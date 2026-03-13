@@ -45,7 +45,7 @@ featured_products:
     budget_tier: "Budget Pick"
     benefit: "Anchors seating group instantly"
     label: "💚 Budget Pick"
-    image: "/content/images/products/large-geometric-area-rug-8x10.jpg"
+    image: "/content/images/products/product-look-1-jute-rug.png"
     link: "https://amzn.to/3P0jO8L"
 
   # Product 2
@@ -53,7 +53,7 @@ featured_products:
     budget_tier: "Mid-Range"
     benefit: "Texture and scale that transforms floors"
     label: "🟡 Mid-Range"
-    image: "/content/images/products/natural-jute-wool-blend-area-rug-9x12.jpg"
+    image: "/content/images/products/product-look-1-jute-rug.png"
     link: "https://amzn.to/4cEAWL8"
 
   # Product 3
@@ -61,7 +61,7 @@ featured_products:
     budget_tier: "Luxury"
     benefit: "Pile depth that changes the whole room"
     label: "💜 Luxury"
-    image: "/content/images/products/hand-tufted-wool-statement-area-rug-9x12.jpg"
+    image: "/content/images/products/product-look-1-wool-rug.png"
     link: "https://amzn.to/3NtLMJu"
 
   # Product 4
@@ -69,7 +69,7 @@ featured_products:
     budget_tier: "Budget Pick"
     benefit: "Kills dead corners with warm light"
     label: "💚 Budget Pick"
-    image: "/content/images/products/slim-arc-floor-lamp-with-linen-shade.jpg"
+    image: "/content/images/products/product-look-2-arc-lamp.png"
     link: "https://amzn.to/4sADYV8"
 
   # Product 5
@@ -77,7 +77,7 @@ featured_products:
     budget_tier: "Mid-Range"
     benefit: "Designer silhouette at accessible price"
     label: "🟡 Mid-Range"
-    image: "/content/images/products/brass-tripod-floor-lamp.jpg"
+    image: "/content/images/products/brass-tripod-floor-lamp"
     link: "https://amzn.to/3Prfq2y"
 
   # Product 6
@@ -85,7 +85,7 @@ featured_products:
     budget_tier: "Luxury"
     benefit: "Art and light in a single object"
     label: "💜 Luxury"
-    image: "/content/images/products/sculptural-ceramic-table-lamp.jpg"
+    image: "/content/images/products/product-look-2-ceramic-lamp.png"
     link: "https://amzn.to/3NavKnO"
 
   # Product 7
@@ -93,7 +93,7 @@ featured_products:
     budget_tier: "Budget Pick"
     benefit: "Four textures, one sofa transformed"
     label: "💚 Budget Pick"
-    image: "/content/images/products/mixed-texture-throw-pillow-set-4-covers.jpg"
+    image: "/content/images/products/product-look-3-pillow-set.png"
     link: "https://amzn.to/3N8k70G"
 
   # Product 8
@@ -101,7 +101,7 @@ featured_products:
     budget_tier: "Mid-Range"
     benefit: "Rich pile that reads as genuine luxury"
     label: "🟡 Mid-Range"
-    image: "/content/images/products/velvet-cushion-cover-set.jpg"
+    image: "/content/images/products/product-look-3-velvet-cushions.png"
     link: "https://amzn.to/3MUKOpD"
 
   # Product 9
@@ -109,7 +109,7 @@ featured_products:
     budget_tier: "Luxury"
     benefit: "The piece guests always compliment first"
     label: "💜 Luxury"
-    image: "/content/images/products/chunky-knit-throw-blanket.jpg"
+    image: "/content/images/products/product-look-3-knit-throw.png"
     link: "https://amzn.to/4bflliJ"
 
   # Product 10
@@ -117,7 +117,7 @@ featured_products:
     budget_tier: "Budget Pick"
     benefit: "Matching frames unify any wall collection"
     label: "💚 Budget Pick"
-    image: "/content/images/products/gallery-wall-frames-set-7-frames.jpg"
+    image: "/content/images/products/product-look-4-gallery-frames.png"
     link: "https://amzn.to/40iUbCv"
 
   # Product 11
@@ -125,7 +125,7 @@ featured_products:
     budget_tier: "Mid-Range"
     benefit: "One large piece beats twelve small ones"
     label: "🟡 Mid-Range"
-    image: "/content/images/products/large-format-canvas-art-print.jpg"
+    image: "/content/images/products/product-look-4-canvas-print.png"
     link: "https://amzn.to/4rgf5gp"
 
   # Product 12
@@ -133,12 +133,12 @@ featured_products:
     budget_tier: "Luxury"
     benefit: "Light, space, and glamour simultaneously"
     label: "💜 Luxury"
-    image: "/content/images/products/oversized-arched-mirror-with-gold-frame.jpg"
+    image: "/content/images/products/product-look-4-arch-mirror.png"
     link: "https://amzn.to/40nj4gh"
 
 ---
 
-![7 living room mistakes that make your home look cheap — styled living room transformation](/content/images/hero-living-room-mistakes-cheap)
+![7 living room mistakes that make your home look cheap — styled living room transformation](/content/images/hero-living-room-mistakes-cheap/)
 
 ## Key Takeaways
 
@@ -187,7 +187,7 @@ By the time you finish reading, you'll know exactly what's dragging your room do
 
 ## Products Featured in This Article
 
-![All featured products for transforming your living room from cheap-looking to polished](/content/images/products-featured-living-room-mistakes)
+![All featured products for transforming your living room from cheap-looking to polished](/content/images/products-featured-living-room-mistakes/)
 
 | Product | Price Range | Best For | Why We Love It |
 |---|---|---|---|
@@ -237,7 +237,7 @@ See more [rugs and carpets curated by our team](https://wowglamdecor.com/categor
 
 ### Large Geometric Area Rug (8x10) — Budget Pick 💚
 
-![Budget large area rug anchoring a living room seating area](/content/images/products/product-rug-budget)
+![Budget large area rug anchoring a living room seating area](/content/images/products/product-look-1-jute-rug.png)
 
 **Price:** $
 **Best For:** Living rooms where the current rug isn't reaching the furniture legs
@@ -260,7 +260,7 @@ The moment this goes down, your seating area stops looking accidental and starts
 
 ### Natural Jute & Wool Blend Area Rug (9x12) — Mid-Range Pick 🟡
 
-![Mid-range natural jute wool area rug in a styled living room](/content/images/products/product-rug-midrange)
+![Mid-range natural jute wool area rug in a styled living room](/content/images/products/product-look-1-jute-rug.png)
 
 **Price:** $$
 **Best For:** Rooms where you want the rug to be the texture story, not just the floor covering
@@ -283,7 +283,7 @@ Natural jute and wool together create a tactile depth that synthetic rugs simply
 
 ### Hand-Tufted Wool Statement Area Rug (9x12) — Luxury Pick 💜
 
-![Luxury hand-tufted wool area rug as living room centrepiece](/content/images/products/product-rug-luxury)
+![Luxury hand-tufted wool area rug as living room centrepiece](/content/images/products/product-look-1-wool-rug.png)
 
 **Price:** $$$
 **Best For:** The living room where the rug is the focal point, not just the floor
@@ -343,7 +343,7 @@ Browse the full [lighting and lamps collection](https://wowglamdecor.com/categor
 
 ### Slim Arc Floor Lamp with Linen Shade — Budget Pick 💚
 
-![Budget arc floor lamp creating warm ambient light in a living room corner](/content/images/products/product-lamp-budget)
+![Budget arc floor lamp creating warm ambient light in a living room corner](/content/images/products/product-look-2-arc-lamp.png)
 
 **Price:** $
 **Best For:** Killing the dead corner that every living room has — and filling it with warm, useful light
@@ -366,7 +366,7 @@ Switch this on beside your sofa and watch what the room does. The arc puts light
 
 ### Brass Tripod Floor Lamp — Mid-Range Pick 🟡
 
-![Mid-range brass tripod floor lamp adding designer silhouette to living room](/content/images/products/product-lamp-midrange)
+![Mid-range brass tripod floor lamp adding designer silhouette to living room](/content/images/products/brass-arc-floor-lamp.png)
 
 **Price:** $$
 **Best For:** Rooms where the lamp itself needs to be a design statement, not just a light source
@@ -389,7 +389,7 @@ The tripod silhouette is one of those rare lamp forms that looks right in a mode
 
 ### Sculptural Ceramic Table Lamp — Luxury Pick 💜
 
-![Luxury sculptural ceramic table lamp as living room statement piece](/content/images/products/product-lamp-luxury)
+![Luxury sculptural ceramic table lamp as living room statement piece](/content/images/products/product-look-2-ceramic-lamp.png)
 
 **Price:** $$$
 **Best For:** A console, side table, or shelving unit that needs a centrepiece, not just a light source
@@ -449,7 +449,7 @@ For a broader look at how to apply this across every room, our [home makeovers g
 
 ### Mixed Texture Throw Pillow Set (4 Covers) — Budget Pick 💚
 
-![Budget throw pillow set adding instant texture to a living room sofa](/content/images/products/product-pillows-budget)
+![Budget throw pillow set adding instant texture to a living room sofa](/content/images/products/product-look-3-pillow-set.png)
 
 **Price:** $
 **Best For:** Sofas that look flat, bare, or like they came straight from a showroom floor
@@ -472,7 +472,7 @@ Four covers, four different textures, one purchase. This set does the visual wor
 
 ### Velvet Cushion Cover Set — Mid-Range Pick 🟡
 
-![Mid-range velvet cushion covers adding luxury texture to a sofa](/content/images/products/product-cushions-midrange)
+![Mid-range velvet cushion covers adding luxury texture to a sofa](/content/images/products/product-look-3-velvet-cushions.png)
 
 **Price:** $$
 **Best For:** The sofa that needs to look like it belongs in a boutique hotel lounge
@@ -495,7 +495,7 @@ Velvet at the right price point changes everything about a sofa. The pile catche
 
 ### Chunky Knit Throw Blanket — Luxury Pick 💜
 
-![Luxury chunky knit throw blanket draped over sofa adding texture and warmth](/content/images/products/product-throw-luxury)
+![Luxury chunky knit throw blanket draped over sofa adding texture and warmth](/content/images/products/product-look-3-knit-throw.png)
 
 **Price:** $$$
 **Best For:** The sofa corner that needs one piece to pull the whole room together
@@ -555,7 +555,7 @@ See the full [wall decor buying guide](https://wowglamdecor.com/category/wall-de
 
 ### Gallery Wall Frames Set (7 Frames) — Budget Pick 💚
 
-![Budget gallery wall frames set creating a curated wall display](/content/images/products/product-frames-budget)
+![Budget gallery wall frames set creating a curated wall display](/content/images/products/product-look-4-gallery-frames.png)
 
 **Price:** $
 **Best For:** Turning a scattered random collection of prints into a composed, intentional gallery wall
@@ -578,7 +578,7 @@ Matching frames are the cheat code for gallery walls. Seven identical frames in 
 
 ### Large Format Canvas Art Print — Mid-Range Pick 🟡
 
-![Mid-range large format canvas art print making a bold living room statement](/content/images/products/product-canvas-midrange)
+![Mid-range large format canvas art print making a bold living room statement](/content/images/products/product-look-4-canvas-print.png)
 
 **Price:** $$
 **Best For:** The wall above a sofa or console that needs one decisive statement, not a collection
@@ -601,7 +601,7 @@ One large piece of art does more for a room than twelve small ones. It gives the
 
 ### Oversized Arched Mirror with Gold Frame — Luxury Pick 💜
 
-![Luxury oversized arched gold frame mirror transforming a living room wall](/content/images/products/product-mirror-luxury)
+![Luxury oversized arched gold frame mirror transforming a living room wall](/content/images/products/product-look-4-arch-mirror.png)
 
 **Price:** $$$
 **Best For:** The living room wall that needs to double the light, add glamour, and make guests ask who your designer is
@@ -659,7 +659,7 @@ Check the full [best-of lists](https://wowglamdecor.com/category/best-of-lists.h
 
 ### Rattan Tray & Bud Vase Set — Budget Pick 💚
 
-![Budget rattan tray and bud vase set creating an instant styled coffee table](/content/images/products/product-tray-budget)
+![Budget rattan tray and bud vase set creating an instant styled coffee table](/content/images/products/product-look-5-rattan-tray.png)
 
 **Price:** $
 **Best For:** Coffee tables that currently have nothing on them — or everything on them
@@ -682,7 +682,7 @@ A rattan tray and two bud vases is the simplest version of the rule of three you
 
 ### Sculptural Stoneware Ceramic Vase — Mid-Range Pick 🟡
 
-![Mid-range sculptural stoneware ceramic vase as coffee table centrepiece](/content/images/products/product-vase-midrange)
+![Mid-range sculptural stoneware ceramic vase as coffee table centrepiece](/content/images/products/product-look-5-ceramic-vase.png)
 
 **Price:** $$
 **Best For:** The person who wants one beautiful object that holds the table together on its own
@@ -705,7 +705,7 @@ This is the piece where form is the decoration. You don't need flowers in this v
 
 ### Marble & Travertine Decorative Sculpture — Luxury Pick 💜
 
-![Luxury marble travertine decorative sculpture anchoring a coffee table](/content/images/products/product-sculpture-luxury)
+![Luxury marble travertine decorative sculpture anchoring a coffee table](/content/images/products/product-look-5-marble-sculpture.png)
 
 **Price:** $$$
 **Best For:** The coffee table centrepiece that says "this room is finished" without saying a word
@@ -767,7 +767,7 @@ Our [furniture buying guides](https://wowglamdecor.com/category/furniture-buying
 
 ### Upholstered Linen Accent Chair — Budget Pick 💚
 
-![Budget linen accent chair completing a living room seating arrangement](/content/images/products/product-chair-budget)
+![Budget linen accent chair completing a living room seating arrangement](/content/images/products/product-look-6-linen-chair.png)
 
 **Price:** $
 **Best For:** Adding a seat to a corner that's been empty since you moved in
@@ -790,7 +790,7 @@ An accent chair at this price point gives you the functional and visual benefit 
 
 ### Boucle Barrel Accent Chair — Mid-Range Pick 🟡
 
-![Mid-range boucle barrel accent chair as statement piece in a living room](/content/images/products/product-chair-midrange)
+![Mid-range boucle barrel accent chair as statement piece in a living room](/content/images/products/product-look-6-boucle-chair.png)
 
 **Price:** $$
 **Best For:** The chair that becomes the most photographed corner in your home
@@ -813,7 +813,7 @@ Boucle barrel chairs are the piece that makes a room look like it was profession
 
 ### Sculptural Velvet Accent Chair — Luxury Pick 💜
 
-![Luxury sculptural velvet accent chair defining a living room's design identity](/content/images/products/product-chair-luxury)
+![Luxury sculptural velvet accent chair defining a living room's design identity](/content/images/products/product-look-6-velvet-chair.png)
 
 **Price:** $$$
 **Best For:** The room that needs one defining piece — the piece the whole room is built around
@@ -873,7 +873,7 @@ For the complete living room transformation checklist, our [living room decor id
 
 ### Floor-Length Linen Curtain Panels (Set of 2) — Budget Pick 💚
 
-![Budget floor-length linen curtain panels adding instant height and polish to a living room](/content/images/products/product-curtains-budget)
+![Budget floor-length linen curtain panels adding instant height and polish to a living room](/content/images/products/product-look-7-linen-panels.png)
 
 **Price:** $
 **Best For:** Any window currently dressed with short panels or nothing at all
@@ -896,7 +896,7 @@ At under $40 a pair, these panels give you the full-length treatment that transf
 
 ### Velvet Blackout Curtain Panels — Mid-Range Pick 🟡
 
-![Mid-range velvet blackout curtain panels adding drama and depth to a living room window](/content/images/products/product-curtains-midrange)
+![Mid-range velvet blackout curtain panels adding drama and depth to a living room window](/content/images/products/product-look-7-velvet-panels.png)
 
 **Price:** $$
 **Best For:** The room that needs drama, depth, and actual light control in one panel
@@ -919,7 +919,7 @@ Velvet curtains at ceiling height do something no other fabric does — they add
 
 ### Premium Linen Blackout Curtains — Luxury Pick 💜
 
-![Luxury premium linen blackout curtains with a tailored custom look](/content/images/products/product-curtains-luxury)
+![Luxury premium linen blackout curtains with a tailored custom look](/content/images/products/product-look-7-premium-linen.png)
 
 **Price:** $$$
 **Best For:** The room where you want curtains that look genuinely custom-made
