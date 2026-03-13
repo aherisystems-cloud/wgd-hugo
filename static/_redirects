@@ -1,7 +1,8 @@
 # Redirect old static site URLs to Hugo URLs
 
 # Old blog page
-/blog.html    /posts.html    301
+/blog          /posts/         301
+/blog.html     /posts/         301
 
 # Old /category/ paths → /categories/
 /category/*   /categories/:splat   301

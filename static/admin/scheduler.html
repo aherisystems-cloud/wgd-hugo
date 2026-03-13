@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Affiliate Blog Scheduler Pro</title>
+<script data-cfasync="false" src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #2D5BFF;--primary-dark: #1E3FD9;--primary-light: #4A73FF;--success: #00D084;--warning: #FFB020;--danger: #FF4757;
+  --bg-main: #F8F9FB;--bg-surface: #FFFFFF;--text-primary: #1A1D29;--text-secondary: #6B7280;--text-tertiary: #9CA3AF;
+  --border: #E5E7EB;--shadow-sm: 0 1px 3px rgba(0,0,0,0.04);--shadow-md: 0 4px 12px rgba(0,0,0,0.08);--shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+  --radius: 12px;--radius-sm: 8px;--font-main: 'Bricolage Grotesque', system-ui, sans-serif;--font-mono: 'DM Mono', 'Courier New', monospace;
+  --purple: #7e0882;--purple-pale: rgba(126,8,130,0.07);--pin: #bd123c;--pin-pale: rgba(189,18,60,0.06);--factory: #B45309;--factory-pale: rgba(180,83,9,0.06);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-main); background: var(--bg-main); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; }
+header { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; padding: 24px 32px; box-shadow: var(--shadow-md); position: sticky; top: 0; z-index: 100; }
+header h2 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; margin: 0; }
+header .subtitle { font-size: 14px; opacity: 0.9; margin-top: 4px; }
+nav { display: flex; background: var(--bg-surface); border-bottom: 1px solid var(--border); overflow-x: auto; position: sticky; top: 81px; z-index: 99; box-shadow: var(--shadow-sm); }
+nav button { flex: 1; min-width: 100px; padding: 16px 8px; color: var(--text-secondary); background: none; border: none; cursor: pointer; font-family: var(--font-main); font-size: 13px; font-weight: 600; transition: all 0.2s; border-bottom: 3px solid transparent; }
+nav button:hover { background: var(--bg-main); color: var(--text-primary); }
+nav button.active { color: var(--primary); border-bottom-color: var(--primary); }
+nav button#nav-pinterest.active { color: var(--pin); border-bottom-color: var(--pin); }
+.container { max-width: 1400px; margin: 0 auto; padding: 32px; }
+section { display: none; animation: fadeIn 0.3s ease; }
+section.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.panel { background: var(--bg-surface); padding: 28px; margin-bottom: 24px; border-radius: var(--radius); box-shadow: var(--shadow-sm); border: 1px solid var(--border); transition: box-shadow 0.2s; }
+.panel:hover { box-shadow: var(--shadow-md); }
+.panel h3 { font-size: 20px; font-weight: 700; margin-bottom: 20px; color: var(--text-primary); display: flex; align-items: center; gap: 10px; }
+.panel h3::before { content: ''; width: 4px; height: 24px; background: var(--primary); border-radius: 2px; }
+.panel h4 { font-size: 13px; font-weight: 600; margin: 20px 0 10px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
+input[type="text"], input[type="datetime-local"], textarea, select { width: 100%; padding: 12px 16px; margin: 8px 0; border: 2px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-main); font-size: 15px; transition: all 0.2s; background: var(--bg-surface); color: var(--text-primary); }
+input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(45,91,255,0.1); }
+input::placeholder, textarea::placeholder { color: var(--text-tertiary); }
+textarea { resize: vertical; min-height: 120px; font-family: var(--font-mono); font-size: 14px; line-height: 1.6; }
+input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; accent-color: var(--primary); }
+label { display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 6px 0; transition: color 0.2s; }
+label:hover { color: var(--primary); }
+button { font-family: var(--font-main); }
+.btn { padding: 12px 24px; border: none; border-radius: var(--radius-sm); font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.btn-secondary { background: var(--bg-main); color: var(--text-primary); border: 2px solid var(--border); }
+.btn-secondary:hover { border-color: var(--primary); color: var(--primary); }
+.btn-success { background: var(--success); color: white; }
+.btn-success:hover { background: #00B872; transform: translateY(-1px); }
+.btn-danger { background: var(--danger); color: white; border: none; }
+.btn-danger:hover { background: #E63946; }
+.btn-sm { padding: 7px 14px; font-size: 13px; }
+.action-row { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+.meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.editor { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; align-items: start; }
+.editor-pane { display: flex; flex-direction: column; }
+.editor-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+.editor-title { font-size: 14px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
+.word-count { font-size: 13px; color: var(--text-tertiary); font-family: var(--font-mono); }
+.editor textarea { height: 560px; flex: 1; resize: vertical; }
+.preview { background: var(--bg-surface); padding: 28px; height: 560px; max-height: 560px; overflow-y: auto; border: 2px solid var(--border); border-radius: var(--radius-sm); line-height: 1.8; }
+.preview h1 { margin: 24px 0 16px; font-size: 32px; } .preview h2 { margin: 20px 0 12px; font-size: 24px; } .preview h3 { margin: 16px 0 10px; font-size: 20px; }
+.preview p { margin: 12px 0; } .preview a { color: var(--primary); } .preview img { max-width: 100%; border-radius: var(--radius-sm); margin: 16px 0; }
+.preview ul, .preview ol { margin: 12px 0; padding-left: 24px; } .preview li { margin: 6px 0; }
+.preview code { background: var(--bg-main); padding: 2px 6px; border-radius: 4px; font-family: var(--font-mono); font-size: 13px; }
+.preview blockquote { border-left: 4px solid var(--primary); padding-left: 20px; margin: 16px 0; color: var(--text-secondary); font-style: italic; }
+.score-container { display: flex; align-items: center; gap: 24px; margin-bottom: 24px; padding: 20px; background: var(--bg-main); border-radius: var(--radius-sm); }
+.score-circle { width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 700; background: linear-gradient(135deg, var(--primary-light), var(--primary)); color: white; box-shadow: var(--shadow-md); }
+.score-circle.low { background: linear-gradient(135deg, #FF6B6B, #EE5A6F); } .score-circle.medium { background: linear-gradient(135deg, #FFB020, #FF9500); } .score-circle.high { background: linear-gradient(135deg, #00D084, #00B872); }
+.score-label { font-size: 14px; color: var(--text-secondary); margin-bottom: 4px; } .score-text { font-size: 18px; font-weight: 600; }
+#seoList { list-style: none; padding: 0; }
+#seoList li { padding: 10px 16px; margin: 6px 0; border-radius: var(--radius-sm); background: var(--bg-main); display: flex; align-items: center; gap: 10px; }
+#seoList li:hover { background: var(--bg-surface); transform: translateX(4px); transition: all 0.2s; }
+#seoList li.pass::before { content: '✓'; color: var(--success); font-weight: bold; font-size: 18px; } #seoList li.fail::before { content: '✗'; color: var(--danger); font-weight: bold; font-size: 18px; }
+.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.stat-card { background: var(--bg-surface); padding: 20px; border-radius: var(--radius-sm); border: 2px solid var(--border); text-align: center; transition: all 0.2s; }
+.stat-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.stat-value { font-size: 32px; font-weight: 700; color: var(--primary); margin-bottom: 4px; } .stat-label { font-size: 13px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
+.multi-select { max-height: 200px; overflow-y: auto; border: 2px solid var(--border); padding: 12px; background: var(--bg-surface); border-radius: var(--radius-sm); }
+.multi-select label { display: flex; align-items: center; gap: 10px; margin: 6px 0; padding: 8px 12px; border-radius: var(--radius-sm); }
+.multi-select label:hover { background: var(--bg-main); } .multi-select label.hidden { display: none; }
+.category-group { margin-bottom: 16px; } .category-group.hidden { display: none; }
+.category-group-title { font-weight: 600; padding: 8px 12px; background: var(--bg-main); border-radius: var(--radius-sm); margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+.selected-categories { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; min-height: 32px; }
+.selected-categories:empty::before { content: 'No categories selected'; color: var(--text-tertiary); font-size: 13px; font-style: italic; }
+.category-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: var(--primary); color: white; border-radius: 16px; font-size: 13px; font-weight: 500; animation: slideIn 0.2s ease; }
+@keyframes slideIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+.category-badge button { background: none; border: none; color: white; cursor: pointer; padding: 0; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: background 0.2s; }
+.category-badge button:hover { background: rgba(255,255,255,0.2); }
+.image-workflow-note { background: rgba(45,91,255,0.05); border: 1px solid rgba(45,91,255,0.18); border-radius: var(--radius-sm); padding: 14px 18px; margin-bottom: 14px; font-size: 14px; line-height: 1.65; color: var(--text-secondary); }
+.image-workflow-note strong { color: var(--primary); } .image-workflow-note code { background: rgba(45,91,255,0.08); padding: 1px 5px; border-radius: 4px; font-family: var(--font-mono); font-size: 12px; color: var(--primary); }
+.image-workflow-note ol { margin: 8px 0 0 20px; } .image-workflow-note ol li { margin-bottom: 4px; }
+.image-path-row { display: flex; gap: 8px; align-items: center; margin: 4px 0 0; } .image-path-row input { margin: 0; flex: 1; }
+.image-path-hint { font-size: 12px; color: var(--text-tertiary); margin: 4px 0 12px 2px; font-family: var(--font-mono); }
+.image-upload-area { padding: 16px; border: 2px dashed var(--border); border-radius: var(--radius-sm); background: var(--bg-main); transition: all 0.2s; }
+.image-upload-area:hover { border-color: var(--primary); background: var(--bg-surface); }
+.image-preview img { max-width: 100%; max-height: 200px; border-radius: var(--radius-sm); border: 2px solid var(--border); margin-top: 12px; }
+.image-preview-actions { display: flex; gap: 8px; margin-top: 8px; }
+.remove-image { background: var(--danger); color: white; border: none; padding: 6px 12px; border-radius: var(--radius-sm); cursor: pointer; font-size: 13px; font-weight: 600; }
+.insert-image { background: var(--primary); color: white; border: none; padding: 6px 12px; border-radius: var(--radius-sm); cursor: pointer; font-size: 13px; font-weight: 600; }
+#finalPost { background: var(--bg-main); padding: 24px; border-radius: var(--radius-sm); overflow-x: auto; font-family: var(--font-mono); font-size: 13px; line-height: 1.6; border: 2px solid var(--border); max-height: 600px; overflow-y: auto; }
+table { width: 100%; border-collapse: collapse; margin-top: 20px; background: var(--bg-surface); border-radius: var(--radius-sm); overflow: hidden; }
+thead { background: var(--bg-main); } th { padding: 14px 16px; text-align: left; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); border-bottom: 2px solid var(--border); }
+td { padding: 14px 16px; border-bottom: 1px solid var(--border); } tbody tr:hover { background: var(--bg-main); }
+.status-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.status-ready { background: #D1FAE5; color: #065F46; } .status-scheduled { background: #FEF3C7; color: #92400E; } .status-draft { background: #E5E7EB; color: #374151; }
+.search-container { display: flex; gap: 12px; margin-bottom: 20px; } .search-container input { flex: 1; margin: 0; }
+#affiliateResults { list-style: none; padding: 0; }
+#affiliateResults li { padding: 16px; margin: 8px 0; background: var(--bg-main); border-radius: var(--radius-sm); display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; }
+#affiliateResults li:hover { background: var(--bg-surface); box-shadow: var(--shadow-sm); transform: translateX(4px); }
+.affiliate-name { font-weight: 600; } .affiliate-category { font-size: 13px; color: var(--text-tertiary); margin-top: 3px; }
+.affiliate-actions { display: flex; gap: 8px; align-items: center; }
+.affiliate-link { color: var(--primary); text-decoration: none; font-weight: 600; padding: 6px 14px; border-radius: var(--radius-sm); background: rgba(45,91,255,0.1); transition: all 0.2s; font-size: 13px; cursor: pointer; border: none; font-family: var(--font-main); }
+.affiliate-link:hover { background: var(--primary); color: white; }
+.affiliate-link-purple { color: var(--purple); background: var(--purple-pale); } .affiliate-link-purple:hover { background: var(--purple); color: white; }
+.affiliate-link-danger { color: var(--danger); background: rgba(255,71,87,0.08); } .affiliate-link-danger:hover { background: var(--danger); color: white; }
+.catalog-count { font-size: 13px; color: var(--text-secondary); padding: 8px 14px; background: var(--bg-main); border-radius: var(--radius-sm); font-family: var(--font-mono); }
+.catalog-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
+.catalog-info { background: rgba(45,91,255,0.05); border: 1px solid rgba(45,91,255,0.18); border-radius: var(--radius-sm); padding: 12px 16px; font-size: 14px; color: var(--text-secondary); margin-bottom: 16px; }
+.catalog-info strong { color: var(--primary); }
+.no-results-state { text-align: center; padding: 32px 20px; color: var(--text-tertiary); } .no-results-state .icon { font-size: 36px; margin-bottom: 12px; opacity: 0.4; }
+.empty-state { text-align: center; padding: 60px 20px; color: var(--text-tertiary); } .empty-state-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.3; } .empty-state-text { font-size: 16px; color: var(--text-secondary); }
+.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+.modal.active { display: flex; align-items: center; justify-content: center; }
+.modal-content { background: var(--bg-surface); padding: 32px; border-radius: var(--radius); max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; box-shadow: var(--shadow-lg); animation: slideUp 0.3s ease; }
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 2px solid var(--border); }
+.modal-header h3 { margin: 0; font-size: 20px; }
+.modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.2s; }
+.modal-close:hover { background: var(--bg-main); }
+.draft-item { padding: 16px; margin: 8px 0; background: var(--bg-main); border-radius: var(--radius-sm); cursor: pointer; transition: all 0.2s; border: 2px solid transparent; }
+.draft-item:hover { border-color: var(--primary); } .draft-item-title { font-weight: 600; margin-bottom: 4px; } .draft-item-meta { font-size: 13px; color: var(--text-secondary); }
+.autosave-saving { color: var(--warning); } .autosave-saved { color: var(--success); }
+.product-card { background: var(--bg-main); border: 2px solid var(--border); border-radius: var(--radius-sm); padding: 20px; margin-bottom: 16px; transition: all 0.2s; }
+.product-card:hover { border-color: var(--purple); box-shadow: var(--shadow-sm); }
+.product-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.product-card-title { font-weight: 700; font-size: 15px; }
+.product-type-toggle { display: flex; gap: 8px; }
+.type-btn { padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; border: 2px solid var(--border); background: var(--bg-surface); color: var(--text-secondary); transition: all 0.2s; font-family: var(--font-main); }
+.type-btn.active-product { border-color: var(--purple); background: var(--purple-pale); color: var(--purple); }
+.type-btn.active-blog { border-color: var(--primary); background: rgba(45,91,255,0.08); color: var(--primary); }
+.product-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; } .product-fields input, .product-fields select { margin: 0; } .product-fields .full-width { grid-column: 1 / -1; }
+.image-path-group { display: flex; align-items: center; border: 2px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-surface); overflow: hidden; transition: all 0.2s; }
+.image-path-group:focus-within { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(45,91,255,0.1); }
+.image-path-prefix { padding: 11px 10px 11px 14px; background: var(--bg-main); color: var(--text-tertiary); font-size: 13px; font-family: var(--font-mono); white-space: nowrap; border-right: 2px solid var(--border); flex-shrink: 0; user-select: none; }
+.image-path-group input { border: none !important; box-shadow: none !important; border-radius: 0 !important; margin: 0 !important; flex: 1; min-width: 0; padding: 11px 14px; font-family: var(--font-mono); font-size: 13px; }
+.image-path-group input:focus { outline: none; border: none; box-shadow: none; }
+.label-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.label-select { width: 100%; padding: 11px 14px; border: 2px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-main); font-size: 14px; background: var(--bg-surface); color: var(--text-primary); cursor: pointer; transition: all 0.2s; }
+.label-select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(45,91,255,0.1); }
+.label-custom { display: none; } .label-custom.visible { display: block; }
+.label-preview { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; margin-left: 6px; }
+.label-sale { background: #FEE2E2; color: #DC2626; } .label-new { background: #D1FAE5; color: #065F46; } .label-top-pick { background: #FEF3C7; color: #92400E; }
+.label-editors-pick { background: rgba(126,8,130,0.12); color: var(--purple); } .label-best-value { background: #DBEAFE; color: #1D4ED8; } .label-limited { background: #FEE2E2; color: #DC2626; } .label-custom-chip { background: #F3E8FF; color: #7C3AED; }
+.price-field { transition: all 0.3s ease; }
+.price-field.hidden-field { opacity: 0; pointer-events: none; height: 0 !important; min-height: 0 !important; padding: 0 !important; border: none !important; margin: 0 !important; overflow: hidden; }
+.add-product-btn { width: 100%; padding: 16px; border: 2px dashed var(--border); border-radius: var(--radius-sm); background: var(--bg-surface); color: var(--text-secondary); font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-main); }
+.add-product-btn:hover { border-color: var(--purple); color: var(--purple); background: var(--purple-pale); }
+.frontmatter-output { background: #1e1e2e; color: #cdd6f4; padding: 24px; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 13px; line-height: 1.9; max-height: 420px; overflow-y: auto; white-space: pre; border: 2px solid #313244; }
+.yaml-key { color: #89b4fa; } .yaml-string { color: #a6e3a1; } .yaml-comment { color: #585b70; font-style: italic; }
+.product-count-badge { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; background: var(--purple); color: white; border-radius: 50%; font-size: 11px; font-weight: 700; margin-left: 4px; vertical-align: middle; }
+.products-preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 14px; margin-top: 16px; }
+.product-preview-card { background: var(--bg-surface); border: 2px solid var(--border); border-radius: var(--radius-sm); padding: 14px; text-align: center; transition: all 0.2s; position: relative; }
+.product-preview-card:hover { border-color: var(--purple); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.product-preview-label { position: absolute; top: -8px; left: 50%; transform: translateX(-50%); padding: 2px 10px; border-radius: 10px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+.product-preview-name { font-weight: 700; font-size: 13px; margin-bottom: 6px; line-height: 1.3; margin-top: 8px; }
+.product-preview-price { font-size: 15px; font-weight: 800; color: var(--purple); margin-bottom: 6px; }
+.product-preview-cta { font-size: 12px; color: var(--text-secondary); font-weight: 600; }
+.product-preview-link { font-size: 11px; color: var(--primary); word-break: break-all; margin-top: 6px; display: block; opacity: 0.7; }
+.copy-confirm { display: none; align-items: center; gap: 6px; padding: 8px 16px; background: #D1FAE5; color: #065F46; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; }
+.products-tip { background: rgba(126,8,130,0.06); border: 1px solid rgba(126,8,130,0.2); border-radius: var(--radius-sm); padding: 14px 18px; font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6; }
+.products-tip strong { color: var(--purple); } .products-tip code { background: rgba(126,8,130,0.1); padding: 2px 6px; border-radius: 4px; font-family: var(--font-mono); font-size: 12px; color: var(--purple); }
+.folder-save-box { background:rgba(0,208,132,0.06); border:1px solid rgba(0,208,132,0.25); border-radius:var(--radius-sm); padding:16px 20px; margin-bottom:20px; }
+.folder-save-box code { background:rgba(0,208,132,0.12); padding:1px 5px; border-radius:3px; font-family:var(--font-mono); font-size:12px; color:#065F46; }
+.import-hero { background: linear-gradient(135deg, rgba(45,91,255,0.08), rgba(126,8,130,0.08)); border: 2px dashed rgba(45,91,255,0.3); border-radius: var(--radius); padding: 32px; text-align: center; margin-bottom: 24px; }
+.import-hero h2 { font-size: 22px; font-weight: 800; margin-bottom: 8px; background: linear-gradient(135deg, var(--primary), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.import-hero p { color: var(--text-secondary); font-size: 14px; line-height: 1.7; max-width: 600px; margin: 0 auto 20px; }
+.import-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 20px 0; }
+.import-step { background: var(--bg-surface); border: 2px solid var(--border); border-radius: var(--radius-sm); padding: 16px; text-align: center; }
+.import-step-num { width: 32px; height: 32px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; margin: 0 auto 10px; }
+.import-step p { font-size: 13px; color: var(--text-secondary); margin: 0; } .import-step strong { color: var(--text-primary); display: block; margin-bottom: 4px; }
+.parse-result { background: #D1FAE5; border: 1px solid #6EE7B7; border-radius: var(--radius-sm); padding: 16px 20px; margin-top: 16px; display: none; }
+.parse-result.error { background: #FEE2E2; border-color: #FCA5A5; }
+.parse-result-title { font-weight: 800; margin-bottom: 8px; color: #065F46; } .parse-result.error .parse-result-title { color: #DC2626; }
+.parse-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; font-size: 13px; }
+.parse-field { display: flex; gap: 6px; align-items: flex-start; } .parse-field-icon { flex-shrink: 0; } .parse-field-label { color: var(--text-secondary); }
+.parse-field-val { color: var(--text-primary); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 200px; }
+.import-paste-area { position: relative; }
+.import-paste-area textarea { height: 280px; font-size: 13px; background: #1e1e2e; color: #cdd6f4; border-color: #313244; font-family: var(--font-mono); }
+.import-paste-area textarea:focus { border-color: var(--primary); } .import-paste-area textarea::placeholder { color: #585b70; }
+.parsed-images-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 12px; }
+.parsed-images-table th { background: var(--bg-main); padding: 8px 12px; text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); border-bottom: 2px solid var(--border); }
+.parsed-images-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; } .parsed-images-table tr:hover td { background: var(--bg-main); }
+.filename-pill { display: inline-block; background: rgba(45,91,255,0.1); color: var(--primary); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; }
+.prompt-text { color: var(--text-secondary); font-size: 12px; line-height: 1.5; max-width: 400px; }
+.image-list-output { background: #1e1e2e; color: #cdd6f4; padding: 20px; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 12px; line-height: 1.8; max-height: 300px; overflow-y: auto; margin-top: 16px; white-space: pre-wrap; border: 2px solid #313244; }
+.tz-preview { margin-top: 10px; padding: 12px 16px; background: rgba(45,91,255,0.05); border: 1px solid rgba(45,91,255,0.2); border-radius: var(--radius-sm); font-size: 13px; font-family: var(--font-mono); display: none; gap: 24px; flex-wrap: wrap; }
+.tz-preview.visible { display: flex; } .tz-item { display: flex; flex-direction: column; gap: 2px; }
+.tz-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-tertiary); font-family: var(--font-main); font-weight: 700; }
+.tz-value { font-weight: 600; color: var(--text-primary); } .tz-value.eat { color: var(--purple); } .tz-value.utc { color: var(--primary); }
+.pinterest-intro { background: var(--pin-pale); border: 1px solid rgba(189,18,60,0.2); border-radius: var(--radius-sm); padding: 14px 18px; font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; line-height: 1.65; }
+.pinterest-intro strong { color: var(--pin); }
+#section-pinterest .panel h3::before { background: var(--pin); }
+.pin-generate-row { display: flex; align-items: center; gap: 16px; }
+.btn-pin { background: var(--pin); color: white; } .btn-pin:hover { background: #9e0f31; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.pin-desc-card { background: var(--bg-main); border: 2px solid var(--border); border-radius: var(--radius-sm); padding: 18px; margin-bottom: 14px; transition: all 0.2s; position: relative; }
+.pin-desc-card:hover { border-color: var(--pin); }
+.pin-desc-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px; color: var(--pin); margin-bottom: 8px; }
+.pin-desc-text { font-size: 15px; line-height: 1.7; color: var(--text-primary); margin-bottom: 10px; }
+.pin-char-count { font-size: 12px; font-family: var(--font-mono); color: var(--text-tertiary); } .pin-char-count.good { color: var(--success); font-weight: 700; } .pin-char-count.over { color: var(--danger); font-weight: 700; }
+.pin-copy-btn { position: absolute; top: 12px; right: 12px; background: rgba(189,18,60,0.1); color: var(--pin); border: none; padding: 5px 12px; border-radius: var(--radius-sm); font-size: 12px; font-weight: 600; cursor: pointer; font-family: var(--font-main); transition: all 0.2s; }
+.pin-copy-btn:hover { background: var(--pin); color: white; }
+.pin-titles-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.pin-title-card { background: var(--bg-main); border: 2px solid var(--border); border-radius: var(--radius-sm); padding: 16px; transition: all 0.2s; cursor: pointer; }
+.pin-title-card:hover { border-color: var(--pin); background: var(--pin-pale); }
+.pin-title-num { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px; color: var(--pin); margin-bottom: 6px; }
+.pin-title-text { font-size: 14px; font-weight: 700; line-height: 1.4; color: var(--text-primary); margin-bottom: 8px; }
+.pin-title-len { font-size: 11px; font-family: var(--font-mono); color: var(--text-tertiary); }
+.pin-hashtags-box { display: flex; flex-wrap: wrap; gap: 8px; padding: 16px; background: var(--bg-main); border-radius: var(--radius-sm); }
+.pin-tag { display: inline-block; padding: 5px 12px; background: rgba(189,18,60,0.08); color: var(--pin); border-radius: 14px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: 1px solid rgba(189,18,60,0.2); }
+.pin-tag:hover { background: var(--pin); color: white; }
+.pin-board { padding: 10px 16px; margin: 6px 0; background: var(--bg-main); border-radius: var(--radius-sm); display: flex; align-items: center; gap: 10px; font-size: 14px; border: 1px solid var(--border); }
+.pin-board-icon { font-size: 18px; }
+.pin-full-block { background: #1e0a10; color: #f4c6d0; padding: 24px; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 13px; line-height: 1.9; max-height: 420px; overflow-y: auto; white-space: pre-wrap; border: 2px solid #3d1020; }
+.pin-tip { background: var(--pin-pale); border: 1px solid rgba(189,18,60,0.2); border-radius: var(--radius-sm); padding: 12px 16px; font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
+.pin-tip strong { color: var(--pin); }
+nav button#nav-pinfactory.active { color: var(--factory); border-bottom-color: var(--factory); }
+.factory-hero { background: linear-gradient(135deg, var(--factory-pale), rgba(180,83,9,0.12)); border: 2px solid rgba(180,83,9,0.2); border-radius: var(--radius); padding: 28px 32px; margin-bottom: 24px; }
+.factory-hero h2 { font-size: 22px; font-weight: 800; color: var(--factory); margin-bottom: 8px; }
+.factory-hero p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; max-width: 680px; }
+.factory-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 20px; }
+.factory-stat { background: white; border-radius: var(--radius-sm); padding: 14px 16px; text-align: center; border: 2px solid rgba(180,83,9,0.15); }
+.factory-stat-val { font-size: 28px; font-weight: 800; color: var(--factory); } .factory-stat-label { font-size: 12px; color: var(--text-secondary); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+.canva-setup { background: var(--bg-surface); border: 2px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 24px; }
+.canva-setup summary { font-size: 16px; font-weight: 700; cursor: pointer; color: var(--factory); list-style: none; display: flex; align-items: center; gap: 10px; }
+.canva-setup summary::before { content: '▶'; font-size: 12px; transition: transform 0.2s; } details[open] .canva-setup summary::before { transform: rotate(90deg); }
+.canva-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 18px; }
+.canva-step { background: var(--bg-main); border-radius: var(--radius-sm); padding: 16px; border-left: 4px solid var(--factory); }
+.canva-step-num { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px; color: var(--factory); margin-bottom: 6px; }
+.canva-step-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; } .canva-step-body { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.canva-spec { display: inline-block; background: rgba(180,83,9,0.1); color: var(--factory); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; }
+.layer-list { list-style: none; padding: 0; margin-top: 10px; }
+.layer-list li { padding: 6px 10px; margin: 4px 0; background: white; border-radius: 4px; font-size: 13px; display: flex; align-items: center; gap: 8px; border: 1px solid var(--border); }
+.layer-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.pin-type-selector { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+.pin-type-btn { padding: 8px 16px; border: 2px solid var(--border); border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; background: var(--bg-surface); color: var(--text-secondary); transition: all 0.2s; font-family: var(--font-main); }
+.pin-type-btn:hover { border-color: var(--factory); color: var(--factory); } .pin-type-btn.selected { border-color: var(--factory); background: var(--factory-pale); color: var(--factory); }
+.pin-cards-grid { display: grid; gap: 20px; }
+.pin-card { background: var(--bg-surface); border: 2px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: all 0.2s; }
+.pin-card:hover { box-shadow: var(--shadow-md); border-color: var(--factory); }
+.pin-card-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: var(--factory-pale); border-bottom: 2px solid rgba(180,83,9,0.15); }
+.pin-card-type { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px; color: var(--factory); display: flex; align-items: center; gap: 8px; }
+.pin-card-actions { display: flex; gap: 8px; }
+.pin-card-body { display: grid; grid-template-columns: 180px 1fr; gap: 0; }
+.pin-visual { background: #1a0a00; width: 180px; min-height: 270px; position: relative; display: flex; flex-direction: column; justify-content: flex-end; padding: 14px; cursor: pointer; flex-shrink: 0; }
+.pin-visual-bg { position: absolute; inset: 0; background: linear-gradient(160deg, #3d2000 0%, #1a0a00 100%); opacity: 0.85; }
+.pin-visual-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%); }
+.pin-visual-content { position: relative; z-index: 2; }
+.pin-visual-title { font-size: 11px; font-weight: 800; color: white; line-height: 1.3; margin-bottom: 6px; text-shadow: 0 1px 3px rgba(0,0,0,0.6); }
+.pin-visual-url { font-size: 9px; color: rgba(255,255,255,0.7); font-family: var(--font-mono); }
+.pin-visual-badge { position: absolute; top: 10px; left: 10px; z-index: 3; background: var(--factory); color: white; font-size: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; padding: 3px 7px; border-radius: 3px; }
+.pin-visual-ratio { position: absolute; top: 10px; right: 10px; z-index: 3; background: rgba(255,255,255,0.15); color: white; font-size: 8px; font-family: var(--font-mono); padding: 2px 6px; border-radius: 3px; }
+.pin-layers { padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; }
+.pin-layer { background: var(--bg-main); border-radius: var(--radius-sm); padding: 12px 14px; border: 1px solid var(--border); }
+.pin-layer-name { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-tertiary); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.pin-layer-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.pin-layer-text { font-size: 14px; font-weight: 600; color: var(--text-primary); line-height: 1.4; margin-bottom: 8px; }
+.pin-layer-copy-btn { background: none; border: 1px solid var(--border); padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; cursor: pointer; color: var(--text-secondary); font-family: var(--font-main); transition: all 0.2s; }
+.pin-layer-copy-btn:hover { border-color: var(--factory); color: var(--factory); }
+.pin-desc-layer { background: rgba(180,83,9,0.04); border-color: rgba(180,83,9,0.2); }
+.pin-img-prompt { background: #1e1e2e; color: #cdd6f4; padding: 12px 14px; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 12px; line-height: 1.6; border: 1px solid #313244; margin-top: 4px; }
+.queue-table { width: 100%; border-collapse: collapse; }
+.queue-table th { padding: 10px 14px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); background: var(--bg-main); border-bottom: 2px solid var(--border); font-weight: 600; }
+.queue-table td { padding: 12px 14px; border-bottom: 1px solid var(--border); font-size: 13px; vertical-align: top; }
+.queue-table tr:hover td { background: var(--bg-main); }
+.queue-pin-type { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; background: var(--factory-pale); color: var(--factory); border: 1px solid rgba(180,83,9,0.2); }
+.queue-day { font-weight: 700; color: var(--text-secondary); }
+.export-block { background: #100800; color: #f5d5a0; padding: 24px; border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 12px; line-height: 2; max-height: 500px; overflow-y: auto; white-space: pre-wrap; border: 2px solid #3d2000; margin-top: 16px; }
+.btn-factory { background: var(--factory); color: white; } .btn-factory:hover { background: #92400E; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+.affiliate-list-panel { background: rgba(0,208,132,0.03); border-color: rgba(0,208,132,0.2); }
+.affiliate-list-panel h3::before { background: var(--success) !important; }
+.parsed-affiliate-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 12px; }
+.parsed-affiliate-table th { background: var(--bg-main); padding: 8px 12px; text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); border-bottom: 2px solid var(--border); font-weight: 600; }
+.parsed-affiliate-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); vertical-align: top; } .parsed-affiliate-table tr:hover td { background: var(--bg-main); }
+.aff-status-ok { color: var(--success); font-weight: 700; font-size: 12px; } .aff-status-skip { color: var(--warning); font-weight: 700; font-size: 12px; }
+.aff-link-pill { display: inline-block; background: rgba(45,91,255,0.08); color: var(--primary); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 11px; max-width: 240px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: middle; }
+.tier-pill { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.4px; }
+.tier-budget { background: #D1FAE5; color: #065F46; } .tier-mid { background: #FEF3C7; color: #92400E; } .tier-luxury { background: rgba(126,8,130,0.12); color: #7e0882; }
+.import-summary-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.import-summary-stat { background: var(--bg-main); border: 2px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; text-align: center; }
+.import-summary-val { font-size: 28px; font-weight: 800; color: var(--primary); } .import-summary-val.green { color: var(--success); } .import-summary-val.purple { color: var(--purple); } .import-summary-val.orange { color: var(--factory); }
+.import-summary-label { font-size: 12px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+.budget-tier-select { width: 100%; padding: 12px 16px; margin: 8px 0; border: 2px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-main); font-size: 15px; background: var(--bg-surface); color: var(--text-primary); transition: all 0.2s; cursor: pointer; }
+.budget-tier-select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(45,91,255,0.1); }
+.budget-tier-select.hidden-field { opacity:0; pointer-events:none; height:0 !important; min-height:0 !important; padding:0 !important; border:none !important; margin:0 !important; overflow:hidden; }
+.aff-tier-pill { display:inline-block; padding:2px 9px; border-radius:10px; font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.4px; }
+.aff-tier-budget { background:#D1FAE5; color:#065F46; } .aff-tier-mid { background:#FEF3C7; color:#92400E; } .aff-tier-luxury { background:rgba(126,8,130,0.12); color:#7e0882; } .aff-tier-none { background:var(--bg-main); color:var(--text-tertiary); }
+.aff-url-chip { display:inline-block; max-width:220px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; background:rgba(45,91,255,0.07); color:var(--primary); padding:2px 8px; border-radius:4px; font-family:var(--font-mono); font-size:11px; vertical-align:middle; }
+.aff-status-added { color:var(--success); font-weight:700; font-size:12px; } .aff-status-skip { color:var(--warning); font-weight:700; font-size:12px; }
+.aff-summary-stat { background:var(--bg-surface); border:2px solid var(--border); border-radius:var(--radius-sm); padding:14px 16px; text-align:center; }
+.aff-summary-val { font-size:26px; font-weight:800; } .aff-summary-label { font-size:11px; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.5px; margin-top:2px; }
+@media (max-width: 968px) {
+  .pin-card-body { grid-template-columns: 1fr; } .pin-visual { width: 100%; min-height: 180px; } .factory-stats { grid-template-columns: 1fr 1fr; }
+  .editor, .meta-grid, .product-fields, .label-row, .pin-titles-grid { grid-template-columns: 1fr; }
+  nav button { min-width: 72px; font-size: 10px; padding: 12px 3px; } .container { padding: 16px; }
+}
+::-webkit-scrollbar { width: 10px; height: 10px; } ::-webkit-scrollbar-track { background: var(--bg-main); } ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 5px; } ::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
+</style>
+</head>
+<body>
+<header>
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <div>
+      <h2>Affiliate Blog Scheduler Pro</h2>
+      <div class="subtitle">WGD V5.1 — Create, optimise, schedule, and publish your affiliate content</div>
+    </div>
+    <div style="display:flex; align-items:center; gap:16px;">
+      <div id="autosaveStatus" style="font-size:13px; opacity:0.8; display:flex; align-items:center; gap:8px;">
+        <span id="autosaveIcon">💾</span><span id="autosaveText">Autosave enabled</span>
+      </div>
+      <button onclick="loadDraft()" class="btn btn-secondary" style="padding:8px 16px; font-size:13px;">📂 Load Draft</button>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <button onclick="openTab('editor')" class="active" id="nav-editor">✏️ Editor</button>
+  <button onclick="openTab('import')" id="nav-import">⚡ Import AI</button>
+  <button onclick="openTab('products')" id="nav-products">🛍️ Products <span id="productCountBadge" class="product-count-badge" style="display:none;">0</span></button>
+  <button onclick="openTab('seo')" id="nav-seo">📊 SEO</button>
+  <button onclick="openTab('schedule')" id="nav-schedule">📅 Schedule</button>
+  <button onclick="openTab('deploy')" id="nav-deploy">💾 Drafts</button>
+  <button onclick="openTab('affiliate')" id="nav-affiliate">🔗 Links</button>
+  <button onclick="openTab('pinterest')" id="nav-pinterest">📌 Pinterest</button>
+  <button onclick="openTab('pinfactory')" id="nav-pinfactory">🏭 Pin Factory</button>
+</nav>
+
+<div class="container">
+
+<!-- ═══ EDITOR ═══ -->
+<section id="editor" class="active">
+  <div class="panel">
+    <h3>Post Metadata</h3>
+    <div class="meta-grid">
+      <input id="title" placeholder="Post Title" type="text">
+      <input id="slug" placeholder="Slug (e.g., best-accent-chairs)" type="text">
+    </div>
+    <textarea id="description" placeholder="Meta Description (150-160 characters recommended)" rows="3"></textarea>
+    <h4>Categories</h4>
+    <input type="text" id="categorySearch" placeholder="🔍 Search categories..." style="margin-bottom:12px;">
+    <div class="selected-categories" id="selectedCategories"></div>
+    <div id="categorySelect" class="multi-select"></div>
+    <h4>Tags</h4>
+    <input id="tags" placeholder="Comma separated tags (e.g., review, comparison, budget-friendly)" type="text">
+    <h4>SEO Keywords</h4>
+    <input id="seoKeywords" placeholder="Comma separated keywords" type="text">
+    <h4>Featured Image</h4>
+    <div class="image-workflow-note">
+      <strong>📌 How images work with your Hugo repo:</strong><br>
+      Images must be added to your <code>wgd-hugo</code> repo separately. Two-step workflow:<br>
+      <ol>
+        <li><strong>Set the repo path below</strong> — written into your frontmatter <code>featured_image:</code> field.</li>
+        <li><strong>Upload for local preview</strong> (optional) — stays in your browser only, never committed.</li>
+      </ol>
+      Image location in repo: <code>wgd-hugo/static/content/images/</code>
+    </div>
+    <label style="font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:0;display:block;">
+      Step 1 — Image path in repo <span style="color:var(--text-tertiary);font-weight:400;">(written into frontmatter)</span>
+    </label>
+    <div style="display:flex;gap:8px;align-items:center;margin-top:6px;">
+      <div class="image-path-group" style="flex:1;">
+        <span class="image-path-prefix">/content/images/</span>
+        <input type="text" id="imagePath" placeholder="hero-image.jpg" oninput="triggerAutosave()" style="margin:0;">
+      </div>
+      <button onclick="copyImagePath()" class="btn btn-secondary btn-sm" title="Copy full path">📋 Copy</button>
+    </div>
+    <div class="image-path-hint">Include the extension — e.g. <code>hero.jpg</code>. Commit to repo at <code>static/content/images/</code></div>
+    <div class="image-upload-area">
+      <input type="file" id="imageUpload" accept="image/*" style="display:none;">
+      <button onclick="document.getElementById('imageUpload').click()" class="btn btn-secondary" style="width:100%;">
+        🖼️ Step 2 — Upload for Local Preview Only <span style="font-weight:400;font-size:13px;">(not saved to repo)</span>
+      </button>
+      <div id="imagePreviewContainer" style="margin-top:12px;"></div>
+    </div>
+    <label style="margin-top:12px;"><input type="checkbox" id="disclaimer"><span>Add FTC Affiliate Disclosure</span></label>
+  </div>
+  <div class="panel">
+    <h3>Content Editor</h3>
+    <div class="editor">
+      <div class="editor-pane">
+        <div class="editor-header">
+          <span class="editor-title">Markdown Editor</span>
+          <span class="word-count" id="wordCount">0 words</span>
+        </div>
+        <textarea id="content" placeholder="Write or paste your Markdown content here..."></textarea>
+      </div>
+      <div class="editor-pane">
+        <div class="editor-header"><span class="editor-title">Live Preview</span></div>
+        <div class="preview" id="preview">
+          <div class="empty-state"><div class="empty-state-icon">📝</div><div class="empty-state-text">Start typing to see your preview</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURED PRODUCTS ═══ -->
+<section id="products">
+  <div class="panel">
+    <h3>Featured Products for Sidebar</h3>
+    <div class="products-tip">
+      Add up to <strong>12 sidebar items</strong> (products, blog post links, ad slots). These populate the <code>featured_products:</code> block in your post's frontmatter.<br><br>
+      🛍️ <strong>Product</strong> → generates "Shop Now →" with budget tier badge &nbsp;|&nbsp; 📝 <strong>Blog Post</strong> → generates "Read More →"<br>
+      🏷️ <strong>Labels</strong> → optional badge (e.g. "TOP PICK") &nbsp;|&nbsp; 💚 <strong>Budget Tier</strong> → Budget Pick / Mid-Range / Luxury<br>
+      💡 <strong>Benefit</strong> → short selling line shown under the product name
+    </div>
+    <div id="productsList"></div>
+    <button class="add-product-btn" onclick="addProductCard()" id="addProductBtn">➕ Add Product or Blog Post Link</button>
+  </div>
+  <div class="panel" id="productsOutputPanel" style="display:none;">
+    <h3>Generated Frontmatter — Copy &amp; Paste into your .md file</h3>
+    <div id="frontmatterOutput" class="frontmatter-output"></div>
+    <div class="action-row">
+      <button onclick="copyFrontmatter()" class="btn btn-primary">📋 Copy to Clipboard</button>
+      <button onclick="generateFrontmatter()" class="btn btn-secondary">🔄 Refresh</button>
+      <span id="copyConfirm" class="copy-confirm">✅ Copied!</span>
+    </div>
+    <h4 style="margin-top:28px;">Visual Preview</h4>
+    <div id="productsPreviewGrid" class="products-preview-grid"></div>
+  </div>
+</section>
+
+<!-- ═══ SEO ═══ -->
+<section id="seo">
+  <div class="panel">
+    <h3>SEO Analysis</h3>
+    <div class="score-container">
+      <div class="score-circle" id="scoreCircle">0%</div>
+      <div class="score-details"><div class="score-label">Overall SEO Score</div><div class="score-text" id="scoreText">Your content needs work</div></div>
+    </div>
+    <h4>Detailed Checks</h4>
+    <ul id="seoList"></ul>
+  </div>
+  <div class="panel">
+    <h3>Content Statistics</h3>
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-value" id="statWords">0</div><div class="stat-label">Words</div></div>
+      <div class="stat-card"><div class="stat-value" id="statChars">0</div><div class="stat-label">Characters</div></div>
+      <div class="stat-card"><div class="stat-value" id="statHeadings">0</div><div class="stat-label">Headings</div></div>
+      <div class="stat-card"><div class="stat-value" id="statLinks">0</div><div class="stat-label">Links</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SCHEDULE ═══ -->
+<section id="schedule">
+  <div class="panel">
+    <h3>Schedule Publication</h3>
+    <label><span style="font-weight:600;">Publication Date &amp; Time</span></label>
+    <p style="font-size:13px; color:var(--text-secondary); margin: 4px 0 8px;">
+      ⏰ Enter your Nairobi time <strong>(EAT, UTC+3)</strong> — the scheduler stores UTC in the frontmatter automatically. Hugo publishes the post when <code>date:</code> is in the past.
+    </p>
+    <input type="datetime-local" id="publishDate" oninput="updateTzPreview()">
+    <div class="tz-preview" id="tzPreview">
+      <div class="tz-item"><span class="tz-label">🕐 You entered (EAT)</span><span class="tz-value eat" id="tzEAT">—</span></div>
+      <div class="tz-item"><span class="tz-label">🌍 Stored as (UTC)</span><span class="tz-value utc" id="tzUTC">—</span></div>
+      <div class="tz-item"><span class="tz-label">⏳ Time until publish</span><span class="tz-value" id="tzCountdown">—</span></div>
+    </div>
+    <div class="action-row">
+      <button onclick="preparePost()" class="btn btn-primary">🚀 Prepare Post for Publishing</button>
+      <button onclick="clearForm()" class="btn btn-secondary">🗑️ Clear Form</button>
+    </div>
+    <div id="finalPostContainer" style="display:none; margin-top:24px;">
+      <h4>Generated Post (frontmatter + content) — scheduler blocks stripped, ready for Hugo</h4>
+      <pre id="finalPost"></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DRAFTS ═══ -->
+<section id="deploy">
+  <div class="panel">
+    <h3>Save &amp; Export</h3>
+    <div class="folder-save-box">
+      <div style="font-size:14px;font-weight:700;color:#065F46;margin-bottom:6px;">📁 Save directly to your Hugo posts folder</div>
+      <div style="font-size:13px;color:var(--text-secondary);margin-bottom:14px;line-height:1.6;">
+        Pick your repo's <code>content/posts/</code> folder once — the scheduler remembers it. After that, one click saves the <code>.md</code> file directly there. Then open GitHub Desktop and push.<br>
+        <strong style="color:#065F46;">Folder path:</strong> <code>C:\Users\Administrator\Blogs\wgd-hugo\content\posts</code>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <button onclick="pickRepoFolder()" class="btn btn-secondary btn-sm" id="pickFolderBtn">📂 Pick posts/ folder</button>
+        <div id="folderStatus" style="font-size:13px;color:var(--text-secondary);font-family:var(--font-mono);"></div>
+      </div>
+      <div id="folderUnsupported" style="display:none;margin-top:10px;font-size:13px;color:var(--warning);">⚠️ Your browser does not support folder-save. Use the standard save button below (Chrome or Edge recommended).</div>
+    </div>
+    <div class="action-row">
+      <button onclick="saveDraftToFolder()" class="btn btn-success" id="saveFolderBtn" style="display:none;">💾 Save to Repo Folder</button>
+      <button onclick="saveDraft()" class="btn btn-success" id="saveDownloadBtn">💾 Save Draft to File</button>
+      <button onclick="exportJSON()" class="btn btn-secondary">📄 Export as JSON</button>
+      <button onclick="copyToClipboard()" class="btn btn-secondary">📋 Copy to Clipboard</button>
+    </div>
+    <div id="saveConfirm" style="display:none;margin-top:12px;padding:10px 16px;background:#D1FAE5;color:#065F46;border-radius:var(--radius-sm);font-size:14px;font-weight:600;"></div>
+  </div>
+  <div class="panel">
+    <h3>Draft History</h3>
+    <table>
+      <thead><tr><th>Slug</th><th>Title</th><th>Scheduled</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody id="draftList"></tbody>
+    </table>
+    <div id="emptyDrafts" class="empty-state" style="display:none;">
+      <div class="empty-state-icon">📭</div><div class="empty-state-text">No drafts saved yet</div>
+    </div>
+  </div>
+</section>
+<!-- ═══ AFFILIATE LINKS ═══ -->
+<section id="affiliate">
+  <div class="panel">
+    <h3>Affiliate Link Manager</h3>
+    <div class="catalog-info">💾 <strong>Your catalog is saved permanently</strong> in your browser. Links survive page refreshes and browser restarts — they're yours until you delete them.</div>
+    <div class="catalog-actions">
+      <div class="search-container" style="flex:1; margin-bottom:0;">
+        <input type="text" id="affiliateSearch" placeholder="Search by product name or category...">
+        <button onclick="searchAffiliate()" class="btn btn-primary">🔍 Search</button>
+      </div>
+      <span id="catalogCountDisplay" class="catalog-count">0 links saved</span>
+    </div>
+    <ul id="affiliateResults"></ul>
+    <div id="emptyAffiliate" class="empty-state" style="display:none;"><div class="empty-state-icon">🔗</div><div class="empty-state-text">Search your catalog or add links below</div></div>
+    <div id="noSearchResults" class="no-results-state" style="display:none;"><div class="icon">🔍</div><div>No results found — try a different search term</div></div>
+  </div>
+  <div class="panel">
+    <h3>Add New Link to Catalog</h3>
+    <div class="meta-grid">
+      <input type="text" id="newLinkName" placeholder="Product Name (e.g. Casaluna Linen Duvet Cover)">
+      <input type="text" id="newLinkCategory" placeholder="Category (e.g. Bedroom, Lighting, Rugs)">
+    </div>
+    <input type="text" id="newLinkUrl" placeholder="Affiliate URL (e.g. https://amzn.to/xxxxx)">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0;">
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.4px;">Budget Tier</div>
+        <select id="newLinkBudgetTier" class="label-select">
+          <option value="">— No Tier —</option>
+          <option value="Budget Pick">💚 Budget Pick</option>
+          <option value="Mid-Range">🟡 Mid-Range</option>
+          <option value="Luxury">💜 Luxury</option>
+        </select>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.4px;">Benefit Line</div>
+        <input type="text" id="newLinkBenefit" placeholder="e.g. Best for small spaces" style="margin:0;">
+      </div>
+    </div>
+    <div style="margin-top:4px;">
+      <div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.4px;">Product Image <span style="font-weight:400;font-style:italic;text-transform:none;">— filename only, e.g. <code style="font-size:11px;">chair.jpg</code></span></div>
+      <div class="image-path-group">
+        <span class="image-path-prefix">/content/images/products/</span>
+        <input type="text" id="newLinkImage" placeholder="chair.jpg" style="margin:0;">
+      </div>
+    </div>
+    <div style="margin-top:10px;">
+      <div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.4px;">🏷️ Sidebar Label <span style="font-weight:400;font-style:italic;text-transform:none;">(optional)</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <select id="newLinkLabelSelect" class="label-select" onchange="onCatalogLabelChange(this)">
+          <option value="">— No Label —</option>
+          <option value="NEW">🟢 New</option>
+          <option value="SALE">🔴 Sale</option>
+          <option value="TOP PICK">⭐ Top Pick</option>
+          <option value="EDITOR'S PICK">💜 Editor's Pick</option>
+          <option value="BEST VALUE">💙 Best Value</option>
+          <option value="LIMITED">🔥 Limited</option>
+          <option value="CUSTOM">✏️ Custom label…</option>
+        </select>
+        <input type="text" id="newLinkLabelCustom" placeholder="e.g. Staff Pick, Hot Deal…" style="display:none;margin:0;">
+      </div>
+    </div>
+    <div class="action-row">
+      <button onclick="addAffiliateLink()" class="btn btn-primary">➕ Add to Catalog</button>
+      <button onclick="clearCatalog()" class="btn btn-danger btn-sm">🗑️ Clear Entire Catalog</button>
+    </div>
+  </div>
+  <div class="panel">
+    <h3>Catalog Backup</h3>
+    <div class="catalog-info">📦 <strong>Export your catalog</strong> as a JSON file to back it up or move to another browser. <strong>Import</strong> to restore — existing links won't be duplicated.</div>
+    <div class="action-row" style="margin-top:0;">
+      <button onclick="exportCatalog()" class="btn btn-success">⬇️ Download Backup (.json)</button>
+      <label class="btn btn-secondary" style="cursor:pointer; margin:0;">⬆️ Import Backup<input type="file" id="catalogImportFile" accept=".json" style="display:none;" onchange="importCatalog(this)"></label>
+    </div>
+    <div id="importStatus" style="display:none; margin-top:12px; padding:10px 16px; border-radius:var(--radius-sm); font-size:14px; font-weight:600;"></div>
+  </div>
+</section>
+
+<!-- ═══ IMPORT AI POST ═══ -->
+<section id="import">
+  <div class="import-hero">
+    <h2>⚡ Paste AI Post → Auto-Fill Everything</h2>
+    <p>Copy the full output from Claude (V5.1 prompt) and paste it below. The scheduler automatically extracts the title, slug, meta description, keywords, categories, tags, featured image, full content — <strong>and your affiliate links</strong>. Products are auto-added to your permanent catalog and the sidebar. One paste. Done.</p>
+    <div class="import-steps">
+      <div class="import-step"><div class="import-step-num">1</div><strong>Run V5.1 prompt</strong><p>Generate the post — make sure it includes the Affiliate Links table at the end</p></div>
+      <div class="import-step"><div class="import-step-num">2</div><strong>Copy all output</strong><p>Select everything from the AI response, top to bottom</p></div>
+      <div class="import-step"><div class="import-step-num">3</div><strong>Paste &amp; parse</strong><p>Hit "Parse &amp; Fill" — all fields, images and affiliate links auto-populate</p></div>
+      <div class="import-step"><div class="import-step-num">4</div><strong>Schedule &amp; save</strong><p>Go to Schedule tab, set your date, prepare &amp; save to wgd-hugo/content/posts/</p></div>
+    </div>
+  </div>
+  <div class="panel">
+    <h3>Paste AI Post Output</h3>
+    <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">Paste the <strong>complete output</strong> from your V5.1 prompt — including the metadata lines at the top, the Image Generation List, and the <strong>Affiliate Links table</strong> at the bottom.</p>
+    <div class="import-paste-area">
+      <textarea id="importPasteArea" placeholder="# Best Bedroom Decor Ideas 2026...&#10;&#10;**Meta Description:** Transform your bedroom...&#10;**URL Slug:** /best-bedroom-decor-ideas&#10;..."></textarea>
+    </div>
+    <div class="action-row" style="margin-top:16px;">
+      <button onclick="parseAndFill()" class="btn btn-primary" style="font-size:16px;padding:14px 28px;">⚡ Parse &amp; Fill All Fields</button>
+      <button onclick="document.getElementById('importPasteArea').value=''" class="btn btn-secondary">🗑️ Clear</button>
+    </div>
+    <div id="parseResult" class="parse-result"></div>
+  </div>
+  <div class="panel" id="imageListPanel" style="display:none;">
+    <h3>🖼️ Image Generation List</h3>
+    <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">Two sets of images. <strong>Blog images</strong> → <code>static/content/images/</code> &nbsp;|&nbsp; <strong>Product images</strong> → <code>static/content/images/products/</code></p>
+    <div style="margin-bottom:24px;">
+      <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--primary);margin-bottom:10px;display:flex;align-items:center;gap:8px;">
+        <span style="background:rgba(45,91,255,0.1);padding:3px 10px;border-radius:4px;">📸 Blog Images — /content/images/</span>
+        <span id="blogImageCount" style="font-size:12px;font-weight:400;color:var(--text-tertiary);font-family:var(--font-mono);"></span>
+      </div>
+      <div id="blogImageTable"></div>
+      <div class="action-row" style="margin-top:12px;">
+        <button onclick="copyBlogImageFilenames()" class="btn btn-secondary btn-sm">📋 Copy Blog Filenames</button>
+        <button onclick="copyBlogImagePrompts()" class="btn btn-secondary btn-sm">📋 Copy Blog Prompts</button>
+      </div>
+    </div>
+    <div id="productImageSection" style="display:none;">
+      <div style="font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--purple);margin-bottom:10px;display:flex;align-items:center;gap:8px;">
+        <span style="background:var(--purple-pale);padding:3px 10px;border-radius:4px;">🛍️ Product Images — /content/images/products/</span>
+        <span id="productImageCount" style="font-size:12px;font-weight:400;color:var(--text-tertiary);font-family:var(--font-mono);"></span>
+      </div>
+      <div id="productImageTable"></div>
+      <div class="action-row" style="margin-top:12px;">
+        <button onclick="copyProductImageFilenames()" class="btn btn-secondary btn-sm">📋 Copy Product Filenames</button>
+        <button onclick="copyProductImagePrompts()" class="btn btn-secondary btn-sm">📋 Copy Product Prompts</button>
+      </div>
+    </div>
+  </div>
+  <div class="panel" id="affiliateListPanel" style="display:none;border-color:rgba(0,208,132,0.25);background:rgba(0,208,132,0.02);">
+    <h3 style="color:var(--success);">🔗 Affiliate Links — Auto-Imported</h3>
+    <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">Products parsed from your AI output — automatically added to your <strong>permanent catalog</strong> and <strong>Products sidebar</strong>. Duplicates were skipped.</p>
+    <div id="affiliateSummaryBox" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-bottom:20px;"></div>
+    <div id="affiliateListTable"></div>
+    <div class="action-row" style="margin-top:16px;">
+      <button onclick="copyAffiliateLinks()" class="btn btn-secondary btn-sm">📋 Copy All URLs</button>
+      <button onclick="copyAffiliateNames()" class="btn btn-secondary btn-sm">📋 Copy All Names</button>
+      <button onclick="copyAffiliateImgFiles()" class="btn btn-secondary btn-sm">🖼️ Copy Image Paths</button>
+      <button onclick="openTab('affiliate')" class="btn btn-secondary btn-sm">🔗 View Catalog</button>
+      <button onclick="openTab('products')" class="btn btn-secondary btn-sm">🛍️ View Sidebar</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PINTEREST ═══ -->
+<section id="pinterest" id="section-pinterest">
+  <div class="panel">
+    <h3>📌 Pinterest Output Generator</h3>
+    <div class="pinterest-intro"><strong>Auto-generated from your post metadata.</strong> Fill in your title, description, keywords, and categories in the Editor tab first — then come here to get Pinterest copy ready to paste into Tailwind.</div>
+    <div class="pin-tip">💡 <strong>Tip:</strong> Run the <strong>Import AI</strong> tab first to auto-fill all metadata from your V5.1 prompt, then come here — everything will be ready in one click.</div>
+    <div class="pin-generate-row">
+      <button onclick="generatePinterest()" class="btn btn-pin" style="font-size:16px;padding:14px 28px;">📌 Generate Pinterest Copy</button>
+      <span id="pinGenStatus" style="font-size:13px;color:var(--text-secondary);"></span>
+    </div>
+  </div>
+  <div id="pinterestOutput" style="display:none;">
+    <div class="panel">
+      <h3>Pin Descriptions <span style="font-size:13px;font-weight:400;color:var(--text-secondary);">220–232 characters, keyword-first</span></h3>
+      <div id="pinDescOptions"></div>
+    </div>
+    <div class="panel">
+      <h3>Pin Title Variations <span style="font-size:13px;font-weight:400;color:var(--text-secondary);">Ready to paste into Tailwind</span></h3>
+      <div class="pin-titles-grid" id="pinTitlesGrid"></div>
+    </div>
+    <div class="panel">
+      <h3>Pinterest Hashtags <span style="font-size:13px;font-weight:400;color:var(--text-secondary);">10–15 niche tags</span></h3>
+      <div class="pin-hashtags-box" id="pinHashtags"></div>
+      <div class="action-row" style="margin-top:16px;"><button onclick="copyPinHashtags()" class="btn btn-secondary btn-sm">📋 Copy All Hashtags</button></div>
+    </div>
+    <div class="panel">
+      <h3>Suggested Boards to Pin To</h3>
+      <div id="pinBoards"></div>
+    </div>
+    <div class="panel" style="background:rgba(189,18,60,0.03);border-color:rgba(189,18,60,0.15);">
+      <h3>📋 Full Tailwind Copy-Paste Block</h3>
+      <div id="pinFullBlock" class="pin-full-block"></div>
+      <div class="action-row" style="margin-top:16px;">
+        <button onclick="copyPinFull()" class="btn btn-pin">📋 Copy Full Block</button>
+        <span id="pinCopyConfirm" class="copy-confirm" style="background:#FFE4EC;color:#bd123c;">✅ Copied!</span>
+      </div>
+    </div>
+  </div>
+</section>
+</div><!-- /.container -->
+
+<!-- ═══ PIN FACTORY ═══ -->
+<section id="pinfactory">
+  <div class="factory-hero">
+    <h2>🏭 Pin Factory — 10 Pins Per Post, Automatically</h2>
+    <p>Every blog post generates 10 Pinterest pin variants across 5 core types and 5 engagement types. Each pin has Canva-ready layer text, a portrait AI image prompt (1000×1500px), Pinterest description, and scheduled day + time.</p>
+    <div class="factory-stats">
+      <div class="factory-stat"><div class="factory-stat-val" id="fsPostCount">0</div><div class="factory-stat-label">Posts this week</div></div>
+      <div class="factory-stat"><div class="factory-stat-val" id="fsPinCount">0</div><div class="factory-stat-label">Pins generated</div></div>
+      <div class="factory-stat"><div class="factory-stat-val">10</div><div class="factory-stat-label">Pins per post</div></div>
+      <div class="factory-stat"><div class="factory-stat-val">1000×1500</div><div class="factory-stat-label">Pin dimensions</div></div>
+    </div>
+  </div>
+  <details style="margin-bottom:24px;">
+    <div class="canva-setup">
+      <summary>📐 One-Time Canva Template Setup Guide <span style="font-size:12px;font-weight:400;color:var(--text-secondary);margin-left:8px;">(read once, skip forever after)</span></summary>
+      <div style="margin-top:18px;">
+        <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;line-height:1.7;">Create <strong>one Canva template at 1000×1500px</strong> with named text layers. Every pin you make is just: open template → paste text into layers → swap background image → download. Under 2 minutes per pin once set up.</p>
+        <div class="canva-steps">
+          <div class="canva-step"><div class="canva-step-num">Step 1</div><div class="canva-step-title">Create the canvas</div><div class="canva-step-body">New design → Custom size → <span class="canva-spec">1000 × 1500 px</span>. Save as "WGD Pinterest Template". Never edit the master directly — always duplicate first.</div></div>
+          <div class="canva-step"><div class="canva-step-num">Step 2</div><div class="canva-step-title">Add background image layer</div><div class="canva-step-body">Full-canvas image placeholder at bottom layer. Use a dark overlay (60–70% opacity) on top so text is always readable.</div></div>
+          <div class="canva-step"><div class="canva-step-num">Step 3</div><div class="canva-step-title">Create exactly 3 text layers</div><div class="canva-step-body"><ul class="layer-list"><li><span class="layer-dot" style="background:#FFB020;"></span><strong>HEADLINE</strong> — bold, large (48–64pt). Top 60% of canvas.</li><li><span class="layer-dot" style="background:#00D084;"></span><strong>SUBLINE</strong> — medium weight (24–30pt). Below headline.</li><li><span class="layer-dot" style="background:#2D5BFF;"></span><strong>URL WATERMARK</strong> — small (16pt), bottom. wowglamdecor.com</li></ul></div></div>
+          <div class="canva-step"><div class="canva-step-num">Step 4</div><div class="canva-step-title">Lock the URL watermark</div><div class="canva-step-body">Right-click the URL layer → Lock. Your URL stays on every pin automatically.</div></div>
+          <div class="canva-step"><div class="canva-step-num">Step 5</div><div class="canva-step-title">Per-pin workflow</div><div class="canva-step-body">Duplicate template → swap background → paste HEADLINE → paste SUBLINE → download as <span class="canva-spec">JPG, quality 80%</span> → upload to Pinterest.</div></div>
+        </div>
+      </div>
+    </div>
+  </details>
+  <div class="panel">
+    <h3>Generate Pins for Current Post</h3>
+    <p style="font-size:14px;color:var(--text-secondary);margin-bottom:20px;">Loads from your Editor metadata. Fill in your post title, keywords, categories, and at least one product in the Products tab first for best results.</p>
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+      <button onclick="generatePinFactory()" class="btn btn-factory" style="font-size:16px;padding:14px 28px;">🏭 Generate All 10 Pins</button>
+      <span id="factoryStatus" style="font-size:13px;color:var(--text-secondary);"></span>
+    </div>
+  </div>
+  <div id="pinFactoryOutput" style="display:none;">
+    <div class="panel">
+      <h3>Pin Cards — Canva Layer Text + Image Prompts</h3>
+      <div class="pin-type-selector" id="pinTypeFilter">
+        <button class="pin-type-btn selected" onclick="filterPinCards('all', this)">All 10 Pins</button>
+        <button class="pin-type-btn" onclick="filterPinCards('hero', this)">🌟 Hero</button>
+        <button class="pin-type-btn" onclick="filterPinCards('benefit', this)">💡 Benefit</button>
+        <button class="pin-type-btn" onclick="filterPinCards('product', this)">🛍️ Product</button>
+        <button class="pin-type-btn" onclick="filterPinCards('list', this)">📋 List</button>
+        <button class="pin-type-btn" onclick="filterPinCards('question', this)">❓ Question</button>
+        <button class="pin-type-btn" onclick="filterPinCards('mistake', this)">⚠️ Mistake</button>
+        <button class="pin-type-btn" onclick="filterPinCards('budget', this)">💰 Budget</button>
+        <button class="pin-type-btn" onclick="filterPinCards('seasonal', this)">🗓️ Seasonal</button>
+        <button class="pin-type-btn" onclick="filterPinCards('comparison', this)">⚖️ Comparison</button>
+        <button class="pin-type-btn" onclick="filterPinCards('stat', this)">📈 Stat</button>
+      </div>
+      <div class="pin-cards-grid" id="pinCardsGrid"></div>
+    </div>
+    <div class="panel">
+      <h3>📅 Weekly Pinterest Queue</h3>
+      <p style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">10 pins distributed across the week. At 6 posts/week this stacks to <strong>60 pins/week</strong>.</p>
+      <div style="overflow-x:auto;">
+        <table class="queue-table" id="pinQueueTable">
+          <thead><tr><th>Day</th><th>Pin Type</th><th>Best Time (EAT)</th><th>Board</th><th>Title (copy →)</th></tr></thead>
+          <tbody id="pinQueueBody"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="panel" style="background:rgba(180,83,9,0.03);border-color:rgba(180,83,9,0.15);">
+      <h3>📋 Full Export Block</h3>
+      <div id="pinFactoryExport" class="export-block"></div>
+      <div class="action-row" style="margin-top:16px;">
+        <button onclick="copyFactoryExport()" class="btn btn-factory">📋 Copy Full Export</button>
+        <button onclick="exportPinCSV()" class="btn btn-secondary">⬇️ Download Pin CSV <span style="font-size:11px;opacity:0.7;">(Canva Bulk Create)</span></button>
+        <button onclick="exportBlogImagesCSV()" class="btn btn-secondary">⬇️ Download Blog Images CSV</button>
+        <span id="factoryCopyConfirm" class="copy-confirm" style="background:#FEF3C7;color:#92400E;">✅ Copied!</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Load Draft Modal -->
+<div id="loadDraftModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Load Autosaved Draft</h3>
+      <button class="modal-close" onclick="closeLoadModal()">×</button>
+    </div>
+    <div id="autosaveDraftPreview"></div>
+  </div>
+</div>
+<script data-cfasync="false">
+/* ══════════════════════════════════════════
+   STATE
+══════════════════════════════════════════ */
+let currentTab = 'editor';
+let uploadedImage = null;
+let productCounter = 0;
+
+/* ══════════════════════════════════════════
+   STRIP SCHEDULER-ONLY BLOCKS BEFORE SAVE
+   Sources & References is KEPT — it belongs in the published post
+══════════════════════════════════════════ */
+function stripSchedulerBlocks(md) {
+  // Strip ### Look N: blocks (scene + product tables embedded in H2 sections)
+  md = md.replace(/^### Look \d+:[\s\S]*?(?=\n### (?:Look \d+:|[^L])|\n## |\n---\n|$)/gm, '');
+  // Strip ## Table of Contents (manual version from V5.1 prompt)
+  md = md.replace(/^## Table of Contents[\s\S]*?(?=\n## |$)/m, '');
+  // Strip ## Image Generation List
+  md = md.replace(/^## [^\n]*Image Generation[^\n]*[\s\S]*?(?=\n## |$)/im, '');
+  // Strip ## Affiliate Links List
+  md = md.replace(/^## [^\n]*Affiliate Links[^\n]*[\s\S]*?(?=\n## |$)/im, '');
+  // Strip ## Pinterest Pin Data
+  md = md.replace(/^## [^\n]*Pinterest[^\n]*[\s\S]*?(?=\n## |$)/im, '');
+  // Strip **Primary Pin Description block
+  md = md.replace(/^\*\*Primary Pin Description[\s\S]*?(?=\n## |$)/m, '');
+  // Strip ## Shop This Look standalone section (Look blocks already stripped above)
+  md = md.replace(/^## [^\n]*Shop This Look[\s\S]*?(?=\n## |$)/im, '');
+  // Strip ## Internal Links Used
+  md = md.replace(/^## [^\n]*Internal Links Used[\s\S]*$/im, '');
+  // NOTE: ## Sources & References is intentionally kept
+  // Clean up excessive blank lines
+  md = md.replace(/\n{3,}/g, '\n\n');
+  return md.trim();
+}
+
+/* ══════════════════════════════════════════
+   LABEL HELPERS
+══════════════════════════════════════════ */
+const PRESET_LABELS = [
+  { value: '',              text: '— No Label —',      chip: '' },
+  { value: 'NEW',           text: '🟢 New',             chip: 'label-new' },
+  { value: 'SALE',          text: '🔴 Sale',            chip: 'label-sale' },
+  { value: 'TOP PICK',      text: '⭐ Top Pick',        chip: 'label-top-pick' },
+  { value: "EDITOR'S PICK", text: "💜 Editor's Pick",  chip: 'label-editors-pick' },
+  { value: 'BEST VALUE',    text: '💙 Best Value',      chip: 'label-best-value' },
+  { value: 'LIMITED',       text: '🔥 Limited',         chip: 'label-limited' },
+  { value: 'CUSTOM',        text: '✏️ Custom label…',  chip: 'label-custom-chip' },
+];
+function getLabelStyle(val) {
+  const map = { 'NEW':'background:#D1FAE5;color:#065F46;','SALE':'background:#FEE2E2;color:#DC2626;','TOP PICK':'background:#FEF3C7;color:#92400E;',"EDITOR'S PICK":'background:rgba(126,8,130,0.12);color:#7e0882;','BEST VALUE':'background:#DBEAFE;color:#1D4ED8;','LIMITED':'background:#FEE2E2;color:#DC2626;' };
+  return map[val] || 'background:#F3E8FF;color:#7C3AED;';
+}
+
+/* ══════════════════════════════════════════
+   AFFILIATE CATALOG
+══════════════════════════════════════════ */
+const CATALOG_KEY = 'wgd_affiliate_catalog';
+const DEFAULT_CATALOG = [
+  { name:"Casaluna Linen Blend Duvet Cover Set", link:"https://amzn.to/3Mt92ag", category:"Bedroom", price:"$69–$129", image:"casaluna-linen-duvet-cover.jpg" },
+  { name:"Brightech Sparq Arc LED Floor Lamp", link:"https://amzn.to/4ubPrMK", category:"Lighting", price:"$79–$109", image:"brightech-sparq-floor-lamp.jpg" },
+  { name:"nuLOOM Rigo Handwoven Jute Area Rug", link:"https://amzn.to/3ZSUXG9", category:"Rugs", price:"$65–$175", image:"nuloom-rigo-jute-rug.jpg" },
+  { name:"Uttermost Abelard Abstract Canvas Art", link:"https://amzn.to/4qTb8hx", category:"Wall Decor", price:"$180–$320", image:"uttermost-abelard-canvas.jpg" },
+  { name:"Bedsure Satin Pillowcase Set (2-Pack)", link:"https://amzn.to/4aT3kXd", category:"Bedroom", price:"$10–$18", image:"bedsure-satin-pillowcase.jpg" },
+];
+function loadCatalog() { const raw=localStorage.getItem(CATALOG_KEY); if(raw){try{return JSON.parse(raw);}catch(e){}} saveCatalog(DEFAULT_CATALOG); return DEFAULT_CATALOG; }
+function saveCatalog(catalog) { localStorage.setItem(CATALOG_KEY,JSON.stringify(catalog)); updateCatalogCount(); }
+function updateCatalogCount() { const catalog=loadCatalog(); const el=document.getElementById('catalogCountDisplay'); if(el) el.textContent=catalog.length+' link'+(catalog.length!==1?'s':'')+' saved'; }
+function searchAffiliate() {
+  const q=document.getElementById('affiliateSearch').value.toLowerCase().trim();
+  const ul=document.getElementById('affiliateResults'),empty=document.getElementById('emptyAffiliate'),noRes=document.getElementById('noSearchResults');
+  const catalog=loadCatalog(); ul.innerHTML=''; empty.style.display='none'; noRes.style.display='none';
+  const res=q?catalog.filter(a=>a.name.toLowerCase().includes(q)||(a.category||'').toLowerCase().includes(q)):catalog;
+  if(!res.length){noRes.style.display='block';return;} renderAffiliateResults(res);
+}
+function renderAffiliateResults(items) {
+  const ul=document.getElementById('affiliateResults'); const catalog=loadCatalog();
+  ul.innerHTML=items.map(a=>{
+    const trueIdx=catalog.findIndex(c=>c.link===a.link&&c.name===a.name);
+    const shortLink=a.link.length>45?a.link.slice(0,45)+'…':a.link;
+    const imgFile=a.image||''; const labelVal=a.label||'';
+    const imgDisplay=imgFile?`<span style="color:var(--success);font-size:11px;">🖼️ ${imgFile}</span>`:`<span style="color:var(--text-tertiary);font-size:11px;font-style:italic;">no image saved</span>`;
+    const labelDisplay=labelVal?`<span style="margin-left:8px;padding:1px 7px;border-radius:8px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.4px;${getLabelStyle(labelVal)}">${labelVal}</span>`:'';
+    return `<li><div style="flex:1;min-width:0;"><div class="affiliate-name">${a.name}${labelDisplay}</div><div class="affiliate-category">${a.category||'Uncategorized'}${a.budgetTier?' · '+a.budgetTier:''}</div>${a.benefit?`<div style="font-size:11px;color:var(--text-tertiary);font-style:italic;margin-top:2px;">${a.benefit}</div>`:''}<div style="font-size:11px;color:var(--text-tertiary);margin-top:2px;font-family:var(--font-mono);">${shortLink}</div><div style="margin-top:3px;">${imgDisplay}</div></div><div class="affiliate-actions"><button class="affiliate-link" onclick="insertAffiliateLink('${esc(a.name)}','${esc(a.link)}')">📎 Insert</button><button class="affiliate-link affiliate-link-purple" onclick="addLinkToProducts('${esc(a.name)}','${esc(a.link)}','${esc(a.budgetTier||'')}','${esc(a.benefit||'')}','${esc(imgFile)}','${esc(labelVal)}')">🛍️ Add to Sidebar</button><button class="affiliate-link affiliate-link-danger" onclick="deleteAffiliateLink(${trueIdx})">🗑️</button></div></li>`;
+  }).join('');
+}
+function addAffiliateLink() {
+  const name=document.getElementById('newLinkName').value.trim(),url=document.getElementById('newLinkUrl').value.trim(),category=document.getElementById('newLinkCategory').value.trim();
+  const budgetTier=document.getElementById('newLinkBudgetTier')?document.getElementById('newLinkBudgetTier').value:'';
+  const benefit=document.getElementById('newLinkBenefit')?document.getElementById('newLinkBenefit').value.trim():'';
+  const image=document.getElementById('newLinkImage').value.trim();
+  let label=document.getElementById('newLinkLabelSelect').value;
+  if(label==='CUSTOM') label=document.getElementById('newLinkLabelCustom').value.trim();
+  if(!name){alert('⚠️ Please enter a product name');return;} if(!url){alert('⚠️ Please enter an affiliate URL');return;}
+  const catalog=loadCatalog();
+  if(catalog.find(c=>c.link===url)){alert('⚠️ This URL is already in your catalog');return;}
+  catalog.push({name,link:url,category:category||'General',budgetTier:budgetTier||'',benefit:benefit||'',image:image||'',label:label||''});
+  saveCatalog(catalog);
+  ['newLinkName','newLinkUrl','newLinkCategory','newLinkBenefit','newLinkImage','newLinkLabelCustom'].forEach(id=>{document.getElementById(id).value='';});
+  document.getElementById('newLinkLabelSelect').value='';
+  if(document.getElementById('newLinkBudgetTier')) document.getElementById('newLinkBudgetTier').value='';
+  document.getElementById('newLinkLabelCustom').style.display='none';
+  updateCatalogCount(); searchAffiliate(); alert(`✅ "${name}" added to your permanent catalog`);
+}
+function onCatalogLabelChange(sel) { const custom=document.getElementById('newLinkLabelCustom'); if(sel.value==='CUSTOM'){custom.style.display='block';custom.focus();}else{custom.style.display='none';custom.value='';} }
+function deleteAffiliateLink(idx) { const catalog=loadCatalog(); if(!catalog[idx])return; if(!confirm(`Delete "${catalog[idx].name}" from your catalog?`))return; catalog.splice(idx,1); saveCatalog(catalog); searchAffiliate(); }
+function clearCatalog() { if(!confirm('⚠️ This will permanently delete ALL links from your catalog. Are you sure?'))return; localStorage.removeItem(CATALOG_KEY); updateCatalogCount(); document.getElementById('affiliateResults').innerHTML=''; document.getElementById('emptyAffiliate').style.display='block'; alert('✅ Catalog cleared'); }
+function exportCatalog() { const catalog=loadCatalog(); if(!catalog.length){alert('⚠️ Your catalog is empty');return;} const blob=new Blob([JSON.stringify({exported:new Date().toISOString(),tool:'Affiliate Blog Scheduler Pro',version:1,count:catalog.length,catalog},null,2)],{type:'application/json'}); Object.assign(document.createElement('a'),{href:URL.createObjectURL(blob),download:`wgd-catalog-backup-${new Date().toISOString().slice(0,10)}.json`}).click(); }
+function importCatalog(input) {
+  const file=input.files[0]; if(!file)return; const reader=new FileReader();
+  reader.onload=ev=>{
+    try{
+      const parsed=JSON.parse(ev.target.result); const incoming=Array.isArray(parsed)?parsed:(parsed.catalog||[]);
+      if(!incoming.length){showImportStatus('⚠️ No links found in this file','warning');return;}
+      const catalog=loadCatalog(); let added=0,skipped=0;
+      incoming.forEach(item=>{if(!item.name||!item.link){skipped++;return;} if(catalog.find(c=>c.link===item.link)){skipped++;return;} catalog.push({name:item.name,link:item.link,category:item.category||'General',price:item.price||'',image:item.image||''}); added++;});
+      saveCatalog(catalog); updateCatalogCount(); searchAffiliate(); showImportStatus(`✅ Imported ${added} link${added!==1?'s':''}${skipped?' · '+skipped+' skipped':''}`, 'success');
+    }catch(e){showImportStatus('❌ Invalid file','error');} input.value='';
+  }; reader.readAsText(file);
+}
+function showImportStatus(msg,type) { const el=document.getElementById('importStatus'); const styles={success:'background:#D1FAE5;color:#065F46;border:1px solid #6EE7B7;',warning:'background:#FEF3C7;color:#92400E;border:1px solid #FCD34D;',error:'background:#FEE2E2;color:#DC2626;border:1px solid #FCA5A5;'}; el.style.cssText=styles[type]||styles.success; el.textContent=msg; el.style.display='block'; setTimeout(()=>el.style.display='none',5000); }
+function insertAffiliateLink(name,link) { const ta=document.getElementById('content'); const md=`[${name}](${link})`; const s=ta.selectionStart,e=ta.selectionEnd; ta.value=ta.value.slice(0,s)+md+ta.value.slice(e); ta.selectionStart=ta.selectionEnd=s+md.length; ta.focus(); updatePreview(); openTab('editor'); }
+function addLinkToProducts(name,link,budgetTier,benefit,imageFile,label) { openTab('products'); addProductCard({name,link,type:'product',budgetTier:budgetTier||'',benefit:benefit||'',image:imageFile?'/content/images/products/'+imageFile:'',label:label||''}); }
+function esc(str){return String(str||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;');}
+
+/* ══════════════════════════════════════════
+   IMAGE PATH
+══════════════════════════════════════════ */
+function copyImagePath() { const file=document.getElementById('imagePath').value.trim(); if(!file){alert('⚠️ Enter an image filename first');return;} const full='/content/images/'+file; navigator.clipboard.writeText(full).then(()=>alert('✅ Path copied: '+full)).catch(()=>alert('❌ Copy failed')); }
+
+/* ══════════════════════════════════════════
+   FEATURED PRODUCTS
+══════════════════════════════════════════ */
+const IMG_PREFIX='/content/images/products/';
+function addProductCard(prefill) {
+  const list=document.getElementById('productsList'); const existing=list.querySelectorAll('.product-card').length;
+  if(existing>=12){alert('⚠️ Maximum 12 sidebar items per post.');return;}
+  productCounter++; const id=productCounter;
+  const isProduct=!prefill||prefill.type!=='blog';
+  const prefillLabel=prefill?.label||''; const prefillBudgetTier=prefill?.budgetTier||''; const prefillBenefit=prefill?.benefit||''; const prefillCustom=prefill?.labelCustom||'';
+  const isCustomLabel=prefillLabel==='CUSTOM'||(prefillLabel&&!PRESET_LABELS.find(l=>l.value===prefillLabel&&l.value!=='CUSTOM'&&l.value!==''));
+  const labelOptions=PRESET_LABELS.map(l=>`<option value="${l.value}" ${(isCustomLabel?'CUSTOM':prefillLabel)===l.value?'selected':''}>${l.text}</option>`).join('');
+  const prefillImageFile=prefill?.image?(prefill.image.startsWith(IMG_PREFIX)?prefill.image.slice(IMG_PREFIX.length):prefill.image):'';
+  const card=document.createElement('div'); card.className='product-card'; card.dataset.id=id; card.dataset.type=isProduct?'product':'blog';
+  card.innerHTML=`<div class="product-card-header"><span class="product-card-title">Item ${existing+1}</span><div style="display:flex;gap:8px;align-items:center;"><div class="product-type-toggle"><button class="type-btn ${isProduct?'active-product':''}" onclick="setProductType(${id},'product',this)">🛍️ Product</button><button class="type-btn ${!isProduct?'active-blog':''}" onclick="setProductType(${id},'blog',this)">📝 Blog Post</button></div><button class="btn btn-danger btn-sm" onclick="removeProductCard(${id})">✕ Remove</button></div></div>
+    <div class="product-fields">
+      <input type="text" class="full-width" data-field="name" placeholder="Name (e.g. Velvet Accent Chair)" value="${ea(prefill?.name)}">
+      <select class="budget-tier-select ${!isProduct?'hidden-field':''}" data-field="budgetTier" style="margin:0;"><option value="" ${!prefillBudgetTier?'selected':''}>— Budget Tier —</option><option value="Budget Pick" ${prefillBudgetTier==='Budget Pick'?'selected':''}>💚 Budget Pick</option><option value="Mid-Range" ${prefillBudgetTier==='Mid-Range'?'selected':''}>🟡 Mid-Range</option><option value="Luxury" ${prefillBudgetTier==='Luxury'?'selected':''}>💜 Luxury</option></select>
+      <input type="text" class="full-width" data-field="benefit" placeholder="Benefit line (e.g. Best for small spaces)" value="${ea(prefillBenefit)}">
+      <div class="label-row full-width" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div><div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.4px;">🏷️ Sidebar Label</div><select class="label-select" data-field="label" onchange="onLabelChange(${id},this)">${labelOptions}</select></div><div><div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.4px;">Custom Label Text</div><input type="text" class="label-custom ${(isCustomLabel||prefillLabel==='CUSTOM')?'visible':''}" data-field="labelCustom" placeholder="e.g. Staff Pick…" value="${ea(isCustomLabel&&!PRESET_LABELS.find(l=>l.value===prefillLabel&&l.value!=='CUSTOM')?prefillLabel:prefillCustom)}" style="margin:0;"></div></div>
+      <input type="text" class="full-width" data-field="link" placeholder="Affiliate URL or /posts/slug.html" value="${ea(prefill?.link)}">
+      <div class="full-width"><div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.4px;">Product Image — filename only</div><div class="image-path-group"><span class="image-path-prefix">${IMG_PREFIX}</span><input type="text" data-field="imageFile" placeholder="chair.jpg" value="${ea(prefillImageFile)}"></div></div>
+    </div>`;
+  card.querySelectorAll('input,select').forEach(inp=>inp.addEventListener('input',()=>{generateFrontmatter();updateProductBadge();}));
+  list.appendChild(card); updateAddButton(); updateProductBadge(); generateFrontmatter();
+}
+function ea(str){return str?String(str).replace(/"/g,'&quot;'):''}
+function onLabelChange(id,selectEl){const card=document.querySelector(`.product-card[data-id="${id}"]`);if(!card)return;const ci=card.querySelector('.label-custom');if(selectEl.value==='CUSTOM'){ci.classList.add('visible');ci.focus();}else{ci.classList.remove('visible');ci.value='';}generateFrontmatter();updateProductBadge();}
+function setProductType(id,type,btn){const card=document.querySelector(`.product-card[data-id="${id}"]`);if(!card)return;card.dataset.type=type;card.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('active-product','active-blog'));btn.classList.add(type==='product'?'active-product':'active-blog');const tf=card.querySelector('.budget-tier-select');if(type==='blog'){if(tf){tf.classList.add('hidden-field');tf.value='';}}else{if(tf)tf.classList.remove('hidden-field');}generateFrontmatter();}
+function removeProductCard(id){document.querySelector(`.product-card[data-id="${id}"]`)?.remove();document.querySelectorAll('.product-card').forEach((c,i)=>{c.querySelector('.product-card-title').textContent=`Item ${i+1}`;});updateAddButton();updateProductBadge();generateFrontmatter();}
+function updateAddButton(){const count=document.querySelectorAll('.product-card').length;document.getElementById('addProductBtn').style.display=count>=12?'none':'flex';}
+function updateProductBadge(){const count=document.querySelectorAll('.product-card').length;const badge=document.getElementById('productCountBadge');badge.textContent=count;badge.style.display=count>0?'inline-flex':'none';}
+function getProductsData(){
+  return Array.from(document.querySelectorAll('.product-card')).map(card=>{
+    const labelSelect=card.querySelector('[data-field="label"]'),labelCustom=card.querySelector('[data-field="labelCustom"]'),imageFile=card.querySelector('[data-field="imageFile"]').value.trim();
+    let labelVal=labelSelect?labelSelect.value:''; if(labelVal==='CUSTOM') labelVal=labelCustom?.value.trim()||'';
+    return{type:card.dataset.type,name:card.querySelector('[data-field="name"]').value.trim(),budgetTier:(card.querySelector('[data-field="budgetTier"]')||{value:''}).value,benefit:(card.querySelector('[data-field="benefit"]')?card.querySelector('[data-field="benefit"]').value.trim():''),link:card.querySelector('[data-field="link"]').value.trim(),image:imageFile?IMG_PREFIX+imageFile:'',label:labelVal};
+  }).filter(p=>p.name||p.link);
+}
+function buildProductsYAML(indent){
+  const products=getProductsData(); if(!products.length)return''; const pad=indent||''; let yaml=`${pad}featured_products:\n`;
+  products.forEach((p,i)=>{
+    yaml+=`${pad}  # ${p.type==='product'?'Product':'Blog Post'} ${i+1}\n`;
+    yaml+=`${pad}  - name: "${p.name}"\n`;
+    if(p.budgetTier) yaml+=`${pad}    budget_tier: "${p.budgetTier}"\n`;
+    if(p.benefit)    yaml+=`${pad}    benefit: "${p.benefit}"\n`;
+    if(p.label)      yaml+=`${pad}    label: "${p.label}"\n`;
+    if(p.image){var imgYaml=p.image;if(imgYaml&&!/\.(jpg|jpeg|png|webp)$/i.test(imgYaml))imgYaml+='.jpg';yaml+=pad+'    image: "'+imgYaml+'"\n';}
+    if(p.link)       yaml+=`${pad}    link: "${p.link}"\n`;
+    yaml+='\n';
+  });
+  return yaml;
+}
+function generateFrontmatter(){
+  const products=getProductsData(); const panel=document.getElementById('productsOutputPanel');
+  if(!products.length){panel.style.display='none';return;} panel.style.display='block';
+  const raw=buildProductsYAML();
+  const highlighted=raw.replace(/^(  # .+)$/gm,'<span class="yaml-comment">$1</span>').replace(/^(featured_products:)/gm,'<span class="yaml-key">$1</span>').replace(/^(  - name:|    price:|    label:|    image:|    link:|    budget_tier:|    benefit:)/gm,'<span class="yaml-key">$1</span>').replace(/("[^"]*")/g,'<span class="yaml-string">$1</span>');
+  document.getElementById('frontmatterOutput').innerHTML=highlighted;
+  document.getElementById('productsPreviewGrid').innerHTML=products.map(p=>{
+    const shortLink=p.link?(p.link.length>38?p.link.slice(0,38)+'…':p.link):'—';
+    const labelHtml=p.label?`<div class="product-preview-label" style="${getLabelStyle(p.label)}">${p.label}</div>`:'';
+    return`<div class="product-preview-card">${labelHtml}<div class="product-preview-name">${p.name||'—'}</div>${p.budgetTier?`<div class="product-preview-price" style="font-size:12px;font-weight:700;padding:2px 10px;border-radius:12px;display:inline-block;margin-bottom:4px;${p.budgetTier==='Budget Pick'?'background:#D1FAE5;color:#065F46;':p.budgetTier==='Luxury'?'background:rgba(126,8,130,0.12);color:#7e0882;':'background:#FEF3C7;color:#92400E;'}">${p.budgetTier}</div>`:''}${p.benefit?`<div style="font-size:11px;color:#6B7280;font-style:italic;margin-bottom:4px;">${p.benefit}</div>`:''}<div class="product-preview-cta">${p.type==='product'?'🛍️ Shop Now →':'📝 Read More →'}</div><span class="product-preview-link">${shortLink}</span></div>`;
+  }).join('');
+}
+function copyFrontmatter(){const raw=buildProductsYAML();if(!raw)return;navigator.clipboard.writeText(raw).then(()=>{const el=document.getElementById('copyConfirm');el.style.display='inline-flex';setTimeout(()=>el.style.display='none',2500);}).catch(()=>alert('❌ Copy failed'));}
+
+/* ══════════════════════════════════════════
+   IMAGE UPLOAD
+══════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('imageUpload').addEventListener('change',e=>{
+    const file=e.target.files[0]; if(!file||!file.type.startsWith('image/')){if(file)alert('⚠️ Please upload an image file');return;}
+    const pathField=document.getElementById('imagePath'); if(!pathField.value&&slug.value) pathField.value=`${slug.value}.jpg`;
+    const reader=new FileReader(); reader.onload=ev=>{uploadedImage={name:file.name,size:file.size,type:file.type,data:ev.target.result};displayImagePreview();triggerAutosave();}; reader.readAsDataURL(file);
+  });
+});
+function displayImagePreview(){const container=document.getElementById('imagePreviewContainer');if(!uploadedImage){container.innerHTML='';return;}const sizeKB=(uploadedImage.size/1024).toFixed(2);container.innerHTML=`<div class="image-preview"><div style="font-size:12px;background:rgba(255,183,0,0.1);border:1px solid #FFB020;border-radius:6px;padding:8px 12px;margin-bottom:8px;color:#92600E;">⚠️ <strong>Preview only</strong> — upload this file to your Hugo repo at the path shown above.</div><img src="${uploadedImage.data}" alt="Preview"><div style="font-size:13px;color:var(--text-secondary);margin-top:6px;">${uploadedImage.name} (${sizeKB} KB)</div><div class="image-preview-actions"><button onclick="insertImageIntoContent()" class="insert-image">📝 Insert into Content</button><button onclick="removeImage()" class="remove-image">🗑️ Remove</button></div></div>`;}
+function insertImageIntoContent(){const file=document.getElementById('imagePath').value.trim();const src=file?'/content/images/'+file:uploadedImage.data;const md=`![${uploadedImage.name}](${src})`;const ta=document.getElementById('content');const s=ta.selectionStart,e=ta.selectionEnd;ta.value=ta.value.slice(0,s)+md+ta.value.slice(e);ta.selectionStart=ta.selectionEnd=s+md.length;ta.focus();updatePreview();}
+function removeImage(){if(!confirm('Remove the local preview image?'))return;uploadedImage=null;displayImagePreview();document.getElementById('imageUpload').value='';triggerAutosave();}
+
+/* ══════════════════════════════════════════
+   AUTOSAVE
+══════════════════════════════════════════ */
+function startAutosave(){
+  setInterval(saveToAutosave,30000);
+  ['title','slug','content','description','tags','seoKeywords','imagePath'].forEach(id=>{document.getElementById(id)?.addEventListener('input',()=>{clearTimeout(window.autosaveTimeout);window.autosaveTimeout=setTimeout(triggerAutosave,2000);});});
+}
+function saveToAutosave(){localStorage.setItem('autosave',JSON.stringify({title:title.value,slug:slug.value,description:document.getElementById('description').value,content:content.value,tags:document.getElementById('tags').value,keywords:document.getElementById('seoKeywords').value,imagePath:document.getElementById('imagePath').value,categories:Array.from(document.querySelectorAll('#categorySelect input:checked')).map(c=>c.value),publishDate:document.getElementById('publishDate').value,disclaimer:document.getElementById('disclaimer').checked,image:uploadedImage,products:getProductsData(),timestamp:new Date().toISOString()}));updateAutosaveStatus('saved');}
+function triggerAutosave(){updateAutosaveStatus('saving');setTimeout(saveToAutosave,500);}
+function updateAutosaveStatus(status){const icon=document.getElementById('autosaveIcon'),text=document.getElementById('autosaveText'),el=document.getElementById('autosaveStatus');el.className='';if(status==='saving'){icon.textContent='💾';text.textContent='Saving...';el.classList.add('autosave-saving');}else{icon.textContent='✅';text.textContent='Autosaved';el.classList.add('autosave-saved');setTimeout(()=>{icon.textContent='💾';text.textContent='Autosave enabled';el.className='';},2000);}}
+function loadDraft(){const raw=localStorage.getItem('autosave');if(!raw){alert('ℹ️ No autosaved draft found');return;}const data=JSON.parse(raw);const productCount=data.products?data.products.length:0;document.getElementById('autosaveDraftPreview').innerHTML=`<div class="draft-item"><div class="draft-item-title">${data.title||'Untitled Post'}</div><div class="draft-item-meta">Last saved: ${new Date(data.timestamp).toLocaleString()}<br>${data.content?data.content.split(/\s+/).length+' words · ':''}${productCount} featured product${productCount!==1?'s':''}${data.imagePath?`<br>📷 Image path: <code>${data.imagePath}</code>`:''}</div><div style="margin-top:12px;display:flex;gap:8px;"><button class="btn btn-primary" onclick="restoreAutosave()">📂 Restore</button><button class="btn btn-secondary" onclick="clearAutosave()">🗑️ Delete</button></div></div>`;document.getElementById('loadDraftModal').classList.add('active');}
+function closeLoadModal(){document.getElementById('loadDraftModal').classList.remove('active');}
+function restoreAutosave(){const data=JSON.parse(localStorage.getItem('autosave')||'{}');title.value=data.title||'';slug.value=data.slug||'';document.getElementById('description').value=data.description||'';content.value=data.content||'';document.getElementById('tags').value=data.tags||'';document.getElementById('seoKeywords').value=data.keywords||'';document.getElementById('imagePath').value=data.imagePath||'';document.getElementById('publishDate').value=data.publishDate||'';document.getElementById('disclaimer').checked=data.disclaimer||false;if(data.image){uploadedImage=data.image;displayImagePreview();}document.querySelectorAll('#categorySelect input[type="checkbox"]').forEach(cb=>{cb.checked=data.categories?.includes(cb.value)||false;});updateSelectedCategories();document.getElementById('productsList').innerHTML='';productCounter=0;if(data.products?.length)data.products.forEach(p=>addProductCard(p));updatePreview();closeLoadModal();alert('✅ Draft restored!');}
+function clearAutosave(){if(!confirm('Delete the autosaved draft?'))return;localStorage.removeItem('autosave');closeLoadModal();alert('✅ Draft deleted');}
+
+/* ══════════════════════════════════════════
+   TAB NAV
+══════════════════════════════════════════ */
+function openTab(tab){document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));document.getElementById(tab).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));document.getElementById('nav-'+tab).classList.add('active');currentTab=tab;if(tab==='seo')runSEO();if(tab==='products')generateFrontmatter();if(tab==='affiliate'){updateCatalogCount();searchAffiliate();}if(tab==='schedule')updateTzPreview();if(tab==='import'){document.getElementById('parseResult').style.display='none';}if(tab==='pinterest')generatePinterest();if(tab==='pinfactory')generatePinFactory();}
+
+/* ══════════════════════════════════════════
+   SLUG / PREVIEW / WORD COUNT
+══════════════════════════════════════════ */
+const title=document.getElementById('title'),slug=document.getElementById('slug'),content=document.getElementById('content');
+function generateSlug(t){return t.toLowerCase().trim().replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').replace(/--+/g,'-').replace(/^-+|-+$/g,'');}
+title.addEventListener('input',()=>{if(!slug.value||slug.dataset.autoGenerated==='true'){slug.value=generateSlug(title.value);slug.dataset.autoGenerated='true';}});
+slug.addEventListener('input',()=>{slug.dataset.autoGenerated='false';});
+content.addEventListener('input',updatePreview);
+function updatePreview(){const text=content.value;document.getElementById('preview').innerHTML=text.trim()?marked.parse(text):`<div class="empty-state"><div class="empty-state-icon">📝</div><div class="empty-state-text">Start typing to see your preview</div></div>`;document.getElementById('wordCount').textContent=text.trim().split(/\s+/).filter(Boolean).length+' words';if(currentTab==='seo')runSEO();}
+
+/* ══════════════════════════════════════════
+   SEO
+══════════════════════════════════════════ */
+function runSEO(){const text=content.value,words=text.trim().split(/\s+/).filter(Boolean).length,headings=(text.match(/^#{1,6}\s/gm)||[]).length,links=(text.match(/\[.*?\]\(.*?\)/g)||[]).length,images=(text.match(/!\[.*?\]\(.*?\)/g)||[]).length,titleLen=title.value.length,descLen=document.getElementById('description').value.length,kw=document.getElementById('seoKeywords').value.split(',').filter(k=>k.trim()).length,cats=document.querySelectorAll('#categorySelect input:checked').length,prods=document.querySelectorAll('.product-card').length,hasImg=!!document.getElementById('imagePath').value.trim()||!!uploadedImage;let score=0,checks=[];if(words>=800){score+=15;checks.push({pass:true,text:`Great content length (${words} words}`});}else checks.push({pass:false,text:`Content too short (${words} words, aim for 800+)`});if(headings>=3){score+=15;checks.push({pass:true,text:`Good use of headings (${headings} found)`});}else checks.push({pass:false,text:`Add more headings (${headings} found, aim for 3+)`});if(links>=3){score+=15;checks.push({pass:true,text:`Good linking (${links} links)`});}else checks.push({pass:false,text:`Add more links (${links} found, aim for 3+)`});if(images>=2){score+=10;checks.push({pass:true,text:`Images included (${images} found)`});}else checks.push({pass:false,text:`Add images (${images} found, aim for 2+)`});if(hasImg){score+=5;checks.push({pass:true,text:'Featured image path set ✓'});}else checks.push({pass:false,text:'Set a featured image repo path'});if(titleLen>=30&&titleLen<=60){score+=10;checks.push({pass:true,text:`Title length optimal (${titleLen} chars)`});}else checks.push({pass:false,text:titleLen>0?`Title should be 30-60 chars (currently ${titleLen})`:'Add a title'});if(descLen>=120&&descLen<=160){score+=10;checks.push({pass:true,text:`Meta description perfect (${descLen} chars)`});}else checks.push({pass:false,text:descLen>0?`Meta description should be 120-160 chars (currently ${descLen})`:'Add a meta description'});if(kw>=3){score+=10;checks.push({pass:true,text:`Keywords defined (${kw})`});}else checks.push({pass:false,text:`Add SEO keywords (${kw} found, aim for 3-5)`});if(cats>=1){score+=10;checks.push({pass:true,text:`Categories selected (${cats})`});}else checks.push({pass:false,text:'Select at least one category'});if(prods>0)checks.push({pass:true,text:`✨ Featured products added (${prods}) — great for conversions!`});const circle=document.getElementById('scoreCircle');circle.textContent=score+'%';circle.className='score-circle '+(score<50?'low':score<80?'medium':'high');document.getElementById('scoreText').textContent=score<50?'Needs significant improvement':score<80?'Good, but could be better':'Excellent SEO optimization!';document.getElementById('seoList').innerHTML=checks.map(c=>`<li class="${c.pass?'pass':'fail'}">${c.text}</li>`).join('');document.getElementById('statWords').textContent=words;document.getElementById('statChars').textContent=text.length;document.getElementById('statHeadings').textContent=headings;document.getElementById('statLinks').textContent=links;}
+
+/* ══════════════════════════════════════════
+   PREPARE POST — FIX: no published:, no publishDate:
+══════════════════════════════════════════ */
+function preparePost(){
+  if(!title.value){alert('⚠️ Please add a post title');return;}
+  if(!slug.value){alert('⚠️ Please add a slug');return;}
+  const scheduled=document.getElementById('publishDate').value;
+  if(!scheduled){alert('⚠️ Please set a publication date');return;}
+  var utcDate=eatInputToUTC(scheduled);
+  var eatDisplay=scheduled.replace('T',' ')+' EAT';
+  if(utcDate<new Date()){if(!confirm('⚠️ This publish time ('+eatDisplay+') is in the past. Continue?'))return;}
+  const selectedCats=Array.from(document.querySelectorAll('#categorySelect input:checked')).map(c=>c.value);
+  const tags=document.getElementById('tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const keys=document.getElementById('seoKeywords').value.split(',').map(k=>k.trim()).filter(Boolean);
+  const imageFile=document.getElementById('imagePath').value.trim();
+  const fullImagePath=imageFile?'/content/images/'+imageFile:'';
+  const productsYAML=buildProductsYAML();
+  const imageEntry=fullImagePath?`featured_image: "${fullImagePath}"\n`:uploadedImage?`featured_image: "/content/images/${slug.value}.jpg"  # ⚠️ Add this file to your repo\n`:'';
+  // NOTE: no published: field — Hugo uses date: only. No publishDate: either.
+  const fm=`---\ntitle: "${title.value}"\ndescription: "${document.getElementById('description').value}"\nslug: "${slug.value}"\ndate: ${utcDate.toISOString()}\n# Scheduled for: ${eatDisplay} (EAT, UTC+3)\ncategories:\n${selectedCats.map(c=>'  - '+c).join('\n')}\ntags:\n${tags.map(t=>'  - '+t).join('\n')}\nkeywords:\n${keys.map(k=>'  - '+k).join('\n')}\n${imageEntry}${productsYAML}---\n\n`;
+  const disclosure=document.getElementById('disclaimer').checked?`> ⚠️ **FTC Disclosure**: This post contains affiliate links. We may earn a commission if you make a purchase through these links at no additional cost to you.\n\n`:'';
+  const rawPost=fm+disclosure+content.value;
+  // Strip scheduler-only blocks before display and save
+  const cleanPost=stripSchedulerBlocks(rawPost);
+  document.getElementById('finalPost').textContent=cleanPost;
+  document.getElementById('finalPostContainer').style.display='block';
+  saveToDraftHistory();
+}
+
+/* ══════════════════════════════════════════
+   FOLDER SAVE — uses stripped content
+══════════════════════════════════════════ */
+const FOLDER_KEY='wgd_repo_folder';
+let repoFolderHandle=null;
+document.addEventListener('DOMContentLoaded',()=>{if(!window.showDirectoryPicker){document.getElementById('folderUnsupported').style.display='block';document.getElementById('pickFolderBtn').style.display='none';}else{restoreFolder();}});
+async function restoreFolder(){try{const db=await openFolderDB();const handle=await dbGet(db,'folderHandle');if(handle){const perm=await handle.queryPermission({mode:'readwrite'});if(perm==='granted'){repoFolderHandle=handle;showFolderStatus(handle.name,true);}else{showFolderStatus(handle.name+' (click to re-allow)',false);repoFolderHandle=handle;}}}catch(e){}}
+async function pickRepoFolder(){if(!window.showDirectoryPicker){document.getElementById('folderUnsupported').style.display='block';return;}try{const handle=await window.showDirectoryPicker({mode:'readwrite',startIn:'documents'});repoFolderHandle=handle;try{const db=await openFolderDB();await dbSet(db,'folderHandle',handle);}catch(e){}showFolderStatus(handle.name,true);document.getElementById('saveFolderBtn').style.display='inline-flex';document.getElementById('saveDownloadBtn').style.display='none';}catch(e){if(e.name!=='AbortError')alert('❌ Could not access folder: '+e.message);}}
+function showFolderStatus(name,ready){const el=document.getElementById('folderStatus');el.innerHTML=ready?`✅ <strong>${name}/</strong> selected — saves go here`:`📁 ${name} — <em>needs permission</em>`;el.style.color=ready?'#065F46':'#92400E';document.getElementById('pickFolderBtn').textContent='🔄 Change folder';if(ready){document.getElementById('saveFolderBtn').style.display='inline-flex';document.getElementById('saveDownloadBtn').style.display='none';}}
+async function saveDraftToFolder(){
+  const fp=document.getElementById('finalPost');
+  if(!fp.textContent){alert('⚠️ Please prepare the post first in the Schedule tab');return;}
+  if(!slug.value){alert('⚠️ Slug is required');return;}
+  if(!repoFolderHandle){alert('⚠️ Pick a folder first');return;}
+  try{
+    const perm=await repoFolderHandle.requestPermission({mode:'readwrite'});
+    if(perm!=='granted'){alert('⚠️ Permission denied — please pick the folder again');return;}
+    const fileName=slug.value+'.md';
+    const fileHandle=await repoFolderHandle.getFileHandle(fileName,{create:true});
+    const writable=await fileHandle.createWritable();
+    // Content is already stripped by preparePost(), fp.textContent is clean
+    await writable.write(fp.textContent);
+    await writable.close();
+    showSaveConfirm(`✅ Saved as ${fileName} in ${repoFolderHandle.name}/ — open GitHub Desktop and push!`);
+    saveToDraftHistory();
+  }catch(e){alert('❌ Save failed: '+e.message);}
+}
+function showSaveConfirm(msg){const el=document.getElementById('saveConfirm');el.textContent=msg;el.style.display='block';setTimeout(()=>el.style.display='none',6000);}
+function openFolderDB(){return new Promise((res,rej)=>{const req=indexedDB.open('wgd_scheduler',1);req.onupgradeneeded=e=>e.target.result.createObjectStore('meta');req.onsuccess=e=>res(e.target.result);req.onerror=()=>rej(req.error);});}
+function dbGet(db,key){return new Promise((res,rej)=>{const tx=db.transaction('meta','readonly');const req=tx.objectStore('meta').get(key);req.onsuccess=()=>res(req.result);req.onerror=()=>rej(req.error);});}
+function dbSet(db,key,val){return new Promise((res,rej)=>{const tx=db.transaction('meta','readwrite');const req=tx.objectStore('meta').put(val,key);req.onsuccess=()=>res();req.onerror=()=>rej(req.error);});}
+
+/* ══════════════════════════════════════════
+   SAVE / EXPORT — uses stripped content
+══════════════════════════════════════════ */
+function saveDraft(){
+  const fp=document.getElementById('finalPost');
+  if(!fp.textContent){alert('⚠️ Please prepare the post first in the Schedule tab');return;}
+  if(!slug.value){alert('⚠️ Slug is required to save');return;}
+  // fp.textContent is already stripped by preparePost()
+  Object.assign(document.createElement('a'),{href:URL.createObjectURL(new Blob([fp.textContent],{type:'text/markdown'})),download:`${slug.value}.md`}).click();
+  showSaveConfirm('✅ Downloaded — move the file to wgd-hugo/content/posts/, then push from GitHub Desktop.');
+}
+function exportJSON(){const data={title:title.value,slug:slug.value,description:document.getElementById('description').value,content:content.value,tags:document.getElementById('tags').value.split(',').map(t=>t.trim()).filter(Boolean),keywords:document.getElementById('seoKeywords').value.split(',').map(k=>k.trim()).filter(Boolean),categories:Array.from(document.querySelectorAll('#categorySelect input:checked')).map(c=>c.value),scheduledDate:document.getElementById('publishDate').value,disclaimer:document.getElementById('disclaimer').checked,imagePath:document.getElementById('imagePath').value.trim(),featuredImage:uploadedImage,featured_products:getProductsData()};Object.assign(document.createElement('a'),{href:URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),download:`${slug.value||'post'}.json`}).click();alert('✅ Exported as JSON!');}
+function copyToClipboard(){const fp=document.getElementById('finalPost');if(!fp.textContent){alert('⚠️ Please prepare the post first');return;}navigator.clipboard.writeText(fp.textContent).then(()=>alert('✅ Copied!')).catch(()=>alert('❌ Copy failed'));}
+
+/* ══════════════════════════════════════════
+   DRAFT HISTORY
+══════════════════════════════════════════ */
+function saveToDraftHistory(){let drafts=JSON.parse(localStorage.getItem('drafts')||'[]');drafts=[{slug:slug.value,title:title.value,scheduled:document.getElementById('publishDate').value,savedAt:new Date().toISOString()},...drafts.filter(d=>d.slug!==slug.value)].slice(0,20);localStorage.setItem('drafts',JSON.stringify(drafts));updateDraftTable();}
+function updateDraftTable(){const drafts=JSON.parse(localStorage.getItem('drafts')||'[]');const body=document.getElementById('draftList');document.getElementById('emptyDrafts').style.display=drafts.length?'none':'block';body.innerHTML=drafts.map((d,i)=>{const sc=d.scheduled?new Date(d.scheduled):null,now=new Date();const[status,cls]=sc?(sc<=now?['✅ Ready','status-ready']:['⏳ Scheduled','status-scheduled']):['📝 Draft','status-draft'];const disp=sc?sc.toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'}):'—';return`<tr><td><code>${d.slug}</code></td><td>${d.title||'Untitled'}</td><td>${disp}</td><td><span class="status-badge ${cls}">${status}</span></td><td><button onclick="deleteDraft(${i})" class="btn btn-secondary" style="padding:6px 12px;font-size:13px;">🗑️</button></td></tr>`;}).join('');}
+function deleteDraft(i){if(!confirm('Delete this draft?'))return;let drafts=JSON.parse(localStorage.getItem('drafts')||'[]');drafts.splice(i,1);localStorage.setItem('drafts',JSON.stringify(drafts));updateDraftTable();}
+
+/* ══════════════════════════════════════════
+   CATEGORIES
+══════════════════════════════════════════ */
+const categoriesList={"Core Rooms":["Living Room","Bedroom","Dining Room","Home Office","Kitchen","Bathroom","Entryway & Hallway","Laundry Room","Kids Room & Nursery","Outdoor & Patio","Balcony & Small Spaces"],"Furniture Types":["Sofas & Seating","Beds & Bed Frames","Mattresses","Tables & Desks","Chairs & Stools","Wardrobes & Closets","TV Stands & Media Units","Shelving & Bookcases","Storage Furniture"],"Decor":["Wall Decor","Lighting & Lamps","Rugs & Carpets","Curtains & Window Treatments","Mirrors","Cushions & Throws","Vases & Decorative Accents","Clocks","Plants & Planters"],"Storage & Organization":["General Storage","Closet Organization","Shoe Storage","Kitchen Storage Solutions","Bathroom Storage Solutions","Small Space Storage"],"Style-Based":["Modern Style","Minimalist Style","Scandinavian Style","Luxury & Glam Decor","Boho & Rustic Decor","Traditional & Classic","Industrial Style"],"Buying Intent":["Budget Furniture","Luxury Furniture","Space-Saving Furniture","Multifunctional Furniture","Furniture Buying Guides","Best Of Lists","Product Reviews","Comparisons"],"DIY & Care":["DIY & Home Improvement","Furniture Care & Maintenance","Cleaning & Care Tips","Furniture Assembly Tips"],"Seasonal & Lifestyle":["Seasonal Decor","Holiday Decor","Home Makeovers","Rental-Friendly Decor"],"Gifts":["Home Gift Ideas","Housewarming Gifts","Luxury Home Gifts","Budget Gift Ideas"]};
+function initializeCategories(){const el=document.getElementById('categorySelect');Object.entries(categoriesList).forEach(([group,cats])=>{const div=document.createElement('div');div.className='category-group';div.dataset.group=group;div.innerHTML=`<div class="category-group-title">${group}</div>`;cats.forEach(cat=>{const lbl=document.createElement('label');lbl.dataset.category=cat.toLowerCase();lbl.dataset.group=group.toLowerCase();const cb=document.createElement('input');cb.type='checkbox';cb.value=cat;cb.id='cat_'+cat.replace(/\s+/g,'_');cb.addEventListener('change',updateSelectedCategories);lbl.appendChild(cb);lbl.appendChild(document.createTextNode(' '+cat));div.appendChild(lbl);});el.appendChild(div);});document.getElementById('categorySearch').addEventListener('input',filterCategories);}
+function filterCategories(){const q=document.getElementById('categorySearch').value.toLowerCase().trim();document.querySelectorAll('.category-group').forEach(group=>{let visible=0;group.querySelectorAll('label').forEach(lbl=>{const match=!q||lbl.dataset.category.includes(q)||lbl.dataset.group.includes(q);lbl.classList.toggle('hidden',!match);if(match)visible++;});group.classList.toggle('hidden',!visible);});}
+function updateSelectedCategories(){const container=document.getElementById('selectedCategories');container.innerHTML='';document.querySelectorAll('#categorySelect input:checked').forEach(cb=>{const badge=document.createElement('div');badge.className='category-badge';badge.innerHTML=`<span>${cb.value}</span><button title="Remove" onclick="this.closest('.category-badge').remove();document.getElementById('${cb.id}').checked=false;">×</button>`;container.appendChild(badge);});}
+
+/* ══════════════════════════════════════════
+   CLEAR FORM
+══════════════════════════════════════════ */
+function clearForm(){if(!confirm('Clear the entire form?'))return;['title','slug','description','content','tags','seoKeywords','publishDate','imagePath'].forEach(id=>{document.getElementById(id).value='';});document.getElementById('disclaimer').checked=false;uploadedImage=null;displayImagePreview();document.getElementById('imageUpload').value='';document.querySelectorAll('#categorySelect input:checked').forEach(cb=>cb.checked=false);updateSelectedCategories();document.getElementById('productsList').innerHTML='';updateAddButton();updateProductBadge();document.getElementById('productsOutputPanel').style.display='none';document.getElementById('finalPostContainer').style.display='none';document.getElementById('tzPreview').classList.remove('visible');document.getElementById('pinterestOutput').style.display='none';updatePreview();runSEO();}
+
+/* ══════════════════════════════════════════
+   KEYBOARD SHORTCUTS
+══════════════════════════════════════════ */
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='s'){e.preventDefault();document.getElementById('finalPost').textContent?saveDraft():alert('⚠️ Prepare the post first in the Schedule tab');}if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();preparePost();}});
+
+/* ══════════════════════════════════════════
+   TIMEZONE (EAT = UTC+3)
+══════════════════════════════════════════ */
+function eatInputToUTC(localStr){const [date,time]=localStr.split('T');const [y,m,d]=date.split('-').map(Number);const [h,min]=(time||'00:00').split(':').map(Number);return new Date(Date.UTC(y,m-1,d,h-3,min));}
+function updateTzPreview(){const val=document.getElementById('publishDate').value;const preview=document.getElementById('tzPreview');if(!val){preview.classList.remove('visible');return;}const utc=eatInputToUTC(val);const now=new Date();const diffMs=utc-now;const eatDisplay=val.replace('T',' ');const utcDisplay=utc.toISOString().replace('T',' ').replace('.000Z',' UTC');let countdown='already published';if(diffMs>0){const days=Math.floor(diffMs/86400000),hrs=Math.floor((diffMs%86400000)/3600000),mins=Math.floor((diffMs%3600000)/60000);const parts=[];if(days)parts.push(days+'d');if(hrs)parts.push(hrs+'h');if(mins)parts.push(mins+'m');countdown='in '+parts.join(' ');}document.getElementById('tzEAT').textContent=eatDisplay+' EAT';document.getElementById('tzUTC').textContent=utcDisplay;document.getElementById('tzCountdown').textContent=countdown;preview.classList.add('visible');}
+
+/* ══════════════════════════════════════════
+   PARSE & IMPORT AI POST
+══════════════════════════════════════════ */
+let parsedImages={blog:[],products:[]};
+let parsedAffiliates=[];
+function parseAndFill(){
+  const raw=document.getElementById('importPasteArea').value.trim();
+  if(!raw){alert('⚠️ Paste your AI post output first');return;}
+  const result={title:'',slug:'',description:'',categories:[],tags:[],keywords:[],imagePath:'',content:'',products:[],images:{blog:[],products:[]}};
+  // Title: first # heading or **Title:** line
+  const titleMatch=raw.match(/^\*{0,2}Title:\*{0,2}\s*(.+)/im)||raw.match(/^#\s+(.+)/m);
+  if(titleMatch) result.title=titleMatch[1].replace(/\*+/g,'').trim();
+  // Slug
+  const slugMatch=raw.match(/^\*{0,2}(?:URL\s*Slug|Slug):\*{0,2}\s*(.+)/im);
+  if(slugMatch) result.slug=slugMatch[1].replace(/^\/?(posts\/)?/,'').replace(/\.html?$/,'').trim();
+  // Description
+  const descMatch=raw.match(/^\*{0,2}Meta\s*Description:\*{0,2}\s*(.+)/im);
+  if(descMatch) result.description=descMatch[1].replace(/\*+/g,'').trim();
+  // Categories
+  const catMatch=raw.match(/^\*{0,2}(?:Hugo\s*)?Categories:\*{0,2}\s*(.+)/im);
+  if(catMatch){const catLine=catMatch[1];result.categories=catLine.split(/[,|]/).map(c=>c.replace(/\*+/g,'').trim()).filter(Boolean);}
+  // Tags
+  const tagMatch=raw.match(/^\*{0,2}Tags:\*{0,2}\s*(.+)/im);
+  if(tagMatch) result.tags=tagMatch[1].split(',').map(t=>t.replace(/\*+/g,'').trim()).filter(Boolean);
+  // Keywords
+  const kwMatch=raw.match(/^\*{0,2}(?:Focus\s*)?Keywords?:\*{0,2}\s*(.+)/im);
+  if(kwMatch) result.keywords=kwMatch[1].split(',').map(k=>k.replace(/\*+/g,'').trim()).filter(Boolean);
+  // Featured image
+  const imgMatch=raw.match(/^\*{0,2}(?:Hero\s*Image|Featured\s*Image)(?:\s*Path)?:\*{0,2}\s*(.+)/im);
+  if(imgMatch){const ip=imgMatch[1].replace(/\*+/g,'').trim();result.imagePath=ip.replace(/^\/content\/images\//,'');}
+  // Image generation list — blog images
+  const blogImgSection=raw.match(/##\s*(?:🖼️\s*)?Image Generation List([\s\S]*?)(?=\n##\s|\n---\n|$)/i);
+  if(blogImgSection){
+    const rows=blogImgSection[1].match(/\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|/g)||[];
+    rows.forEach(row=>{const cells=row.split('|').map(c=>c.trim()).filter(Boolean);if(cells.length>=2&&!cells[0].toLowerCase().includes('filename')&&!cells[0].includes('---')){const fname=cells[0].trim();const prompt=(cells[2]||cells[1]||'').trim();if(fname&&fname!=='Filename'&&!fname.includes('---'))result.images.blog.push({filename:fname,prompt});}});
+  }
+  // Product images
+  const prodImgSection=raw.match(/##\s*(?:🛍️\s*)?(?:Product\s*Image Generation|Product Images?)\s*List?([\s\S]*?)(?=\n##\s|$)/i);
+  if(prodImgSection){
+    const rows=prodImgSection[1].match(/\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|/g)||[];
+    rows.forEach(row=>{const cells=row.split('|').map(c=>c.trim()).filter(Boolean);if(cells.length>=2&&!cells[0].toLowerCase().includes('filename')&&!cells[0].includes('---')){const fname=cells[0].trim();const prompt=(cells[2]||cells[1]||'').trim();if(fname&&fname!=='Filename'&&!fname.includes('---'))result.images.products.push({filename:fname,prompt});}});
+  }
+  // Parse affiliate links table
+  parsedAffiliates=[];
+  const affSection=raw.match(/##\s*(?:🔗\s*)?Affiliate Links\s*(?:List)?([\s\S]*?)(?=\n##\s|$)/i);
+  if(affSection){
+    const rows=affSection[1].match(/\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|/g)||[];
+    rows.forEach(row=>{
+      const cells=row.split('|').map(c=>c.trim()).filter(Boolean);
+      // Prompt format: | # | Product Name | Budget Tier | Affiliate URL | Benefit | Image Filename |
+      // cells[0]=# (row number), cells[1]=name, cells[2]=budgetTier, cells[3]=url, cells[4]=benefit, cells[5]=image
+      // Skip header rows and separator rows
+      if(cells.length>=4&&!cells[0].toLowerCase().includes('product')&&!cells[1]?.toLowerCase().includes('product name')&&!cells[0].includes('---')){
+        // Detect if first cell is a row number (prompt format) or product name (fallback)
+        const hasRowNum = /^\d+$/.test(cells[0].trim());
+        const offset = hasRowNum ? 1 : 0;
+        const name=(cells[offset]||'').trim(),budgetTier=(cells[offset+1]||'').replace(/\*+/g,'').trim(),urlRaw=cells[offset+2]||'',benefit=(cells[offset+3]||'').replace(/\*+/g,'').trim(),imgFile=(cells[offset+4]||'').replace(/\*+/g,'').trim();
+        const urlMatch=urlRaw.match(/https?:\/\/[^\s\]|)]+/);
+        if(name&&name!=='Product Name'&&urlMatch) parsedAffiliates.push({name,link:urlMatch[0],budgetTier,benefit,image:imgFile,category:'Imported'});
+      }
+    });
+  }
+  // Extract main content — everything between first ## heading and scheduler sections
+  const contentStartMatch=raw.match(/\n(##\s+(?!Table of Contents|Image Generation|Affiliate Links|Pinterest|Shop This Look).+)/);
+  if(contentStartMatch){
+    const startIdx=raw.indexOf(contentStartMatch[0]);
+    let contentRaw=raw.slice(startIdx);
+    // Remove scheduler-only sections from content
+    contentRaw=contentRaw.replace(/\n##\s*(?:🖼️\s*)?(?:Image Generation List|Product Image)[^\n]*[\s\S]*?(?=\n##\s|$)/gi,'');
+    contentRaw=contentRaw.replace(/\n##\s*(?:🔗\s*)?Affiliate Links\s*(?:List)?[^\n]*[\s\S]*?(?=\n##\s|$)/gi,'');
+    contentRaw=contentRaw.replace(/\n##\s*(?:📌\s*)?Pinterest[^\n]*[\s\S]*?(?=\n##\s|$)/gi,'');
+    contentRaw=contentRaw.replace(/\n##\s*(?:📌\s*)?Internal Links[^\n]*[\s\S]*/gi,'');
+    result.content=contentRaw.replace(/\n{3,}/g,'\n\n').trim();
+  }
+  // Populate fields
+  if(result.title) document.getElementById('title').value=result.title;
+  if(result.slug) document.getElementById('slug').value=result.slug;
+  if(result.description) document.getElementById('description').value=result.description;
+  if(result.imagePath) document.getElementById('imagePath').value=result.imagePath;
+  if(result.content){document.getElementById('content').value=result.content;updatePreview();}
+  if(result.tags.length) document.getElementById('tags').value=result.tags.join(', ');
+  if(result.keywords.length) document.getElementById('seoKeywords').value=result.keywords.join(', ');
+  // Set categories
+  if(result.categories.length){document.querySelectorAll('#categorySelect input[type="checkbox"]').forEach(cb=>{cb.checked=result.categories.some(c=>c.toLowerCase()===cb.value.toLowerCase());});updateSelectedCategories();}
+  // Import affiliates to catalog + products sidebar
+  if(parsedAffiliates.length){
+    const catalog=loadCatalog(); let added=0,skipped=0;
+    document.getElementById('productsList').innerHTML=''; productCounter=0;
+    parsedAffiliates.forEach(a=>{
+      const exists=catalog.find(c=>c.link===a.link||c.name.toLowerCase()===a.name.toLowerCase());
+      if(!exists){catalog.push({name:a.name,link:a.link,category:a.category||'Imported',budgetTier:a.budgetTier||'',benefit:a.benefit||'',image:a.image||''});added++;}else{skipped++;}
+      addProductCard({name:a.name,link:a.link,type:'product',budgetTier:a.budgetTier||'',benefit:a.benefit||'',image:a.image?'/content/images/products/'+a.image:'',label:''});
+    });
+    saveCatalog(catalog);
+    renderAffiliateImportPanel(parsedAffiliates,added,skipped);
+  }
+  parsedImages=result.images;
+  renderImageListPanel(result.images);
+  // Show parse result
+  const pr=document.getElementById('parseResult');
+  pr.style.display='block'; pr.className='parse-result';
+  const wordCount=result.content?result.content.split(/\s+/).filter(Boolean).length:0;
+  pr.innerHTML=`<div class="parse-result-title">✅ Post parsed successfully</div><div class="parse-fields"><div class="parse-field"><span class="parse-field-icon">📝</span><span class="parse-field-label">Title:</span><span class="parse-field-val">${result.title||'—'}</span></div><div class="parse-field"><span class="parse-field-icon">🔗</span><span class="parse-field-label">Slug:</span><span class="parse-field-val">${result.slug||'—'}</span></div><div class="parse-field"><span class="parse-field-icon">📊</span><span class="parse-field-label">Words:</span><span class="parse-field-val">${wordCount}</span></div><div class="parse-field"><span class="parse-field-icon">🖼️</span><span class="parse-field-label">Images:</span><span class="parse-field-val">${result.images.blog.length} blog + ${result.images.products.length} product</span></div><div class="parse-field"><span class="parse-field-icon">🏷️</span><span class="parse-field-label">Categories:</span><span class="parse-field-val">${result.categories.join(', ')||'—'}</span></div><div class="parse-field"><span class="parse-field-icon">🔗</span><span class="parse-field-label">Affiliates:</span><span class="parse-field-val">${parsedAffiliates.length} products</span></div></div>`;
+  triggerAutosave();
+}
+function renderImageListPanel(images){
+  const panel=document.getElementById('imageListPanel');
+  if(!images.blog.length&&!images.products.length){panel.style.display='none';return;}
+  panel.style.display='block';
+  document.getElementById('blogImageCount').textContent=images.blog.length+' images';
+  document.getElementById('blogImageTable').innerHTML=images.blog.length?`<table class="parsed-images-table"><thead><tr><th>Filename</th><th>Image Prompt</th></tr></thead><tbody>${images.blog.map(img=>`<tr><td><span class="filename-pill">${img.filename}</span></td><td><div class="prompt-text">${img.prompt}</div></td></tr>`).join('')}</tbody></table>`:'<div style="color:var(--text-tertiary);font-size:13px;padding:8px;">No blog images found</div>';
+  const productSection=document.getElementById('productImageSection');
+  if(images.products.length){productSection.style.display='block';document.getElementById('productImageCount').textContent=images.products.length+' images';document.getElementById('productImageTable').innerHTML=`<table class="parsed-images-table"><thead><tr><th>Filename</th><th>Image Prompt</th></tr></thead><tbody>${images.products.map(img=>`<tr><td><span class="filename-pill">${img.filename}</span></td><td><div class="prompt-text">${img.prompt}</div></td></tr>`).join('')}</tbody></table>`;}else{productSection.style.display='none';}
+}
+function renderAffiliateImportPanel(affiliates,added,skipped){
+  const panel=document.getElementById('affiliateListPanel');
+  if(!affiliates.length){panel.style.display='none';return;}
+  panel.style.display='block';
+  document.getElementById('affiliateSummaryBox').innerHTML=`<div class="aff-summary-stat"><div class="aff-summary-val green">${added}</div><div class="aff-summary-label">Added to catalog</div></div><div class="aff-summary-stat"><div class="aff-summary-val" style="color:var(--warning);">${skipped}</div><div class="aff-summary-label">Skipped (duplicate)</div></div><div class="aff-summary-stat"><div class="aff-summary-val purple">${affiliates.length}</div><div class="aff-summary-label">Added to sidebar</div></div>`;
+  document.getElementById('affiliateListTable').innerHTML=`<table class="parsed-affiliate-table"><thead><tr><th>Product Name</th><th>URL</th><th>Budget Tier</th><th>Benefit</th><th>Image File</th><th>Status</th></tr></thead><tbody>${affiliates.map((a,i)=>{const tierClass={'Budget Pick':'aff-tier-budget','Mid-Range':'aff-tier-mid','Luxury':'aff-tier-luxury'}[a.budgetTier]||'aff-tier-none';const wasDuplicate=i>=(added);return`<tr><td><strong>${a.name}</strong></td><td><span class="aff-url-chip">${a.link}</span></td><td>${a.budgetTier?`<span class="aff-tier-pill ${tierClass}">${a.budgetTier}</span>`:'—'}</td><td>${a.benefit||'—'}</td><td>${a.image?`<span class="filename-pill">${a.image}</span>`:'—'}</td><td><span class="${wasDuplicate?'aff-status-skip':'aff-status-added'}">${wasDuplicate?'↩ Skipped':'✅ Added'}</span></td></tr>`;}).join('')}</tbody></table>`;
+}
+function copyBlogImageFilenames(){navigator.clipboard.writeText(parsedImages.blog.map(i=>i.filename).join('\n')).then(()=>alert('✅ Copied '+parsedImages.blog.length+' filenames')).catch(()=>alert('❌ Copy failed'));}
+function copyBlogImagePrompts(){navigator.clipboard.writeText(parsedImages.blog.map(i=>i.filename+'\n'+i.prompt).join('\n\n')).then(()=>alert('✅ Copied')).catch(()=>alert('❌ Copy failed'));}
+function copyProductImageFilenames(){navigator.clipboard.writeText(parsedImages.products.map(i=>i.filename).join('\n')).then(()=>alert('✅ Copied '+parsedImages.products.length+' filenames')).catch(()=>alert('❌ Copy failed'));}
+function copyProductImagePrompts(){navigator.clipboard.writeText(parsedImages.products.map(i=>i.filename+'\n'+i.prompt).join('\n\n')).then(()=>alert('✅ Copied')).catch(()=>alert('❌ Copy failed'));}
+function copyAffiliateLinks(){navigator.clipboard.writeText(parsedAffiliates.map(a=>a.link).join('\n')).then(()=>alert('✅ Copied')).catch(()=>alert('❌ Copy failed'));}
+function copyAffiliateNames(){navigator.clipboard.writeText(parsedAffiliates.map(a=>a.name).join('\n')).then(()=>alert('✅ Copied')).catch(()=>alert('❌ Copy failed'));}
+function copyAffiliateImgFiles(){navigator.clipboard.writeText(parsedAffiliates.filter(a=>a.image).map(a=>'/content/images/products/'+a.image).join('\n')).then(()=>alert('✅ Copied image paths')).catch(()=>alert('❌ Copy failed'));}
+
+/* ══════════════════════════════════════════
+   PINTEREST
+══════════════════════════════════════════ */
+let pinFullData={};
+function generatePinterest(){
+  const postTitle=document.getElementById('title').value.trim();
+  const postDesc=document.getElementById('description').value.trim();
+  const keywords=document.getElementById('seoKeywords').value.split(',').map(k=>k.trim()).filter(Boolean);
+  const cats=Array.from(document.querySelectorAll('#categorySelect input:checked')).map(c=>c.value);
+  const tags=document.getElementById('tags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  if(!postTitle){document.getElementById('pinGenStatus').textContent='⚠️ Add a title in Editor first';return;}
+  document.getElementById('pinGenStatus').textContent='';
+  const kw1=keywords[0]||cats[0]||postTitle.split(' ').slice(0,3).join(' ');
+  const kw2=keywords[1]||cats[1]||'home decor';
+  const kw3=keywords[2]||tags[0]||'interior design';
+  const shortTitle=postTitle.replace(/\b(a|an|the|and|or|for|with|to|in|on|of|at)\b/gi,'').replace(/\s+/g,' ').trim().slice(0,40);
+  // 3 description variants
+  const descs=[
+    {label:'Keyword-First',text:`${kw1} ideas to transform your space ✨ ${postTitle}. Discover the best ${kw2} picks, styling tips, and budget-friendly options. Save this pin and shop the look at wowglamdecor.com 🏠`},
+    {label:'Benefit-Led',text:`Transform your home with these gorgeous ${kw1} ideas 🌿 ${postDesc?postDesc.slice(0,90)+'…':postTitle}. Curated picks for every budget. Shop now at wowglamdecor.com ✨`},
+    {label:'Question Hook',text:`Looking for the best ${kw1}? 💫 We rounded up the top ${kw2} options — from budget picks to luxury splurges. ${kw3} inspiration inside. wowglamdecor.com 🏡`},
+  ];
+  // 3 title variants
+  const titles=[
+    `${shortTitle} — ${kw2.split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ')} Ideas`,
+    `Best ${kw1.split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ')} for Every Budget (${new Date().getFullYear()})`,
+    `${cats[0]||'Home Decor'} Inspo: ${shortTitle}`,
+  ];
+  // Hashtags
+  const baseTags=['#homedecor','#homeinspo','#interiordesign','#decorideas','#homestyle'];
+  const catTags=cats.slice(0,3).map(c=>'#'+c.toLowerCase().replace(/[^a-z0-9]/g,''));
+  const kwTags=keywords.slice(0,4).map(k=>'#'+k.toLowerCase().replace(/[^a-z0-9]/g,''));
+  const allTags=[...new Set([...baseTags,...catTags,...kwTags,'#wowglamdecor','#affiliatelinks'])].slice(0,15);
+  // Boards
+  const boards=[...cats.slice(0,3).map(c=>({icon:'🎨',name:c+' Ideas',match:'Best for this post'})),{icon:'🏠',name:'Home Decor Inspiration',match:'General reach'},{icon:'💫',name:'Glam Home Style',match:'Brand board'}];
+  pinFullData={descs,titles,allTags,boards,postTitle};
+  // Render
+  document.getElementById('pinDescOptions').innerHTML=descs.map((d,i)=>{const len=d.text.length;const ok=len>=220&&len<=232;return`<div class="pin-desc-card"><div class="pin-desc-label">Option ${i+1} — ${d.label}</div><div class="pin-desc-text">${d.text}</div><div class="pin-char-count ${ok?'good':len>232?'over':''}">${len} characters ${ok?'✓ Perfect range':len>232?'⚠️ Too long':'ℹ️ Slightly short'}</div><button class="pin-copy-btn" onclick="copyText('${esc(d.text)}',this)">📋 Copy</button></div>`;}).join('');
+  document.getElementById('pinTitlesGrid').innerHTML=titles.map((t,i)=>`<div class="pin-title-card" onclick="copyText('${esc(t)}',this)"><div class="pin-title-num">Title ${i+1}</div><div class="pin-title-text">${t}</div><div class="pin-title-len">${t.length} chars — click to copy</div></div>`).join('');
+  document.getElementById('pinHashtags').innerHTML=allTags.map(t=>`<span class="pin-tag" onclick="copyText('${esc(t)}',this)" title="Click to copy">${t}</span>`).join('');
+  document.getElementById('pinBoards').innerHTML=boards.map(b=>`<div class="pin-board"><span class="pin-board-icon">${b.icon}</span><strong>${b.name}</strong><span style="margin-left:auto;font-size:12px;color:var(--text-tertiary);">${b.match}</span></div>`).join('');
+  // Full block
+  const fb=`PINTEREST COPY — ${postTitle}\n${'='.repeat(60)}\n\nTITLE 1\n${titles[0]}\n\nTITLE 2\n${titles[1]}\n\nTITLE 3\n${titles[2]}\n\n${'─'.repeat(40)}\n\nDESCRIPTION (Option 1 — ${descs[0].label})\n${descs[0].text}\n\nDESCRIPTION (Option 2 — ${descs[1].label})\n${descs[1].text}\n\nDESCRIPTION (Option 3 — ${descs[2].label})\n${descs[2].text}\n\n${'─'.repeat(40)}\n\nHASHTAGS\n${allTags.join(' ')}\n\n${'─'.repeat(40)}\n\nBOARDS\n${boards.map(b=>'• '+b.name).join('\n')}\n\nURL: https://wowglamdecor.com/posts/${document.getElementById('slug').value||'[slug]'}/`;
+  document.getElementById('pinFullBlock').textContent=fb;
+  document.getElementById('pinterestOutput').style.display='block';
+}
+function copyPinHashtags(){navigator.clipboard.writeText(pinFullData.allTags?.join(' ')||'').then(()=>alert('✅ Hashtags copied!')).catch(()=>alert('❌ Failed'));}
+function copyPinFull(){navigator.clipboard.writeText(document.getElementById('pinFullBlock').textContent).then(()=>{const c=document.getElementById('pinCopyConfirm');c.style.display='inline-flex';setTimeout(()=>c.style.display='none',2500);}).catch(()=>alert('❌ Copy failed'));}
+function copyText(text,el){navigator.clipboard.writeText(text).then(()=>{const orig=el.textContent;el.textContent='✅ Copied!';setTimeout(()=>{el.textContent=orig;},1500);}).catch(()=>alert('❌ Copy failed'));}
+
+/* ══════════════════════════════════════════
+   PIN FACTORY
+══════════════════════════════════════════ */
+let generatedPins=[];
+const PIN_TYPES=[
+  {id:'hero',icon:'🌟',label:'Hero',day:1,time:'8:00 AM',board:'Home Decor Inspiration'},
+  {id:'benefit',icon:'💡',label:'Benefit',day:1,time:'7:00 PM',board:'Home Decor Inspiration'},
+  {id:'product',icon:'🛍️',label:'Product',day:2,time:'9:00 AM',board:'[Room] Ideas'},
+  {id:'list',icon:'📋',label:'List',day:2,time:'6:00 PM',board:'Home Decor Inspiration'},
+  {id:'question',icon:'❓',label:'Question',day:3,time:'8:00 AM',board:'[Room] Style Guide'},
+  {id:'mistake',icon:'⚠️',label:'Mistake',day:3,time:'7:00 PM',board:'Home Decor Tips'},
+  {id:'budget',icon:'💰',label:'Budget',day:4,time:'9:00 AM',board:'Budget Decor Finds'},
+  {id:'seasonal',icon:'🗓️',label:'Seasonal',day:4,time:'6:00 PM',board:'Seasonal Decor'},
+  {id:'comparison',icon:'⚖️',label:'Comparison',day:5,time:'8:00 AM',board:'[Room] Decor Ideas'},
+  {id:'stat',icon:'📈',label:'Stat',day:5,time:'7:00 PM',board:'Home Decor Inspiration'},
+];
+const DAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+function generatePinFactory(){
+  const postTitle=document.getElementById('title').value.trim();
+  if(!postTitle){alert('⚠️ Add a post title in the Editor first');return;}
+  const kws=document.getElementById('seoKeywords').value.split(',').map(k=>k.trim()).filter(Boolean);
+  const cats=Array.from(document.querySelectorAll('#categorySelect input:checked')).map(c=>c.value);
+  const products=getProductsData();
+  const kw1=kws[0]||cats[0]||'home decor';
+  const kw2=kws[1]||cats[1]||'interior design';
+  const room=cats[0]||'living room';
+  const shortTitle=postTitle.slice(0,55);
+  const prod1=products[0]?.name||kw1+' piece';
+  const prod2=products[1]?.name||kw2+' item';
+  const year=new Date().getFullYear();
+  generatedPins=[
+    {type:'hero',headline:`${shortTitle}`,subline:`Curated picks + styling tips — wowglamdecor.com`,desc:`Transform your ${room} with these stunning ${kw1} ideas ✨ From budget-friendly finds to luxury splurges, discover the best picks for every style. Shop the look at wowglamdecor.com 🏠`,imgPrompt:`Luxurious, editorial ${room} interior, soft natural light, warm tones, professional photography, 1000x1500px portrait, no text`},
+    {type:'benefit',headline:`5 Reasons to Try ${kw1}`,subline:`Designer secrets you didn't know`,desc:`Why ${kw1} is the upgrade your ${room} needs right now 💫 5 styling secrets inside — plus our top product picks for every budget. wowglamdecor.com`,imgPrompt:`Beautifully styled ${room} detail shot, ${kw1} focus, soft bokeh, warm lifestyle photography, 1000x1500px portrait, no text`},
+    {type:'product',headline:`Our Top Pick: ${prod1.slice(0,40)}`,subline:`⭐ Editor's choice — link in bio`,desc:`This ${prod1} is our current obsession for the ${room} 🛍️ Click through for full details, price comparison, and styling ideas at wowglamdecor.com`,imgPrompt:`Luxury product lifestyle photo, ${prod1} styled in ${room}, beautiful ambient lighting, editorial feel, 1000x1500px portrait, no text`},
+    {type:'list',headline:`7 Best ${kw1} Pieces ${year}`,subline:`Ranked from budget to luxury`,desc:`Looking for the best ${kw1}? We ranked 7 top picks from budget to luxury 💰✨ Full roundup + where to buy at wowglamdecor.com 🏡`,imgPrompt:`Flat lay or styled grid of ${room} accessories, clean background, warm tones, editorial photography, 1000x1500px portrait, no text`},
+    {type:'question',headline:`Is Your ${room.charAt(0).toUpperCase()+room.slice(1)} Missing This?`,subline:`Most people overlook it…`,desc:`The one ${kw1} element most people skip — and why it makes all the difference in your ${room} 🤔 See the full breakdown at wowglamdecor.com`,imgPrompt:`Before and after style split, ${room} transformation, clean editorial photography, 1000x1500px portrait, no text`},
+    {type:'mistake',headline:`Stop Making This ${kw1} Mistake`,subline:`Interior designers agree`,desc:`The most common ${kw1} mistake homeowners make (and how to fix it fast) ⚠️ Pro tips from our team at wowglamdecor.com 🏠`,imgPrompt:`Stylish, well-lit ${room} interior showing correct design principles, professional photography, 1000x1500px portrait, no text`},
+    {type:'budget',headline:`${kw1} Under $100`,subline:`Looks expensive, costs less`,desc:`You don't need a big budget for a beautiful ${room} 💸 Our top ${kw1} picks all under $100 — styled and curated by our team. Full list at wowglamdecor.com`,imgPrompt:`Affordable but elegant ${room} styling, warm and inviting, lifestyle photography, 1000x1500px portrait, no text`},
+    {type:'seasonal',headline:`${kw1} Trends ${year}`,subline:`What's in right now`,desc:`The biggest ${kw1} trends of ${year} — and exactly how to bring them into your ${room} 🌟 Shop the look at wowglamdecor.com ✨`,imgPrompt:`Current season ${room} interior, on-trend styling, beautiful lighting, editorial photography, 1000x1500px portrait, no text`},
+    {type:'comparison',headline:`${prod1.slice(0,30)} vs ${prod2.slice(0,30)}`,subline:`Which is worth it? We compared both`,desc:`${prod1} vs ${prod2} — we compared both so you don't have to ⚖️ Price, quality, styling versatility breakdown at wowglamdecor.com`,imgPrompt:`Two beautifully styled ${room} setups side by side, comparison layout, editorial photography, 1000x1500px portrait, no text`},
+    {type:'stat',headline:`9 in 10 Designers Recommend This`,subline:`For your ${room} makeover`,desc:`The #1 ${kw1} tip interior designers swear by 📈 Data-backed styling advice + our top product picks at wowglamdecor.com 🏠`,imgPrompt:`Aspirational ${room} interior, aspirational styling, data-driven clean aesthetic, editorial photography, 1000x1500px portrait, no text`},
+  ];
+  renderPinCards(generatedPins);
+  renderPinQueue(generatedPins);
+  renderPinExport(generatedPins,postTitle);
+  document.getElementById('pinFactoryOutput').style.display='block';
+  const pinCount=parseInt(document.getElementById('fsPinCount').textContent||0);
+  document.getElementById('fsPinCount').textContent=pinCount+10;
+  document.getElementById('fsPostCount').textContent=parseInt(document.getElementById('fsPostCount').textContent||0)+1;
+  document.getElementById('factoryStatus').textContent='✅ 10 pins generated';
+}
+function renderPinCards(pins){
+  document.getElementById('pinCardsGrid').innerHTML=pins.map((pin,i)=>{
+    const meta=PIN_TYPES.find(t=>t.id===pin.type)||PIN_TYPES[0];
+    return`<div class="pin-card" data-pintype="${pin.type}">
+      <div class="pin-card-header"><div class="pin-card-type">${meta.icon} ${meta.label} Pin <span style="font-size:11px;font-weight:400;color:var(--text-secondary);margin-left:6px;">#${i+1} of 10</span></div>
+      <div class="pin-card-actions"><button onclick="copySinglePin(${i})" class="btn btn-secondary btn-sm">📋 Copy all text</button></div></div>
+      <div class="pin-card-body">
+        <div class="pin-visual"><div class="pin-visual-bg"></div><div class="pin-visual-overlay"></div><div class="pin-visual-badge">${meta.icon} ${meta.label}</div><div class="pin-visual-ratio">1000×1500</div><div class="pin-visual-content"><div class="pin-visual-title">${pin.headline}</div><div class="pin-visual-url">wowglamdecor.com</div></div></div>
+        <div class="pin-layers">
+          <div class="pin-layer"><div class="pin-layer-name"><span class="pin-layer-dot" style="background:#FFB020;"></span>HEADLINE (Canva text layer 1)</div><div class="pin-layer-text">${pin.headline}</div><button class="pin-layer-copy-btn" onclick="copyText('${esc(pin.headline)}',this)">📋 Copy</button></div>
+          <div class="pin-layer"><div class="pin-layer-name"><span class="pin-layer-dot" style="background:#00D084;"></span>SUBLINE (Canva text layer 2)</div><div class="pin-layer-text">${pin.subline}</div><button class="pin-layer-copy-btn" onclick="copyText('${esc(pin.subline)}',this)">📋 Copy</button></div>
+          <div class="pin-layer pin-desc-layer"><div class="pin-layer-name"><span class="pin-layer-dot" style="background:var(--factory);"></span>PINTEREST DESCRIPTION</div><div class="pin-layer-text">${pin.desc}</div><button class="pin-layer-copy-btn" onclick="copyText('${esc(pin.desc)}',this)">📋 Copy</button></div>
+          <div class="pin-layer" style="background:#1e1e2e;border-color:#313244;"><div class="pin-layer-name" style="color:#585b70;"><span class="pin-layer-dot" style="background:#89b4fa;"></span>AI IMAGE PROMPT</div><div class="pin-img-prompt">${pin.imgPrompt}</div><button class="pin-layer-copy-btn" style="border-color:#313244;color:#89b4fa;" onclick="copyText('${esc(pin.imgPrompt)}',this)">📋 Copy prompt</button></div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+function filterPinCards(type,btn){document.querySelectorAll('.pin-type-btn').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');document.querySelectorAll('.pin-card').forEach(card=>{card.style.display=(type==='all'||card.dataset.pintype===type)?'':'none';});}
+function renderPinQueue(pins){
+  const tbody=document.getElementById('pinQueueBody');
+  tbody.innerHTML=pins.map((pin,i)=>{
+    const meta=PIN_TYPES.find(t=>t.id===pin.type)||{day:i+1,time:'9:00 AM',board:'Home Decor',icon:'📌',label:'Pin'};
+    return`<tr><td><span class="queue-day">${DAYS[(meta.day-1)%7]}</span></td><td><span class="queue-pin-type">${meta.icon} ${meta.label}</span></td><td>${meta.time} EAT</td><td>${meta.board}</td><td style="max-width:280px;"><span style="font-weight:600;font-size:13px;cursor:pointer;" onclick="copyText('${esc(pin.headline)}',this)">${pin.headline} 📋</span></td></tr>`;
+  }).join('');
+}
+function renderPinExport(pins,postTitle){
+  document.getElementById('pinFactoryExport').textContent=`PIN FACTORY EXPORT — ${postTitle}\n${'═'.repeat(60)}\nGenerated: ${new Date().toLocaleString()}\nPost URL: https://wowglamdecor.com/posts/${document.getElementById('slug').value||'[slug]'}/\n\n`+pins.map((pin,i)=>{const meta=PIN_TYPES.find(t=>t.id===pin.type)||{day:1,time:'9:00 AM',board:'Home Decor',icon:'📌',label:'Pin'};return`${'─'.repeat(50)}\nPIN ${i+1} — ${meta.icon} ${meta.label.toUpperCase()} | Day ${meta.day} (${DAYS[(meta.day-1)%7]}) @ ${meta.time}\nBoard: ${meta.board}\n\nHEADLINE:\n${pin.headline}\n\nSUBLINE:\n${pin.subline}\n\nDESCRIPTION:\n${pin.desc}\n\nAI IMAGE PROMPT (1000×1500px):\n${pin.imgPrompt}`;}).join('\n\n');
+}
+function copySinglePin(idx){const pin=generatedPins[idx];if(!pin)return;const meta=PIN_TYPES.find(t=>t.id===pin.type)||{label:'Pin'};navigator.clipboard.writeText(`HEADLINE:\n${pin.headline}\n\nSUBLINE:\n${pin.subline}\n\nDESCRIPTION:\n${pin.desc}\n\nIMAGE PROMPT:\n${pin.imgPrompt}`).then(()=>alert('✅ Pin '+( idx+1)+' copied!')).catch(()=>alert('❌ Copy failed'));}
+function copyFactoryExport(){navigator.clipboard.writeText(document.getElementById('pinFactoryExport').textContent).then(()=>{const c=document.getElementById('factoryCopyConfirm');c.style.display='inline-flex';setTimeout(()=>c.style.display='none',2500);}).catch(()=>alert('❌ Copy failed'));}
+function exportPinCSV(){
+  if(!generatedPins.length){alert('⚠️ Generate pins first');return;}
+  const headers=['Pin #','Type','Day','Time','Board','Headline','Subline','Description','Image Prompt (1000x1500px)'];
+  const rows=generatedPins.map((pin,i)=>{const meta=PIN_TYPES.find(t=>t.id===pin.type)||{day:1,time:'',board:''};return[i+1,meta.label||pin.type,DAYS[(meta.day-1)%7],meta.time,meta.board,pin.headline,pin.subline,pin.desc,pin.imgPrompt].map(v=>`"${String(v).replace(/"/g,'""')}"`);});
+  const csv=[headers.map(h=>`"${h}"`).join(','),...rows.map(r=>r.join(','))].join('\n');
+  Object.assign(document.createElement('a'),{href:URL.createObjectURL(new Blob([csv],{type:'text/csv'})),download:`pins-${document.getElementById('slug').value||'post'}-${new Date().toISOString().slice(0,10)}.csv`}).click();
+}
+function exportBlogImagesCSV(){
+  const imgs=parsedImages.blog||[];
+  if(!imgs.length){alert('⚠️ Parse a post with images first (Import AI tab)');return;}
+  const headers=['Filename','Prompt','Folder'];
+  const rows=imgs.map(img=>[img.filename,img.prompt,'/content/images/'].map(v=>`"${String(v).replace(/"/g,'""')}"`));
+  const csv=[headers.join(','),...rows.map(r=>r.join(','))].join('\n');
+  Object.assign(document.createElement('a'),{href:URL.createObjectURL(new Blob([csv],{type:'text/csv'})),download:`blog-images-${new Date().toISOString().slice(0,10)}.csv`}).click();
+}
+
+/* ══════════════════════════════════════════
+   INIT
+══════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded',()=>{
+  initializeCategories();
+  updateDraftTable();
+  updateCatalogCount();
+  updatePreview();
+  startAutosave();
+  // Restore autosave hint if exists
+  const auto=localStorage.getItem('autosave');
+  if(auto){const d=JSON.parse(auto);if(d.title){document.getElementById('autosaveText').textContent='Draft: "'+d.title.slice(0,25)+(d.title.length>25?'…':'')+'" — click 📂 to restore';}}
+});
+</script>
+</body>
+</html>

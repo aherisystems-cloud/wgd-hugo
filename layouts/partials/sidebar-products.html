@@ -28,7 +28,7 @@
       {{ end }}
       <div class="sidebar-product-inner">
         {{ if .image }}
-        <img src="{{ partial "imgpath.html" .image }}" alt="{{ .name }}" class="sidebar-product-image" loading="lazy" onerror="this.style.display='none'">
+        <img src="{{ .image }}" alt="{{ .name }}" class="sidebar-product-image" loading="lazy" onerror="this.style.display='none'">
         {{ end }}
         <div class="sidebar-product-info">
           <h4>{{ .name }}</h4>
