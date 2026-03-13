@@ -160,7 +160,25 @@ img{max-width:100%;height:auto;display:block}
 .content-body p{margin-bottom:20px}
 .content-body ul,.content-body ol{margin:16px 0 20px 24px}
 .content-body li{margin-bottom:10px;line-height:1.75}
-.content-body img{width:100%;height:auto;border-radius:12px;margin:28px 0;box-shadow:var(--shadow-sm)}
+/* Base — never let any image overflow its container */
+.content-body img{max-width:100%;height:auto;display:block;border-radius:12px;}
+
+/* figure wrapper — all images come through render-image.html as <figure> */
+.post-figure{margin:28px 0;}
+
+/* Hero inline (1200×630 landscape) — full column width */
+.post-figure--hero img{width:100%;box-shadow:var(--shadow-md);}
+
+/* Wide (comparison shots, general inline photos) — full column width */
+.post-figure--wide img{width:100%;box-shadow:var(--shadow-sm);}
+
+/* Portrait (1000×1500) — section headers, scene images, product look-alikes */
+/* Capped at 380px so they read as editorial cards, not page-filling towers  */
+.post-figure--portrait{max-width:380px;margin-left:auto;margin-right:auto;}
+.post-figure--portrait img{width:100%;box-shadow:var(--shadow-sm);}
+
+/* On mobile portrait images go full width naturally */
+@media(max-width:480px){.post-figure--portrait{max-width:100%;}}
 .content-body blockquote{border-left:4px solid var(--brand);background:var(--brand-pale);padding:20px 24px;margin:24px 0;border-radius:8px;font-style:italic}
 .content-body a{color:var(--brand);font-weight:700;text-decoration:underline;text-underline-offset:3px;transition:color 0.2s}
 .content-body a:hover{color:var(--brand-dark)}

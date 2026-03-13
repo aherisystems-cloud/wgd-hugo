@@ -1,19 +1,53 @@
-{{ $src := .Destination }}
-{{ $hasExt := or
+{{- $src := .Destination -}}
+
+{{/* ── Resolve missing extension by checking static/ folder ── */}}
+{{- $hasExt := or
     (strings.HasSuffix $src ".jpg")
     (strings.HasSuffix $src ".jpeg")
     (strings.HasSuffix $src ".png")
     (strings.HasSuffix $src ".webp")
     (strings.HasSuffix $src ".gif")
-}}
-{{ if not $hasExt }}
-  {{ $exts := slice ".jpg" ".jpeg" ".png" ".webp" ".gif" }}
-  {{ range $exts }}
-    {{ $candidate := printf "%s%s" $src . }}
-    {{ $filepath := printf "static%s" $candidate }}
-    {{ if os.FileExists $filepath }}
-      {{ $src = $candidate }}
-    {{ end }}
-  {{ end }}
-{{ end }}
-<img src="{{ $src }}" alt="{{ .Text }}" {{ with .Title }}title="{{ . }}"{{ end }} loading="lazy">
+-}}
+{{- if not $hasExt -}}
+  {{- range slice ".jpg" ".jpeg" ".png" ".webp" ".gif" -}}
+    {{- $candidate := printf "%s%s" $src . -}}
+    {{- if os.FileExists (printf "static%s" $candidate) -}}
+      {{- $src = $candidate -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* ── Classify image type ───────────────────────────────────────
+     Portrait (1000×1500):
+       - /content/images/products/  → product look-alike
+       - scene-look-                → look scene image
+       - section-                   → section header image
+       - product-look-              → product look-alike (alt naming)
+       - products-featured-         → featured products flatlay
+     Hero (1200×630, landscape):
+       - hero-                      → post hero
+     Wide (everything else):
+       - comparison images, inline photos → full column width
+──────────────────────────────────────────────────────────────── */}}
+{{- $isPortrait := or
+    (strings.Contains $src "/content/images/products/")
+    (strings.Contains $src "scene-look-")
+    (strings.Contains $src "section-")
+    (strings.Contains $src "product-look-")
+    (strings.Contains $src "products-featured-")
+-}}
+{{- $isHero := strings.Contains $src "hero-" -}}
+
+{{- if $isHero -}}
+<figure class="post-figure post-figure--hero">
+  <img src="{{ $src }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }} loading="lazy">
+</figure>
+{{- else if $isPortrait -}}
+<figure class="post-figure post-figure--portrait">
+  <img src="{{ $src }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }} loading="lazy">
+</figure>
+{{- else -}}
+<figure class="post-figure post-figure--wide">
+  <img src="{{ $src }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }} loading="lazy">
+</figure>
+{{- end -}}
