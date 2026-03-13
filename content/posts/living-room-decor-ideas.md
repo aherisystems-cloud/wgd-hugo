@@ -433,23 +433,41 @@ Getting size right matters more than you think. Here's my foolproof formula:
 ### Material Matters
 
 **Wool Rugs** (Premium choice)
-- **Pros:** Durable, natural, luxurious feel, resists stains
+- **Pros:**
+  - Durable
+  - Natural
+  - Luxurious feel
+  - Resists stains
 - **Cons:** Higher cost ($190-540)
 - **Best for:** High-traffic areas, long-term investment
 
 **Cotton Rugs** (Budget-friendly)
-- **Pros:** Affordable ($50-115), machine washable, lightweight
-- **Cons:** Shows wear faster, less durable
+- **Pros:**
+  - Affordable ($50-115)
+  - Machine washable
+  - Lightweight
+- **Cons:**
+  - Shows wear faster
+  - Less durable
 - **Best for:** Rentals, temporary spaces, frequent style changes
 
 **Synthetic (Polypropylene) Rugs** (Popular middle ground)
-- **Pros:** Stain-resistant, affordable ($62-190), easy maintenance
+- **Pros:**
+  - Stain-resistant
+  - Affordable ($62-190)
+  - Easy maintenance
 - **Cons:** Less luxurious feel than natural fibers
 - **Best for:** Families with kids, pet owners, practical choice
 
 **Jute/Sisal Rugs** (Natural texture)
-- **Pros:** Eco-friendly, adds organic texture, neutral
-- **Cons:** Rough texture, stains easily, harder to clean
+- **Pros:**
+  - Eco-friendly
+  - Adds organic texture
+  - Neutral
+- **Cons:**
+  - Rough texture
+  - Stains easily
+  - Harder to clean
 - **Best for:** Layering, low-traffic areas, boho/natural styles
 
 ### Featured Area Rug
