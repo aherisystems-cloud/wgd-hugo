@@ -173,12 +173,17 @@ img{max-width:100%;height:auto;display:block}
 .post-figure--wide img{width:100%;box-shadow:var(--shadow-sm);}
 
 /* Portrait (1000×1500) — section headers, scene images, product look-alikes */
-/* Capped at 380px so they read as editorial cards, not page-filling towers  */
-.post-figure--portrait{max-width:380px;margin-left:auto;margin-right:auto;}
+/* Floated right at 260px — sits beside text, retains 2:3 orientation       */
+.post-figure--portrait{max-width:260px;float:right;margin:8px 0 20px 24px;clear:right;}
 .post-figure--portrait img{width:100%;box-shadow:var(--shadow-sm);}
 
-/* On mobile portrait images go full width naturally */
-@media(max-width:480px){.post-figure--portrait{max-width:100%;}}
+/* Headings clear floats so they always start on a fresh line */
+.content-body h2,.content-body h3{clear:both;}
+
+/* On mobile: no float, stack normally, comfortable width */
+@media(max-width:480px){
+  .post-figure--portrait{float:none;max-width:220px;margin:16px auto;}
+}
 .content-body blockquote{border-left:4px solid var(--brand);background:var(--brand-pale);padding:20px 24px;margin:24px 0;border-radius:8px;font-style:italic}
 .content-body a{color:var(--brand);font-weight:700;text-decoration:underline;text-underline-offset:3px;transition:color 0.2s}
 .content-body a:hover{color:var(--brand-dark)}
