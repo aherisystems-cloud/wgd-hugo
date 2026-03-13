@@ -1,17 +1,21 @@
-# Redirect old static site URLs to Hugo URLs
-
-# Old blog page
-/blog          /posts/         301
-/blog.html     /posts/         301
-
+# ── Taxonomy slug redirects ──────────────────────────────────────
 # Old /category/ paths → /categories/
 /category/*   /categories/:splat   301
 
 # Old /tag/ paths → /tags/
-/tag/*        /tags/:splat    301
+/tag/*        /tags/:splat          301
 
-# Old /feed.xml → Hugo RSS
-/feed.xml     /index.xml      301
+# ── Blog section redirect ────────────────────────────────────────
+/blog          /posts/              301
+/blog.html     /posts/              301
 
-# Sitemap passthrough
-/sitemap.xml  /sitemap.xml    200
+# ── Feed & sitemap passthroughs ─────────────────────────────────
+/feed.xml      /index.xml           301
+/sitemap.xml   /sitemap.xml         200
+
+# ── .html catch-all — must be LAST ──────────────────────────────
+# Strips .html from any URL that Hugo or a stale cache may have
+# emitted with an extension, and redirects to the clean version.
+# Netlify processes rules top-to-bottom; more-specific rules above
+# take priority, this catches everything else.
+/*.html        /:splat              301

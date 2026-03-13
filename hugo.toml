@@ -1,8 +1,12 @@
-baseURL = "https://wowglamdecor.com/"
+baseURL      = "https://wowglamdecor.com/"
 languageCode = "en-us"
-title = "Wow Glam Decor"
-paginate = 12
+title        = "Wow Glam Decor"
+paginate     = 12
 
+# ── Clean URLs (never output .html extensions) ───────────────────
+uglyURLs     = false
+
+# ── Output formats per page kind ────────────────────────────────
 [outputs]
   home     = ["HTML", "RSS", "JSON"]
   section  = ["HTML", "RSS"]
@@ -10,19 +14,25 @@ paginate = 12
   term     = ["HTML", "RSS"]
   page     = ["HTML"]
 
+# ── Custom output format: JSON posts feed ────────────────────────
+# NOTE: Only define custom/overridden formats here.
+# Do NOT redefine [outputFormats.HTML] — doing so breaks clean URLs.
 [outputFormats.JSON]
-  mediaType  = "application/json"
-  baseName   = "posts"
-  isPlainText = true
+  mediaType      = "application/json"
+  baseName       = "posts"
+  isPlainText    = true
   notAlternative = true
 
+# ── Taxonomies ───────────────────────────────────────────────────
 [taxonomies]
   category = "categories"
   tag      = "tags"
 
+# ── Site params ──────────────────────────────────────────────────
 [params]
   description = "Beautiful home decor ideas, furniture guides and product picks for every budget"
   author      = "Wow Glam Decor Team"
-[outputFormats]
-  [outputFormats.HTML]
-    permalinks = true
+
+  # Affiliate CTA — change this label to suit any affiliate program.
+  # Used by sidebar product cards and in-post product CTAs.
+  affiliateCTALabel = "Check Today's Price"

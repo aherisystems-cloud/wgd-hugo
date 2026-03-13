@@ -28,7 +28,8 @@
       {{ end }}
       <div class="sidebar-product-inner">
         {{ if .image }}
-        <img src="{{ .image }}" alt="{{ .name }}" class="sidebar-product-image" loading="lazy" onerror="this.style.display='none'">
+        {{ $pimg := partial "imgpath.html" .image }}
+        <img src="{{ $pimg }}" alt="{{ .name }}" class="sidebar-product-image" loading="lazy" onerror="this.src='/content/images/bedroom-decor-ideas.png'">
         {{ end }}
         <div class="sidebar-product-info">
           <h4>{{ .name }}</h4>
@@ -39,7 +40,7 @@
             <span class="sidebar-budget-tier {{ $tc }}">{{ .budget_tier }}</span>
           {{ end }}
           {{ if .benefit }}<p class="sidebar-benefit">{{ .benefit }}</p>{{ end }}
-          <span class="sidebar-cta">🛍️ Shop on Amazon →</span>
+          <span class="sidebar-cta">🛍️ Shop This Pick →</span>
         </div>
       </div>
     </a>
