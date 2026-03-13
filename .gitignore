@@ -1,0 +1,18 @@
+# Hugo build output - never commit this
+public/
+public_test/
+
+# Hugo cache
+.hugo_build.lock
+resources/_gen/
+
+# Node (leftover from old setup)
+node_modules/
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+*.swp

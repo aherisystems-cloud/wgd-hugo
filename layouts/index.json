@@ -1,0 +1,18 @@
+{{- $pages := where .Site.RegularPages "Section" "posts" -}}
+[
+{{- range $i, $p := $pages -}}
+{{- $img := partial "imgpath.html" $p.Params.featured_image -}}
+{{- if $i }},{{ end }}
+  {
+    "title":          {{ $p.Title | jsonify }},
+    "url":            {{ $p.Permalink | jsonify }},
+    "slug":           {{ $p.File.BaseFileName | jsonify }},
+    "description":    {{ $p.Description | jsonify }},
+    "featured_image": {{ $img | jsonify }},
+    "categories":     {{ $p.Params.categories | default slice | jsonify }},
+    "tags":           {{ $p.Params.tags | default slice | jsonify }},
+    "readTime":       {{ $p.ReadingTime }},
+    "date":           {{ $p.Date.Format "2006-01-02" | jsonify }}
+  }
+{{- end }}
+]

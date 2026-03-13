@@ -1,0 +1,57 @@
+<div class="sidebar-quiz-wrap">
+  <div id="quiz-widget"></div>
+  <script src="/quiz/widget.js" defer></script>
+</div>
+{{ with .Params.featured_products }}
+  <div class="sidebar-section-title">🌟 Featured Products</div>
+  {{ range . }}
+    {{ $isProduct := true }}
+    {{ if .link }}{{ if strings.Contains .link "/posts/" }}{{ $isProduct = false }}{{ end }}{{ end }}
+
+    {{ if $isProduct }}
+    <a href="{{ .link }}" class="sidebar-product" target="_blank" rel="nofollow noopener sponsored">
+      {{ $labelClass := "label-none" }}
+      {{ if .label }}
+        {{ $l := .label | upper }}
+        {{ if eq $l "NEW" }}{{ $labelClass = "label-new" }}
+        {{ else if eq $l "SALE" }}{{ $labelClass = "label-sale" }}
+        {{ else if eq $l "TOP PICK" }}{{ $labelClass = "label-top-pick" }}
+        {{ else if eq $l "EDITOR'S PICK" }}{{ $labelClass = "label-editors-pick" }}
+        {{ else if eq $l "BEST VALUE" }}{{ $labelClass = "label-best-value" }}
+        {{ else if eq $l "LIMITED" }}{{ $labelClass = "label-limited" }}
+        {{ end }}
+        <div class="sidebar-product-label {{ $labelClass }}">
+          <span>{{ .label }}</span><span>Shop →</span>
+        </div>
+      {{ else }}
+        <div class="sidebar-product-label label-none"></div>
+      {{ end }}
+      <div class="sidebar-product-inner">
+        {{ if .image }}
+        <img src="{{ partial "imgpath.html" .image }}" alt="{{ .name }}" class="sidebar-product-image" loading="lazy" onerror="this.style.display='none'">
+        {{ end }}
+        <div class="sidebar-product-info">
+          <h4>{{ .name }}</h4>
+          {{ if .budget_tier }}
+            {{ $tc := "tier-mid" }}
+            {{ if eq .budget_tier "Budget Pick" }}{{ $tc = "tier-budget" }}{{ end }}
+            {{ if eq .budget_tier "Luxury" }}{{ $tc = "tier-luxury" }}{{ end }}
+            <span class="sidebar-budget-tier {{ $tc }}">{{ .budget_tier }}</span>
+          {{ end }}
+          {{ if .benefit }}<p class="sidebar-benefit">{{ .benefit }}</p>{{ end }}
+          <span class="sidebar-cta">🛍️ Shop on Amazon →</span>
+        </div>
+      </div>
+    </a>
+    {{ else }}
+    <a href="{{ .link }}" class="sidebar-related">
+      {{ if .image }}<img src="{{ .image }}" alt="{{ .name }}" loading="lazy">{{ end }}
+      <div class="sidebar-related-body">
+        <div class="sidebar-related-cat">Read Next</div>
+        <div class="sidebar-related-title">{{ .name }}</div>
+        <span class="sidebar-related-link">Read more →</span>
+      </div>
+    </a>
+    {{ end }}
+  {{ end }}
+{{ end }}

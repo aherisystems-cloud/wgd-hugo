@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>About Us - Wow Glam Decor | Our Story & Mission</title>
+<meta name="description" content="Learn about Wow Glam Decor — your trusted source for honest home decor reviews, curated product recommendations, and interior design inspiration for every budget."/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://wowglamdecor.com/about.html"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--brand:#7e0882;--brand-dark:#5a0660;--brand-light:#a020a8;--brand-pale:rgba(126,8,130,0.07);--off-white:#fafafa;--gray-100:#f5f5f5;--gray-200:#eee;--gray-600:#757575;--gray-800:#424242;--gray-900:#212121;--shadow-sm:0 2px 12px rgba(126,8,130,0.08);--shadow-md:0 8px 32px rgba(126,8,130,0.13);--radius:16px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito',sans-serif;background:var(--off-white);color:var(--gray-900);line-height:1.7}
+a{text-decoration:none}
+.navbar{background:rgba(255,255,255,0.96);backdrop-filter:blur(16px);box-shadow:var(--shadow-sm);position:sticky;top:0;z-index:100}
+.nav-container{max-width:1400px;margin:0 auto;padding:13px 24px;display:flex;align-items:center;justify-content:space-between}
+.logo{height:48px}
+.nav-menu{display:flex;gap:2px}
+.nav-link{color:var(--gray-800);font-weight:700;font-size:14px;padding:8px 14px;border-radius:8px;transition:all 0.2s}
+.nav-link:hover,.nav-link.active{background:var(--brand-pale);color:var(--brand)}
+.nav-cta{background:var(--brand);color:#fff!important;padding:10px 20px!important;border-radius:8px;font-weight:800}
+.hero{background:linear-gradient(140deg,var(--brand-dark),var(--brand-light));color:#fff;padding:88px 24px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-30%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 70%);border-radius:50%}
+.hero-content{position:relative;z-index:2;max-width:700px;margin:0 auto}
+.hero h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:900;margin-bottom:16px}
+.hero p{font-size:1.25rem;opacity:0.93;line-height:1.7}
+.container{max-width:900px;margin:0 auto;padding:72px 24px}
+.card{background:#fff;border-radius:var(--radius);padding:48px;box-shadow:var(--shadow-sm);margin-bottom:28px}
+.card-icon{font-size:2.5rem;margin-bottom:16px;display:block}
+.card h2{font-size:1.75rem;font-weight:900;color:var(--brand);margin-bottom:20px}
+.card p{color:var(--gray-800);font-size:1.05rem;margin-bottom:16px;line-height:1.75}
+.card p:last-child{margin-bottom:0}
+.card ul{list-style:none;margin-top:8px}
+.card ul li{padding:10px 0;border-bottom:1px solid var(--gray-100);font-size:1rem;color:var(--gray-800);display:flex;align-items:flex-start;gap:10px}
+.card ul li:last-child{border-bottom:none}
+.values-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px}
+.value-item{background:var(--brand-pale);border-radius:12px;padding:24px}
+.value-item h3{font-size:1.05rem;font-weight:800;color:var(--brand);margin-bottom:8px}
+.value-item p{font-size:14px;color:var(--gray-700);margin:0}
+.disclosure-card{background:var(--gray-900);color:#fff;border-radius:var(--radius);padding:44px;margin-bottom:28px}
+.disclosure-card h2{font-size:1.5rem;font-weight:900;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.disclosure-card p{opacity:0.82;font-size:1rem;margin-bottom:14px;line-height:1.75}
+.disclosure-card p:last-child{margin-bottom:0}
+.disclosure-card a{color:rgba(255,255,255,0.75);text-decoration:underline}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:28px}
+.stat-card{background:#fff;border-radius:var(--radius);padding:32px 24px;text-align:center;box-shadow:var(--shadow-sm)}
+.stat-num{font-size:2.5rem;font-weight:900;color:var(--brand);display:block;margin-bottom:8px}
+.stat-label{font-size:14px;color:var(--gray-600);font-weight:600}
+.cta-card{background:linear-gradient(135deg,var(--brand-dark),var(--brand-light));color:#fff;border-radius:var(--radius);padding:56px;text-align:center}
+.cta-card h2{font-size:2.2rem;font-weight:900;margin-bottom:14px}
+.cta-card p{font-size:1.15rem;opacity:0.93;margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto}
+.btn-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn-white{background:#fff;color:var(--brand);padding:15px 30px;border-radius:10px;font-weight:800;font-size:15px;transition:all 0.25s}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.2)}
+.btn-outline{border:2px solid rgba(255,255,255,0.5);color:#fff;padding:15px 30px;border-radius:10px;font-weight:800;font-size:15px;transition:all 0.25s}
+.btn-outline:hover{background:rgba(255,255,255,0.15);transform:translateY(-2px)}
+footer{background:var(--gray-900);color:#fff;padding:32px 24px;text-align:center}
+.footer-links-row{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.footer-links-row a{color:rgba(255,255,255,0.6);font-size:14px;transition:color 0.2s}
+.footer-links-row a:hover{color:#fff}
+footer p{opacity:0.55;font-size:13px}
+@media(max-width:768px){.nav-menu{display:none}.values-grid{grid-template-columns:1fr}.stats-row{grid-template-columns:1fr}.card{padding:28px}.cta-card{padding:36px 24px}.btn-row{flex-direction:column;align-items:center}}
+
+<style>
+/* ═══ SEARCH WITH AUTO-SUGGEST ═══ */
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+.search-input {
+  width: 280px;
+  padding: 10px 40px 10px 16px;
+  border: 2px solid var(--gray-200);
+  border-radius: 24px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  background: var(--gray-100);
+}
+.search-input:focus {
+  outline: none;
+  border-color: var(--brand);
+  background: #fff;
+  width: 360px;
+  box-shadow: 0 4px 16px rgba(126,8,130,0.15);
+  border-radius: 24px 24px 0 0;
+}
+.search-input.has-results:focus {
+  border-radius: 24px 24px 0 0;
+}
+.search-input::placeholder {
+  color: var(--gray-600);
+  font-weight: 500;
+}
+.search-btn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--gray-600);
+  padding: 6px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+.search-btn:hover {
+  color: var(--brand);
+  transform: scale(1.1);
+}
+
+/* Auto-suggest dropdown */
+.search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 2px solid var(--brand);
+  border-top: none;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 12px 32px rgba(126,8,130,0.18);
+  max-height: 420px;
+  overflow-y: auto;
+  z-index: 999;
+  display: none;
+}
+.search-suggestions.active {
+  display: block;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 1px solid var(--gray-100);
+}
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+.suggestion-item:hover,
+.suggestion-item.selected {
+  background: var(--brand-pale);
+}
+.suggestion-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: var(--gray-100);
+}
+.suggestion-content {
+  flex: 1;
+  min-width: 0;
+}
+.suggestion-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.suggestion-meta {
+  font-size: 12px;
+  color: var(--gray-600);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.suggestion-category {
+  background: var(--brand-pale);
+  color: var(--brand);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+.search-footer {
+  padding: 12px 16px;
+  background: var(--gray-100);
+  text-align: center;
+  border-radius: 0 0 14px 14px;
+}
+.search-footer a {
+  color: var(--brand);
+  font-weight: 700;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.2s;
+}
+.search-footer a:hover {
+  gap: 10px;
+}
+
+.no-results {
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--gray-600);
+}
+.no-results-icon {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  opacity: 0.3;
+}
+.no-results p {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+.popular-searches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 12px;
+}
+.popular-tag {
+  background: var(--brand-pale);
+  color: var(--brand);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.popular-tag:hover {
+  background: var(--brand);
+  color: #fff;
+}
+
+/* Highlight matched text */
+.highlight {
+  background: rgba(126,8,130,0.15);
+  font-weight: 800;
+  color: var(--brand);
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+/* Loading state */
+.search-loading {
+  padding: 24px;
+  text-align: center;
+  color: var(--gray-600);
+  font-size: 14px;
+}
+.loading-dots {
+  display: inline-flex;
+  gap: 4px;
+  margin-left: 8px;
+}
+.loading-dots span {
+  width: 6px;
+  height: 6px;
+  background: var(--brand);
+  border-radius: 50%;
+  animation: bounce 1.2s infinite;
+}
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* ═══ MEGA MENU STYLES ═══ */
+/* ═══ MEGA MENU FIX - Replace your mega menu CSS with this ═══ */
+
+.mega-menu-wrapper { 
+  position: relative; 
+}
+
+.mega-menu-trigger {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mega-menu-trigger::after {
+  content: '▾';
+  font-size: 10px;
+  transition: transform 0.2s;
+}
+
+.mega-menu-trigger:hover::after { 
+  transform: rotate(180deg); 
+}
+
+/* FIXED: Menu stays within viewport */
+.mega-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  width: 1200px;
+  max-width: calc(100vw - 48px); /* Stay within viewport with padding */
+  background: #fff;
+  box-shadow: 0 12px 48px rgba(126,8,130,0.18);
+  border-radius: 0 0 16px 16px;
+  padding: 32px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+  z-index: 999;
+}
+
+.mega-menu-wrapper:hover .mega-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.mega-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.mega-menu-section h4 {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--brand);
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--brand-pale);
+}
+
+.mega-menu-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mega-menu-links li a {
+  color: var(--gray-800);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.mega-menu-links li a:hover {
+  color: var(--brand);
+  padding-left: 8px;
+}
+
+.mega-menu-links .icon {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+/* Mobile responsive */
+@media (max-width: 1024px) {
+  .mega-menu-wrapper { display: none; }
+}
+</style>
+</head>
+<body>
+
+
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/"><img src="/content/images/logo.jpg" alt="Wow Glam Decor" class="logo"></a>
+    
+    <!-- AUTO-SUGGEST SEARCH -->
+    <div class="search-box">
+      <input 
+        type="text" 
+        id="searchInput" 
+        class="search-input" 
+        placeholder="Search articles, rooms, styles..."
+        autocomplete="off"
+      >
+      <button class="search-btn" onclick="performSearch()" aria-label="Search">🔍</button>
+      
+      <!-- Suggestions dropdown -->
+      <div class="search-suggestions" id="searchSuggestions"></div>
+    </div>
+    
+    <div class="nav-menu">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/blog.html" class="nav-link">Blog</a>
+      
+      <!-- MEGA MENU: Rooms -->
+      <div class="mega-menu-wrapper">
+        <span class="nav-link mega-menu-trigger">Rooms</span>
+        <div class="mega-menu">
+          <div class="mega-menu-grid">
+            <div class="mega-menu-section">
+              <h4>Living Spaces</h4>
+              <ul class="mega-menu-links">
+                <li><a href="/category/living-room.html"><span class="icon">🛋️</span>Living Room</a></li>
+                <li><a href="/category/bedroom.html"><span class="icon">🛏️</span>Bedroom</a></li>
+                <li><a href="/category/dining-room.html"><span class="icon">🍽️</span>Dining Room</a></li>
+                <li><a href="/category/home-office.html"><span class="icon">💻</span>Home Office</a></li>
+              </ul>
+            </div>
+            <div class="mega-menu-section">
+              <h4>Functional Rooms</h4>
+              <ul class="mega-menu-links">
+                <li><a href="/category/kitchen.html"><span class="icon">🍳</span>Kitchen</a></li>
+                <li><a href="/category/bathroom.html"><span class="icon">🚿</span>Bathroom</a></li>
+                <li><a href="/category/laundry-room.html"><span class="icon">🧺</span>Laundry Room</a></li>
+                <li><a href="/category/entryway-hallway.html"><span class="icon">🚪</span>Entryway & Hallway</a></li>
+              </ul>
+            </div>
+            <div class="mega-menu-section">
+              <h4>Special Spaces</h4>
+              <ul class="mega-menu-links">
+                <li><a href="/category/kids-room-nursery.html"><span class="icon">🧸</span>Kids Room & Nursery</a></li>
+                <li><a href="/category/outdoor-patio.html"><span class="icon">🌿</span>Outdoor & Patio</a></li>
+                <li><a href="/category/balcony-small-spaces.html"><span class="icon">🪴</span>Balcony & Small Spaces</a></li>
+              </ul>
+            </div>
+            <div class="mega-menu-section">
+              <h4>Popular Guides</h4>
+              <ul class="mega-menu-links">
+                <li><a href="/category/small-space-storage.html"><span class="icon">📦</span>Small Space Storage</a></li>
+                <li><a href="/category/rental-friendly-decor.html"><span class="icon">🔑</span>Rental-Friendly</a></li>
+                <li><a href="/category/home-makeovers.html"><span class="icon">✨</span>Home Makeovers</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- MEGA MENU: Styles -->
+      <div class="mega-menu-wrapper">
+        <span class="nav-link mega-menu-trigger">Styles</span>
+        <div class="mega-menu">
+          <div class="mega-menu-grid">
+            <div class="mega-menu-section">
+              <h4>Modern Styles</h4>
+              <ul class="mega-menu-links">
+                <li><a href="/category/modern-style.html"><span class="icon">🏙️</span>Modern</a></li>
+                <li><a href="/category/minimalist-style.html"><span class="icon">◻️</span>Minimalist</a></li>
+                <li><a href="/category/scandinavian-style.html"><span class="icon">🌿</span>Scandinavian</a></li>
+                <li><a href="/category/industrial-style.html"><span class="icon">🏭</span>Industrial</a></li>
+              </ul>
+            </div>
+            <div class="mega-menu-section">
+              <h4>Classic Styles</h4>
+              <ul class="mega-menu-links">
+                <li><a href="/category/traditional-classic.html"><span class="icon">🏛️</span>Traditional & Classic</a></li>
+                <li><a href="/category/luxury-glam-decor.html"><span class="icon">👑</span>Luxury & Glam</a></li>
+                <li><a href="/category/boho-rustic-decor.html"><span class="icon">🌻</span>Boho & Rustic</a></li>
+              </ul>
+            </div>
+            <div class="mega-menu-section">
+              <h4>Decor Elements</h4>
+              <ul class="mega-menu-links">
+                <li><a href="/category/wall-decor.html"><span class="icon">🖼️</span>Wall Decor</a></li>
+                <li><a href="/category/lighting-lamps.html"><span class="icon">💡</span>Lighting & Lamps</a></li>
+                <li><a href="/category/rugs-carpets.html"><span class="icon">🟫</span>Rugs & Carpets</a></li>
+                <li><a href="/category/plants-planters.html"><span class="icon">🪴</span>Plants & Planters</a></li>
+              </ul>
+            </div>
+            <div class="mega-menu-section">
+              <h4>Seasonal</h4>
+              <ul class="mega-menu-links">
+                <li><a href="/category/seasonal-decor.html"><span class="icon">🍂</span>Seasonal Decor</a></li>
+                <li><a href="/category/holiday-decor.html"><span class="icon">🎄</span>Holiday Decor</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- MEGA MENU: Buying Guides -->
+      <div class="mega-menu-wrapper">
+        <span class="nav-link mega-menu-trigger">Buying Guides</span>
+        <div class="mega-menu">
+          <div class="mega-menu-grid">
+            <div class="mega-menu-section">
+              <h4>By Budget</h4>
+              <ul class="mega-menu-links">
+                <li><a href="/category/budget-furniture.html"><span class="icon">💰</span>Budget Furniture</a></li>
+                <li><a href="/category/luxury-furniture.html"><span class="icon">💎</span>Luxury Furniture</a></li>
+                <li><a href="/category/budget-gift-ideas.html"><span class="icon">🎁</span>Budget Gifts</a></li>
+                <li><a href="/category/luxury-home-gifts.html"><span class="icon">✨</span>Luxury Gifts</a></li>
+              </ul>
+            </div>
+            <div class="mega-menu-section">
+              <h4>By Type</h4>
+              <ul class="mega-menu-links">
+                <li><a href="/category/space-saving-furniture.html"><span class="icon">📐</span>Space-Saving</a></li>
+                <li><a href="/category/multifunctional-furniture.html"><span class="icon">🔄</span>Multifunctional</a></li>
+                <li><a href="/category/furniture-buying-guides.html"><span class="icon">📖</span>Buying Guides</a></li>
+              </ul>
+            </div>
+            <div class="mega-menu-section">
+              <h4>Reviews & Lists</h4>
+              <ul class="mega-menu-links">
+                <li><a href="/category/best-of-lists.html"><span class="icon">🏆</span>Best Of Lists</a></li>
+                <li><a href="/category/product-reviews.html"><span class="icon">⭐</span>Product Reviews</a></li>
+                <li><a href="/category/comparisons.html"><span class="icon">⚖️</span>Comparisons</a></li>
+              </ul>
+            </div>
+            <div class="mega-menu-section">
+              <h4>Gift Ideas</h4>
+              <ul class="mega-menu-links">
+                <li><a href="/category/home-gift-ideas.html"><span class="icon">🎁</span>Home Gift Ideas</a></li>
+                <li><a href="/category/housewarming-gifts.html"><span class="icon">🏡</span>Housewarming</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <a href="/about.html" class="nav-link">About</a>
+    </div>
+    
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+  </div>
+</nav>
+<header class="hero">
+  <div class="hero-content">
+    <h1>About Wow Glam Decor ✨</h1>
+    <p>We believe every home deserves to be beautiful — regardless of budget, size, or style. We're here to make that easier.</p>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="stats-row">
+    <div class="stat-card"><span class="stat-num">100%</span><span class="stat-label">Honest Reviews</span></div>
+    <div class="stat-card"><span class="stat-num">60+</span><span class="stat-label">Categories Covered</span></div>
+    <div class="stat-card"><span class="stat-num">$0</span><span class="stat-label">Extra Cost to You</span></div>
+  </div>
+
+  <div class="card">
+    <span class="card-icon">🏠</span>
+    <h2>Our Story</h2>
+    <p>Wow Glam Decor was born from a simple frustration: finding trustworthy, practical home decor advice that didn't require a designer budget or a design degree.</p>
+    <p>We've spent years researching furniture, testing decor strategies, and learning what actually works in real homes — not just in magazine photoshoots. Now we share everything we know: the good, the bad, and the surprisingly affordable.</p>
+    <p>Whether you're furnishing your first apartment, refreshing a family home, or treating yourself to a luxury upgrade, you'll find honest guidance here.</p>
+  </div>
+
+  <div class="card">
+    <span class="card-icon">🎯</span>
+    <h2>Our Mission</h2>
+    <p>To be the most trusted home decor resource online — where every recommendation is backed by genuine research, honest evaluation, and deep respect for your money and your time.</p>
+    <div class="values-grid">
+      <div class="value-item"><h3>💯 Honesty First</h3><p>We share real pros AND cons. No product gets a glowing review just because we earn a commission from it.</p></div>
+      <div class="value-item"><h3>💰 Every Budget</h3><p>From $20 finds to $2,000 investments — every price point gets equal care and research.</p></div>
+      <div class="value-item"><h3>🔍 Deep Research</h3><p>Every guide involves extensive research, user review analysis, and real-world evaluation.</p></div>
+      <div class="value-item"><h3>🎨 Real Homes</h3><p>Our advice is designed for real homes and real families — not showroom perfection.</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="card-icon">📝</span>
+    <h2>What We Cover</h2>
+    <ul>
+      <li>🛋️ <strong>Room Guides</strong> — Living room, bedroom, kitchen, bathroom, home office, dining room, kids rooms, outdoor spaces and more</li>
+      <li>⭐ <strong>Product Reviews</strong> — Honest, detailed reviews of furniture, decor, lighting, rugs, and storage solutions</li>
+      <li>🏆 <strong>Best Of Lists</strong> — Curated top picks comparing products across price points and styles</li>
+      <li>📖 <strong>Buying Guides</strong> — What to look for when buying key furniture pieces and decor items</li>
+      <li>🎨 <strong>Style Guides</strong> — Design principles you can apply today without hiring a professional</li>
+      <li>🎁 <strong>Gift Guides</strong> — Thoughtful home gift ideas for every occasion and budget</li>
+    </ul>
+  </div>
+
+  <div class="disclosure-card">
+    <h2>🔗 Our Affiliate Disclosure</h2>
+    <p>Wow Glam Decor participates in affiliate marketing programs including Amazon Associates. This means we earn a small commission when you purchase products through links on our site — at absolutely no additional cost to you.</p>
+    <p>These commissions are what keep this site free, fund our ongoing research, and allow us to keep publishing quality content. They do <strong>not</strong> influence our recommendations. We only recommend products we genuinely believe in.</p>
+    <p>We're committed to full transparency. Read our complete <a href="/affiliate-disclosure.html">affiliate disclosure policy here</a>.</p>
+  </div>
+
+  <div class="cta-card">
+    <h2>Ready to Transform Your Home?</h2>
+    <p>Explore our guides, discover your perfect products, and create the home you've always wanted.</p>
+    <div class="btn-row">
+      <a href="/blog.html" class="btn-white">🏠 Browse All Guides</a>
+      <a href="/category/best-of-lists.html" class="btn-outline">🔥 See Best Of Lists</a>
+      <a href="/contact.html" class="btn-outline">✉️ Get In Touch</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-links-row">
+    <a href="/">Home</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/affiliate-disclosure.html">Affiliate Disclosure</a>
+    <a href="/privacy-policy.html">Privacy Policy</a>
+    <a href="/sitemap.xml">Sitemap</a>
+  </div>
+  <p>&copy; 2026 Wow Glam Decor. All rights reserved.</p>
+</footer>
+
+<script>
+(function() {
+  const searchInput = document.getElementById('searchInput');
+  const suggestionsBox = document.getElementById('searchSuggestions');
+  
+  if (!searchInput || !suggestionsBox) return; // Exit if elements don't exist
+  
+  let searchTimeout;
+  let selectedIndex = -1;
+  let cachedPosts = null;
+
+  // Popular searches for no results state
+  const popularSearches = ['Living Room', 'Bedroom Decor', 'Budget Furniture', 'Minimalist', 'Best Of Lists'];
+
+  // Load posts data
+  async function loadPosts() {
+    if (cachedPosts) return cachedPosts;
+    try {
+      const res = await fetch('/posts.json');
+      if (res.ok) {
+        cachedPosts = await res.json();
+        return cachedPosts;
+      }
+    } catch (e) {
+      console.log('Posts data not available yet');
+    }
+    return [];
+  }
+
+  // Highlight matching text
+  function highlightText(text, query) {
+    if (!query || !text) return text;
+    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return text.replace(regex, '<span class="highlight">$1</span>');
+  }
+
+  // Perform search
+  async function searchPosts(query) {
+    const posts = await loadPosts();
+    if (!posts.length) return [];
+
+    const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+    
+    return posts
+      .map(post => {
+        const searchable = `${post.title} ${post.description || post.excerpt || ''} ${(post.tags||[]).join(' ')} ${(post.categories||[]).join(' ')}`.toLowerCase();
+        const score = terms.reduce((s, t) => s + (searchable.split(t).length - 1), 0);
+        return { ...post, score };
+      })
+      .filter(p => p.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 5); // Show top 5 results
+  }
+
+  // Render suggestions
+  function renderSuggestions(results, query) {
+    if (!results.length) {
+      suggestionsBox.innerHTML = `
+        <div class="no-results">
+          <div class="no-results-icon">🔍</div>
+          <p>No results for "<strong>${query}</strong>"</p>
+          <div class="popular-searches">
+            ${popularSearches.map(term => 
+              `<span class="popular-tag" onclick="document.getElementById('searchInput').value='${term}'; document.getElementById('searchInput').dispatchEvent(new Event('input'));">${term}</span>`
+            ).join('')}
+          </div>
+        </div>`;
+      suggestionsBox.classList.add('active');
+      return;
+    }
+
+    const html = results.map((post, idx) => {
+      const img = post.featured_image || post.image || '/content/images/default-post.jpg';
+      const cat = (post.categories && post.categories[0]) || post.category || 'Decor';
+      const readTime = post.readTime || Math.ceil((post.content || '').split(/\s+/).length / 200) || '5';
+      const url = post.url || `/posts/${post.slug}.html`;
+      
+      return `
+        <a href="${url}" class="suggestion-item" data-index="${idx}">
+          <img src="${img}" alt="${post.title}" class="suggestion-thumb" loading="lazy">
+          <div class="suggestion-content">
+            <div class="suggestion-title">${highlightText(post.title, query)}</div>
+            <div class="suggestion-meta">
+              <span class="suggestion-category">${cat}</span>
+              <span>⏱️ ${readTime} min read</span>
+            </div>
+          </div>
+        </a>`;
+    }).join('');
+
+    suggestionsBox.innerHTML = html + `
+      <div class="search-footer">
+        <a href="/search.html?q=${encodeURIComponent(query)}">View all results for "${query}" →</a>
+      </div>`;
+    
+    suggestionsBox.classList.add('active');
+    selectedIndex = -1;
+  }
+
+  // Handle input
+  searchInput.addEventListener('input', (e) => {
+    const query = e.target.value.trim();
+    
+    clearTimeout(searchTimeout);
+    
+    if (!query) {
+      suggestionsBox.classList.remove('active');
+      searchInput.classList.remove('has-results');
+      return;
+    }
+
+    if (query.length < 2) return;
+
+    suggestionsBox.innerHTML = '<div class="search-loading">Searching<div class="loading-dots"><span></span><span></span><span></span></div></div>';
+    suggestionsBox.classList.add('active');
+    searchInput.classList.add('has-results');
+
+    searchTimeout = setTimeout(async () => {
+      const results = await searchPosts(query);
+      renderSuggestions(results, query);
+    }, 300);
+  });
+
+  // Handle keyboard navigation
+  searchInput.addEventListener('keydown', (e) => {
+    const items = suggestionsBox.querySelectorAll('.suggestion-item');
+    
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+      updateSelection(items);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      selectedIndex = Math.max(selectedIndex - 1, -1);
+      updateSelection(items);
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (selectedIndex >= 0 && items[selectedIndex]) {
+        items[selectedIndex].click();
+      } else {
+        performSearch();
+      }
+    } else if (e.key === 'Escape') {
+      suggestionsBox.classList.remove('active');
+      searchInput.blur();
+    }
+  });
+
+  function updateSelection(items) {
+    items.forEach((item, idx) => {
+      item.classList.toggle('selected', idx === selectedIndex);
+    });
+    if (selectedIndex >= 0 && items[selectedIndex]) {
+      items[selectedIndex].scrollIntoView({ block: 'nearest' });
+    }
+  }
+
+  // Close suggestions when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
+      suggestionsBox.classList.remove('active');
+      searchInput.classList.remove('has-results');
+    }
+  });
+
+  // Focus on "/" key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+      e.preventDefault();
+      searchInput.focus();
+    }
+  });
+
+  // Regular search function
+  window.performSearch = function() {
+    const query = searchInput.value.trim();
+    if (query) {
+      window.location.href = `/search.html?q=${encodeURIComponent(query)}`;
+    }
+  };
+  
+  // Mobile menu toggle
+  window.toggleMobileMenu = function() {
+    const menu = document.querySelector('.nav-menu');
+    if (!menu) return;
+    if (menu.style.display === 'flex') {
+      menu.style.display = 'none';
+    } else {
+      menu.style.display = 'flex';
+      menu.style.flexDirection = 'column';
+      menu.style.position = 'absolute';
+      menu.style.top = '100%';
+      menu.style.left = '0';
+      menu.style.right = '0';
+      menu.style.background = '#fff';
+      menu.style.padding = '20px';
+      menu.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+    }
+  };
+})();
+</script>
+</body>
+</html>

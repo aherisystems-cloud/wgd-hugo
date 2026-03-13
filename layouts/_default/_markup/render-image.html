@@ -1,0 +1,19 @@
+{{ $src := .Destination }}
+{{ $hasExt := or
+    (strings.HasSuffix $src ".jpg")
+    (strings.HasSuffix $src ".jpeg")
+    (strings.HasSuffix $src ".png")
+    (strings.HasSuffix $src ".webp")
+    (strings.HasSuffix $src ".gif")
+}}
+{{ if not $hasExt }}
+  {{ $exts := slice ".jpg" ".jpeg" ".png" ".webp" ".gif" }}
+  {{ range $exts }}
+    {{ $candidate := printf "%s%s" $src . }}
+    {{ $filepath := printf "static%s" $candidate }}
+    {{ if os.FileExists $filepath }}
+      {{ $src = $candidate }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+<img src="{{ $src }}" alt="{{ .Text }}" {{ with .Title }}title="{{ . }}"{{ end }} loading="lazy">

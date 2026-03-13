@@ -1,0 +1,31 @@
+{{/*
+  partial "imgpath.html"
+  Auto-detects image extension by checking static folder at build time.
+  Usage: {{ $img := partial "imgpath.html" .Params.featured_image }}
+*/}}
+{{ $raw      := . | default "" }}
+{{ $fallback := "/content/images/bedroom-decor-ideas.png" }}
+{{ $out      := $fallback }}
+{{ if $raw }}
+  {{ $hasExt := or
+      (strings.HasSuffix $raw ".jpg")
+      (strings.HasSuffix $raw ".jpeg")
+      (strings.HasSuffix $raw ".png")
+      (strings.HasSuffix $raw ".webp")
+      (strings.HasSuffix $raw ".avif")
+      (strings.HasSuffix $raw ".gif")
+  }}
+  {{ if $hasExt }}
+    {{ $out = $raw }}
+  {{ else }}
+    {{ $exts := slice ".jpg" ".jpeg" ".png" ".webp" ".avif" ".gif" }}
+    {{ range $exts }}
+      {{ $candidate := printf "%s%s" $raw . }}
+      {{ $filepath  := printf "static%s" $candidate }}
+      {{ if os.FileExists $filepath }}
+        {{ $out = $candidate }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ return $out }}

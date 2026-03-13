@@ -1,0 +1,150 @@
+/**
+ * WGD Mega Menu — mega-menu-patch.css
+ * ─────────────────────────────────────────────────────────────
+ * Add AFTER your existing <style> block on every page
+ * (blog.html, category-template.html, tag-template.html).
+ *
+ * The post-template.html already has this logic in its <style>;
+ * paste these rules there too, replacing the old :hover selectors.
+ */
+
+/* ═══ 1. DISABLE CSS-ONLY HOVER (JS handles it now) ═══
+   Scoped to desktop only so it doesn't bleed into mobile styles
+   and fight the accordion show/hide logic. */
+@media (min-width: 1025px) {
+  .mega-menu-wrapper:hover .mega-menu,
+  .mega-menu:hover {
+    /* Reset — JS will apply .mega-open instead */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-8px);
+  }
+}
+
+/* ═══ 2. JS-DRIVEN OPEN STATE (desktop) ═══ */
+.mega-menu.mega-open {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: translateY(0) !important;
+  transition: opacity 0.18s cubic-bezier(0.4,0,0.2,1),
+              visibility 0s 0s,
+              transform 0.18s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* Chevron rotates when open */
+.mega-menu-wrapper.mega-open .mega-menu-trigger::after {
+  transform: rotate(180deg);
+}
+
+/* ═══ 3. MOBILE ACCORDION (≤ 1024px) ═══ */
+@media (max-width: 1024px) {
+  /* Override the fixed/absolute positioning so it sits inline */
+  .mega-menu {
+    position: static !important;
+    display: none;             /* hidden by default */
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: none !important;
+    transition: none !important;
+    box-shadow: none;
+    border-top: 1px solid var(--gray-200, #eee);
+    border-radius: 0;
+    padding: 12px 16px 16px;
+    width: 100%;
+    max-width: 100%;
+    background: var(--gray-100, #f5f5f5);
+    margin: 0;
+    /* Remove the fixed top position set by JS positionMenus() */
+    top: auto !important;
+  }
+
+  /* Show accordion content when .mobile-expanded is set by JS */
+  /* !important ensures this wins over any base stylesheet display:none */
+  .mega-menu-wrapper.mobile-expanded > .mega-menu {
+    display: block !important;
+  }
+
+  /* Chevron for mobile toggle */
+  .mega-menu-wrapper.mobile-expanded .mega-menu-trigger::after {
+    transform: rotate(180deg);
+  }
+
+  /* Stack the 4-column grid vertically */
+  .mega-menu-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .mega-menu-section {
+    border-bottom: 1px solid var(--gray-200, #eee);
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+
+  .mega-menu-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .mega-menu-section h4 {
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+  }
+
+  .mega-menu-links {
+    gap: 4px;
+  }
+
+  .mega-menu-links li a {
+    padding: 8px 4px;
+    font-size: 14px;
+  }
+
+  /* Prevent left-indent animation that only works on desktop */
+  .mega-menu-links li a:hover {
+    padding-left: 4px;
+  }
+}
+
+/* ═══ 4. MOBILE OPEN NAV MENU — full width, scrollable ═══ */
+@media (max-width: 768px) {
+  .nav-menu.mobile-open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 12px 0 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    z-index: 200;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  /* Nav links inside hamburger menu */
+  .nav-menu.mobile-open > .nav-link {
+    padding: 12px 20px;
+    border-radius: 0;
+    border-bottom: 1px solid var(--gray-100, #f5f5f5);
+  }
+
+  /* Mega menu wrappers sit full-width inside the open hamburger */
+  .nav-menu.mobile-open .mega-menu-wrapper {
+    border-bottom: 1px solid var(--gray-100, #f5f5f5);
+    width: 100%;
+  }
+
+  .nav-menu.mobile-open .mega-menu-trigger {
+    padding: 12px 20px;
+    border-radius: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}

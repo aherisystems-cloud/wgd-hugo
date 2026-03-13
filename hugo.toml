@@ -1,0 +1,28 @@
+baseURL = "https://wowglamdecor.com/"
+languageCode = "en-us"
+title = "Wow Glam Decor"
+paginate = 12
+
+[outputs]
+  home     = ["HTML", "RSS", "JSON"]
+  section  = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  term     = ["HTML", "RSS"]
+  page     = ["HTML"]
+
+[outputFormats.JSON]
+  mediaType  = "application/json"
+  baseName   = "posts"
+  isPlainText = true
+  notAlternative = true
+
+[taxonomies]
+  category = "categories"
+  tag      = "tags"
+
+[params]
+  description = "Beautiful home decor ideas, furniture guides and product picks for every budget"
+  author      = "Wow Glam Decor Team"
+[outputFormats]
+  [outputFormats.HTML]
+    permalinks = true
