@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "gold-arc-floor-lamp",
+    "name": "Gold Arc Floor Lamp with Marble Base",
+    "category_slug": "lighting-lamps",
+    "room": "living-room",
+    "style": "luxury-glam",
+    "price_label": "$89–$149",
+    "price_min": 89,
+    "image_key": "products/gold-arc-floor-lamp.png",
+    "affiliate_url": "https://amzn.to/YOURLINK",
+    "featured": 1
+  },
+  {
+    "slug": "crystal-table-lamp",
+    "name": "Crystal Table Lamp with Gold Base",
+    "category_slug": "lighting-lamps",
+    "room": "bedroom",
+    "style": "luxury-glam",
+    "price_label": "$49–$89",
+    "price_min": 49,
+    "image_key": "products/crystal-table-lamp.png",
+    "affiliate_url": "https://amzn.to/YOURLINK",
+    "featured": 1
+  },
+  {
+    "slug": "gold-sunburst-mirror",
+    "name": "Gold Sunburst Wall Mirror",
+    "category_slug": "mirrors",
+    "room": "any",
+    "style": "luxury-glam",
+    "price_label": "$65–$120",
+    "price_min": 65,
+    "image_key": "products/gold-sunburst-mirror.png",
+    "affiliate_url": "https://amzn.to/YOURLINK",
+    "featured": 1
+  },
+  {
+    "slug": "velvet-throw-pillow-blush",
+    "name": "Blush Velvet Throw Pillow Set",
+    "category_slug": "throw-pillows",
+    "room": "living-room",
+    "style": "luxury-glam",
+    "price_label": "$28–$45",
+    "price_min": 28,
+    "image_key": "products/velvet-throw-pillow-blush.png",
+    "affiliate_url": "https://amzn.to/YOURLINK",
+    "featured": 0
+  },
+  {
+    "slug": "glam-area-rug-ivory",
+    "name": "Ivory & Gold Glam Area Rug",
+    "category_slug": "rugs-carpets",
+    "room": "bedroom",
+    "style": "luxury-glam",
+    "price_label": "$79–$199",
+    "price_min": 79,
+    "image_key": "products/glam-area-rug-ivory.png",
+    "affiliate_url": "https://amzn.to/YOURLINK",
+    "featured": 1
+  }
+]

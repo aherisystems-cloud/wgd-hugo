@@ -40,51 +40,52 @@ keywords:
   - small bathroom decor
   - bathroom decor on a budget
   - hotel bathroom look at home
-featured_image: /content/images/hero-luxury-glam-bathroom-decor
+featured_image: https://images.wowglamdecor.com/blog/hero-luxury-glam-bathroom-decor
 featured_products:
   - name: Hollywood LED Vanity Mirror
     benefit: 'Best overall, highest visual impact upgrade'
     label: Premium ($$$)
-    image: /content/images/products/hollywood-led-vanity-mirror
+    image: https://images.wowglamdecor.com/products/hollywood-led-vanity-mirror
     link: 'https://amzn.to/40eFws4'
   - name: Gold Brushed Brass Bathroom Faucet
     benefit: One swap that transforms the entire room
     label: Luxury ($$$$)
-    image: /content/images/products/gold-brushed-brass-bathroom-faucet
+    image: https://images.wowglamdecor.com/products/gold-brushed-brass-bathroom-faucet
     link: 'https://amzn.to/4svm2vf'
   - name: Marble and Gold Bath Tray
     benefit: Iconic spa tray look for under $50
     label: Mid-Range ($$)
-    image: /content/images/products/marble-gold-bath-tray
+    image: https://images.wowglamdecor.com/products/marble-gold-bath-tray
     link: 'https://amzn.to/4uaBf6w'
   - name: Thick Plush Bath Rug
     benefit: 'Luxury underfoot feel, machine washable'
     label: Budget ($)
-    image: /content/images/products/thick-plush-bath-rug
+    image: https://images.wowglamdecor.com/products/thick-plush-bath-rug
     link: 'https://amzn.to/4szyBWx'
   - name: Gold Towel Bar and Ring Accessory Set
     benefit: Ties every gold element together cohesively
     label: Mid-Range ($$)
-    image: /content/images/products/gold-towel-bar-ring-accessory-set
+    image: https://images.wowglamdecor.com/products/gold-towel-bar-ring-accessory-set
     link: 'https://amzn.to/4rjmxHz'
   - name: Crystal Glass Soap Dispenser Set
     benefit: 'Replaces plastic, adds instant countertop glamour'
     label: Mid-Range ($$)
-    image: /content/images/products/crystal-glass-soap-dispenser-set
+    image: https://images.wowglamdecor.com/products/crystal-glass-soap-dispenser-set
     link: 'https://amzn.to/4sqP7YB'
   - name: Luxury Scented Candle and Diffuser Set
     benefit: 'Five-star hotel scent, highest value per dollar'
     label: Budget ($)
-    image: /content/images/products/luxury-scented-candle-diffuser-set
+    image: https://images.wowglamdecor.com/products/luxury-scented-candle-diffuser-set
     link: 'https://amzn.to/4d6JwlL'
   - name: Framed Botanical Gold-Tone Wall Art
     benefit: 'Finishes the room, ready to hang out of the box'
     label: Mid-Range ($$)
-    image: /content/images/products/framed-botanical-gold-tone-wall-art
+    image: https://images.wowglamdecor.com/products/framed-botanical-gold-tone-wall-art
     link: 'https://amzn.to/4rSirqZ'
 ---
 
-![A stunning luxury glam bathroom with gold accents, Hollywood vanity mirror, marble tray, and spa-like atmosphere](/content/images/hero-luxury-glam-bathroom-decor)
+![A stunning luxury glam bathroom with gold accents, Hollywood vanity mirror, marble tray, and spa-like atmosphere](https://images.wowglamdecor.com/blog
+/hero-luxury-glam-bathroom-decor)
 
 ---
 
@@ -137,7 +138,7 @@ Every single product ships from Amazon. Every single one is reversible. No tools
 
 ## Products Featured in This Article
 
-![Flat-lay of all 8 luxury glam bathroom decor products including gold mirror, marble tray, plush rug, and crystal dispenser](/content/images/products-featured-bathroom-decor-glam)
+![Flat-lay of all 8 luxury glam bathroom decor products including gold mirror, marble tray, plush rug, and crystal dispenser](https://images.wowglamdecor.com/products-featured-bathroom-decor-glam)
 
 | Product | Price Range | Best For | Why We Love It |
 |---|---|---|---|
@@ -174,13 +175,15 @@ Replace the random with the intentional and your bathroom transforms overnight. 
 
 ---
 
-![Luxury glam bathroom vanity setup with Hollywood LED mirror glowing, gold accents, and marble countertop styling](/content/images/section-vanity-mirror-bathroom-glow)
+![Luxury glam bathroom vanity setup with Hollywood LED mirror glowing, gold accents, and marble countertop styling](https://images.wowglamdecor.com/blog
+/section-vanity-mirror-bathroom-glow)
 
 ## The Hollywood LED Vanity Mirror: The One Upgrade That Changes Everything
 
 ### Hollywood LED Vanity Mirror — Best Overall
 
-![Hollywood LED vanity mirror in gold frame glowing warmly above a bathroom vanity with gold accessories](/content/images/hollywood-led-vanity-mirror)
+![Hollywood LED vanity mirror in gold frame glowing warmly above a bathroom vanity with gold accessories](https://images.wowglamdecor.com/blog
+/hollywood-led-vanity-mirror)
 
 **Price:** $$$
 
@@ -212,13 +215,13 @@ Every other piece in this guide looks better next to it.
 
 ---
 
-![Gold brushed brass bathroom faucet installed on a white marble sink, glinting under warm bathroom lighting](/content/images/section-gold-faucet-bathroom-upgrade)
+![Gold brushed brass bathroom faucet installed on a white marble sink, glinting under warm bathroom lighting](https://images.wowglamdecor.com/blog/section-gold-faucet-bathroom-upgrade)
 
 ## Gold Brushed Brass Faucet: Swap One Piece, Transform the Whole Room
 
 ### Gold Brushed Brass Bathroom Faucet — Premium Pick
 
-![Gold brushed brass faucet on white sink with marble soap dispenser and gold accessories nearby](/content/images/gold-brushed-brass-bathroom-faucet)
+![Gold brushed brass faucet on white sink with marble soap dispenser and gold accessories nearby](https://images.wowglamdecor.com/blog/gold-brushed-brass-bathroom-faucet)
 
 **Price:** $$$$
 
@@ -250,7 +253,7 @@ Nothing in your bathroom signals luxury louder than gold hardware. This brushed 
 
 ### Marble and Gold Bath Tray — Mid-Range Pick
 
-![Marble and gold bath tray styled on a white bathtub with a candle, crystal soap dispenser, and small plant](/content/images/marble-gold-bath-tray)
+![Marble and gold bath tray styled on a white bathtub with a candle, crystal soap dispenser, and small plant](https://images.wowglamdecor.com/blog/marble-gold-bath-tray)
 
 **Price:** $$
 
@@ -278,13 +281,13 @@ Lay this across your bathtub or position it on the counter and watch what happen
 
 ---
 
-![Thick ivory plush bath rug on a clean white bathroom floor next to a gold towel ring, soft and inviting](/content/images/section-plush-bath-rug-spa-feel)
+![Thick ivory plush bath rug on a clean white bathroom floor next to a gold towel ring, soft and inviting](https://images.wowglamdecor.com/blog/section-plush-bath-rug-spa-feel)
 
 ## Thick Plush Bath Rug: What Your Feet Deserve Every Morning
 
 ### Thick Plush Bath Rug — Budget Pick
 
-![Thick ivory plush bath rug on white bathroom tiles next to gold accessories and a marble tray](/content/images/thick-plush-bath-rug)
+![Thick ivory plush bath rug on white bathroom tiles next to gold accessories and a marble tray](https://images.wowglamdecor.com/blog/thick-plush-bath-rug)
 
 **Price:** $
 
@@ -314,7 +317,7 @@ Step onto a thin, worn bath mat after a hot shower. Then step onto this. The dif
 
 ### Gold Towel Bar and Ring Accessory Set — Mid-Range Pick
 
-![Gold towel bar and ring set on a white bathroom wall with a fluffy white towel draped elegantly](/content/images/gold-towel-bar-ring-accessory-set)
+![Gold towel bar and ring set on a white bathroom wall with a fluffy white towel draped elegantly](https://images.wowglamdecor.com/blog/gold-towel-bar-ring-accessory-set)
 
 **Price:** $$
 
@@ -346,7 +349,7 @@ This is the piece that makes the room feel finished. The gold mirror, the gold f
 
 ### Crystal Glass Soap Dispenser Set — Specialty Pick
 
-![Crystal glass soap dispenser set on a marble bathroom counter with gold faucet and accessories in the background](/content/images/crystal-glass-soap-dispenser-set)
+![Crystal glass soap dispenser set on a marble bathroom counter with gold faucet and accessories in the background](https://images.wowglamdecor.com/blog/crystal-glass-soap-dispenser-set)
 
 **Price:** $$
 
@@ -372,13 +375,13 @@ Nothing in your bathroom says "I stopped trying" louder than a plastic hand soap
 
 ---
 
-![Luxury scented candle and reed diffuser on a marble bath tray in a glam bathroom, warm candlelight glow](/content/images/section-scented-candle-bathroom-ambiance)
+![Luxury scented candle and reed diffuser on a marble bath tray in a glam bathroom, warm candlelight glow](https://images.wowglamdecor.com/blog/section-scented-candle-bathroom-ambiance)
 
 ## Luxury Scented Candle and Diffuser: The Upgrade You Feel Before You See It
 
 ### Luxury Scented Candle and Diffuser Set — Budget Pick
 
-![Luxury scented candle and reed diffuser set styled on a marble tray in a glam bathroom with gold accents](/content/images/luxury-scented-candle-diffuser-set)
+![Luxury scented candle and reed diffuser set styled on a marble tray in a glam bathroom with gold accents](https://images.wowglamdecor.com/blog/luxury-scented-candle-diffuser-set)
 
 **Price:** $
 
@@ -408,7 +411,7 @@ Before a guest sees your mirror, your faucet, or your marble tray, they smell yo
 
 ### Framed Botanical Gold-Tone Wall Art — Style Upgrade
 
-![Framed gold-tone botanical wall art hung above a toilet in a luxury glam bathroom with white walls and gold accessories](/content/images/framed-botanical-gold-tone-wall-art)
+![Framed gold-tone botanical wall art hung above a toilet in a luxury glam bathroom with white walls and gold accessories](https://images.wowglamdecor.com/blog/framed-botanical-gold-tone-wall-art)
 
 **Price:** $$
 
@@ -436,7 +439,7 @@ A bare bathroom wall is a missed opportunity. One piece of framed art tells the 
 
 ## Full Comparison: All 8 Products at a Glance
 
-![Side-by-side comparison of luxury bathroom decor products including gold faucet, Hollywood mirror, and marble tray](/content/images/comparison-bathroom-decor-products)
+![Side-by-side comparison of luxury bathroom decor products including gold faucet, Hollywood mirror, and marble tray](https://images.wowglamdecor.com/blog/comparison-bathroom-decor-products)
 
 | Feature | Hollywood Mirror | Gold Faucet | Marble Tray | Plush Rug | Towel Set | Soap Dispenser | Candle Set | Wall Art |
 |---|---|---|---|---|---|---|---|---|

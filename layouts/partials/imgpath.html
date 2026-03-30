@@ -1,12 +1,14 @@
 {{/*
   partial "imgpath.html"
-  Resolves a product/content image path to one that actually exists in static/.
+  Resolves an image path/URL to one that is safe to render.
 
-  Handles three real-world cases:
-    1. Path has extension AND file exists  → return as-is
-    2. Path has extension BUT file missing → strip extension, probe all extensions
-       (catches frontmatter written with .jpg but file saved without extension)
-    3. Path has no extension              → probe all extensions until one matches
+  Cases handled:
+    1. External URL (http/https) — returned as-is immediately. No file probing.
+       Covers Cloudflare R2, Cloudinary, or any CDN URL.
+    2. Local path WITH extension, file exists  → return as-is
+    3. Local path WITH extension, file missing → strip ext, probe alternatives
+    4. Local path WITHOUT extension            → probe all extensions
+    5. Nothing found anywhere                  → return fallback image
 
   Usage: {{ $img := partial "imgpath.html" .Params.featured_image }}
 */}}
@@ -16,64 +18,65 @@
 {{ $exts     := slice ".jpg" ".jpeg" ".png" ".webp" ".avif" ".gif" }}
 
 {{ if $raw }}
-  {{ $hasExt := or
-      (strings.HasSuffix $raw ".jpg")
-      (strings.HasSuffix $raw ".jpeg")
-      (strings.HasSuffix $raw ".png")
-      (strings.HasSuffix $raw ".webp")
-      (strings.HasSuffix $raw ".avif")
-      (strings.HasSuffix $raw ".gif")
-  }}
 
-  {{ if $hasExt }}
-    {{/* Extension present — verify the file actually exists */}}
-    {{ $filepath := printf "static%s" $raw }}
-    {{ if os.FileExists $filepath }}
-      {{/* File exists with this extension — use it */}}
-      {{ $out = $raw }}
-    {{ else }}
-      {{/* File not found with stated extension.
-           Strip extension and probe all alternatives.
-           This fixes frontmatter written as "image.jpg" when the
-           file on disk was saved without an extension. */}}
-      {{ $base := $raw }}
-      {{ range $exts }}
-        {{ if strings.HasSuffix $base . }}
-          {{ $base = strings.TrimSuffix $base . }}
-        {{ end }}
-      {{ end }}
-      {{ range $exts }}
-        {{ $candidate := printf "%s%s" $base . }}
-        {{ $filepath   := printf "static%s" $candidate }}
-        {{ if os.FileExists $filepath }}
-          {{ $out = $candidate }}
-        {{ end }}
-      {{ end }}
-      {{/* Also try the bare extensionless path as a last resort */}}
-      {{ if eq $out $fallback }}
-        {{ $filepath := printf "static%s" $base }}
-        {{ if os.FileExists $filepath }}
-          {{ $out = $base }}
-        {{ end }}
-      {{ end }}
-    {{ end }}
+  {{/* ── Case 1: External URL — return immediately, no file system check ── */}}
+  {{ if or (strings.HasPrefix $raw "https://") (strings.HasPrefix $raw "http://") }}
+    {{ $out = $raw }}
 
   {{ else }}
-    {{/* No extension — probe all extensions */}}
-    {{ range $exts }}
-      {{ $candidate := printf "%s%s" $raw . }}
-      {{ $filepath   := printf "static%s" $candidate }}
-      {{ if os.FileExists $filepath }}
-        {{ $out = $candidate }}
-      {{ end }}
-    {{ end }}
-    {{/* Also try bare extensionless path */}}
-    {{ if eq $out $fallback }}
+    {{/* ── Local path handling ── */}}
+    {{ $hasExt := or
+        (strings.HasSuffix $raw ".jpg")
+        (strings.HasSuffix $raw ".jpeg")
+        (strings.HasSuffix $raw ".png")
+        (strings.HasSuffix $raw ".webp")
+        (strings.HasSuffix $raw ".avif")
+        (strings.HasSuffix $raw ".gif")
+    }}
+
+    {{ if $hasExt }}
+      {{/* Extension present — check file exists */}}
       {{ $filepath := printf "static%s" $raw }}
       {{ if os.FileExists $filepath }}
         {{ $out = $raw }}
+      {{ else }}
+        {{/* File not found with stated extension — strip and probe */}}
+        {{ $base := $raw }}
+        {{ range $exts }}
+          {{ if strings.HasSuffix $base . }}
+            {{ $base = strings.TrimSuffix $base . }}
+          {{ end }}
+        {{ end }}
+        {{ range $exts }}
+          {{ $candidate := printf "%s%s" $base . }}
+          {{ if os.FileExists (printf "static%s" $candidate) }}
+            {{ $out = $candidate }}
+          {{ end }}
+        {{ end }}
+        {{/* Try bare extensionless path as last resort */}}
+        {{ if eq $out $fallback }}
+          {{ if os.FileExists (printf "static%s" $base) }}
+            {{ $out = $base }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+
+    {{ else }}
+      {{/* No extension — probe all */}}
+      {{ range $exts }}
+        {{ $candidate := printf "%s%s" $raw . }}
+        {{ if os.FileExists (printf "static%s" $candidate) }}
+          {{ $out = $candidate }}
+        {{ end }}
+      {{ end }}
+      {{/* Try bare extensionless path */}}
+      {{ if eq $out $fallback }}
+        {{ if os.FileExists (printf "static%s" $raw) }}
+          {{ $out = $raw }}
+        {{ end }}
       {{ end }}
     {{ end }}
+
   {{ end }}
 {{ end }}
 

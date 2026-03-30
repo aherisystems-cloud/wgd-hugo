@@ -30,9 +30,9 @@ uglyURLs     = false
 
 # ── Site params ──────────────────────────────────────────────────
 [params]
-  description = "Beautiful home decor ideas, furniture guides and product picks for every budget"
-  author      = "Wow Glam Decor Team"
-
-  # Affiliate CTA — change this label to suit any affiliate program.
-  # Used by sidebar product cards and in-post product CTAs.
+  description       = "Beautiful home decor ideas, furniture guides and product picks for every budget"
+  author            = "Wow Glam Decor Team"
   affiliateCTALabel = "Check Today's Price"
+  r2Base            = "https://images.wowglamdecor.com"
+  blogImgs          = "https://images.wowglamdecor.com/blog"
+  prodImgs          = "https://images.wowglamdecor.com/products"

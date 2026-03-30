@@ -1,0 +1,562 @@
+{{/*
+  HUB PAGE TEMPLATE — layouts/hub/single.html
+  ============================================
+  Used by all main category hub pages:
+    /lamps/, /mirrors/, /rugs/, /wall-decor/ etc.
+
+  Required frontmatter on each hub page:
+  ---------------------------------------
+  ---
+  title: "Glam Lamps for Every Room"
+  description: "The complete guide to glam lighting..."
+  category_slug: "lighting-lamps"        # must match D1 categories.slug
+  category_name: "Lamps"
+  hero_image: "lamps-hero.png"           # R2 key
+  product_category: "lighting-lamps"     # for shortcode auto-filter
+  room: ""                               # leave blank for all rooms
+  featured_products:                     # top 3 — static SEO fallback
+    - slug: "gold-arc-floor-lamp"
+      name: "Gold Arc Floor Lamp with Marble Base"
+      price_label: "$89–$149"
+      image_key: "gold-arc-floor-lamp.png"
+      affiliate_url: "https://amzn.to/XXX"
+      room: "living-room"
+    - slug: "crystal-table-lamp"
+      name: "Crystal Table Lamp with Gold Base"
+      price_label: "$49–$89"
+      image_key: "crystal-table-lamp.png"
+      affiliate_url: "https://amzn.to/XXX"
+      room: "bedroom"
+    - slug: "pendant-light-gold"
+      name: "Modern Gold Pendant Light"
+      price_label: "$65–$120"
+      image_key: "pendant-light-gold.png"
+      affiliate_url: "https://amzn.to/XXX"
+      room: "dining-room"
+  types:
+    - name: "Floor Lamps"
+      description: "Tall freestanding lamps that provide ambient light..."
+      best_for: "Living rooms, bedrooms, reading corners"
+    - name: "Table Lamps"
+      description: "Versatile lamps for bedside tables, desks, and consoles..."
+      best_for: "Bedrooms, home offices, side tables"
+  styles:
+    - name: "Luxury Glam"
+      slug: "luxury-glam"
+      description: "Crystal, gold, and velvet finishes..."
+      materials: "Crystal, polished gold, brass, velvet shades"
+      price_range: "$80–$500+"
+      best_room: "Bedroom, living room"
+    - name: "Modern Minimalist"
+      slug: "modern-minimalist"
+      description: "Clean lines, matte finishes, geometric forms..."
+      materials: "Matte black, brushed nickel, linen"
+      price_range: "$40–$200"
+      best_room: "Home office, living room"
+  rooms:
+    - name: "Bedroom"
+      slug: "bedroom"
+      recommendation: "Bedside table lamps (18–24\" tall) + overhead dimmer"
+      wattage: "800–1100 lumens per lamp"
+      placement: "Centre of bedside table, shade bottom at shoulder height"
+    - name: "Living Room"
+      slug: "living-room"
+      recommendation: "Arc floor lamp beside sofa + table lamp on console"
+      wattage: "1500–3000 lumens total"
+      placement: "Floor lamp to the side and slightly behind seating"
+  faqs:
+    - question: "What size lamp should I choose for a bedroom?"
+      answer: "For most bedrooms, bedside table lamps should stand 24–30 inches tall so the shade sits at eye level when you're sitting in bed. For a floor lamp, choose one that reaches 58–64 inches total height."
+    - question: "Can I use LED bulbs in crystal and glam-style lamps?"
+      answer: "Yes — and you should. Look for warm white LEDs (2700K–3000K colour temperature) which complement gold and crystal finishes beautifully. Avoid cool daylight LEDs (5000K+) as they wash out the warm glam aesthetic."
+    - question: "How do I make a room look more glamorous with lighting?"
+      answer: "Layer your lighting: one overhead source, one floor or table lamp, and one accent source (sconce or LED strip). Use warm bulbs (2700K), choose metallic finishes, and install dimmers. The combination of layered warm light is what creates that luxury hotel feel."
+    - question: "What is the difference between brass and gold lamps?"
+      answer: "Brass is a natural metal alloy (copper and zinc) with a warmer, slightly antique tone. Gold finish refers to a plating or coating in bright gold. Brass ages beautifully; gold finishes stay consistently bright. Both work well in glam interiors — it depends on the look you prefer."
+    - question: "How do I clean a crystal lamp?"
+      answer: "Turn off and unplug the lamp. Remove individual crystals if possible and wipe with a microfibre cloth dampened with a 50/50 mix of distilled water and white vinegar. Dry immediately. For the base, use a gold/chrome-safe polish. Never spray cleaner directly onto the lamp."
+  layout: hub
+  ---
+*/}}
+
+{{ define "main" }}
+{{ $cat := .Params.category_slug }}
+{{ $products := where site.Data.products "category_slug" $cat }}
+{{ $featured := .Params.featured_products }}
+{{ $R2 := "https://images.wowglamdecor.com/" }}
+
+{{/* ══════════════════════════════════════
+     JSON-LD SCHEMAS — injected via partial
+     ══════════════════════════════════════ */}}
+{{ partial "hub-jsonld.html" . }}
+
+<article class="hub-page">
+
+  {{/* ══════════════════════════════════════
+       ① HERO
+       ══════════════════════════════════════ */}}
+  <section class="hub-hero">
+    {{ if .Params.hero_image }}
+    <div class="hub-hero__image">
+      <img
+        src="{{ $R2 }}{{ .Params.hero_image }}"
+        alt="{{ .Title }}"
+        width="1200" height="500"
+        loading="eager"
+        fetchpriority="high"
+      >
+    </div>
+    {{ end }}
+    <div class="hub-hero__content">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li aria-current="page">{{ .Params.category_name }}</li>
+        </ol>
+      </nav>
+      <h1>{{ .Title }}</h1>
+      <p class="hub-hero__desc">{{ .Description }}</p>
+    </div>
+  </section>
+
+  {{/* ══════════════════════════════════════
+       ② INTRODUCTION (from Markdown content)
+       ══════════════════════════════════════ */}}
+  <section class="hub-intro content-section">
+    <div class="prose">
+      {{ .Content }}
+    </div>
+  </section>
+
+  {{/* ══════════════════════════════════════
+       ③ TYPES OF [CATEGORY]
+       ══════════════════════════════════════ */}}
+  {{ if .Params.types }}
+  <section class="hub-types content-section" id="types">
+    <h2>Types of {{ .Params.category_name }}</h2>
+    <p class="section-intro">Not all {{ lower .Params.category_name }} are created equal. Here's what each type does, where it works best, and how to choose between them.</p>
+    <div class="types-grid">
+      {{ range .Params.types }}
+      <div class="type-card">
+        <h3>{{ .name }}</h3>
+        <p>{{ .description }}</p>
+        <div class="type-card__meta">
+          <span class="meta-label">Best for:</span>
+          <span>{{ .best_for }}</span>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* ══════════════════════════════════════
+       ④ FEATURED PRODUCTS — BLOCK 1
+         Static top 3 (SEO) + Dynamic grid
+       ══════════════════════════════════════ */}}
+  <section class="hub-products content-section" id="shop">
+    <h2>Shop {{ .Params.category_name }}</h2>
+    <p class="section-intro">Browse our curated selection. Use the filters below to narrow by room, style, or budget.</p>
+
+    {{/* FILTER BAR */}}
+    <div class="product-filter-bar" role="search" aria-label="Filter products">
+      <input
+        id="pf-search"
+        type="search"
+        placeholder="Search {{ lower .Params.category_name }}..."
+        aria-label="Search"
+      >
+      <select id="pf-room" aria-label="Filter by room">
+        <option value="">All Rooms</option>
+        <option value="bedroom">Bedroom</option>
+        <option value="living-room">Living Room</option>
+        <option value="dining-room">Dining Room</option>
+        <option value="bathroom">Bathroom</option>
+        <option value="home-office">Home Office</option>
+        <option value="entryway">Entryway</option>
+      </select>
+      <select id="pf-style" aria-label="Filter by style">
+        <option value="">All Styles</option>
+        <option value="luxury-glam">Luxury Glam</option>
+        <option value="modern-minimalist">Modern Minimalist</option>
+        <option value="boho-eclectic">Boho & Eclectic</option>
+        <option value="art-deco">Art Deco</option>
+        <option value="coastal">Coastal</option>
+        <option value="rustic-farmhouse">Rustic Farmhouse</option>
+      </select>
+      <select id="pf-price" aria-label="Filter by price">
+        <option value="">Any Price</option>
+        <option value="0-50">Under $50</option>
+        <option value="50-150">$50 – $150</option>
+        <option value="150-500">$150 – $500</option>
+        <option value="500-9999">$500+</option>
+      </select>
+    </div>
+
+    {{/* STATIC FALLBACK — Googlebot sees this */}}
+    <div
+      id="pf-results"
+      class="product-grid"
+      data-category="{{ $cat }}"
+      data-room="{{ .Params.room }}"
+    >
+      {{ range $featured }}
+      <article class="product-card product-card--static">
+        <a href="{{ .affiliate_url }}" target="_blank" rel="noopener nofollow sponsored">
+          <div class="product-card__image">
+            <img
+              src="{{ $R2 }}{{ .image_key }}"
+              alt="{{ .name }}"
+              width="400" height="400"
+              loading="lazy"
+            >
+          </div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">{{ .name }}</h3>
+            <span class="product-card__room">{{ .room }}</span>
+            <span class="product-card__price">{{ .price_label }}</span>
+            <span class="product-card__cta">Check Current Price →</span>
+          </div>
+        </a>
+      </article>
+      {{ end }}
+    </div>
+
+    <div id="pf-pagination" class="pagination" aria-label="Product pages"></div>
+  </section>
+
+  {{/* ══════════════════════════════════════
+       ⑤ HOW TO CHOOSE
+       ══════════════════════════════════════ */}}
+  <section class="hub-guide content-section" id="how-to-choose">
+    <h2>How to Choose the Right {{ .Params.category_name }}</h2>
+
+    <h3>By Room Size</h3>
+    <p>The size of your room should drive your choice more than anything else. As a rule of thumb: small rooms (under 150 sq ft) need a single focused light source; medium rooms work best with two light sources; large rooms need layered lighting from three or more sources. Choose {{ lower .Params.category_name }} proportionally — an oversized piece in a small room overwhelms; a tiny piece in a large room disappears.</p>
+
+    <h3>By Existing Furniture Style</h3>
+    <p>Your {{ lower .Params.category_name }} should complement the dominant material in your space. Gold and brass finishes pair best with warm wood tones and velvet upholstery. Chrome and nickel work with cooler greys and whites. Mixed metal? Match the finish to the largest piece of furniture in the room.</p>
+
+    <h3>By Budget</h3>
+    <p>See the <a href="#price-guide">price guide section below</a> for a full breakdown of what you get at each budget tier. Short version: $50–$150 is the sweet spot for quality without overspending; $150–$500 is where you start to see real material and craftsmanship differences; $500+ is true investment-grade décor.</p>
+
+    <h3>Red Flags to Avoid</h3>
+    <ul class="red-flags">
+      <li>Cheap plastic parts painted to look like metal — check product listings for "ABS plastic base"</li>
+      <li>No UL or ETL safety listing — all electrical items should be safety certified</li>
+      <li>Shades that don't diffuse light evenly — look for fabric or frosted glass, not clear plastic</li>
+      <li>Cord length under 5 feet — always check cord length for floor and table lamps</li>
+    </ul>
+  </section>
+
+  {{/* ══════════════════════════════════════
+       ⑥ STYLE GUIDE
+       ══════════════════════════════════════ */}}
+  {{ if .Params.styles }}
+  <section class="hub-styles content-section" id="styles">
+    <h2>{{ .Params.category_name }} by Style</h2>
+    <p class="section-intro">Different design aesthetics call for completely different choices. Find your style below to narrow your search before you shop.</p>
+    <div class="styles-grid">
+      {{ range .Params.styles }}
+      <div class="style-card" id="style-{{ .slug }}">
+        <div class="style-card__header">
+          <h3>{{ .name }}</h3>
+          <span class="style-card__price">{{ .price_range }}</span>
+        </div>
+        <p>{{ .description }}</p>
+        <dl class="style-card__meta">
+          <dt>Key materials</dt>
+          <dd>{{ .materials }}</dd>
+          <dt>Best room</dt>
+          <dd>{{ .best_room }}</dd>
+        </dl>
+        <a
+          href="/{{ .slug }}/{{ $.Params.category_slug | urlize }}/"
+          class="style-card__link"
+        >
+          Shop {{ .name }} {{ $.Params.category_name }} →
+        </a>
+      </div>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* ══════════════════════════════════════
+       ⑦ ROOM-BY-ROOM GUIDE
+       ══════════════════════════════════════ */}}
+  {{ if .Params.rooms }}
+  <section class="hub-rooms content-section" id="by-room">
+    <h2>{{ .Params.category_name }} by Room</h2>
+    <p class="section-intro">Every room has different needs. Here's exactly what to look for in each space.</p>
+    <div class="rooms-grid">
+      {{ range .Params.rooms }}
+      <div class="room-card">
+        <h3>{{ .name }}</h3>
+        <p class="room-card__rec"><strong>Best choice:</strong> {{ .recommendation }}</p>
+        <dl class="room-card__meta">
+          <dt>Brightness</dt>
+          <dd>{{ .wattage }}</dd>
+          <dt>Placement tip</dt>
+          <dd>{{ .placement }}</dd>
+        </dl>
+        <a href="/{{ .slug }}/{{ $.Params.category_slug | urlize }}/" class="room-card__link">
+          See all {{ $.Params.category_name }} for {{ .name }} →
+        </a>
+      </div>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* ══════════════════════════════════════
+       ⑧ MID-PAGE PRODUCT BLOCK 2
+         Pre-filtered to first room
+       ══════════════════════════════════════ */}}
+  <section class="hub-products hub-products--mid content-section">
+    <h2>Top Picks: {{ with index .Params.rooms 0 }}{{ .name }}{{ end }} {{ .Params.category_name }}</h2>
+    <div
+      class="product-grid inline-products"
+      data-category="{{ $cat }}"
+      data-room="{{ with index .Params.rooms 0 }}{{ .slug }}{{ end }}"
+      data-limit="6"
+    >
+      {{/* Static fallback — first 3 products for the first room */}}
+      {{ range first 3 (where $products "room" (index .Params.rooms 0).slug) }}
+      <article class="product-card product-card--static">
+        <a href="{{ .affiliate_url }}" target="_blank" rel="noopener nofollow sponsored">
+          <img src="{{ $R2 }}{{ .image_key }}" alt="{{ .name }}" loading="lazy" width="400" height="400">
+          <div class="product-card__body">
+            <h3 class="product-card__name">{{ .name }}</h3>
+            <span class="product-card__price">{{ .price_label }}</span>
+            <span class="product-card__cta">Check Current Price →</span>
+          </div>
+        </a>
+      </article>
+      {{ end }}
+    </div>
+  </section>
+
+  {{/* ══════════════════════════════════════
+       ⑨ SIZING + PLACEMENT GUIDE
+       ══════════════════════════════════════ */}}
+  <section class="hub-sizing content-section" id="sizing">
+    <h2>Sizing + Placement Guide</h2>
+    <p>Getting the size right is the single most common mistake buyers make. Here are the rules that interior designers use:</p>
+
+    <div class="sizing-rules">
+      <div class="sizing-rule">
+        <div class="sizing-rule__label">Table lamp height</div>
+        <div class="sizing-rule__value">The bottom of the shade should sit at eye level when you're seated — typically 58–64" from the floor</div>
+      </div>
+      <div class="sizing-rule">
+        <div class="sizing-rule__label">Floor lamp height</div>
+        <div class="sizing-rule__value">58–64" total height for reading; 72–78" for ambient or arc lamps</div>
+      </div>
+      <div class="sizing-rule">
+        <div class="sizing-rule__label">Pendant height</div>
+        <div class="sizing-rule__value">30–36" above a dining table; 7 feet minimum above a walkway</div>
+      </div>
+      <div class="sizing-rule">
+        <div class="sizing-rule__label">Chandelier width</div>
+        <div class="sizing-rule__value">Add the room's length + width in feet; that number in inches = ideal chandelier diameter</div>
+      </div>
+      <div class="sizing-rule">
+        <div class="sizing-rule__label">Lampshade width</div>
+        <div class="sizing-rule__value">Shade width should be ≈ twice the width of the lamp base</div>
+      </div>
+    </div>
+  </section>
+
+  {{/* ══════════════════════════════════════
+       ⑩ MATERIALS + QUALITY GUIDE
+       ══════════════════════════════════════ */}}
+  <section class="hub-materials content-section" id="materials">
+    <h2>Materials + Quality Guide</h2>
+
+    <h3>Gold, Brass, and Chrome — What's the Difference?</h3>
+    <p><strong>Polished gold</strong> is a finish (plating over a base metal), bright and consistent. It suits maximalist glam interiors. <strong>Brass</strong> is a solid alloy with a warmer, living tone that develops a natural patina — more character, slightly more expensive. <strong>Chrome</strong> is cooler and more reflective — better for modern or art deco aesthetics than traditional glam.</p>
+
+    <h3>Crystal Types</h3>
+    <p><strong>K9 crystal</strong> is the standard for décor lamps — optical-quality glass that refracts light beautifully. <strong>Asfour crystal</strong> is Egyptian-made and considered premium. <strong>Swarovski</strong> is the luxury tier. Acrylic crystals are budget alternatives — fine from a distance, but lack the genuine sparkle of real crystal up close.</p>
+
+    <h3>Shade Materials</h3>
+    <p>Fabric shades (linen, silk, velvet) give the warmest, most diffused light — ideal for glam and cosy aesthetics. Glass shades (clear, frosted, or seeded) create more defined light pools. Avoid thin plastic shades that yellow over time or create hot spots.</p>
+
+    <h3>What Signals Quality</h3>
+    <ul>
+      <li>Weight — quality lamps are heavy (stable base, real materials)</li>
+      <li>UL/ETL safety certification listed in the product specs</li>
+      <li>Solid metal vs hollow-sounding when tapped</li>
+      <li>Smooth, consistent finish with no visible seams</li>
+      <li>Fabric shade with a plastic or metal liner inside</li>
+    </ul>
+  </section>
+
+  {{/* ══════════════════════════════════════
+       ⑪ CARE + MAINTENANCE
+       ══════════════════════════════════════ */}}
+  <section class="hub-care content-section" id="care">
+    <h2>Care + Maintenance</h2>
+
+    <h3>Cleaning Crystal</h3>
+    <p>Turn off and unplug first — always. Remove individual crystal drops if the design allows. Mix distilled water with white vinegar (50/50) in a spray bottle. Spray onto a microfibre cloth (not directly on the lamp) and wipe each crystal individually. Dry immediately with a clean cloth to prevent water marks. Do this 2–4 times per year.</p>
+
+    <h3>Polishing Gold + Brass Finishes</h3>
+    <p>For polished gold: wipe with a dry microfibre cloth weekly to prevent fingerprint buildup. Use a dedicated metal polish (e.g. Brasso for brass, Renaissance Wax for plated gold) every 6 months. Avoid abrasive cloths or bathroom cleaners — they strip plating permanently.</p>
+
+    <h3>Bulb Replacement</h3>
+    <p>Always check the maximum wattage rating on the shade or socket before replacing. Most glam lamps are rated for 40–60W equivalent. With LEDs, you can safely use a 9–10W LED to replace a 60W incandescent. Use warm white (2700K) for the most flattering glam effect.</p>
+
+    <h3>Storage</h3>
+    <p>If storing a crystal lamp: remove and individually wrap each crystal drop in tissue paper before boxing. Store shades upright, never stacked. Keep in a dry space — humidity causes tarnishing on metal bases.</p>
+
+    <h3>Expected Lifespan</h3>
+    <p>A quality glam lamp with proper care should last 10–15 years. The first component to fail is usually the wiring or socket — both can be replaced by an electrician for a fraction of the cost of a new lamp. Replace vs repair if: the base is cracked, the plating is peeling over more than 30% of the surface, or crystals are chipped at the top where they attach.</p>
+  </section>
+
+  {{/* ══════════════════════════════════════
+       ⑫ CATEGORY BASICS (educational)
+       ══════════════════════════════════════ */}}
+  <section class="hub-basics content-section" id="lighting-basics">
+    <h2>Lighting Basics — What Every Buyer Should Know</h2>
+
+    <h3>Lumens vs Watts</h3>
+    <p>Watts measure energy use; lumens measure actual brightness. With LED bulbs now standard, watts are almost meaningless as a brightness guide. Instead: 400–500 lumens = soft bedside light; 800–1100 lumens = comfortable reading light; 1500+ lumens = bright task or ambient lighting. Most glam table lamps are designed for the 800–1100 lumen range.</p>
+
+    <h3>Colour Temperature</h3>
+    <p>Measured in Kelvin (K). For glam interiors: 2700K (warm white) is the gold standard — it makes gold and crystal finishes glow and creates the warm, luxurious atmosphere associated with upscale hotels. Avoid 5000K+ (daylight) bulbs in any decorative lamp — they make gold look greenish and kill the ambience.</p>
+
+    <h3>Layered Lighting — The Designer Approach</h3>
+    <p>The difference between a room that looks designed and one that doesn't is almost always lighting layers. Layer 1: ambient (overhead, general). Layer 2: task (table lamp, reading lamp). Layer 3: accent (sconces, LED strips, candles). Each layer should be on a separate switch or dimmer. A well-layered room can be set to any mood — bright and energising for daytime, warm and intimate for evenings.</p>
+
+    <h3>Dimmer Compatibility</h3>
+    <p>Not all LED bulbs are dimmable — check the package. If installing a dimmer switch, buy dimmable LEDs specifically. The best glam lamps use E26 or E12 base sockets, both of which have a wide selection of dimmable LED options. Avoid smart bulbs in decorative lamps unless you want the visible bulb to be part of the aesthetic.</p>
+  </section>
+
+  {{/* ══════════════════════════════════════
+       ⑬ PRICE GUIDE + PRODUCT BLOCK 3
+       ══════════════════════════════════════ */}}
+  <section class="hub-pricing content-section" id="price-guide">
+    <h2>Price Guide — What to Expect at Every Budget</h2>
+
+    <div class="price-tiers">
+      <div class="price-tier">
+        <div class="price-tier__range">Under $50</div>
+        <p>Entry-level decorative lamps — primarily from mass-market retailers. Expect ABS plastic bases with a metallic paint finish, basic fabric or paper shades, and standard sockets. Good for: rentals, children's rooms, or testing a style before committing. Not suitable for a main living or bedroom statement piece.</p>
+      </div>
+      <div class="price-tier price-tier--highlight">
+        <div class="price-tier__range">$50 – $150 ★ Sweet Spot</div>
+        <p>The best value tier for most buyers. You start to see real metal bases (zinc alloy, aluminium), K9 crystal accents, lined fabric shades, and proper cord management. Brands at this level typically have UL certification and longer warranties. This is where 80% of our featured picks live.</p>
+      </div>
+      <div class="price-tier">
+        <div class="price-tier__range">$150 – $500</div>
+        <p>Solid construction, genuine materials (real brass, hand-blown glass, premium crystal), and noticeably better finishing. Lamps at this level become room focal points — they're designed to be looked at, not just functional. Expect 5+ year lifespans with proper care.</p>
+      </div>
+      <div class="price-tier">
+        <div class="price-tier__range">$500+</div>
+        <p>Investment-grade decorative lighting. Heirloom materials (solid brass, Swarovski or Asfour crystal, hand-sewn silk shades), designer names, and bespoke finishes. Buy once, keep forever. These are the pieces that become part of a home's identity.</p>
+      </div>
+    </div>
+
+    {{/* PRODUCT BLOCK 3 — price filtered, featured items */}}
+    <div
+      class="product-grid inline-products"
+      data-category="{{ $cat }}"
+      data-featured="1"
+      data-limit="6"
+    >
+      {{ range first 3 (where $products "featured" 1) }}
+      <article class="product-card product-card--static">
+        <a href="{{ .affiliate_url }}" target="_blank" rel="noopener nofollow sponsored">
+          <img src="{{ $R2 }}{{ .image_key }}" alt="{{ .name }}" loading="lazy" width="400" height="400">
+          <div class="product-card__body">
+            <h3 class="product-card__name">{{ .name }}</h3>
+            <span class="product-card__price">{{ .price_label }}</span>
+            <span class="product-card__cta">Check Current Price →</span>
+          </div>
+        </a>
+      </article>
+      {{ end }}
+    </div>
+  </section>
+
+  {{/* ══════════════════════════════════════
+       ⑭ FAQ — FAQPage schema ready
+       ══════════════════════════════════════ */}}
+  {{ if .Params.faqs }}
+  <section class="hub-faq content-section" id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-list" itemscope itemtype="https://schema.org/FAQPage">
+      {{ range .Params.faqs }}
+      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+        <h3 class="faq-item__question" itemprop="name">{{ .question }}</h3>
+        <div class="faq-item__answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <p itemprop="text">{{ .answer }}</p>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  {{/* ══════════════════════════════════════
+       ⑮ RELATED CATEGORIES + INTERNAL LINKS
+       ══════════════════════════════════════ */}}
+  <section class="hub-related content-section" id="related">
+    <h2>Explore More</h2>
+    <div class="related-grid">
+      {{ range site.Menus.categories }}
+      {{ if ne .URL (printf "/%s/" $.Params.category_slug) }}
+      <a href="{{ .URL }}" class="related-card">
+        <span class="related-card__name">{{ .Name }}</span>
+        <span class="related-card__arrow">→</span>
+      </a>
+      {{ end }}
+      {{ end }}
+    </div>
+
+    {{/* RELATED BLOG POSTS */}}
+    {{ $related := where site.Pages "Section" "blog" | first 4 }}
+    {{ if $related }}
+    <h3>From the Blog</h3>
+    <div class="related-posts">
+      {{ range $related }}
+      <a href="{{ .RelPermalink }}" class="related-post">
+        <span class="related-post__title">{{ .Title }}</span>
+        <span class="related-post__arrow">→</span>
+      </a>
+      {{ end }}
+    </div>
+    {{ end }}
+  </section>
+
+  {{/* ══════════════════════════════════════
+       ⑯ pSEO ROOM SUB-PAGES
+       ══════════════════════════════════════ */}}
+  <section class="hub-pseo content-section" id="by-room-pages">
+    <h2>Shop by Room</h2>
+    <p>Looking for {{ lower .Params.category_name }} for a specific room? We have dedicated guides for every space:</p>
+    <div class="pseo-links">
+      {{ range .Params.rooms }}
+      <a href="/{{ .slug }}/{{ $.Params.category_slug | urlize }}/" class="pseo-link">
+        <span class="pseo-link__room">{{ .name }}</span>
+        <span class="pseo-link__label">{{ $.Params.category_name }} →</span>
+      </a>
+      {{ end }}
+    </div>
+  </section>
+
+</article>
+
+{{/* JS — loaded async at end of page */}}
+<script>
+  window.HUB_CONFIG = {
+    category: "{{ $cat }}",
+    room: "{{ .Params.room }}",
+    R2Base: "{{ $R2 }}"
+  };
+</script>
+<script src="{{ "js/product-filter.js" | relURL }}" defer></script>
+
+{{ end }}

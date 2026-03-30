@@ -1,0 +1,23 @@
+{{ $category := .Get "category" | default (.Page.Params.product_category) }}
+{{ $room     := .Get "room"     | default (.Page.Params.room) }}
+{{ $featured := .Get "featured" | default "0" }}
+{{ $limit    := .Get "limit"    | default "6" }}
+<div
+  class="product-grid inline-products"
+  data-category="{{ $category }}"
+  data-room="{{ $room }}"
+  data-featured="{{ $featured }}"
+  data-limit="{{ $limit }}">
+  {{ range first 3 (where site.Data.products "category_slug" $category) }}
+  <article class="product-card product-card--static">
+    <a href="{{ .affiliate_url }}" target="_blank" rel="noopener nofollow sponsored">
+      <img src="https://images.wowglamdecor.com/{{ .image_key }}" alt="{{ .name }}" loading="lazy" width="400" height="400">
+      <div class="product-card__body">
+        <h3 class="product-card__name">{{ .name }}</h3>
+        <span class="product-card__price">{{ .price_label }}</span>
+        <span class="product-card__cta">Check Current Price →</span>
+      </div>
+    </a>
+  </article>
+  {{ end }}
+</div>

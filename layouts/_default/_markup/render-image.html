@@ -1,25 +1,38 @@
 {{- $src := .Destination -}}
+{{- $fallback := "/content/images/bedroom-decor-ideas.png" -}}
 
-{{/* ── Resolve missing extension ── */}}
-{{- $hasExt := or
-    (strings.HasSuffix $src ".jpg")
-    (strings.HasSuffix $src ".jpeg")
-    (strings.HasSuffix $src ".png")
-    (strings.HasSuffix $src ".webp")
-    (strings.HasSuffix $src ".gif")
--}}
-{{- if not $hasExt -}}
-  {{- range slice ".jpg" ".jpeg" ".png" ".webp" ".gif" -}}
-    {{- $candidate := printf "%s%s" $src . -}}
-    {{- if os.FileExists (printf "static%s" $candidate) -}}
-      {{- $src = $candidate -}}
+{{/* ── SHORT-CIRCUIT: external URLs (Cloudflare R2, Cloudinary, etc.) pass straight through ── */}}
+{{- if not (strings.HasPrefix $src "http") -}}
+
+  {{/* ── Resolve missing extension for LOCAL files only ── */}}
+  {{- $hasExt := or
+      (strings.HasSuffix $src ".jpg")
+      (strings.HasSuffix $src ".jpeg")
+      (strings.HasSuffix $src ".png")
+      (strings.HasSuffix $src ".webp")
+      (strings.HasSuffix $src ".gif")
+  -}}
+  {{- if not $hasExt -}}
+    {{- range slice ".jpg" ".jpeg" ".png" ".webp" ".gif" -}}
+      {{- $candidate := printf "%s%s" $src . -}}
+      {{- if os.FileExists (printf "static%s" $candidate) -}}
+        {{- $src = $candidate -}}
+      {{- end -}}
     {{- end -}}
   {{- end -}}
+
+  {{/* ── Final local fallback: if file still not found, use default ── */}}
+  {{- $stillMissing := not (os.FileExists (printf "static%s" $src)) -}}
+  {{- if $stillMissing -}}
+    {{- $src = $fallback -}}
+  {{- end -}}
+
 {{- end -}}
 
-{{/* ── Classify image type ── */}}
+{{/* ── Classify image type (works for both local paths and R2 URLs) ── */}}
 {{- $isPortrait := or
     (strings.Contains $src "/content/images/products/")
+    (strings.Contains $src "/products/")
     (strings.Contains $src "scene-look-")
     (strings.Contains $src "section-")
     (strings.Contains $src "product-look-")
@@ -27,9 +40,15 @@
 -}}
 {{- $isHero := strings.Contains $src "hero-" -}}
 
-{{/* ── Share bar — rendered BELOW image, exterior to it ── */}}
+{{/* ── Figure with share bar ── */}}
 <figure class="post-figure{{ if $isHero }} post-figure--hero{{ else if $isPortrait }} post-figure--portrait{{ else }} post-figure--wide{{ end }}">
-  <img src="{{ $src }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }} loading="lazy">
+  <img
+    src="{{ $src }}"
+    alt="{{ .Text }}"
+    {{ with .Title }}title="{{ . }}"{{ end }}
+    loading="lazy"
+    onerror="this.onerror=null;this.src='{{ $fallback }}'"
+  >
   <div class="img-share-bar">
     <span class="img-share-label">Save &amp; share</span>
     <button class="img-share-icon pin" onclick="imgShare('pinterest',this)" title="Pin on Pinterest" aria-label="Pin on Pinterest">

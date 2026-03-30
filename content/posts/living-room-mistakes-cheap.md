@@ -38,14 +38,14 @@ keywords:
   - living room curtain length
   - accent chair placement
   - living room wall decor ideas
-featured_image: "/content/images/products-featured-living-room-mistakes"
+featured_image: "https://images.wowglamdecor.com/products-featured-living-room-mistakes"
 featured_products:
   # Product 1
   - name: "Large Geometric Area Rug (8x10)"
     budget_tier: "Budget Pick"
     benefit: "Anchors seating group instantly"
     label: "💚 Budget Pick"
-    image: "/content/images/products/product-look-1-jute-rug.png"
+    image: "https://images.wowglamdecor.com/products/product-look-1-jute-rug.png"
     link: "https://amzn.to/3P0jO8L"
 
   # Product 2
@@ -53,7 +53,7 @@ featured_products:
     budget_tier: "Mid-Range"
     benefit: "Texture and scale that transforms floors"
     label: "🟡 Mid-Range"
-    image: "/content/images/products/product-look-1-jute-rug.png"
+    image: "https://images.wowglamdecor.com/products/product-look-1-jute-rug.png"
     link: "https://amzn.to/4cEAWL8"
 
   # Product 3
@@ -61,7 +61,7 @@ featured_products:
     budget_tier: "Luxury"
     benefit: "Pile depth that changes the whole room"
     label: "💜 Luxury"
-    image: "/content/images/products/product-look-1-wool-rug.png"
+    image: "https://images.wowglamdecor.com/products/product-look-1-wool-rug.png"
     link: "https://amzn.to/3NtLMJu"
 
   # Product 4
@@ -69,7 +69,7 @@ featured_products:
     budget_tier: "Budget Pick"
     benefit: "Kills dead corners with warm light"
     label: "💚 Budget Pick"
-    image: "/content/images/products/product-look-2-arc-lamp.png"
+    image: "https://images.wowglamdecor.com/products/product-look-2-arc-lamp.png"
     link: "https://amzn.to/4sADYV8"
 
   # Product 5
@@ -77,7 +77,7 @@ featured_products:
     budget_tier: "Mid-Range"
     benefit: "Designer silhouette at accessible price"
     label: "🟡 Mid-Range"
-    image: "/content/images/products/brass-tripod-floor-lamp"
+    image: "https://images.wowglamdecor.com/products/brass-tripod-floor-lamp"
     link: "https://amzn.to/3Prfq2y"
 
   # Product 6
@@ -85,7 +85,7 @@ featured_products:
     budget_tier: "Luxury"
     benefit: "Art and light in a single object"
     label: "💜 Luxury"
-    image: "/content/images/products/product-look-2-ceramic-lamp.png"
+    image: "https://images.wowglamdecor.com/products/product-look-2-ceramic-lamp.png"
     link: "https://amzn.to/3NavKnO"
 
   # Product 7
@@ -93,7 +93,7 @@ featured_products:
     budget_tier: "Budget Pick"
     benefit: "Four textures, one sofa transformed"
     label: "💚 Budget Pick"
-    image: "/content/images/products/product-look-3-pillow-set.png"
+    image: "https://images.wowglamdecor.com/products/product-look-3-pillow-set.png"
     link: "https://amzn.to/3N8k70G"
 
   # Product 8
@@ -101,7 +101,7 @@ featured_products:
     budget_tier: "Mid-Range"
     benefit: "Rich pile that reads as genuine luxury"
     label: "🟡 Mid-Range"
-    image: "/content/images/products/product-look-3-velvet-cushions.png"
+    image: "https://images.wowglamdecor.com/products/product-look-3-velvet-cushions.png"
     link: "https://amzn.to/3MUKOpD"
 
   # Product 9
@@ -109,7 +109,7 @@ featured_products:
     budget_tier: "Luxury"
     benefit: "The piece guests always compliment first"
     label: "💜 Luxury"
-    image: "/content/images/products/product-look-3-knit-throw.png"
+    image: "https://images.wowglamdecor.com/products/product-look-3-knit-throw.png"
     link: "https://amzn.to/4bflliJ"
 
   # Product 10
@@ -117,7 +117,7 @@ featured_products:
     budget_tier: "Budget Pick"
     benefit: "Matching frames unify any wall collection"
     label: "💚 Budget Pick"
-    image: "/content/images/products/product-look-4-gallery-frames.png"
+    image: "https://images.wowglamdecor.com/products/product-look-4-gallery-frames.png"
     link: "https://amzn.to/40iUbCv"
 
   # Product 11
@@ -125,7 +125,7 @@ featured_products:
     budget_tier: "Mid-Range"
     benefit: "One large piece beats twelve small ones"
     label: "🟡 Mid-Range"
-    image: "/content/images/products/product-look-4-canvas-print.png"
+    image: "https://images.wowglamdecor.com/products/product-look-4-canvas-print.png"
     link: "https://amzn.to/4rgf5gp"
 
   # Product 12
@@ -133,12 +133,13 @@ featured_products:
     budget_tier: "Luxury"
     benefit: "Light, space, and glamour simultaneously"
     label: "💜 Luxury"
-    image: "/content/images/products/product-look-4-arch-mirror.png"
+    image: "https://images.wowglamdecor.com/products/product-look-4-arch-mirror.png"
     link: "https://amzn.to/40nj4gh"
 
 ---
 
-![7 living room mistakes that make your home look cheap — styled living room transformation](/content/images/hero-living-room-mistakes-cheap/)
+![7 living room mistakes that make your home look cheap — styled living room transformation](https://images.wowglamdecor.com/blog
+/hero-living-room-mistakes-cheap/)
 
 ## Key Takeaways
 
@@ -187,7 +188,7 @@ By the time you finish reading, you'll know exactly what's dragging your room do
 
 ## Products Featured in This Article
 
-![All featured products for transforming your living room from cheap-looking to polished](/content/images/products-featured-living-room-mistakes/)
+![All featured products for transforming your living room from cheap-looking to polished](https://images.wowglamdecor.com/products-featured-living-room-mistakes/)
 
 | Product | Price Range | Best For | Why We Love It |
 |---|---|---|---|
@@ -237,7 +238,7 @@ See more [rugs and carpets curated by our team](https://wowglamdecor.com/categor
 
 ### Large Geometric Area Rug (8x10) — Budget Pick 💚
 
-![Budget large area rug anchoring a living room seating area](/content/images/products/product-look-1-jute-rug.png)
+![Budget large area rug anchoring a living room seating area](https://images.wowglamdecor.com/products/product-look-1-jute-rug.png)
 
 **Price:** $
 **Best For:** Living rooms where the current rug isn't reaching the furniture legs
@@ -260,7 +261,7 @@ The moment this goes down, your seating area stops looking accidental and starts
 
 ### Natural Jute & Wool Blend Area Rug (9x12) — Mid-Range Pick 🟡
 
-![Mid-range natural jute wool area rug in a styled living room](/content/images/products/product-look-1-jute-rug.png)
+![Mid-range natural jute wool area rug in a styled living room](https://images.wowglamdecor.com/products/product-look-1-jute-rug.png)
 
 **Price:** $$
 **Best For:** Rooms where you want the rug to be the texture story, not just the floor covering
@@ -283,7 +284,7 @@ Natural jute and wool together create a tactile depth that synthetic rugs simply
 
 ### Hand-Tufted Wool Statement Area Rug (9x12) — Luxury Pick 💜
 
-![Luxury hand-tufted wool area rug as living room centrepiece](/content/images/products/product-look-1-wool-rug.png)
+![Luxury hand-tufted wool area rug as living room centrepiece](https://images.wowglamdecor.com/products/product-look-1-wool-rug.png)
 
 **Price:** $$$
 **Best For:** The living room where the rug is the focal point, not just the floor
@@ -311,7 +312,8 @@ This is the rug you stop and look at. Hand-tufted wool has a pile depth and a wa
 **CTA:** Get this look — your seating area can feel anchored and intentional by tomorrow.
 
 **Scene Image Filename:** scene-look-1-foundation-rug
-*(Saved to: /content/images/)*
+*(Saved to: https://images.wowglamdecor.com/blog
+/)*
 
 **Scene Image Prompt:** Wide 16:9 editorial living room scene. Warm afternoon light from a tall window to the left. Neutral palette — warm cream, soft taupe, natural linen. A large natural-fibre area rug anchoring a three-seater sofa and two upholstered armchairs, all front legs sitting on the rug. Low coffee table with minimal styling. Light oak floors visible at the perimeter. Scandi-neutral aesthetic. Slightly elevated camera angle showing the full rug footprint. Aspirational but lived-in. Soft natural film grain. No logos, text, or labels.
 
@@ -343,7 +345,7 @@ Browse the full [lighting and lamps collection](https://wowglamdecor.com/categor
 
 ### Slim Arc Floor Lamp with Linen Shade — Budget Pick 💚
 
-![Budget arc floor lamp creating warm ambient light in a living room corner](/content/images/products/product-look-2-arc-lamp.png)
+![Budget arc floor lamp creating warm ambient light in a living room corner](https://images.wowglamdecor.com/products/product-look-2-arc-lamp.png)
 
 **Price:** $
 **Best For:** Killing the dead corner that every living room has — and filling it with warm, useful light
@@ -366,7 +368,7 @@ Switch this on beside your sofa and watch what the room does. The arc puts light
 
 ### Brass Tripod Floor Lamp — Mid-Range Pick 🟡
 
-![Mid-range brass tripod floor lamp adding designer silhouette to living room](/content/images/products/brass-arc-floor-lamp.png)
+![Mid-range brass tripod floor lamp adding designer silhouette to living room](https://images.wowglamdecor.com/products/brass-arc-floor-lamp.png)
 
 **Price:** $$
 **Best For:** Rooms where the lamp itself needs to be a design statement, not just a light source
@@ -389,7 +391,7 @@ The tripod silhouette is one of those rare lamp forms that looks right in a mode
 
 ### Sculptural Ceramic Table Lamp — Luxury Pick 💜
 
-![Luxury sculptural ceramic table lamp as living room statement piece](/content/images/products/product-look-2-ceramic-lamp.png)
+![Luxury sculptural ceramic table lamp as living room statement piece](https://images.wowglamdecor.com/products/product-look-2-ceramic-lamp.png)
 
 **Price:** $$$
 **Best For:** A console, side table, or shelving unit that needs a centrepiece, not just a light source
@@ -417,7 +419,8 @@ This lamp does two things at once: it lights the room and it decorates it. The s
 **CTA:** Get this look — your room can feel this warm and considered by tonight.
 
 **Scene Image Filename:** scene-look-2-warm-light
-*(Saved to: /content/images/)*
+*(Saved to: https://images.wowglamdecor.com/blog
+/)*
 
 **Scene Image Prompt:** Cosy 16:9 editorial living room scene at dusk. Room lit entirely by warm lamps — no overhead light. A tall arc floor lamp casting warm amber glow over a linen sofa to the left. A sculptural table lamp on a console table in the background. Cream, warm white, and soft caramel colour palette. Plaster textured wall behind sofa. Layered cushions. Minimal coffee table. The room feels intimate and warm. Eye-level camera angle. Scandi-luxe aesthetic. Soft film grain. No logos or text.
 
@@ -449,7 +452,7 @@ For a broader look at how to apply this across every room, our [home makeovers g
 
 ### Mixed Texture Throw Pillow Set (4 Covers) — Budget Pick 💚
 
-![Budget throw pillow set adding instant texture to a living room sofa](/content/images/products/product-look-3-pillow-set.png)
+![Budget throw pillow set adding instant texture to a living room sofa](https://images.wowglamdecor.com/products/product-look-3-pillow-set.png)
 
 **Price:** $
 **Best For:** Sofas that look flat, bare, or like they came straight from a showroom floor
@@ -472,7 +475,7 @@ Four covers, four different textures, one purchase. This set does the visual wor
 
 ### Velvet Cushion Cover Set — Mid-Range Pick 🟡
 
-![Mid-range velvet cushion covers adding luxury texture to a sofa](/content/images/products/product-look-3-velvet-cushions.png)
+![Mid-range velvet cushion covers adding luxury texture to a sofa](https://images.wowglamdecor.com/products/product-look-3-velvet-cushions.png)
 
 **Price:** $$
 **Best For:** The sofa that needs to look like it belongs in a boutique hotel lounge
@@ -495,7 +498,7 @@ Velvet at the right price point changes everything about a sofa. The pile catche
 
 ### Chunky Knit Throw Blanket — Luxury Pick 💜
 
-![Luxury chunky knit throw blanket draped over sofa adding texture and warmth](/content/images/products/product-look-3-knit-throw.png)
+![Luxury chunky knit throw blanket draped over sofa adding texture and warmth](https://images.wowglamdecor.com/products/product-look-3-knit-throw.png)
 
 **Price:** $$$
 **Best For:** The sofa corner that needs one piece to pull the whole room together
@@ -523,7 +526,8 @@ Drape this at the end of your sofa or over the arm of your accent chair and watc
 **CTA:** Get this look — three textures, one sofa, a completely different room.
 
 **Scene Image Filename:** scene-look-3-texture-story
-*(Saved to: /content/images/)*
+*(Saved to: https://images.wowglamdecor.com/blog
+/)*
 
 **Scene Image Prompt:** Close editorial 16:9 shot of a linen sofa styled with layered cushions and a throw. Smooth cotton cushion, velvet cushion in deep jewel tone, and chunky knit throw draped over the arm. Warm afternoon light from the right. Warm neutral palette — cream linen, emerald velvet, oatmeal knit. Plaster wall visible behind. Low coffee table partially in frame. Scandi-glam aesthetic. Eye-level camera angle showing the textile layering in detail. Soft warm shadows. No logos or text.
 
@@ -555,7 +559,7 @@ See the full [wall decor buying guide](https://wowglamdecor.com/category/wall-de
 
 ### Gallery Wall Frames Set (7 Frames) — Budget Pick 💚
 
-![Budget gallery wall frames set creating a curated wall display](/content/images/products/product-look-4-gallery-frames.png)
+![Budget gallery wall frames set creating a curated wall display](https://images.wowglamdecor.com/products/product-look-4-gallery-frames.png)
 
 **Price:** $
 **Best For:** Turning a scattered random collection of prints into a composed, intentional gallery wall
@@ -578,7 +582,7 @@ Matching frames are the cheat code for gallery walls. Seven identical frames in 
 
 ### Large Format Canvas Art Print — Mid-Range Pick 🟡
 
-![Mid-range large format canvas art print making a bold living room statement](/content/images/products/product-look-4-canvas-print.png)
+![Mid-range large format canvas art print making a bold living room statement](https://images.wowglamdecor.com/products/product-look-4-canvas-print.png)
 
 **Price:** $$
 **Best For:** The wall above a sofa or console that needs one decisive statement, not a collection
@@ -601,7 +605,7 @@ One large piece of art does more for a room than twelve small ones. It gives the
 
 ### Oversized Arched Mirror with Gold Frame — Luxury Pick 💜
 
-![Luxury oversized arched gold frame mirror transforming a living room wall](/content/images/products/product-look-4-arch-mirror.png)
+![Luxury oversized arched gold frame mirror transforming a living room wall](https://images.wowglamdecor.com/products/product-look-4-arch-mirror.png)
 
 **Price:** $$$
 **Best For:** The living room wall that needs to double the light, add glamour, and make guests ask who your designer is
@@ -629,7 +633,8 @@ A large arched or round mirror in an aged gold frame is the most versatile state
 **CTA:** Get this look — your wall can stop looking like an afterthought by this weekend.
 
 **Scene Image Filename:** scene-look-4-statement-wall
-*(Saved to: /content/images/)*
+*(Saved to: https://images.wowglamdecor.com/blog
+/)*
 
 **Scene Image Prompt:** Wide 16:9 editorial living room scene focused on the wall behind a sofa. A large arched gold-framed mirror mounted at eye height above a low sofa, reflecting warm natural light from the opposite window. Warm cream walls, natural linen sofa with layered cushions below. Minimal coffee table in foreground. Warm afternoon light. Modern-glam aesthetic. Slightly elevated camera angle. The wall feels composed and decisive. Soft warm shadows. No logos, text, or labels.
 
@@ -659,7 +664,7 @@ Check the full [best-of lists](https://wowglamdecor.com/category/best-of-lists.h
 
 ### Rattan Tray & Bud Vase Set — Budget Pick 💚
 
-![Budget rattan tray and bud vase set creating an instant styled coffee table](/content/images/products/product-look-5-rattan-tray.png)
+![Budget rattan tray and bud vase set creating an instant styled coffee table](https://images.wowglamdecor.com/products/product-look-5-rattan-tray.png)
 
 **Price:** $
 **Best For:** Coffee tables that currently have nothing on them — or everything on them
@@ -682,7 +687,7 @@ A rattan tray and two bud vases is the simplest version of the rule of three you
 
 ### Sculptural Stoneware Ceramic Vase — Mid-Range Pick 🟡
 
-![Mid-range sculptural stoneware ceramic vase as coffee table centrepiece](/content/images/products/product-look-5-ceramic-vase.png)
+![Mid-range sculptural stoneware ceramic vase as coffee table centrepiece](https://images.wowglamdecor.com/products/product-look-5-ceramic-vase.png)
 
 **Price:** $$
 **Best For:** The person who wants one beautiful object that holds the table together on its own
@@ -705,7 +710,7 @@ This is the piece where form is the decoration. You don't need flowers in this v
 
 ### Marble & Travertine Decorative Sculpture — Luxury Pick 💜
 
-![Luxury marble travertine decorative sculpture anchoring a coffee table](/content/images/products/product-look-5-marble-sculpture.png)
+![Luxury marble travertine decorative sculpture anchoring a coffee table](https://images.wowglamdecor.com/products/product-look-5-marble-sculpture.png)
 
 **Price:** $$$
 **Best For:** The coffee table centrepiece that says "this room is finished" without saying a word
@@ -733,7 +738,8 @@ Natural stone on a coffee table communicates one thing immediately: this is a co
 **CTA:** Get this look — your coffee table can look intentionally styled before dinner tonight.
 
 **Scene Image Filename:** scene-look-5-styled-surface
-*(Saved to: /content/images/)*
+*(Saved to: https://images.wowglamdecor.com/blog
+/)*
 
 **Scene Image Prompt:** Close editorial 16:9 shot of a styled living room coffee table. A low rectangular wooden or marble-top coffee table. On it: a natural rattan tray holding a tall stoneware ceramic vase, a small sculptural object, and a stack of two or three coffee table books. One third of the table surface intentionally left clear. Warm natural light from the left. Neutral tones — warm cream, oat, natural wood, matte stone. The styling feels curated and deliberate. Slightly elevated camera angle. Scandi-luxe aesthetic. Soft shadows. No logos or text.
 
@@ -767,7 +773,7 @@ Our [furniture buying guides](https://wowglamdecor.com/category/furniture-buying
 
 ### Upholstered Linen Accent Chair — Budget Pick 💚
 
-![Budget linen accent chair completing a living room seating arrangement](/content/images/products/product-look-6-linen-chair.png)
+![Budget linen accent chair completing a living room seating arrangement](https://images.wowglamdecor.com/products/product-look-6-linen-chair.png)
 
 **Price:** $
 **Best For:** Adding a seat to a corner that's been empty since you moved in
@@ -790,7 +796,7 @@ An accent chair at this price point gives you the functional and visual benefit 
 
 ### Boucle Barrel Accent Chair — Mid-Range Pick 🟡
 
-![Mid-range boucle barrel accent chair as statement piece in a living room](/content/images/products/product-look-6-boucle-chair.png)
+![Mid-range boucle barrel accent chair as statement piece in a living room](https://images.wowglamdecor.com/products/product-look-6-boucle-chair.png)
 
 **Price:** $$
 **Best For:** The chair that becomes the most photographed corner in your home
@@ -813,7 +819,7 @@ Boucle barrel chairs are the piece that makes a room look like it was profession
 
 ### Sculptural Velvet Accent Chair — Luxury Pick 💜
 
-![Luxury sculptural velvet accent chair defining a living room's design identity](/content/images/products/product-look-6-velvet-chair.png)
+![Luxury sculptural velvet accent chair defining a living room's design identity](https://images.wowglamdecor.com/products/product-look-6-velvet-chair.png)
 
 **Price:** $$$
 **Best For:** The room that needs one defining piece — the piece the whole room is built around
@@ -841,7 +847,8 @@ This is the chair that makes a room. The sculptural form, the velvet upholstery 
 **CTA:** Get this look — your living room can finally feel like a destination, not a waiting room.
 
 **Scene Image Filename:** scene-look-6-conversation-group
-*(Saved to: /content/images/)*
+*(Saved to: https://images.wowglamdecor.com/blog
+/)*
 
 **Scene Image Prompt:** Wide 16:9 editorial living room scene from a slightly elevated angle showing a floating furniture arrangement. A cream linen sofa pulled away from the wall, facing a boucle barrel accent chair positioned at the corner of a large area rug. Low coffee table between them. Both pieces face inward toward each other, creating a natural conversation area. Visible space between sofa and wall. Warm afternoon light from a window at the far right. Cream, warm white, and natural wood palette. Scandi-luxe aesthetic. The arrangement feels intentional and inviting. Soft shadows. No logos or text.
 
@@ -873,7 +880,7 @@ For the complete living room transformation checklist, our [living room decor id
 
 ### Floor-Length Linen Curtain Panels (Set of 2) — Budget Pick 💚
 
-![Budget floor-length linen curtain panels adding instant height and polish to a living room](/content/images/products/product-look-7-linen-panels.png)
+![Budget floor-length linen curtain panels adding instant height and polish to a living room](https://images.wowglamdecor.com/products/product-look-7-linen-panels.png)
 
 **Price:** $
 **Best For:** Any window currently dressed with short panels or nothing at all
@@ -896,7 +903,7 @@ At under $40 a pair, these panels give you the full-length treatment that transf
 
 ### Velvet Blackout Curtain Panels — Mid-Range Pick 🟡
 
-![Mid-range velvet blackout curtain panels adding drama and depth to a living room window](/content/images/products/product-look-7-velvet-panels.png)
+![Mid-range velvet blackout curtain panels adding drama and depth to a living room window](https://images.wowglamdecor.com/products/product-look-7-velvet-panels.png)
 
 **Price:** $$
 **Best For:** The room that needs drama, depth, and actual light control in one panel
@@ -919,7 +926,7 @@ Velvet curtains at ceiling height do something no other fabric does — they add
 
 ### Premium Linen Blackout Curtains — Luxury Pick 💜
 
-![Luxury premium linen blackout curtains with a tailored custom look](/content/images/products/product-look-7-premium-linen.png)
+![Luxury premium linen blackout curtains with a tailored custom look](https://images.wowglamdecor.com/products/product-look-7-premium-linen.png)
 
 **Price:** $$$
 **Best For:** The room where you want curtains that look genuinely custom-made
@@ -947,7 +954,8 @@ The difference between budget linen and premium linen curtains is the weight. Pr
 **CTA:** Get this look — your windows can look twice as tall and your room twice as elegant by the weekend.
 
 **Scene Image Filename:** scene-look-7-high-hang-curtains
-*(Saved to: /content/images/)*
+*(Saved to: https://images.wowglamdecor.com/blog
+/)*
 
 **Scene Image Prompt:** Wide 16:9 editorial living room scene with curtains as the hero element. Floor-to-ceiling velvet or heavy linen curtain panels in warm cream or soft sage, rod mounted 4 inches below the ceiling line, fabric grazing the floor. Tall window behind letting in warm afternoon light through sheer underlayers. Sofa partially visible in foreground. The room feels tall, elegant, and finished. Neutral warm palette. Scandi-glam aesthetic. Slightly elevated camera angle emphasising the vertical height of the curtains. Soft shadows. No logos or text.
 
