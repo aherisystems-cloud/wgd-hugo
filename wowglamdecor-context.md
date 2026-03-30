@@ -31,20 +31,23 @@ GitHub              → Source control + deploy trigger → CF Pages
 - Image keys stored flat (no subfolders) — e.g. `gold-arc-floor-lamp.png`
 - NOTE: images are mixed — product images + blog post images in same bucket
 
-### Step 3 — Worker API ⏳ PENDING
+### Step 3 — Worker API ✅ DONE
 - Worker name: `wowglamdecor-api`
-- Endpoints to build:
-  - GET /api/products (filters: category, room, style, price_min, price_max, q, featured, page, limit)
-  - GET /api/products/:slug
-  - GET /api/categories
-- Features: KV caching, CORS, input sanitization, pagination
+- Live at: `wowglamdecor-api.wowglamdecor.workers.dev`
+- Endpoints working:
+  - GET /api/products ✅
+  - GET /api/products/:slug ✅
+  - GET /api/categories ✅
+- Features: KV caching, CORS, input sanitization, pagination ✅
 
-### Step 4 — Worker Bindings ⏳ PENDING
-- Binding: `DB` → wowglamdecor-db (D1)
-- Binding: `CACHE` → wowglamdecor-cache (KV namespace)
+### Step 4 — Worker Bindings ✅ DONE
+- Binding: `DB` → wowglamdecor-db (D1) ✅
+- Binding: `CACHE` → wowglamdecor-cache (KV namespace) ✅
 
-### Step 5 — Worker Route ⏳ PENDING
-- Route: `wowglamdecor.com/api/*` → wowglamdecor-api
+### Step 5 — Worker Route ✅ DONE
+- Route: `wowglamdecor.com/api/*` → wowglamdecor-api ✅
+- Tested on real domain: wowglamdecor.com/api/products ✅
+- Tested on real domain: wowglamdecor.com/api/categories ✅
 
 ---
 
@@ -84,15 +87,18 @@ GitHub              → Source control + deploy trigger → CF Pages
 ### Step 9 — JS Fetch Logic ✅ BUILT
 ### Step 10 — Dynamic Product Shortcode ✅ BUILT
 
-### Hub Page Template ✅ BUILT (session 2026-03-26)
-- File: `layouts/hub/single.html`
-- Sections: Hero, Intro, Types, Products×3, How to Choose, Style Guide,
-  Room Guide, Sizing, Materials, Care, Lighting Basics, Price Guide, FAQ,
-  Related links, pSEO links
-- JSON-LD: ItemList + BreadcrumbList + FAQPage schemas
-- Product blocks: static Hugo fallback (top 3) + dynamic JS fetch
-- Filter bar: category, room, style, price, search
-- Output: ~4,000–6,000 words per hub page
+### Hub Page Template ✅ FULLY WORKING (2026-03-27)
+- File: `layouts/lamps/list.html` — complete standalone HTML matching site design
+- Live at: `http://localhost:1313/lamps/`
+- ⚠️ KEY LESSON: Hugo uses list.html for _index.md section pages
+- ⚠️ KEY LESSON: No baseof.html — each layout is a complete standalone HTML file
+- ⚠️ KEY LESSON: JS goes in `static/js/` not `assets/js/` — served as `/js/` on site
+- ⚠️ KEY LESSON: Never use `with` inside a parenthesized pipeline in Hugo templates
+- All 16 sections rendering correctly
+- Product filter bar working
+- Dynamic API fetch working
+- JSON-LD schemas injected
+- Matches site brand (purple/gold, Nunito font, navbar, footer)
 
 ### Partials Built ✅
 - `layouts/partials/product-card.html` — single product card
@@ -102,11 +108,21 @@ GitHub              → Source control + deploy trigger → CF Pages
 
 ---
 
-## PHASE 4 — Image Migration ⏳ PENDING
-- Find: `/content/images/`
-- Replace: `https://images.wowglamdecor.com/`
-- Also check: og_image, thumbnail frontmatter fields
-- Verify with: broken-link-checker after replace
+## PHASE 4 — Image Migration ✅ DONE
+
+### What was done
+- R2 bucket reorganized into two folders:
+  - `blog/` → all blog post images
+  - `products/` → all product images
+- Hugo posts updated: `/content/images/` → `https://images.wowglamdecor.com/blog/`
+- D1 product image_keys updated to use `products/` prefix
+- hugo.toml params merged (was duplicate [params] blocks)
+- Site builds cleanly: 190 pages, 0 errors
+
+### Image conventions going forward
+- Blog images: upload to R2 `/blog/` → reference as `https://images.wowglamdecor.com/blog/filename.jpg`
+- Product images: upload to R2 `/products/` → reference in D1 as `products/filename.png`
+- hugo.toml params available: `site.Params.r2Base`, `site.Params.blogImgs`, `site.Params.prodImgs`
 
 ---
 

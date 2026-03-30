@@ -3,10 +3,17 @@ title: "Glam Lamps for Every Room — The Complete Guide"
 description: "Everything you need to know about choosing, styling, and buying glam lamps — floor lamps, table lamps, chandeliers, and more."
 category_slug: "lighting-lamps"
 category_name: "Lamps"
-hero_image: "lamps-hero.png"
+hero_image: "hubs/lighting-lamps/hero.jpg"
+hero_image_alt: "Luxury glam lighting in a styled bedroom with gold arc floor lamp"
 product_category: "lighting-lamps"
 room: ""
+layout: lamps
 type: lamps
+types_intro: "The lamp type you choose changes the entire light plan of a room — not just how bright it is, but how the space feels after dark."
+shop_intro: "Filter by room to find lamps sized and styled for your specific space."
+styles_intro: "Gold looks completely different in a Luxury Glam context versus an Art Deco one — here's how each aesthetic plays out in lighting."
+rooms_intro: "Every room has a different light plan — here's exactly what works where and why."
+price_intro: "Lamp price reflects materials quality more than design complexity — here's what the money actually buys."
 
 featured_products:
   - slug: "gold-arc-floor-lamp"
@@ -121,6 +128,114 @@ faqs:
     answer: "If you are replacing an existing ceiling light fixture that already has wiring in place, it is typically a DIY job — you connect the same wires (black to black, white to white, green or copper to ground). If there is no existing wiring and you need a new electrical box installed, then yes, an electrician is required. Always turn off the circuit breaker before starting."
   - question: "What wattage should I use in a glam table lamp?"
     answer: "Check the maximum wattage listed on the socket or shade label — most decorative lamps are rated for 40–60 watts. With LED bulbs, use a 9–10W LED equivalent (about 800 lumens) for a bedside lamp, or a 13–15W LED (about 1100 lumens) for a reading or task lamp. Always use dimmable LEDs if the lamp is on a dimmer."
+
+choose_intro: "Most buyers get the height wrong — a lamp that's too short looks like an afterthought, no matter what it cost."
+choose_image: "hubs/lighting-lamps/how-to-choose.jpg"
+choose_image_alt: "How to choose the right lamp for your room"
+choose_sections:
+  - heading: "By Room Size"
+    content: "Small rooms need one focused source. Medium rooms need two. Large rooms need three or more, layered. Get the size of the lamp proportional to the room — an oversized arc lamp in a small space overwhelms everything else."
+  - heading: "By Existing Style"
+    content: "Your lamp's finish should respond to the dominant material in the room. Gold and brass work with warm woods and velvet. Chrome suits cooler greys and whites. Mixing metals? Match the finish to your largest piece of furniture."
+  - heading: "By Ceiling Height"
+    content: "Low ceilings rule out chandeliers and tall pendants. For rooms under 8 feet, stay with table and floor lamps. For rooms over 10 feet, a chandelier or cluster pendant balances the vertical proportions properly."
+  - heading: "By How You Use the Room"
+    content: "A reading lamp needs directed bright light. An ambient lamp needs a shade that diffuses softly. A statement lamp needs to look beautiful when off. Decide which job this lamp is doing before you shop."
+red_flags:
+  - "ABS plastic base listed as 'metal finish' — tap it, a real metal base sounds solid"
+  - "No UL or ETL certification listed — required for all electrical items sold in the US"
+  - "Shade under 10 inches wide on a table lamp — too narrow to cast usable light"
+  - "Cord length under 5 feet on a floor lamp — almost never reaches an outlet properly"
+  - "No maximum wattage listed — means the shade material is likely flammable at higher temps"
+
+sizing_title: "Lamp Sizing Guide"
+sizing_intro: "The single most common mistake — buying a lamp that's the right style but the wrong height."
+sizing_image: "hubs/lighting-lamps/sizing-guide.jpg"
+sizing_image_alt: "Lamp height sizing guide for bedroom and living room"
+sizing_rules:
+  - label: "Bedside table lamp"
+    value: "Total height 24–30 inches. Bottom of shade at shoulder height when sitting up in bed."
+  - label: "Living room table lamp"
+    value: "Bottom of shade at eye level when seated — typically 58–64 inches from floor."
+  - label: "Floor lamp"
+    value: "58–64 inches for reading lamps. 72–78 inches for ambient or arc lamps."
+  - label: "Pendant above dining table"
+    value: "30–36 inches from table surface to bottom of pendant."
+  - label: "Chandelier height"
+    value: "Minimum 7 feet clearance from floor. In dining rooms, bottom at 6.5–7 feet from floor."
+  - label: "Chandelier width"
+    value: "Room length + width in feet = ideal chandelier diameter in inches."
+  - label: "Lampshade width"
+    value: "Shade width should be approximately twice the width of the lamp base."
+
+materials_title: "Materials + Quality Guide"
+materials_intro: "Price tells you very little about lamp quality — material composition tells you everything."
+materials_image: "hubs/lighting-lamps/materials-guide.jpg"
+materials_image_alt: "Lamp materials guide — gold, brass, crystal comparison"
+materials_sections:
+  - heading: "Polished Gold vs Brass vs Chrome"
+    content: "Polished gold is a plating or coating — bright, consistent, stays shiny. Brass is a solid alloy with a warmer, living tone that develops character over time. Chrome runs cooler and more reflective, suits modern and art deco more than traditional glam. All three work well — the choice depends on the other metals already in your room."
+  - heading: "Crystal Types"
+    content: "K9 crystal is optical-quality glass — refracts light beautifully and is the standard for quality decor lamps. Asfour is Egyptian-made premium crystal. Swarovski is the luxury tier. Acrylic looks fine in photos but lacks genuine sparkle in person. Always check the product listing for crystal type before buying."
+  - heading: "Shade Materials"
+    content: "Fabric shades (linen, silk, velvet) give the warmest, most diffused light. Glass shades create sharper, more directional pools of light. Avoid thin clear plastic shades — they yellow, crack, and create harsh hot spots. A fabric shade with a metal liner inside signals a quality construction."
+quality_signals:
+  - "Heavy base — quality lamps are noticeably weighty, not hollow-sounding"
+  - "UL or ETL safety certification visible in the product specs"
+  - "Smooth, consistent finish — no visible brush marks, seams, or drips"
+  - "Lined fabric shade — a white or silver inner liner improves light quality significantly"
+  - "Adjustable socket — allows you to use standard E26 or E12 bulbs"
+
+care_title: "Care + Maintenance"
+care_sections:
+  - heading: "Cleaning Crystal"
+    content: "Turn off and unplug first. Mix equal parts distilled water and white vinegar in a spray bottle. Spray onto a microfibre cloth — never directly on the lamp. Wipe each crystal piece individually. Dry immediately to prevent water marks. Do this 2–4 times per year."
+  - heading: "Polishing Gold and Brass Finishes"
+    content: "Wipe with a dry microfibre cloth weekly to prevent fingerprint build-up. Use a dedicated metal polish every 6 months — Renaissance Wax for plated gold, Brasso for solid brass. Avoid abrasive cloths or bathroom cleaners. They strip plating permanently and cannot be reversed."
+  - heading: "Bulb Replacement"
+    content: "Always check the maximum wattage on the shade or socket before replacing. Most glam lamps are rated for 40–60W equivalent. Use warm white LED (2700K) at 9–10W for bedside, 13–15W for reading. Always use dimmable LEDs if the lamp is on a dimmer switch."
+  - heading: "Expected Lifespan"
+    content: "A quality glam lamp with proper care lasts 10–15 years. The first component to fail is usually the socket or wiring — both replaceable by an electrician for a fraction of the replacement cost. Replace rather than repair if: the base is cracked, plating is peeling over 30% of the surface, or crystal drops are chipped at the attachment points."
+
+basics_title: "Lighting Basics"
+basics_intro: "Most buyers focus on how a lamp looks. These are the numbers that determine how it actually works."
+basics_sections:
+  - heading: "Lumens vs Watts"
+    content: "Watts measure energy use — not brightness. With LED bulbs now standard, watts are almost meaningless. Lumens measure actual light output. For bedside: 400–500 lumens. For reading: 800–1100 lumens. For ambient room lighting: 1500+ lumens. Most glam table lamps are designed for the 800–1100 lumen range."
+  - heading: "Colour Temperature"
+    content: "Measured in Kelvin. For glam interiors, use 2700K (warm white) exclusively. It makes gold and crystal finishes glow and creates the warm atmosphere associated with luxury hotels. Never use 5000K+ daylight bulbs in decorative lamps — they make gold look greenish and kill the ambience entirely."
+  - heading: "Layered Lighting"
+    content: "Layer 1: ambient (overhead source). Layer 2: task (table or floor lamp). Layer 3: accent (sconces, candles, LED strips). Put each layer on a separate switch or dimmer. This is the one technique that separates designed rooms from ordinary ones — and it costs nothing extra if you plan it when buying."
+  - heading: "Dimmer Compatibility"
+    content: "Not all LED bulbs are dimmable — check the packaging. If you're installing a dimmer switch, buy LEDs labelled 'dimmable' specifically. Most quality glam lamps use E26 or E12 sockets — both have a wide range of dimmable LED options available."
+
+price_tiers:
+  - range: "$500+ Luxury"
+    content: "Solid brass or solid bronze construction, Swarovski or Asfour crystal, hand-sewn silk shades, designer names. These are investment pieces bought once and kept forever. The finishing is noticeably different in person."
+    highlight: false
+  - range: "$150–$500"
+    content: "Real metal bases, premium K9 crystal, lined fabric shades, noticeably better finishing quality. These become focal points — designed to be admired as much as used. Expect 10+ year lifespans with proper care."
+    highlight: false
+  - range: "$50–$150 Sweet Spot"
+    content: "Real metal or quality zinc alloy bases, K9 crystal accents, UL-certified wiring, proper shade construction. This is where 80% of our picks live. The quality-to-price ratio is best at this level for most buyers."
+    highlight: true
+  - range: "Under $50"
+    content: "ABS plastic bases with metallic paint, paper or thin fabric shades. Fine for a rental, a guest room, or testing a style before committing. Not suitable as a primary statement piece."
+    highlight: false
+
+related_hubs:
+  - name: "Mirrors"
+    url: "/mirrors/"
+  - name: "Wall Décor"
+    url: "/wall-decor/"
+  - name: "Rugs"
+    url: "/rugs/"
+  - name: "Curtains"
+    url: "/curtains/"
+  - name: "Candles"
+    url: "/candles/"
+  - name: "Vases"
+    url: "/vases/"
 ---
 
 Lighting is the single most transformative element in any room — more than furniture, paint colour, or accessories. The right lamp doesn't just illuminate a space; it defines the mood, flatters the other pieces in the room, and tells visitors exactly what kind of home this is.
