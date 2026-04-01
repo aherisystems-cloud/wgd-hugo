@@ -70,12 +70,12 @@ featured_products:
   - name: Crystal Glass Soap Dispenser Set
     benefit: 'Replaces plastic, adds instant countertop glamour'
     label: Mid-Range ($$)
-    image: https://images.wowglamdecor.com/products/crystal-glass-soap-dispenser-set
+    image: sectionproducts/crystal-glass-soap-dispenser-set
     link: 'https://amzn.to/4sqP7YB'
   - name: Luxury Scented Candle and Diffuser Set
     benefit: 'Five-star hotel scent, highest value per dollar'
     label: Budget ($)
-    image: https://images.wowglamdecor.com/products/luxury-scented-candle-diffuser-set
+    image: section-vanityproducts/luxury-scented-candle-diffuser-set
     link: 'https://amzn.to/4d6JwlL'
   - name: Framed Botanical Gold-Tone Wall Art
     benefit: 'Finishes the room, ready to hang out of the box'
@@ -84,8 +84,7 @@ featured_products:
     link: 'https://amzn.to/4rSirqZ'
 ---
 
-![A stunning luxury glam bathroom with gold accents, Hollywood vanity mirror, marble tray, and spa-like atmosphere](https://images.wowglamdecor.com/blog
-/hero-luxury-glam-bathroom-decor)
+![A stunning luxury glam bathroom with gold accents, Hollywood vanity mirror, marble tray, and spa-like atmosphere](https://images.wowglamdecor.com/blog/hero-luxury-glam-bathroom-decor)
 
 ---
 
@@ -175,15 +174,13 @@ Replace the random with the intentional and your bathroom transforms overnight. 
 
 ---
 
-![Luxury glam bathroom vanity setup with Hollywood LED mirror glowing, gold accents, and marble countertop styling](https://images.wowglamdecor.com/blog
-/section-vanity-mirror-bathroom-glow)
+![Luxury glam bathroom vanity setup with Hollywood LED mirror glowing, gold accents, and marble countertop styling](https://images.wowglamdecor.com/blog/section-vanity-mirror-bathroom-glow)
 
 ## The Hollywood LED Vanity Mirror: The One Upgrade That Changes Everything
 
 ### Hollywood LED Vanity Mirror — Best Overall
 
-![Hollywood LED vanity mirror in gold frame glowing warmly above a bathroom vanity with gold accessories](https://images.wowglamdecor.com/blog
-/hollywood-led-vanity-mirror)
+![Hollywood LED vanity mirror in gold frame glowing warmly above a bathroom vanity with gold accessories](https://images.wowglamdecor.com/blog/hollywood-led-vanity-mirror)
 
 **Price:** $$$
 
