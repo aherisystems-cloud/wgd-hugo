@@ -1,52 +1,36 @@
 {{/*
   layouts/partials/related-guides.html
-  ────────────────────────────────────────────────────────────────────────────
-  Shows relevant blog posts on hub pages and pSEO pages.
-  Place inside hub-body / pseo-body, before the newsletter block.
+  ─────────────────────────────────────────────────────────────
+  Shows relevant blog posts on hub and pSEO pages.
 
   Usage — hub pages:
     {{ partial "related-guides.html" (dict "page" . "cat" .Params.category_slug "limit" 3) }}
 
   Usage — pSEO pages:
     {{ partial "related-guides.html" (dict "page" . "cat" .Params.category_slug "room" .Params.filter_value "limit" 3) }}
-
-  Matching logic:
-    1. Posts with matching product_category AND room/style
-    2. Posts with matching product_category only
-    3. Posts tagged with the category name
-  ────────────────────────────────────────────────────────────────────────────
 */}}
 
-{{ $page   := .page }}
-{{ $cat    := .cat    | default "" }}
-{{ $room   := .room   | default "" }}
-{{ $style  := .style  | default "" }}
-{{ $limit  := .limit  | default 3 }}
+{{ $cat   := .cat   | default "" }}
+{{ $room  := .room  | default "" }}
+{{ $style := .style | default "" }}
+{{ $limit := .limit | default 3 }}
 
-{{/* Collect all published blog posts */}}
+{{/* All published posts — note: no leading dot in where key */}}
 {{ $posts := where site.RegularPages "Section" "posts" }}
-{{ $posts  = where $posts ".Params.draft" "ne" true }}
+{{ $posts  = where $posts "Params.draft" "ne" true }}
 
-{{/* Score each post by relevance */}}
 {{ $scored := slice }}
 {{ range $posts }}
-  {{ $score := 0 }}
-  {{ $postCat   := .Params.product_category | default "" }}
-  {{ $postRoom  := .Params.room | default "" }}
-  {{ $postStyle := .Params.style | default "" }}
-  {{ $postTags  := .Params.tags | default (slice) }}
+  {{ $score    := 0 }}
+  {{ $postCat  := .Params.product_category | default "" }}
+  {{ $postRoom := .Params.room  | default "" }}
+  {{ $postSty  := .Params.style | default "" }}
+  {{ $postTags := .Params.tags  | default (slice) }}
 
-  {{/* Category match */}}
-  {{ if eq $postCat $cat }}{{ $score = add $score 3 }}{{ end }}
-
-  {{/* Room match */}}
-  {{ if and $room (eq $postRoom $room) }}{{ $score = add $score 2 }}{{ end }}
-
-  {{/* Style match */}}
-  {{ if and $style (eq $postStyle $style) }}{{ $score = add $score 2 }}{{ end }}
-
-  {{/* Tag matches */}}
-  {{ if in $postTags $cat }}{{ $score = add $score 1 }}{{ end }}
+  {{ if and $cat (eq $postCat $cat) }}{{ $score = add $score 3 }}{{ end }}
+  {{ if and $room  (eq $postRoom $room)  }}{{ $score = add $score 2 }}{{ end }}
+  {{ if and $style (eq $postSty  $style) }}{{ $score = add $score 2 }}{{ end }}
+  {{ if and $cat  (in $postTags $cat)  }}{{ $score = add $score 1 }}{{ end }}
   {{ if and $room (in $postTags $room) }}{{ $score = add $score 1 }}{{ end }}
 
   {{ if gt $score 0 }}
@@ -54,9 +38,7 @@
   {{ end }}
 {{ end }}
 
-{{/* Sort by score descending, take limit */}}
-{{ $sorted  := sort $scored "score" "desc" }}
-{{ $display := first $limit $sorted }}
+{{ $display := first $limit (sort $scored "score" "desc") }}
 
 {{ if $display }}
 <section class="rg-block" aria-label="Related guides">

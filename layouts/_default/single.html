@@ -1,13 +1,13 @@
 {{ $primaryCat := "Blog" }}
 {{ with .Params.categories }}{{ $primaryCat = index . 0 }}{{ end }}
-{{ $catSlug := $primaryCat | urlize }}
-{{ $slug := .Params.slug | default .File.BaseFileName }}
-{{ $img := partial "imgpath.html" .Params.featured_image }}
-{{ $imgAlt := .Params.featured_image_alt | default .Title }}
+{{ $catSlug    := $primaryCat | urlize }}
+{{ $slug       := .Params.slug | default .File.BaseFileName }}
+{{ $img        := partial "imgpath.html" .Params.featured_image }}
+{{ $imgAlt     := .Params.featured_image_alt | default .Title }}
 {{ $authorName := .Params.author_name | default "Wow Glam Decor Team" }}
 {{ $authorRole := .Params.author_role | default "Interior Design Expert" }}
-{{ $authorBio := .Params.author_bio | default "Passionate about creating beautiful, functional living spaces on any budget." }}
-{{ $keywords := delimit (.Params.keywords | default (slice)) ", " }}
+{{ $authorBio  := .Params.author_bio  | default "Passionate about creating beautiful, functional living spaces on any budget." }}
+{{ $keywords   := delimit (.Params.keywords | default (slice)) ", " }}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,27 +44,27 @@
 <meta name="twitter:image:alt" content="{{ $imgAlt }}"/>
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": {{ .Title | jsonify }},
-  "description": {{ .Description | jsonify }},
-  "image": {"@type":"ImageObject","url":"https://wowglamdecor.com{{ $img }}","width":1200,"height":630},
-  "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
-  "dateModified": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
-  "author": {"@type":"Person","name":{{ $authorName | jsonify }},"url":"https://wowglamdecor.com/about.html"},
-  "publisher": {"@type":"Organization","name":"Wow Glam Decor","url":"https://wowglamdecor.com","logo":{"@type":"ImageObject","url":"https://wowglamdecor.com/content/images/logo.jpg","width":200,"height":60}},
-  "mainEntityOfPage": {"@type":"WebPage","@id":"https://wowglamdecor.com/posts/{{ $slug }}.html"},
-  "url": "https://wowglamdecor.com/posts/{{ $slug }}.html",
-  "keywords": {{ $keywords | jsonify }},
-  "articleSection": {{ $primaryCat | jsonify }},
-  "inLanguage": "en-US"
+  "@context":"https://schema.org",
+  "@type":"BlogPosting",
+  "headline":{{ .Title | jsonify }},
+  "description":{{ .Description | jsonify }},
+  "image":{"@type":"ImageObject","url":"https://wowglamdecor.com{{ $img }}","width":1200,"height":630},
+  "datePublished":"{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+  "dateModified":"{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+  "author":{"@type":"Person","name":{{ $authorName | jsonify }},"url":"https://wowglamdecor.com/about.html"},
+  "publisher":{"@type":"Organization","name":"Wow Glam Decor","url":"https://wowglamdecor.com","logo":{"@type":"ImageObject","url":"https://wowglamdecor.com/content/images/logo.jpg","width":200,"height":60}},
+  "mainEntityOfPage":{"@type":"WebPage","@id":"https://wowglamdecor.com/posts/{{ $slug }}.html"},
+  "url":"https://wowglamdecor.com/posts/{{ $slug }}.html",
+  "keywords":{{ $keywords | jsonify }},
+  "articleSection":{{ $primaryCat | jsonify }},
+  "inLanguage":"en-US"
 }
 </script>
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
+  "@context":"https://schema.org",
+  "@type":"BreadcrumbList",
+  "itemListElement":[
     {"@type":"ListItem","position":1,"name":"Home","item":"https://wowglamdecor.com"},
     {"@type":"ListItem","position":2,"name":"Blog","item":"https://wowglamdecor.com/posts/"},
     {"@type":"ListItem","position":3,"name":{{ $primaryCat | jsonify }},"item":"https://wowglamdecor.com/categories/{{ $catSlug }}.html"},
@@ -78,18 +78,13 @@
 <link rel="stylesheet" href="/css/navbar.css">
 <link rel="stylesheet" href="/css/linkify.css">
 <style>
-:root{
-  --brand:#7e0882;--brand-dark:#5a0660;--brand-light:#a020a8;--brand-pale:rgba(126,8,130,0.07);
-  --look:#0f766e;--look-dark:#065f46;--look-pale:rgba(15,118,110,0.07);
-  --white:#fff;--off-white:#fafafa;--gray-100:#f5f5f5;--gray-200:#eee;--gray-600:#757575;--gray-800:#424242;--gray-900:#212121;
-  --shadow-sm:0 2px 12px rgba(126,8,130,0.08);--shadow-md:0 8px 32px rgba(126,8,130,0.13);--radius:16px;--ease:cubic-bezier(0.4,0,0.2,1)
-}
+:root{--brand:#7e0882;--brand-dark:#5a0660;--brand-light:#a020a8;--brand-pale:rgba(126,8,130,0.07);--look:#0f766e;--white:#fff;--off-white:#fafafa;--gray-100:#f5f5f5;--gray-200:#eee;--gray-600:#757575;--gray-800:#424242;--gray-900:#212121;--shadow-sm:0 2px 12px rgba(126,8,130,0.08);--shadow-md:0 8px 32px rgba(126,8,130,0.13);--radius:16px;--ease:cubic-bezier(0.4,0,0.2,1)}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{overflow-x:hidden}
 body{font-family:'Nunito',sans-serif;background:var(--off-white);color:var(--gray-900);line-height:1.75;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 img{max-width:100%;height:auto;display:block}
-/* TOC float */
+/* floating TOC */
 .toc-float{display:none;position:fixed;left:24px;width:220px;background:#fff;border-radius:12px;box-shadow:var(--shadow-md);padding:18px 16px;z-index:90;max-height:70vh;overflow-y:auto}
 .toc-float h5{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--brand);margin-bottom:12px}
 .toc-float ul{list-style:none;display:flex;flex-direction:column;gap:4px}
@@ -105,17 +100,19 @@ img{max-width:100%;height:auto;display:block}
 .breadcrumb{max-width:860px;margin:0 auto;padding:12px 24px 0;font-size:13px;color:var(--gray-600);display:flex;flex-wrap:wrap;align-items:center;gap:4px}
 .breadcrumb a{color:var(--brand);font-weight:600}
 .breadcrumb span{opacity:.5}
-/* article */
+/* article layout */
 .article-header{max-width:860px;margin:0 auto;padding:24px 24px 0;text-align:center}
 .category-badge{display:inline-block;background:var(--brand);color:#fff;font-size:12px;font-weight:800;padding:5px 16px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px}
-.article-title{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:900;line-height:1.2;margin-bottom:14px;color:var(--gray-900)}
+.article-title{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:900;line-height:1.2;margin-bottom:14px}
 .article-meta{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--gray-600);font-weight:600;margin-bottom:20px}
 .disclosure{max-width:860px;margin:0 auto;padding:0 24px 20px}
-.disclosure-box{background:rgba(126,8,130,.06);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;font-weight:600;color:var(--gray-700,#555)}
+.disclosure-box{background:rgba(126,8,130,.06);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;font-weight:600;color:var(--gray-800)}
 .disclosure-box a{color:var(--brand)}
+/* two-col layout */
 .content-wrapper{max-width:1200px;margin:0 auto;padding:0 24px 80px;display:grid;grid-template-columns:1fr 280px;gap:48px;align-items:start}
 .article-content{min-width:0}
 .featured-image{width:100%;border-radius:12px;margin-bottom:28px;max-height:520px;object-fit:cover}
+/* post body */
 .content-body{font-size:1.05rem;line-height:1.8;color:var(--gray-800)}
 .content-body h2{font-size:1.5rem;font-weight:900;color:var(--gray-900);margin:36px 0 14px}
 .content-body h3{font-size:1.2rem;font-weight:800;color:var(--gray-900);margin:28px 0 10px}
@@ -131,37 +128,26 @@ img{max-width:100%;height:auto;display:block}
 .content-body td{padding:10px 14px;border-bottom:1px solid var(--gray-200)}
 .content-body tr:hover td{background:var(--brand-pale)}
 .table-scroll-wrap{overflow-x:auto;margin:24px 0}
-/* post figure */
-.post-figure{position:relative;margin:28px 0}
-.post-figure figcaption{font-size:13px;color:var(--gray-600);text-align:center;margin-top:8px;font-style:italic}
-.img-share-btns{position:absolute;top:10px;right:10px;display:flex;gap:6px;opacity:0;transition:opacity .2s}
-.post-figure:hover .img-share-btns{opacity:1}
-.img-share-btn{background:rgba(0,0,0,.55);color:#fff;border:none;border-radius:6px;padding:5px 10px;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:4px;transition:background .2s}
-.img-share-btn:hover{background:var(--brand)}
-/* newsletter in post */
+/* in-post widgets */
 .newsletter-box{background:linear-gradient(135deg,var(--brand-dark),var(--brand-light));color:#fff;border-radius:var(--radius);padding:28px 24px;text-align:center;margin:36px 0}
 .newsletter-box p{font-size:1rem;font-weight:700;margin-bottom:6px}
 .newsletter-box .nl-sub{font-size:.9rem;opacity:.85;margin-bottom:16px}
 .newsletter-box button{background:#fff;color:var(--brand);border:none;padding:11px 24px;border-radius:8px;font-family:'Nunito',sans-serif;font-size:.95rem;font-weight:800;cursor:pointer;transition:all .2s}
-.newsletter-box button:hover{background:var(--brand-pale)}
-/* share */
 .share-section{margin:28px 0}
-.share-section h4{font-size:14px;font-weight:800;margin-bottom:12px;color:var(--gray-700,#555)}
+.share-section h4{font-size:14px;font-weight:800;margin-bottom:12px;color:var(--gray-800)}
 .share-buttons{display:flex;flex-wrap:wrap;gap:8px}
 .share-btn{padding:9px 16px;border-radius:8px;border:2px solid var(--gray-200);background:#fff;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
 .share-btn:hover{border-color:var(--brand);color:var(--brand)}
-/* tags */
 .tags-section{margin:24px 0}
-.tags-section h4{font-size:13px;font-weight:800;color:var(--gray-700,#555);margin-bottom:10px}
+.tags-section h4{font-size:13px;font-weight:800;color:var(--gray-600);margin-bottom:10px}
 .tags{display:flex;flex-wrap:wrap;gap:8px}
 .tag{background:var(--brand-pale);color:var(--brand);padding:5px 14px;border-radius:20px;font-size:13px;font-weight:700;transition:all .2s}
 .tag:hover{background:var(--brand);color:#fff}
-/* author */
 .author-box{background:var(--gray-100);border-radius:var(--radius);padding:24px;margin:32px 0}
 .author-box h3{font-size:1rem;font-weight:900;margin-bottom:4px}
 .author-role{font-size:12px;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
 .author-box p{font-size:.9rem;color:var(--gray-600);line-height:1.7}
-/* related posts */
+/* related posts (JS-loaded) */
 .related-posts{margin-top:32px}
 .related-posts h3{font-size:1.2rem;font-weight:900;margin-bottom:16px}
 .related-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
@@ -174,6 +160,27 @@ img{max-width:100%;height:auto;display:block}
 .related-card-link{font-size:.82rem;color:var(--brand);font-weight:700}
 /* sidebar */
 .sidebar{position:sticky;top:90px;align-self:start}
+.sidebar-product-card{background:#fff;border-radius:12px;box-shadow:var(--shadow-sm);overflow:hidden;margin-bottom:16px;transition:all .2s}
+.sidebar-product-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
+.sidebar-product-label{display:flex;align-items:center;justify-content:space-between;padding:8px 14px 0;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px}
+.label-editors-pick{color:var(--brand)}.label-best-value{color:#1D4ED8}.label-limited{color:#DC2626}
+.sidebar-product-inner{display:flex;gap:12px;padding:12px 14px}
+.sidebar-product-image{width:80px;height:80px;object-fit:contain;flex-shrink:0;background:var(--gray-100);border-radius:8px}
+.sidebar-product-info{flex:1;min-width:0}
+.sidebar-product-info h4{font-size:.82rem;font-weight:700;line-height:1.3;margin-bottom:6px}
+.sidebar-benefit{font-size:.72rem;color:var(--gray-600);margin:4px 0 0}
+.sidebar-related{display:flex;gap:12px;padding:12px;background:#fff;border:1px solid var(--gray-200);border-radius:12px;margin-bottom:16px;text-decoration:none;color:inherit;transition:all .2s}
+.sidebar-related:hover{border-color:var(--brand);transform:translateY(-2px)}
+.sidebar-related img{width:60px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0}
+.sidebar-related-body{flex:1;min-width:0}
+.sidebar-related-cat{font-size:10px;font-weight:800;text-transform:uppercase;color:var(--brand);margin-bottom:4px}
+.sidebar-related-title{font-size:13px;font-weight:700;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sidebar-related-link{font-size:12px;color:var(--brand);font-weight:700;margin-top:4px;display:block}
+/* progress + back to top */
+.progress-bar{position:fixed;top:0;left:0;width:0;height:3px;background:linear-gradient(90deg,var(--brand),var(--brand-light));z-index:999;transition:width .1s}
+.back-to-top{position:fixed;bottom:24px;right:24px;width:50px;height:50px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;opacity:0;visibility:hidden;transition:all .3s;box-shadow:var(--shadow-md);border:none}
+.back-to-top.visible{opacity:1;visibility:visible}
+.back-to-top:hover{background:var(--brand-dark);transform:translateY(-4px)}
 /* footer */
 footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
 .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:40px}
@@ -190,31 +197,8 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
 .footer-bottom{max-width:1200px;margin:0 auto;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;font-size:13px;opacity:.55;flex-wrap:wrap;gap:12px}
 .footer-bottom a{color:rgba(255,255,255,.55)}
 .footer-legal{display:flex;gap:20px}
-.progress-bar{position:fixed;top:0;left:0;width:0;height:3px;background:linear-gradient(90deg,var(--brand),var(--brand-light));z-index:999;transition:width .1s}
-.back-to-top{position:fixed;bottom:24px;right:24px;width:50px;height:50px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;opacity:0;visibility:hidden;transition:all .3s;box-shadow:var(--shadow-md);border:none}
-.back-to-top.visible{opacity:1;visibility:visible}
-.back-to-top:hover{background:var(--brand-dark);transform:translateY(-4px)}
-/* sidebar product styles (sidebar-products.html partial needs these) */
-.sidebar-product-card{background:#fff;border-radius:12px;box-shadow:var(--shadow-sm);overflow:hidden;margin-bottom:16px;transition:all .2s}
-.sidebar-product-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md)}
-.sidebar-product-label{display:flex;align-items:center;justify-content:space-between;padding:8px 14px 0;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px}
-.label-editors-pick{color:var(--brand)}
-.label-best-value{color:#1D4ED8}
-.label-limited{color:#DC2626}
-.sidebar-product-inner{display:flex;gap:12px;padding:12px 14px}
-.sidebar-product-image{width:80px;height:80px;object-fit:contain;flex-shrink:0;background:var(--gray-100);border-radius:8px}
-.sidebar-product-info{flex:1;min-width:0}
-.sidebar-product-info h4{font-size:.82rem;font-weight:700;line-height:1.3;margin-bottom:6px}
-.sidebar-benefit{font-size:.72rem;color:var(--gray-600);margin:4px 0 0}
-.sidebar-related{display:flex;gap:12px;padding:12px;background:#fff;border:1px solid var(--gray-200);border-radius:12px;margin-bottom:16px;text-decoration:none;color:inherit;transition:all .2s}
-.sidebar-related:hover{border-color:var(--brand);transform:translateY(-2px)}
-.sidebar-related img{width:60px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0}
-.sidebar-related-body{flex:1;min-width:0}
-.sidebar-related-cat{font-size:10px;font-weight:800;text-transform:uppercase;color:var(--brand);margin-bottom:4px}
-.sidebar-related-title{font-size:13px;font-weight:700;line-height:1.4;color:var(--gray-900);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.sidebar-related-link{font-size:12px;color:var(--brand);font-weight:700;margin-top:4px;display:block}
 @media(max-width:1100px){.content-wrapper{grid-template-columns:1fr}.sidebar{position:static}.footer-grid{grid-template-columns:1fr 1fr}.related-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:768px){.article-content{padding:0}.article-title{font-size:1.5rem}.content-body{font-size:1rem}.content-wrapper{padding:0 16px 60px}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;text-align:center}.related-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.article-title{font-size:1.5rem}.content-body{font-size:1rem}.content-wrapper{padding:0 16px 60px}.footer-grid{grid-template-columns:1fr}.footer-bottom{flex-direction:column;text-align:center}.related-grid{grid-template-columns:1fr}}
 ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--gray-100)}::-webkit-scrollbar-thumb{background:var(--brand);border-radius:4px}
 </style>
 </head>
@@ -238,9 +222,9 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
   <a href="/categories/{{ $catSlug }}.html" class="category-badge">{{ $primaryCat }}</a>
   <h1 class="article-title">{{ .Title }}</h1>
   <div class="article-meta">
-    <span class="meta-item">👤 {{ $authorName }}</span>
-    <span class="meta-item">🗓 {{ .Date.Format "January 2, 2006" }}</span>
-    <span class="meta-item">⏱️ {{ .ReadingTime }} min read</span>
+    <span>👤 {{ $authorName }}</span>
+    <span>🗓 {{ .Date.Format "January 2, 2006" }}</span>
+    <span>⏱️ {{ .ReadingTime }} min read</span>
   </div>
 </header>
 
@@ -259,17 +243,20 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
       <ol id="tocListInline"></ol>
     </div>
 
-    <div class="content-body post-content">{{ $c := .Content }}
-{{ $c = $c | replaceRE `(?s)<h2[^>]*>\s*Table of Contents\s*</h2>\s*(<ol>.*?</ol>|<ul>.*?</ul>|<nav>.*?</nav>)` "" }}
-{{ $c = $c | replaceRE `(?s)<h3[^>]*>Look\s+\d+:(?:[^<]|<(?:[^h]|h[^23]))*` "" }}
-{{ $c = $c | replaceRE `(?s)<h2[^>]*>\s*(?:🖼️?\s*)?(?:IMAGE GENERATION LIST|Image Generation List)\s*</h2>.*?(?:<h2|$)` "" }}
-{{ $c = $c | replaceRE `(?s)<h2[^>]*>\s*(?:🔗\s*)?(?:AFFILIATE LINKS LIST|Affiliate Links List|AFFILIATE LINKS|Affiliate Links)\s*</h2>.*?(?:<h2|$)` "" }}
-{{ $c = $c | replaceRE `(?s)<h2[^>]*>\s*(?:📌\s*)?(?:PINTEREST PIN DATA|Pinterest Pin Data)\s*</h2>.*?(?:<h2|$)` "" }}
-{{ $c = $c | replaceRE `(?s)<p[^>]*>\s*\*\*Primary Pin Description.*?(?:<h2|$)` "" }}
-{{ $c = $c | replaceRE `(?s)<h2[^>]*>\s*Shop This Look\s*</h2>.*?(?:<h2|$)` "" }}
-{{ $c | safeHTML }}</div>
+    {{/* ── POST BODY — class post-content enables linkify.js ── */}}
+    <div class="content-body post-content">
+      {{ $c := .Content }}
+      {{ $c = $c | replaceRE `(?s)<h2[^>]*>\s*Table of Contents\s*</h2>\s*(<ol>.*?</ol>|<ul>.*?</ul>|<nav>.*?</nav>)` "" }}
+      {{ $c = $c | replaceRE `(?s)<h3[^>]*>Look\s+\d+:(?:[^<]|<(?:[^h]|h[^23]))*` "" }}
+      {{ $c = $c | replaceRE `(?s)<h2[^>]*>\s*(?:🖼️?\s*)?(?:IMAGE GENERATION LIST|Image Generation List)\s*</h2>.*?(?:<h2|$)` "" }}
+      {{ $c = $c | replaceRE `(?s)<h2[^>]*>\s*(?:🔗\s*)?(?:AFFILIATE LINKS LIST|Affiliate Links List|AFFILIATE LINKS|Affiliate Links)\s*</h2>.*?(?:<h2|$)` "" }}
+      {{ $c = $c | replaceRE `(?s)<h2[^>]*>\s*(?:📌\s*)?(?:PINTEREST PIN DATA|Pinterest Pin Data)\s*</h2>.*?(?:<h2|$)` "" }}
+      {{ $c = $c | replaceRE `(?s)<p[^>]*>\s*\*\*Primary Pin Description.*?(?:<h2|$)` "" }}
+      {{ $c = $c | replaceRE `(?s)<h2[^>]*>\s*Shop This Look\s*</h2>.*?(?:<h2|$)` "" }}
+      {{ $c | safeHTML }}
+    </div>
 
-    {{/* ── RELATED PRODUCTS — auto from frontmatter ── */}}
+    {{/* ── RELATED PRODUCTS — auto from post frontmatter ── */}}
     {{ partial "related-products.html" . }}
 
     <div class="newsletter-box">
@@ -281,11 +268,11 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
     <div class="share-section">
       <h4>📤 Share This Article</h4>
       <div class="share-buttons">
-        <button class="share-btn facebook" onclick="shareOn('facebook')">📘 Facebook</button>
-        <button class="share-btn whatsapp" onclick="shareOn('whatsapp')">💬 WhatsApp</button>
-        <button class="share-btn twitter" onclick="shareOn('twitter')">🐦 Tweet</button>
-        <button class="share-btn pinterest" onclick="shareOn('pinterest')">📌 Pin</button>
-        <button class="share-btn email" onclick="shareOn('email')">✉️ Email</button>
+        <button class="share-btn" onclick="shareOn('facebook')">📘 Facebook</button>
+        <button class="share-btn" onclick="shareOn('whatsapp')">💬 WhatsApp</button>
+        <button class="share-btn" onclick="shareOn('twitter')">🐦 Tweet</button>
+        <button class="share-btn" onclick="shareOn('pinterest')">📌 Pin</button>
+        <button class="share-btn" onclick="shareOn('email')">✉️ Email</button>
       </div>
     </div>
 
@@ -310,8 +297,14 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
       <button class="ml-onclick-form" onclick="ml('show', 'ygWEME', true)">🏡 Join the Wow Glam Community →</button>
     </div>
 
-    {{/* ── RELATED GUIDES — auto from post category/room/style ── */}}
-    {{ partial "related-guides.html" (dict "page" . "cat" .Params.product_category "room" .Params.room "style" .Params.style "limit" 3) }}
+    {{/* ── RELATED GUIDES — auto from blog posts by category ── */}}
+    {{ partial "related-guides.html" (dict
+        "page"  .
+        "cat"   .Params.product_category
+        "room"  .Params.room
+        "style" .Params.style
+        "limit" 3
+    ) }}
 
     <div class="related-posts" id="relatedPosts" style="display:none">
       <h3>💕 You May Also Love</h3>
@@ -333,22 +326,11 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
     <div class="footer-brand">
       <img src="/content/images/logo.jpg" alt="Wow Glam Decor" class="footer-logo">
       <p>Your trusted source for home decor inspiration, honest product reviews, and curated recommendations for every style and budget.</p>
-      <div class="social-row">
-        <a href="#" class="social-btn">📘</a><a href="#" class="social-btn">📷</a><a href="#" class="social-btn">🐦</a><a href="#" class="social-btn">📌</a>
-      </div>
+      <div class="social-row"><a href="#" class="social-btn">📘</a><a href="#" class="social-btn">📷</a><a href="#" class="social-btn">🐦</a><a href="#" class="social-btn">📌</a></div>
     </div>
-    <div class="footer-col">
-      <h4>Shop By Room</h4>
-      <ul class="footer-links"><li><a href="/bedroom/">Bedroom</a></li><li><a href="/living-room/">Living Room</a></li><li><a href="/dining-room/">Dining Room</a></li><li><a href="/bathroom/">Bathroom</a></li><li><a href="/home-office/">Home Office</a></li></ul>
-    </div>
-    <div class="footer-col">
-      <h4>Shop By Category</h4>
-      <ul class="footer-links"><li><a href="/lamps/">Lamps</a></li><li><a href="/mirrors/">Mirrors</a></li><li><a href="/rugs/">Rugs</a></li><li><a href="/wall-decor/">Wall Décor</a></li><li><a href="/candles/">Candles</a></li></ul>
-    </div>
-    <div class="footer-col">
-      <h4>Company</h4>
-      <ul class="footer-links"><li><a href="/about.html">About</a></li><li><a href="/contact.html">Contact</a></li><li><a href="/affiliate-disclosure.html">Disclosure</a></li><li><a href="/sitemap.xml">Sitemap</a></li><li><a href="/index.xml">RSS</a></li></ul>
-    </div>
+    <div class="footer-col"><h4>Shop By Room</h4><ul class="footer-links"><li><a href="/bedroom/">Bedroom</a></li><li><a href="/living-room/">Living Room</a></li><li><a href="/dining-room/">Dining Room</a></li><li><a href="/bathroom/">Bathroom</a></li><li><a href="/home-office/">Home Office</a></li></ul></div>
+    <div class="footer-col"><h4>Shop By Category</h4><ul class="footer-links"><li><a href="/lamps/">Lamps</a></li><li><a href="/mirrors/">Mirrors</a></li><li><a href="/rugs/">Rugs</a></li><li><a href="/wall-decor/">Wall Décor</a></li><li><a href="/candles/">Candles</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul class="footer-links"><li><a href="/about.html">About</a></li><li><a href="/contact.html">Contact</a></li><li><a href="/affiliate-disclosure.html">Disclosure</a></li><li><a href="/privacy-policy.html">Privacy</a></li><li><a href="/sitemap.xml">Sitemap</a></li><li><a href="/index.xml">RSS</a></li></ul></div>
   </div>
   <div class="footer-bottom">
     <p>© {{ now.Format "2006" }} Wow Glam Decor. All rights reserved.</p>
@@ -363,44 +345,44 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
 ml('account', '2154421');
 </script>
 <script>
-window.addEventListener('scroll',()=>{const h=document.documentElement.scrollHeight-document.documentElement.clientHeight;document.getElementById('progressBar').style.width=(window.pageYOffset/h*100)+'%';},{passive:true});
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+  document.getElementById('progressBar').style.width=(window.pageYOffset/h*100)+'%';
+},{passive:true});
 const btt=document.getElementById('backToTop');
 window.addEventListener('scroll',()=>btt.classList.toggle('visible',window.pageYOffset>400),{passive:true});
 btt.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
-document.querySelectorAll('.content-body table').forEach(table=>{const w=document.createElement('div');w.className='table-scroll-wrap';table.parentNode.insertBefore(w,table);w.appendChild(table);});
+document.querySelectorAll('.content-body table').forEach(t=>{const w=document.createElement('div');w.className='table-scroll-wrap';t.parentNode.insertBefore(w,t);w.appendChild(t);});
 (function(){
-  const tocFloat=document.getElementById('tocFloat');
-  const tocList=document.getElementById('tocList');
-  const tocInlineWrap=document.getElementById('tocInlineWrap');
-  const tocListInline=document.getElementById('tocListInline');
+  const tocFloat=document.getElementById('tocFloat'),tocList=document.getElementById('tocList');
+  const tocInlineWrap=document.getElementById('tocInlineWrap'),tocListInline=document.getElementById('tocListInline');
   const headings=Array.from(document.querySelectorAll('.content-body h2'));
-  if(!headings.length||headings.length<2)return;
-  headings.forEach((h,i)=>{if(!h.id){h.id='section-'+(h.textContent.trim().toLowerCase().replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').substring(0,50))||('section-'+i);}});
+  if(headings.length<2)return;
+  headings.forEach((h,i)=>{if(!h.id){h.id='section-'+(h.textContent.trim().toLowerCase().replace(/[^\w\s-]/g,'').replace(/\s+/g,'-').substring(0,50))||('s'+i);}});
   const navbar=document.querySelector('.navbar');
   function navH(){return navbar?navbar.getBoundingClientRect().height+16:80;}
-  function scrollToHeading(h){window.scrollTo({top:h.getBoundingClientRect().top+window.pageYOffset-navH(),behavior:'smooth'});}
+  function scrollTo(h){window.scrollTo({top:h.getBoundingClientRect().top+window.pageYOffset-navH(),behavior:'smooth'});}
   if(tocFloat&&tocList){
     tocFloat.style.display='block';
-    headings.forEach(h=>{const li=document.createElement('li');const a=document.createElement('a');a.href='#'+h.id;a.textContent=h.textContent.replace(/^[\d]+[\.\:\s]+/,'').trim();a.addEventListener('click',e=>{e.preventDefault();scrollToHeading(h);history.pushState(null,null,'#'+h.id);});li.appendChild(a);tocList.appendChild(li);});
+    headings.forEach(h=>{const li=document.createElement('li');const a=document.createElement('a');a.href='#'+h.id;a.textContent=h.textContent.replace(/^[\d]+[\.\:\s]+/,'').trim();a.addEventListener('click',e=>{e.preventDefault();scrollTo(h);history.pushState(null,null,'#'+h.id);});li.appendChild(a);tocList.appendChild(li);});
     const links=Array.from(tocList.querySelectorAll('a'));
-    const obs=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){const idx=headings.indexOf(entry.target);if(idx>=0)links.forEach((l,i)=>l.classList.toggle('active',i===idx));}});},{rootMargin:'-10% 0px -80% 0px'});
+    const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const i=headings.indexOf(e.target);if(i>=0)links.forEach((l,j)=>l.classList.toggle('active',j===i));}});},{rootMargin:'-10% 0px -80% 0px'});
     headings.forEach(h=>obs.observe(h));
-    function positionToc(){if(!navbar)return;tocFloat.style.top=(navbar.getBoundingClientRect().bottom+12)+'px';}
-    positionToc();window.addEventListener('scroll',positionToc,{passive:true});window.addEventListener('resize',positionToc,{passive:true});
+    function pos(){if(!navbar)return;tocFloat.style.top=(navbar.getBoundingClientRect().bottom+12)+'px';}
+    pos();window.addEventListener('scroll',pos,{passive:true});window.addEventListener('resize',pos,{passive:true});
   }
   if(tocInlineWrap&&tocListInline){
     tocInlineWrap.style.display='block';
-    headings.forEach(h=>{const li=document.createElement('li');const a=document.createElement('a');a.href='#'+h.id;a.textContent=h.textContent.replace(/^[\d]+[\.\:\s]+/,'').trim();a.addEventListener('click',e=>{e.preventDefault();scrollToHeading(h);history.pushState(null,null,'#'+h.id);});li.appendChild(a);tocListInline.appendChild(li);});
+    headings.forEach(h=>{const li=document.createElement('li');const a=document.createElement('a');a.href='#'+h.id;a.textContent=h.textContent.replace(/^[\d]+[\.\:\s]+/,'').trim();a.addEventListener('click',e=>{e.preventDefault();scrollTo(h);history.pushState(null,null,'#'+h.id);});li.appendChild(a);tocListInline.appendChild(li);});
   }
 })();
-function imgShare(platform,btn){var url=encodeURIComponent(window.location.href);var title=encodeURIComponent(document.title);var fig=btn.closest('.post-figure');var img=fig?fig.querySelector('img'):null;var imgUrl=img?encodeURIComponent(location.origin+img.getAttribute('src')):'';var links={pinterest:'https://pinterest.com/pin/create/button/?url='+url+'&media='+imgUrl+'&description='+title,whatsapp:'https://wa.me/?text='+title+'%20'+url,facebook:'https://www.facebook.com/sharer/sharer.php?u='+url};btn.style.transform='scale(0.85)';setTimeout(function(){btn.style.transform='';},150);window.open(links[platform],'_blank','width=620,height=520,noopener');}
-function shareOn(platform){const url=encodeURIComponent(window.location.href);const title=encodeURIComponent(document.title);const links={facebook:`https://www.facebook.com/sharer/sharer.php?u=${url}`,twitter:`https://twitter.com/intent/tweet?url=${url}&text=${title}`,whatsapp:`https://wa.me/?text=${title}%20${url}`,pinterest:`https://pinterest.com/pin/create/button/?url=${url}&description=${title}`,email:`mailto:?subject=${title}&body=Check%20this%20out%3A%20${url}`};if(platform==='email'){window.location.href=links.email;return;}window.open(links[platform],'_blank','width=600,height=500,noopener');}
+function shareOn(p){const u=encodeURIComponent(window.location.href),t=encodeURIComponent(document.title);const m={facebook:`https://www.facebook.com/sharer/sharer.php?u=${u}`,twitter:`https://twitter.com/intent/tweet?url=${u}&text=${t}`,whatsapp:`https://wa.me/?text=${t}%20${u}`,pinterest:`https://pinterest.com/pin/create/button/?url=${u}&description=${t}`,email:`mailto:?subject=${t}&body=Check%20this%20out%3A%20${u}`};if(p==='email'){window.location.href=m.email;return;}window.open(m[p],'_blank','width=600,height=500,noopener');}
 (function(){
-  const container=document.getElementById('relatedPosts');const grid=document.getElementById('relatedGrid');if(!container||!grid)return;
-  const currentSlug=window.location.pathname.split('/').pop().replace('.html','');
-  const currentCategory=document.querySelector('.category-badge')?document.querySelector('.category-badge').textContent.trim():'';
-  async function loadRelated(){try{const res=await fetch('/posts.json');if(!res.ok)return;const posts=await res.json();const others=posts.filter(p=>p.slug!==currentSlug);const sameCat=others.filter(p=>(p.categories||[]).some(c=>c.toLowerCase()===currentCategory.toLowerCase()));const pool=sameCat.length>=3?sameCat:others;const shuffled=pool.sort(()=>0.5-Math.random()).slice(0,4);if(!shuffled.length)return;shuffled.forEach(post=>{const img=post.featured_image||'/content/images/default-post.jpg';const cat=(post.categories&&post.categories[0])||'Decor';const url=post.url||`/posts/${post.slug}.html`;const card=document.createElement('a');card.href=url;card.className='related-card';card.innerHTML=`<img src="${img}" alt="${post.title}" class="related-card-img" loading="lazy"><div class="related-card-body"><div class="related-card-cat">${cat}</div><div class="related-card-title">${post.title}</div><span class="related-card-link">Read more →</span></div>`;grid.appendChild(card);});container.style.display='block';}catch(e){}}
-  loadRelated();
+  const c=document.getElementById('relatedPosts'),g=document.getElementById('relatedGrid');if(!c||!g)return;
+  const cur=window.location.pathname.split('/').pop().replace('.html','');
+  const curCat=document.querySelector('.category-badge')?document.querySelector('.category-badge').textContent.trim():'';
+  async function load(){try{const r=await fetch('/posts.json');if(!r.ok)return;const posts=await r.json();const others=posts.filter(p=>p.slug!==cur);const same=others.filter(p=>(p.categories||[]).some(c=>c.toLowerCase()===curCat.toLowerCase()));const pool=same.length>=3?same:others;pool.sort(()=>0.5-Math.random()).slice(0,4).forEach(post=>{const img=post.featured_image||'/content/images/bedroom-decor-ideas.png';const cat=(post.categories&&post.categories[0])||'Decor';const url=post.url||`/posts/${post.slug}.html`;const a=document.createElement('a');a.href=url;a.className='related-card';a.innerHTML=`<img src="${img}" alt="${post.title}" class="related-card-img" loading="lazy"><div class="related-card-body"><div class="related-card-cat">${cat}</div><div class="related-card-title">${post.title}</div><span class="related-card-link">Read more →</span></div>`;g.appendChild(a);});c.style.display='block';}catch(e){}}
+  load();
 })();
 </script>
 <script src="/js/mega-menu.js" defer></script>
