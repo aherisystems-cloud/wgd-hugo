@@ -1,148 +1,391 @@
-{{/*
-  HUB PAGE TEMPLATE — layouts/hub/single.html
-  ============================================
-  Used by all main category hub pages:
-    /lamps/, /mirrors/, /rugs/, /wall-decor/ etc.
-
-  Required frontmatter on each hub page:
-  ---------------------------------------
-  ---
-  title: "Glam Lamps for Every Room"
-  description: "The complete guide to glam lighting..."
-  category_slug: "lighting-lamps"        # must match D1 categories.slug
-  category_name: "Lamps"
-  hero_image: "lamps-hero.png"           # R2 key
-  product_category: "lighting-lamps"     # for shortcode auto-filter
-  room: ""                               # leave blank for all rooms
-  featured_products:                     # top 3 — static SEO fallback
-    - slug: "gold-arc-floor-lamp"
-      name: "Gold Arc Floor Lamp with Marble Base"
-      price_label: "$89–$149"
-      image_key: "gold-arc-floor-lamp.png"
-      affiliate_url: "https://amzn.to/XXX"
-      room: "living-room"
-    - slug: "crystal-table-lamp"
-      name: "Crystal Table Lamp with Gold Base"
-      price_label: "$49–$89"
-      image_key: "crystal-table-lamp.png"
-      affiliate_url: "https://amzn.to/XXX"
-      room: "bedroom"
-    - slug: "pendant-light-gold"
-      name: "Modern Gold Pendant Light"
-      price_label: "$65–$120"
-      image_key: "pendant-light-gold.png"
-      affiliate_url: "https://amzn.to/XXX"
-      room: "dining-room"
-  types:
-    - name: "Floor Lamps"
-      description: "Tall freestanding lamps that provide ambient light..."
-      best_for: "Living rooms, bedrooms, reading corners"
-    - name: "Table Lamps"
-      description: "Versatile lamps for bedside tables, desks, and consoles..."
-      best_for: "Bedrooms, home offices, side tables"
-  styles:
-    - name: "Luxury Glam"
-      slug: "luxury-glam"
-      description: "Crystal, gold, and velvet finishes..."
-      materials: "Crystal, polished gold, brass, velvet shades"
-      price_range: "$80–$500+"
-      best_room: "Bedroom, living room"
-    - name: "Modern Minimalist"
-      slug: "modern-minimalist"
-      description: "Clean lines, matte finishes, geometric forms..."
-      materials: "Matte black, brushed nickel, linen"
-      price_range: "$40–$200"
-      best_room: "Home office, living room"
-  rooms:
-    - name: "Bedroom"
-      slug: "bedroom"
-      recommendation: "Bedside table lamps (18–24\" tall) + overhead dimmer"
-      wattage: "800–1100 lumens per lamp"
-      placement: "Centre of bedside table, shade bottom at shoulder height"
-    - name: "Living Room"
-      slug: "living-room"
-      recommendation: "Arc floor lamp beside sofa + table lamp on console"
-      wattage: "1500–3000 lumens total"
-      placement: "Floor lamp to the side and slightly behind seating"
-  faqs:
-    - question: "What size lamp should I choose for a bedroom?"
-      answer: "For most bedrooms, bedside table lamps should stand 24–30 inches tall so the shade sits at eye level when you're sitting in bed. For a floor lamp, choose one that reaches 58–64 inches total height."
-    - question: "Can I use LED bulbs in crystal and glam-style lamps?"
-      answer: "Yes — and you should. Look for warm white LEDs (2700K–3000K colour temperature) which complement gold and crystal finishes beautifully. Avoid cool daylight LEDs (5000K+) as they wash out the warm glam aesthetic."
-    - question: "How do I make a room look more glamorous with lighting?"
-      answer: "Layer your lighting: one overhead source, one floor or table lamp, and one accent source (sconce or LED strip). Use warm bulbs (2700K), choose metallic finishes, and install dimmers. The combination of layered warm light is what creates that luxury hotel feel."
-    - question: "What is the difference between brass and gold lamps?"
-      answer: "Brass is a natural metal alloy (copper and zinc) with a warmer, slightly antique tone. Gold finish refers to a plating or coating in bright gold. Brass ages beautifully; gold finishes stay consistently bright. Both work well in glam interiors — it depends on the look you prefer."
-    - question: "How do I clean a crystal lamp?"
-      answer: "Turn off and unplug the lamp. Remove individual crystals if possible and wipe with a microfibre cloth dampened with a 50/50 mix of distilled water and white vinegar. Dry immediately. For the base, use a gold/chrome-safe polish. Never spray cleaner directly onto the lamp."
-  layout: hub
-  ---
-*/}}
-
-{{ define "main" }}
+{{ $R2 := "https://images.wowglamdecor.com/" }}
 {{ $cat := .Params.category_slug }}
 {{ $products := where site.Data.products "category_slug" $cat }}
 {{ $featured := .Params.featured_products }}
-{{ $R2 := "https://images.wowglamdecor.com/" }}
 
-{{/* ══════════════════════════════════════
-     JSON-LD SCHEMAS — injected via partial
-     ══════════════════════════════════════ */}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="icon" type="image/svg+xml" href="/content/images/favicon.svg">
+<link rel="icon" type="image/png" sizes="96x96" href="/content/images/favicon-96x96.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/content/images/apple-touch-icon.png">
+<link rel="shortcut icon" href="/content/images/favicon.ico">
+<link rel="manifest" href="/site.webmanifest">
+<title>{{ .Title }} | Wow Glam Decor</title>
+<meta name="description" content="{{ .Description }}"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="{{ .Permalink }}"/>
+<meta property="og:title" content="{{ .Title }} | Wow Glam Decor"/>
+<meta property="og:description" content="{{ .Description }}"/>
+<meta property="og:url" content="{{ .Permalink }}"/>
+<meta property="og:type" content="website"/>
+<meta property="og:image" content="{{ $R2 }}{{ .Params.hero_image }}"/>
+{{ with .OutputFormats.Get "RSS" }}<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $.Site.Title }}">{{ end }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/mega-menu-patch.css">
+
 {{ partial "hub-jsonld.html" . }}
 
-<article class="hub-page">
+<style>
+:root{--brand:#7e0882;--brand-dark:#5a0660;--brand-light:#a020a8;--brand-pale:rgba(126,8,130,0.07);--off-white:#fafafa;--gray-100:#f5f5f5;--gray-200:#eee;--gray-600:#757575;--gray-800:#424242;--gray-900:#212121;--shadow-sm:0 2px 12px rgba(126,8,130,0.08);--shadow-md:0 8px 32px rgba(126,8,130,0.13);--shadow-lg:0 20px 60px rgba(126,8,130,0.18);--radius:16px;--ease:cubic-bezier(0.4,0,0.2,1)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{overflow-x:hidden}
+body{font-family:'Nunito',sans-serif;background:var(--off-white);color:var(--gray-900);line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;height:auto;display:block}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--gray-100)}::-webkit-scrollbar-thumb{background:var(--brand);border-radius:4px}::-webkit-scrollbar-thumb:hover{background:var(--brand-dark)}
+.navbar{background:rgba(255,255,255,0.96);backdrop-filter:blur(16px);box-shadow:var(--shadow-sm);position:sticky;top:0;z-index:100}
+.nav-container{max-width:1400px;margin:0 auto;padding:13px 24px;display:flex;align-items:center;gap:16px}
+.logo{height:48px;flex-shrink:0}
+.search-box{position:relative;display:flex;align-items:center;margin-left:8px;flex-shrink:1;min-width:0}
+.search-input{width:240px;max-width:100%;padding:10px 40px 10px 16px;border:2px solid var(--gray-200);border-radius:24px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;transition:all .3s;background:var(--gray-100);box-sizing:border-box}
+.search-input:focus{outline:none;border-color:var(--brand);background:#fff;box-shadow:0 4px 16px rgba(126,8,130,.15);border-radius:24px 24px 0 0}
+.search-input::placeholder{color:var(--gray-600);font-weight:500}
+.search-btn{position:absolute;right:12px;background:none;border:none;cursor:pointer;font-size:18px;color:var(--gray-600);padding:6px;transition:all .2s;display:flex;align-items:center;z-index:10}
+.search-btn:hover{color:var(--brand);transform:scale(1.1)}
+.search-suggestions{position:absolute;top:100%;left:0;width:100%;min-width:280px;background:#fff;border:2px solid var(--brand);border-top:none;border-radius:0 0 16px 16px;box-shadow:0 12px 32px rgba(126,8,130,.18);max-height:420px;overflow-y:auto;z-index:999;display:none}
+.search-suggestions.active{display:block}
+.suggestion-item{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;transition:all .2s;border-bottom:1px solid var(--gray-100);text-decoration:none;color:inherit}
+.suggestion-item:last-child{border-bottom:none}
+.suggestion-item:hover,.suggestion-item.selected{background:var(--brand-pale)}
+.suggestion-thumb{width:48px;height:48px;border-radius:8px;object-fit:cover;flex-shrink:0;background:var(--gray-100)}
+.suggestion-content{flex:1;min-width:0}
+.suggestion-title{font-size:14px;font-weight:700;color:var(--gray-900);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.suggestion-meta{font-size:12px;color:var(--gray-600);display:flex;align-items:center;gap:8px}
+.suggestion-category{background:var(--brand-pale);color:var(--brand);padding:2px 8px;border-radius:10px;font-weight:700;font-size:11px}
+.search-footer{padding:12px 16px;background:var(--gray-100);text-align:center;border-radius:0 0 14px 14px}
+.search-footer a{color:var(--brand);font-weight:700;font-size:13px;display:inline-flex;align-items:center;gap:6px}
+.no-results-search{padding:32px 16px;text-align:center;color:var(--gray-600)}
+.highlight{background:rgba(126,8,130,.15);font-weight:800;color:var(--brand);padding:0 2px;border-radius:2px}
+.search-loading{padding:24px;text-align:center;color:var(--gray-600);font-size:14px}
+.loading-dots{display:inline-flex;gap:4px;margin-left:8px}
+.loading-dots span{width:6px;height:6px;background:var(--brand);border-radius:50%;animation:bounce 1.2s infinite}
+.loading-dots span:nth-child(2){animation-delay:.2s}.loading-dots span:nth-child(3){animation-delay:.4s}
+@keyframes bounce{0%,80%,100%{transform:scale(.6);opacity:.4}40%{transform:scale(1);opacity:1}}
+.nav-menu{display:flex;gap:2px;align-items:center;margin-left:auto;flex-shrink:0}
+.nav-link{color:var(--gray-800);font-weight:700;font-size:14px;padding:8px 14px;border-radius:8px;transition:all .2s;white-space:nowrap}
+.nav-link:hover,.nav-link.active{background:var(--brand-pale);color:var(--brand)}
+.mobile-menu-btn{display:none;background:none;border:none;font-size:24px;cursor:pointer;color:var(--gray-800);padding:8px;margin-left:auto;flex-shrink:0}
+.mega-menu-wrapper{position:relative}
+.mega-menu-trigger{cursor:pointer;display:flex;align-items:center;gap:4px;user-select:none}
+.mega-menu-trigger::after{content:'▾';font-size:10px;transition:transform .25s}
+.mega-menu-wrapper.mega-open .mega-menu-trigger::after{transform:rotate(180deg)}
+.mega-menu{position:fixed;top:auto;left:0;right:0;max-width:1400px;margin:0 auto;width:calc(100vw - 48px);background:#fff;box-shadow:0 12px 48px rgba(126,8,130,.18);border-top:3px solid var(--brand);border-radius:0 0 16px 16px;padding:32px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s var(--ease),visibility 0s .25s,transform .25s var(--ease);transform:translateY(-8px);z-index:998}
+.mega-menu.mega-open{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0);transition:opacity .18s var(--ease),visibility 0s 0s,transform .18s var(--ease)}
+.mega-menu-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+.mega-menu-section h4{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--brand);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--brand-pale)}
+.mega-menu-links{list-style:none;display:flex;flex-direction:column;gap:8px}
+.mega-menu-links li a{color:var(--gray-800);font-size:14px;font-weight:600;padding:6px 0;display:flex;align-items:center;gap:8px;transition:all .2s}
+.mega-menu-links li a:hover{color:var(--brand);padding-left:8px}
+.mega-menu-links .icon{font-size:16px;width:20px;text-align:center}
+.disclosure-bar{background:var(--gray-900);color:rgba(255,255,255,.85);padding:10px 24px;text-align:center;font-size:13px;font-weight:600}
+.disclosure-bar a{color:rgba(255,255,255,.6);text-decoration:underline}
+footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:40px}
+.footer-logo{height:42px;margin-bottom:14px}
+.footer-brand p{opacity:.7;font-size:14px;line-height:1.7;margin-bottom:20px}
+.social-row{display:flex;gap:10px}
+.social-btn{width:38px;height:38px;background:rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .2s;text-decoration:none}
+.social-btn:hover{background:var(--brand);transform:translateY(-2px)}
+.footer-col h4{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin-bottom:18px;opacity:.88}
+.footer-links{list-style:none}
+.footer-links li{margin-bottom:10px}
+.footer-links a{color:rgba(255,255,255,.6);font-size:14px;transition:color .2s}
+.footer-links a:hover{color:#fff}
+.footer-bottom{max-width:1200px;margin:0 auto;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;font-size:13px;opacity:.55;flex-wrap:wrap;gap:12px}
+.footer-bottom a{color:rgba(255,255,255,.55)}
+.footer-bottom a:hover{color:#fff;opacity:1}
+.footer-legal{display:flex;gap:20px}
 
-  {{/* ══════════════════════════════════════
-       ① HERO
-       ══════════════════════════════════════ */}}
-  <section class="hub-hero">
-    {{ if .Params.hero_image }}
-    <div class="hub-hero__image">
-      <img
-        src="{{ $R2 }}{{ .Params.hero_image }}"
-        alt="{{ .Title }}"
-        width="1200" height="500"
-        loading="eager"
-        fetchpriority="high"
-      >
-    </div>
-    {{ end }}
-    <div class="hub-hero__content">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <ol>
-          <li><a href="/">Home</a></li>
-          <li aria-current="page">{{ .Params.category_name }}</li>
-        </ol>
-      </nav>
-      <h1>{{ .Title }}</h1>
-      <p class="hub-hero__desc">{{ .Description }}</p>
-    </div>
-  </section>
+/* ── HUB PAGE STYLES ── */
+.hub-hero{background:linear-gradient(140deg,var(--brand-dark) 0%,var(--brand) 55%,var(--brand-light) 100%);color:#fff;padding:0;position:relative;overflow:hidden;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end}
+.hub-hero__img{position:absolute;inset:0;z-index:0}
+.hub-hero__img img{width:100%;height:100%;object-fit:cover;opacity:0.35}
+.hub-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(90,6,96,0.92) 0%,rgba(90,6,96,0.5) 60%,transparent 100%);z-index:1}
+.hub-hero-inner{max-width:960px;margin:0 auto;padding:48px 24px 40px;position:relative;z-index:2;width:100%}
+.breadcrumb{font-size:13px;margin-bottom:14px;opacity:.8}
+.breadcrumb a{color:#fff;text-decoration:underline}
+.breadcrumb span{margin:0 8px;opacity:.6}
+.hub-hero h1{font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:900;line-height:1.15;margin-bottom:14px}
+.hub-hero p.hero-desc{font-size:1.05rem;opacity:.92;max-width:620px;line-height:1.7}
+.hub-toc{background:#fff;border-bottom:1px solid var(--gray-200);padding:12px 24px;position:sticky;top:74px;z-index:89;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+.hub-toc::-webkit-scrollbar{display:none}
+.hub-toc-inner{max-width:960px;margin:0 auto;display:flex;gap:6px}
+.hub-toc a{font-size:13px;font-weight:700;color:var(--gray-600);padding:6px 14px;border-radius:20px;background:var(--gray-100);transition:all .2s;flex-shrink:0}
+.hub-toc a:hover{background:var(--brand-pale);color:var(--brand)}
+.hub-body{max-width:960px;margin:0 auto;padding:48px 24px 80px}
+.hub-section{margin-bottom:56px}
+.hub-section h2{font-size:1.75rem;font-weight:900;color:var(--gray-900);margin-bottom:8px;padding-bottom:12px;border-bottom:3px solid var(--brand-pale)}
+.hub-section h2 span{color:var(--brand)}
+.hub-section h3{font-size:1.1rem;font-weight:800;color:var(--gray-900);margin:24px 0 8px}
+.hub-section p{font-size:15px;color:var(--gray-800);line-height:1.8;margin-bottom:12px}
+.hub-section ul{margin:10px 0 14px 20px}
+.hub-section ul li{font-size:15px;color:var(--gray-800);line-height:1.75;margin-bottom:6px}
+.section-intro{font-size:15px;color:var(--gray-600);margin-bottom:24px;line-height:1.7}
+.section-img{width:100%;border-radius:var(--radius);margin:20px 0 28px;object-fit:cover;max-height:420px}
+.section-img-caption{font-size:12px;color:var(--gray-600);text-align:center;margin-top:-20px;margin-bottom:24px}
 
-  {{/* ══════════════════════════════════════
-       ② INTRODUCTION (from Markdown content)
-       ══════════════════════════════════════ */}}
-  <section class="hub-intro content-section">
-    <div class="prose">
-      {{ .Content }}
-    </div>
-  </section>
+/* Types grid — supports optional image per card */
+.types-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;margin-top:20px}
+.type-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);border-left:4px solid var(--brand);display:flex;flex-direction:column}
+.type-card--has-image{border-left:none}
+.type-card__image{overflow:hidden;aspect-ratio:3/2;background:var(--gray-100)}
+.type-card__image img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.type-card:hover .type-card__image img{transform:scale(1.05)}
+.type-card__body{padding:20px;flex:1;display:flex;flex-direction:column}
+.type-card__body h3{font-size:1rem;font-weight:800;color:var(--brand);margin:0 0 8px}
+.type-card__body p{font-size:14px;color:var(--gray-600);line-height:1.65;flex:1;margin-bottom:10px}
+.type-card__meta{font-size:13px;color:var(--gray-600);border-top:1px solid var(--gray-100);padding-top:10px;margin-top:auto}
+.meta-label{font-weight:800;color:var(--gray-800);margin-right:4px}
 
-  {{/* ══════════════════════════════════════
-       ③ TYPES OF [CATEGORY]
-       ══════════════════════════════════════ */}}
+/* Product filter bar */
+.product-filter-bar{display:flex;flex-wrap:wrap;gap:10px;background:#fff;padding:16px;border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:24px}
+.product-filter-bar input,.product-filter-bar select{padding:10px 16px;border:2px solid var(--gray-200);border-radius:24px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;background:var(--gray-100);color:var(--gray-900);cursor:pointer;transition:all .2s}
+.product-filter-bar input{flex:1;min-width:180px}
+.product-filter-bar input:focus,.product-filter-bar select:focus{outline:none;border-color:var(--brand);background:#fff}
+
+/* Product grid */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px;margin-bottom:32px}
+.product-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);transition:all .3s var(--ease);border:2px solid transparent}
+.product-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:rgba(126,8,130,.1)}
+.product-card a{display:flex;flex-direction:column;height:100%;color:inherit}
+.product-card__image{overflow:hidden;background:var(--gray-100);aspect-ratio:1/1}
+.product-card__image img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.product-card:hover .product-card__image img{transform:scale(1.06)}
+.product-card__body{padding:18px;display:flex;flex-direction:column;flex:1}
+.product-card__name{font-size:15px;font-weight:800;color:var(--gray-900);margin-bottom:8px;line-height:1.35}
+.product-card__room{font-size:12px;color:var(--brand);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;display:block}
+.product-card__price{font-size:17px;font-weight:900;color:var(--gray-900);margin-bottom:12px;display:block}
+.product-card__rating{font-size:13px;color:#f59e0b;margin-bottom:8px;display:block}
+.product-card__review-count{color:var(--gray-600);font-size:12px}
+.product-card__cta{display:inline-flex;align-items:center;gap:6px;background:var(--brand);color:#fff;padding:10px 18px;border-radius:8px;font-weight:800;font-size:14px;margin-top:auto;transition:all .2s;width:fit-content}
+.product-card:hover .product-card__cta{background:var(--brand-dark);gap:10px}
+.product-card--skeleton{pointer-events:none}
+.skeleton-img{width:100%;aspect-ratio:1/1;background:linear-gradient(90deg,var(--gray-100) 25%,var(--gray-200) 50%,var(--gray-100) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
+.skeleton-line{height:14px;border-radius:4px;background:linear-gradient(90deg,var(--gray-100) 25%,var(--gray-200) 50%,var(--gray-100) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;margin:12px 16px}
+.skeleton-line--lg{height:18px;width:80%}.skeleton-line--sm{width:50%}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.no-results{grid-column:1/-1;text-align:center;padding:48px 24px;color:var(--gray-600)}
+.no-results button{margin-top:16px;padding:10px 24px;background:var(--brand);color:#fff;border:none;border-radius:8px;font-family:'Nunito',sans-serif;font-weight:800;cursor:pointer}
+
+/* Styles grid — supports optional image per card */
+.styles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-top:20px}
+.style-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);display:flex;flex-direction:column}
+.style-card__image{overflow:hidden;aspect-ratio:3/2;background:var(--gray-100)}
+.style-card__image img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.style-card:hover .style-card__image img{transform:scale(1.05)}
+.style-card__body{padding:20px;flex:1;display:flex;flex-direction:column}
+.style-card__header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.style-card__header h3{font-size:1rem;font-weight:800;color:var(--gray-900);margin:0}
+.style-card__price{font-size:12px;font-weight:800;color:var(--brand);background:var(--brand-pale);padding:4px 10px;border-radius:12px;white-space:nowrap}
+.style-card__body p{font-size:14px;color:var(--gray-600);line-height:1.65;margin-bottom:12px;flex:1}
+.style-card__meta{font-size:13px;color:var(--gray-600);margin-bottom:14px}
+.style-card__meta dt{font-weight:800;color:var(--gray-800);float:left;margin-right:6px}
+.style-card__meta dd{margin-bottom:6px;overflow:hidden}
+.style-card__link{display:inline-flex;align-items:center;color:var(--brand);font-weight:800;font-size:14px;margin-top:auto;gap:6px;transition:gap .2s}
+.style-card__link:hover{gap:10px}
+
+/* Rooms grid — supports optional image per card */
+.rooms-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;margin-top:20px}
+.room-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);display:flex;flex-direction:column}
+.room-card__image{overflow:hidden;aspect-ratio:3/2;background:var(--gray-100)}
+.room-card__image img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.room-card:hover .room-card__image img{transform:scale(1.05)}
+.room-card__body{padding:20px;flex:1;display:flex;flex-direction:column}
+.room-card__body h3{font-size:1rem;font-weight:800;color:var(--brand);margin-bottom:10px}
+.room-card__rec{font-size:14px;color:var(--gray-800);margin-bottom:12px;line-height:1.6}
+.room-card__meta{font-size:13px;color:var(--gray-600);margin-bottom:14px}
+.room-card__meta dt{font-weight:800;color:var(--gray-800);float:left;margin-right:6px}
+.room-card__meta dd{margin-bottom:8px;overflow:hidden}
+.room-card__link{display:inline-flex;align-items:center;color:var(--brand);font-weight:800;font-size:14px;gap:4px;margin-top:auto;transition:gap .2s}
+.room-card__link:hover{gap:8px}
+
+/* How to choose */
+.choose-sections{display:flex;flex-direction:column;gap:4px}
+.red-flags{background:#fff8f8;border-left:4px solid #e53e3e;border-radius:0 10px 10px 0;padding:16px 20px;margin:12px 0;list-style:none}
+.red-flags li{color:#742a2a;font-size:14px;line-height:1.7;padding-left:20px;position:relative;margin-bottom:6px}
+.red-flags li::before{content:'✗';position:absolute;left:0;color:#e53e3e;font-weight:900}
+
+/* Sizing rules */
+.sizing-rules{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.sizing-rule{display:grid;grid-template-columns:200px 1fr;gap:16px;background:#fff;border-radius:10px;padding:14px 18px;box-shadow:var(--shadow-sm)}
+.sizing-rule__label{font-weight:800;color:var(--brand);font-size:14px}
+.sizing-rule__value{font-size:14px;color:var(--gray-800);line-height:1.6}
+
+/* Materials + care + basics — generic content sections */
+.content-sections{display:flex;flex-direction:column;gap:4px}
+.quality-signals{list-style:none;margin:12px 0;display:flex;flex-direction:column;gap:8px}
+.quality-signals li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--gray-800);line-height:1.6}
+.quality-signals li::before{content:'✓';color:var(--brand);font-weight:900;flex-shrink:0;margin-top:1px}
+
+/* Price tiers */
+.price-tiers{display:flex;flex-direction:column;gap:14px;margin:20px 0}
+.price-tier{background:#fff;border-radius:var(--radius);padding:20px 24px;box-shadow:var(--shadow-sm);border-left:4px solid var(--gray-200)}
+.price-tier--highlight{border-left-color:var(--brand);background:linear-gradient(to right,var(--brand-pale),#fff)}
+.price-tier__range{font-size:1.05rem;font-weight:900;color:var(--gray-900);margin-bottom:8px}
+.price-tier--highlight .price-tier__range{color:var(--brand)}
+.price-tier p{font-size:14px;color:var(--gray-600);line-height:1.7;margin:0}
+
+/* FAQ — accordion style */
+.faq-list{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+.faq-item{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden}
+.faq-item__question{font-size:1rem;font-weight:800;color:var(--gray-900);padding:20px 24px;line-height:1.4;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq-item__question::after{content:'▾';font-size:14px;color:var(--brand);transition:transform .2s;flex-shrink:0;margin-left:12px}
+.faq-item details[open] .faq-item__question::after{transform:rotate(180deg)}
+.faq-item__answer{padding:0 24px 20px;font-size:14px;color:var(--gray-600);line-height:1.8}
+
+/* Related + pSEO */
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:16px}
+.related-card{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:10px;padding:12px 16px;box-shadow:var(--shadow-sm);font-weight:700;font-size:14px;transition:all .2s;border:2px solid transparent}
+.related-card:hover{border-color:var(--brand);color:var(--brand);transform:translateY(-2px)}
+.pseo-links{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:16px}
+.pseo-link{display:flex;flex-direction:column;background:var(--brand-pale);border-radius:10px;padding:14px 18px;transition:all .2s;border:2px solid transparent}
+.pseo-link:hover{border-color:var(--brand);background:#fff}
+.pseo-link__room{font-weight:900;font-size:15px;color:var(--brand);margin-bottom:3px}
+.pseo-link__label{font-size:13px;color:var(--gray-600);font-weight:700}
+
+/* Intro prose */
+.hub-intro{font-size:15px;color:var(--gray-800);line-height:1.85;padding:28px 32px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:48px}
+
+/* Newsletter */
+.newsletter{background:linear-gradient(135deg,var(--brand-dark),var(--brand-light));color:#fff;border-radius:var(--radius);padding:56px;text-align:center;margin:48px 0;position:relative;overflow:hidden}
+.newsletter-inner{position:relative;z-index:2}
+.newsletter h2{font-size:2rem;font-weight:900;margin-bottom:12px}
+.newsletter p{font-size:1.1rem;opacity:.93;margin-bottom:28px}
+.nl-btn{display:inline-block;background:#fff;color:var(--brand);font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;padding:16px 36px;border-radius:10px;border:none;cursor:pointer;transition:all .25s;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.nl-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.2)}
+
+/* Pagination */
+.hub-pagination{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hub-pagination button{display:inline-flex;align-items:center;justify-content:center;min-width:40px;height:40px;padding:0 14px;border-radius:8px;font-weight:700;font-size:14px;transition:all .2s;background:#fff;border:2px solid var(--gray-200);color:var(--gray-800);font-family:'Nunito',sans-serif;cursor:pointer}
+.hub-pagination button:hover,.hub-pagination button.active{border-color:var(--brand);color:var(--brand)}
+
+@media(max-width:768px){
+  .nav-menu{display:none}.mobile-menu-btn{display:block}
+  .sizing-rule{grid-template-columns:1fr}
+  .hub-body{padding:32px 16px 64px}
+  .newsletter{padding:32px 20px}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .hub-hero-inner{padding:32px 16px 28px}
+}
+@media(max-width:1024px){.footer-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<!-- DISCLOSURE BAR -->
+<div class="disclosure-bar">
+  💡 <strong>Disclosure:</strong> This site contains affiliate links. We may earn a small commission at no extra cost to you. <a href="/affiliate-disclosure.html">Learn more</a>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/"><img src="/content/images/logo.jpg" alt="Wow Glam Decor" class="logo"></a>
+    <div class="search-box">
+      <input type="text" id="searchInput" class="search-input" placeholder="Search articles, rooms, styles..." autocomplete="off">
+      <button class="search-btn" onclick="performSearch()" aria-label="Search">🔍</button>
+      <div class="search-suggestions" id="searchSuggestions"></div>
+    </div>
+    <div class="nav-menu" id="navMenu">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/posts/" class="nav-link">Blog</a>
+      <div class="mega-menu-wrapper">
+        <span class="nav-link mega-menu-trigger">Rooms</span>
+        <div class="mega-menu"><div class="mega-menu-grid">
+          <div class="mega-menu-section"><h4>Living Spaces</h4><ul class="mega-menu-links"><li><a href="/categories/living-room.html"><span class="icon">🛋️</span>Living Room</a></li><li><a href="/categories/bedroom.html"><span class="icon">🛏️</span>Bedroom</a></li><li><a href="/categories/dining-room.html"><span class="icon">🍽️</span>Dining Room</a></li><li><a href="/categories/home-office.html"><span class="icon">💻</span>Home Office</a></li></ul></div>
+          <div class="mega-menu-section"><h4>Functional Rooms</h4><ul class="mega-menu-links"><li><a href="/categories/kitchen.html"><span class="icon">🍳</span>Kitchen</a></li><li><a href="/categories/bathroom.html"><span class="icon">🚿</span>Bathroom</a></li><li><a href="/categories/entryway-hallway.html"><span class="icon">🚪</span>Entryway &amp; Hallway</a></li></ul></div>
+          <div class="mega-menu-section"><h4>Special Spaces</h4><ul class="mega-menu-links"><li><a href="/categories/kids-room-nursery.html"><span class="icon">🧸</span>Kids Room</a></li><li><a href="/categories/outdoor-patio.html"><span class="icon">🌿</span>Outdoor &amp; Patio</a></li></ul></div>
+          <div class="mega-menu-section"><h4>Popular Guides</h4><ul class="mega-menu-links"><li><a href="/categories/home-makeovers.html"><span class="icon">✨</span>Home Makeovers</a></li></ul></div>
+        </div></div>
+      </div>
+      <div class="mega-menu-wrapper">
+        <span class="nav-link mega-menu-trigger">Styles</span>
+        <div class="mega-menu"><div class="mega-menu-grid">
+          <div class="mega-menu-section"><h4>Modern Styles</h4><ul class="mega-menu-links"><li><a href="/categories/modern-style.html"><span class="icon">🏙️</span>Modern</a></li><li><a href="/categories/minimalist-style.html"><span class="icon">◻️</span>Minimalist</a></li></ul></div>
+          <div class="mega-menu-section"><h4>Classic Styles</h4><ul class="mega-menu-links"><li><a href="/categories/luxury-glam-decor.html"><span class="icon">👑</span>Luxury &amp; Glam</a></li><li><a href="/categories/boho-rustic-decor.html"><span class="icon">🌻</span>Boho &amp; Rustic</a></li></ul></div>
+          <div class="mega-menu-section"><h4>Decor Elements</h4><ul class="mega-menu-links"><li><a href="/categories/lighting-lamps.html"><span class="icon">💡</span>Lighting &amp; Lamps</a></li><li><a href="/categories/rugs-carpets.html"><span class="icon">🟫</span>Rugs &amp; Carpets</a></li></ul></div>
+        </div></div>
+      </div>
+      <div class="mega-menu-wrapper">
+        <span class="nav-link mega-menu-trigger">Buying Guides</span>
+        <div class="mega-menu"><div class="mega-menu-grid">
+          <div class="mega-menu-section"><h4>Product Guides</h4><ul class="mega-menu-links"><li><a href="/categories/best-of-lists.html"><span class="icon">🏆</span>Best Of Lists</a></li><li><a href="/categories/product-reviews.html"><span class="icon">⭐</span>Reviews</a></li><li><a href="/categories/comparisons.html"><span class="icon">⚖️</span>Comparisons</a></li></ul></div>
+          <div class="mega-menu-section"><h4>By Budget</h4><ul class="mega-menu-links"><li><a href="/categories/budget-furniture.html"><span class="icon">💰</span>Budget Picks</a></li><li><a href="/categories/luxury-furniture.html"><span class="icon">💎</span>Luxury Finds</a></li></ul></div>
+        </div></div>
+      </div>
+      <a href="/about.html" class="nav-link">About</a>
+    </div>
+    <button class="mobile-menu-btn" onclick="document.getElementById('navMenu').classList.toggle('mobile-open')" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hub-hero">
+  {{ if .Params.hero_image }}
+  <div class="hub-hero__img">
+    <img src="{{ $R2 }}{{ .Params.hero_image }}" alt="{{ with .Params.hero_image_alt }}{{ . }}{{ else }}{{ .Title }}{{ end }}" loading="eager">
+  </div>
+  {{ end }}
+  <div class="hub-hero-inner">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span>›</span>{{ .Params.category_name }}
+    </nav>
+    <h1>{{ .Title }}</h1>
+    <p class="hero-desc">{{ .Description }}</p>
+  </div>
+</section>
+
+<!-- TABLE OF CONTENTS -->
+<nav class="hub-toc" aria-label="Jump to section">
+  <div class="hub-toc-inner">
+    {{ if .Params.types }}<a href="#types">Types</a>{{ end }}
+    <a href="#shop">Shop</a>
+    {{ if .Params.choose_sections }}<a href="#how-to-choose">How to Choose</a>{{ end }}
+    {{ if .Params.styles }}<a href="#styles">By Style</a>{{ end }}
+    {{ if .Params.rooms }}<a href="#by-room">By Room</a>{{ end }}
+    {{ if .Params.sizing_rules }}<a href="#sizing">Sizing Guide</a>{{ end }}
+    {{ if .Params.materials_sections }}<a href="#materials">Materials</a>{{ end }}
+    {{ if .Params.care_sections }}<a href="#care">Care</a>{{ end }}
+    {{ if .Params.basics_sections }}<a href="#basics">{{ with .Params.basics_title }}{{ . }}{{ else }}Basics{{ end }}</a>{{ end }}
+    <a href="#price-guide">Price Guide</a>
+    {{ if .Params.faqs }}<a href="#faq">FAQ</a>{{ end }}
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="hub-body">
+
+  <!-- INTRO -->
+  <div class="hub-intro">{{ .Content }}</div>
+
+  <!-- TYPES -->
   {{ if .Params.types }}
-  <section class="hub-types content-section" id="types">
-    <h2>Types of {{ .Params.category_name }}</h2>
-    <p class="section-intro">Not all {{ lower .Params.category_name }} are created equal. Here's what each type does, where it works best, and how to choose between them.</p>
+  <section class="hub-section" id="types">
+    <h2>Types of <span>{{ .Params.category_name }}</span></h2>
+    {{ with .Params.types_intro }}<p class="section-intro">{{ . }}</p>{{ end }}
+    {{ with .Params.types_image }}
+    <img src="{{ $R2 }}{{ . }}" alt="{{ $.Params.types_image_alt }}" class="section-img" loading="lazy">
+    {{ end }}
     <div class="types-grid">
       {{ range .Params.types }}
-      <div class="type-card">
-        <h3>{{ .name }}</h3>
-        <p>{{ .description }}</p>
-        <div class="type-card__meta">
-          <span class="meta-label">Best for:</span>
-          <span>{{ .best_for }}</span>
+      <div class="type-card {{ if .image }}type-card--has-image{{ end }}">
+        {{ if .image }}
+        <div class="type-card__image">
+          <img src="{{ $R2 }}{{ .image }}" alt="{{ .name }}" loading="lazy">
+        </div>
+        {{ end }}
+        <div class="type-card__body">
+          <h3>{{ .name }}</h3>
+          <p>{{ .description }}</p>
+          <div class="type-card__meta">
+            <span class="meta-label">Best for:</span>{{ .best_for }}
+          </div>
         </div>
       </div>
       {{ end }}
@@ -150,23 +393,13 @@
   </section>
   {{ end }}
 
-  {{/* ══════════════════════════════════════
-       ④ FEATURED PRODUCTS — BLOCK 1
-         Static top 3 (SEO) + Dynamic grid
-       ══════════════════════════════════════ */}}
-  <section class="hub-products content-section" id="shop">
-    <h2>Shop {{ .Params.category_name }}</h2>
-    <p class="section-intro">Browse our curated selection. Use the filters below to narrow by room, style, or budget.</p>
-
-    {{/* FILTER BAR */}}
-    <div class="product-filter-bar" role="search" aria-label="Filter products">
-      <input
-        id="pf-search"
-        type="search"
-        placeholder="Search {{ lower .Params.category_name }}..."
-        aria-label="Search"
-      >
-      <select id="pf-room" aria-label="Filter by room">
+  <!-- PRODUCT BLOCK 1 — Main filter grid -->
+  <section class="hub-section" id="shop">
+    <h2>Shop <span>{{ .Params.category_name }}</span></h2>
+    {{ with .Params.shop_intro }}<p class="section-intro">{{ . }}</p>{{ end }}
+    <div class="product-filter-bar" role="search">
+      <input id="pf-search" type="search" placeholder="Search {{ lower .Params.category_name }}..." aria-label="Search">
+      <select id="pf-room" aria-label="Room">
         <option value="">All Rooms</option>
         <option value="bedroom">Bedroom</option>
         <option value="living-room">Living Room</option>
@@ -174,325 +407,130 @@
         <option value="bathroom">Bathroom</option>
         <option value="home-office">Home Office</option>
         <option value="entryway">Entryway</option>
+        <option value="kids-room">Kids Room</option>
+        <option value="outdoor">Outdoor</option>
       </select>
-      <select id="pf-style" aria-label="Filter by style">
+      <select id="pf-style" aria-label="Style">
         <option value="">All Styles</option>
         <option value="luxury-glam">Luxury Glam</option>
         <option value="modern-minimalist">Modern Minimalist</option>
-        <option value="boho-eclectic">Boho & Eclectic</option>
+        <option value="boho-eclectic">Boho &amp; Eclectic</option>
         <option value="art-deco">Art Deco</option>
         <option value="coastal">Coastal</option>
         <option value="rustic-farmhouse">Rustic Farmhouse</option>
+        <option value="scandinavian">Scandinavian</option>
+        <option value="traditional">Traditional</option>
       </select>
-      <select id="pf-price" aria-label="Filter by price">
+      <select id="pf-price" aria-label="Price">
         <option value="">Any Price</option>
         <option value="0-50">Under $50</option>
-        <option value="50-150">$50 – $150</option>
-        <option value="150-500">$150 – $500</option>
+        <option value="50-150">$50–$150</option>
+        <option value="150-500">$150–$500</option>
         <option value="500-9999">$500+</option>
       </select>
     </div>
-
-    {{/* STATIC FALLBACK — Googlebot sees this */}}
-    <div
-      id="pf-results"
-      class="product-grid"
-      data-category="{{ $cat }}"
-      data-room="{{ .Params.room }}"
-    >
+    <div id="pf-results" class="product-grid" data-category="{{ $cat }}">
       {{ range $featured }}
-      <article class="product-card product-card--static">
+      <article class="product-card">
         <a href="{{ .affiliate_url }}" target="_blank" rel="noopener nofollow sponsored">
           <div class="product-card__image">
-            <img
-              src="{{ $R2 }}{{ .image_key }}"
-              alt="{{ .name }}"
-              width="400" height="400"
-              loading="lazy"
-            >
+            <img src="{{ $R2 }}{{ .image_key }}" alt="{{ .name }}" loading="eager" width="400" height="400">
           </div>
           <div class="product-card__body">
-            <h3 class="product-card__name">{{ .name }}</h3>
             <span class="product-card__room">{{ .room }}</span>
-            <span class="product-card__price">{{ .price_label }}</span>
+            <div class="product-card__name">{{ .name }}</div>
+            <div class="product-card__price">{{ .price_label }}</div>
             <span class="product-card__cta">Check Current Price →</span>
           </div>
         </a>
       </article>
       {{ end }}
     </div>
-
-    <div id="pf-pagination" class="pagination" aria-label="Product pages"></div>
+    <div id="pf-pagination" class="hub-pagination"></div>
   </section>
 
-  {{/* ══════════════════════════════════════
-       ⑤ HOW TO CHOOSE
-       ══════════════════════════════════════ */}}
-  <section class="hub-guide content-section" id="how-to-choose">
-    <h2>How to Choose the Right {{ .Params.category_name }}</h2>
-
-    <h3>By Room Size</h3>
-    <p>The size of your room should drive your choice more than anything else. As a rule of thumb: small rooms (under 150 sq ft) need a single focused light source; medium rooms work best with two light sources; large rooms need layered lighting from three or more sources. Choose {{ lower .Params.category_name }} proportionally — an oversized piece in a small room overwhelms; a tiny piece in a large room disappears.</p>
-
-    <h3>By Existing Furniture Style</h3>
-    <p>Your {{ lower .Params.category_name }} should complement the dominant material in your space. Gold and brass finishes pair best with warm wood tones and velvet upholstery. Chrome and nickel work with cooler greys and whites. Mixed metal? Match the finish to the largest piece of furniture in the room.</p>
-
-    <h3>By Budget</h3>
-    <p>See the <a href="#price-guide">price guide section below</a> for a full breakdown of what you get at each budget tier. Short version: $50–$150 is the sweet spot for quality without overspending; $150–$500 is where you start to see real material and craftsmanship differences; $500+ is true investment-grade décor.</p>
-
+  <!-- HOW TO CHOOSE — fully from frontmatter -->
+  {{ if .Params.choose_sections }}
+  <section class="hub-section" id="how-to-choose">
+    <h2>How to <span>Choose</span></h2>
+    {{ with .Params.choose_intro }}<p class="section-intro">{{ . }}</p>{{ end }}
+    {{ with .Params.choose_image }}
+    <img src="{{ $R2 }}{{ . }}" alt="{{ $.Params.choose_image_alt }}" class="section-img" loading="lazy">
+    {{ end }}
+    <div class="choose-sections">
+      {{ range .Params.choose_sections }}
+      <h3>{{ .heading }}</h3>
+      <p>{{ .content }}</p>
+      {{ end }}
+    </div>
+    {{ if .Params.red_flags }}
     <h3>Red Flags to Avoid</h3>
     <ul class="red-flags">
-      <li>Cheap plastic parts painted to look like metal — check product listings for "ABS plastic base"</li>
-      <li>No UL or ETL safety listing — all electrical items should be safety certified</li>
-      <li>Shades that don't diffuse light evenly — look for fabric or frosted glass, not clear plastic</li>
-      <li>Cord length under 5 feet — always check cord length for floor and table lamps</li>
+      {{ range .Params.red_flags }}
+      <li>{{ . }}</li>
+      {{ end }}
     </ul>
+    {{ end }}
   </section>
+  {{ end }}
 
-  {{/* ══════════════════════════════════════
-       ⑥ STYLE GUIDE
-       ══════════════════════════════════════ */}}
+  <!-- STYLE GUIDE — with optional images per card -->
   {{ if .Params.styles }}
-  <section class="hub-styles content-section" id="styles">
-    <h2>{{ .Params.category_name }} by Style</h2>
-    <p class="section-intro">Different design aesthetics call for completely different choices. Find your style below to narrow your search before you shop.</p>
+  <section class="hub-section" id="styles">
+    <h2>{{ .Params.category_name }} by <span>Style</span></h2>
+    {{ with .Params.styles_intro }}<p class="section-intro">{{ . }}</p>{{ end }}
     <div class="styles-grid">
       {{ range .Params.styles }}
-      <div class="style-card" id="style-{{ .slug }}">
-        <div class="style-card__header">
-          <h3>{{ .name }}</h3>
-          <span class="style-card__price">{{ .price_range }}</span>
+      <div class="style-card">
+        {{ if .image }}
+        <div class="style-card__image">
+          <img src="{{ $R2 }}{{ .image }}" alt="{{ .name }} style" loading="lazy">
         </div>
-        <p>{{ .description }}</p>
-        <dl class="style-card__meta">
-          <dt>Key materials</dt>
-          <dd>{{ .materials }}</dd>
-          <dt>Best room</dt>
-          <dd>{{ .best_room }}</dd>
-        </dl>
-        <a
-          href="/{{ .slug }}/{{ $.Params.category_slug | urlize }}/"
-          class="style-card__link"
-        >
-          Shop {{ .name }} {{ $.Params.category_name }} →
-        </a>
+        {{ end }}
+        <div class="style-card__body">
+          <div class="style-card__header">
+            <h3>{{ .name }}</h3>
+            <span class="style-card__price">{{ .price_range }}</span>
+          </div>
+          <p>{{ .description }}</p>
+          <dl class="style-card__meta">
+            <dt>Materials:</dt><dd>{{ .materials }}</dd>
+            <dt>Best room:</dt><dd>{{ .best_room }}</dd>
+          </dl>
+          <a href="/{{ .slug }}/{{ $.Params.category_slug | urlize }}/" class="style-card__link">
+            Shop {{ .name }} {{ $.Params.category_name }} →
+          </a>
+        </div>
       </div>
       {{ end }}
     </div>
   </section>
   {{ end }}
 
-  {{/* ══════════════════════════════════════
-       ⑦ ROOM-BY-ROOM GUIDE
-       ══════════════════════════════════════ */}}
+  <!-- ROOM GUIDE — with optional images per card -->
   {{ if .Params.rooms }}
-  <section class="hub-rooms content-section" id="by-room">
-    <h2>{{ .Params.category_name }} by Room</h2>
-    <p class="section-intro">Every room has different needs. Here's exactly what to look for in each space.</p>
+  <section class="hub-section" id="by-room">
+    <h2>{{ .Params.category_name }} by <span>Room</span></h2>
+    {{ with .Params.rooms_intro }}<p class="section-intro">{{ . }}</p>{{ end }}
     <div class="rooms-grid">
       {{ range .Params.rooms }}
       <div class="room-card">
-        <h3>{{ .name }}</h3>
-        <p class="room-card__rec"><strong>Best choice:</strong> {{ .recommendation }}</p>
-        <dl class="room-card__meta">
-          <dt>Brightness</dt>
-          <dd>{{ .wattage }}</dd>
-          <dt>Placement tip</dt>
-          <dd>{{ .placement }}</dd>
-        </dl>
-        <a href="/{{ .slug }}/{{ $.Params.category_slug | urlize }}/" class="room-card__link">
-          See all {{ $.Params.category_name }} for {{ .name }} →
-        </a>
-      </div>
-      {{ end }}
-    </div>
-  </section>
-  {{ end }}
-
-  {{/* ══════════════════════════════════════
-       ⑧ MID-PAGE PRODUCT BLOCK 2
-         Pre-filtered to first room
-       ══════════════════════════════════════ */}}
-  <section class="hub-products hub-products--mid content-section">
-    <h2>Top Picks: {{ with index .Params.rooms 0 }}{{ .name }}{{ end }} {{ .Params.category_name }}</h2>
-    <div
-      class="product-grid inline-products"
-      data-category="{{ $cat }}"
-      data-room="{{ with index .Params.rooms 0 }}{{ .slug }}{{ end }}"
-      data-limit="6"
-    >
-      {{/* Static fallback — first 3 products for the first room */}}
-      {{ range first 3 (where $products "room" (index .Params.rooms 0).slug) }}
-      <article class="product-card product-card--static">
-        <a href="{{ .affiliate_url }}" target="_blank" rel="noopener nofollow sponsored">
-          <img src="{{ $R2 }}{{ .image_key }}" alt="{{ .name }}" loading="lazy" width="400" height="400">
-          <div class="product-card__body">
-            <h3 class="product-card__name">{{ .name }}</h3>
-            <span class="product-card__price">{{ .price_label }}</span>
-            <span class="product-card__cta">Check Current Price →</span>
-          </div>
-        </a>
-      </article>
-      {{ end }}
-    </div>
-  </section>
-
-  {{/* ══════════════════════════════════════
-       ⑨ SIZING + PLACEMENT GUIDE
-       ══════════════════════════════════════ */}}
-  <section class="hub-sizing content-section" id="sizing">
-    <h2>Sizing + Placement Guide</h2>
-    <p>Getting the size right is the single most common mistake buyers make. Here are the rules that interior designers use:</p>
-
-    <div class="sizing-rules">
-      <div class="sizing-rule">
-        <div class="sizing-rule__label">Table lamp height</div>
-        <div class="sizing-rule__value">The bottom of the shade should sit at eye level when you're seated — typically 58–64" from the floor</div>
-      </div>
-      <div class="sizing-rule">
-        <div class="sizing-rule__label">Floor lamp height</div>
-        <div class="sizing-rule__value">58–64" total height for reading; 72–78" for ambient or arc lamps</div>
-      </div>
-      <div class="sizing-rule">
-        <div class="sizing-rule__label">Pendant height</div>
-        <div class="sizing-rule__value">30–36" above a dining table; 7 feet minimum above a walkway</div>
-      </div>
-      <div class="sizing-rule">
-        <div class="sizing-rule__label">Chandelier width</div>
-        <div class="sizing-rule__value">Add the room's length + width in feet; that number in inches = ideal chandelier diameter</div>
-      </div>
-      <div class="sizing-rule">
-        <div class="sizing-rule__label">Lampshade width</div>
-        <div class="sizing-rule__value">Shade width should be ≈ twice the width of the lamp base</div>
-      </div>
-    </div>
-  </section>
-
-  {{/* ══════════════════════════════════════
-       ⑩ MATERIALS + QUALITY GUIDE
-       ══════════════════════════════════════ */}}
-  <section class="hub-materials content-section" id="materials">
-    <h2>Materials + Quality Guide</h2>
-
-    <h3>Gold, Brass, and Chrome — What's the Difference?</h3>
-    <p><strong>Polished gold</strong> is a finish (plating over a base metal), bright and consistent. It suits maximalist glam interiors. <strong>Brass</strong> is a solid alloy with a warmer, living tone that develops a natural patina — more character, slightly more expensive. <strong>Chrome</strong> is cooler and more reflective — better for modern or art deco aesthetics than traditional glam.</p>
-
-    <h3>Crystal Types</h3>
-    <p><strong>K9 crystal</strong> is the standard for décor lamps — optical-quality glass that refracts light beautifully. <strong>Asfour crystal</strong> is Egyptian-made and considered premium. <strong>Swarovski</strong> is the luxury tier. Acrylic crystals are budget alternatives — fine from a distance, but lack the genuine sparkle of real crystal up close.</p>
-
-    <h3>Shade Materials</h3>
-    <p>Fabric shades (linen, silk, velvet) give the warmest, most diffused light — ideal for glam and cosy aesthetics. Glass shades (clear, frosted, or seeded) create more defined light pools. Avoid thin plastic shades that yellow over time or create hot spots.</p>
-
-    <h3>What Signals Quality</h3>
-    <ul>
-      <li>Weight — quality lamps are heavy (stable base, real materials)</li>
-      <li>UL/ETL safety certification listed in the product specs</li>
-      <li>Solid metal vs hollow-sounding when tapped</li>
-      <li>Smooth, consistent finish with no visible seams</li>
-      <li>Fabric shade with a plastic or metal liner inside</li>
-    </ul>
-  </section>
-
-  {{/* ══════════════════════════════════════
-       ⑪ CARE + MAINTENANCE
-       ══════════════════════════════════════ */}}
-  <section class="hub-care content-section" id="care">
-    <h2>Care + Maintenance</h2>
-
-    <h3>Cleaning Crystal</h3>
-    <p>Turn off and unplug first — always. Remove individual crystal drops if the design allows. Mix distilled water with white vinegar (50/50) in a spray bottle. Spray onto a microfibre cloth (not directly on the lamp) and wipe each crystal individually. Dry immediately with a clean cloth to prevent water marks. Do this 2–4 times per year.</p>
-
-    <h3>Polishing Gold + Brass Finishes</h3>
-    <p>For polished gold: wipe with a dry microfibre cloth weekly to prevent fingerprint buildup. Use a dedicated metal polish (e.g. Brasso for brass, Renaissance Wax for plated gold) every 6 months. Avoid abrasive cloths or bathroom cleaners — they strip plating permanently.</p>
-
-    <h3>Bulb Replacement</h3>
-    <p>Always check the maximum wattage rating on the shade or socket before replacing. Most glam lamps are rated for 40–60W equivalent. With LEDs, you can safely use a 9–10W LED to replace a 60W incandescent. Use warm white (2700K) for the most flattering glam effect.</p>
-
-    <h3>Storage</h3>
-    <p>If storing a crystal lamp: remove and individually wrap each crystal drop in tissue paper before boxing. Store shades upright, never stacked. Keep in a dry space — humidity causes tarnishing on metal bases.</p>
-
-    <h3>Expected Lifespan</h3>
-    <p>A quality glam lamp with proper care should last 10–15 years. The first component to fail is usually the wiring or socket — both can be replaced by an electrician for a fraction of the cost of a new lamp. Replace vs repair if: the base is cracked, the plating is peeling over more than 30% of the surface, or crystals are chipped at the top where they attach.</p>
-  </section>
-
-  {{/* ══════════════════════════════════════
-       ⑫ CATEGORY BASICS (educational)
-       ══════════════════════════════════════ */}}
-  <section class="hub-basics content-section" id="lighting-basics">
-    <h2>Lighting Basics — What Every Buyer Should Know</h2>
-
-    <h3>Lumens vs Watts</h3>
-    <p>Watts measure energy use; lumens measure actual brightness. With LED bulbs now standard, watts are almost meaningless as a brightness guide. Instead: 400–500 lumens = soft bedside light; 800–1100 lumens = comfortable reading light; 1500+ lumens = bright task or ambient lighting. Most glam table lamps are designed for the 800–1100 lumen range.</p>
-
-    <h3>Colour Temperature</h3>
-    <p>Measured in Kelvin (K). For glam interiors: 2700K (warm white) is the gold standard — it makes gold and crystal finishes glow and creates the warm, luxurious atmosphere associated with upscale hotels. Avoid 5000K+ (daylight) bulbs in any decorative lamp — they make gold look greenish and kill the ambience.</p>
-
-    <h3>Layered Lighting — The Designer Approach</h3>
-    <p>The difference between a room that looks designed and one that doesn't is almost always lighting layers. Layer 1: ambient (overhead, general). Layer 2: task (table lamp, reading lamp). Layer 3: accent (sconces, LED strips, candles). Each layer should be on a separate switch or dimmer. A well-layered room can be set to any mood — bright and energising for daytime, warm and intimate for evenings.</p>
-
-    <h3>Dimmer Compatibility</h3>
-    <p>Not all LED bulbs are dimmable — check the package. If installing a dimmer switch, buy dimmable LEDs specifically. The best glam lamps use E26 or E12 base sockets, both of which have a wide selection of dimmable LED options. Avoid smart bulbs in decorative lamps unless you want the visible bulb to be part of the aesthetic.</p>
-  </section>
-
-  {{/* ══════════════════════════════════════
-       ⑬ PRICE GUIDE + PRODUCT BLOCK 3
-       ══════════════════════════════════════ */}}
-  <section class="hub-pricing content-section" id="price-guide">
-    <h2>Price Guide — What to Expect at Every Budget</h2>
-
-    <div class="price-tiers">
-      <div class="price-tier">
-        <div class="price-tier__range">Under $50</div>
-        <p>Entry-level decorative lamps — primarily from mass-market retailers. Expect ABS plastic bases with a metallic paint finish, basic fabric or paper shades, and standard sockets. Good for: rentals, children's rooms, or testing a style before committing. Not suitable for a main living or bedroom statement piece.</p>
-      </div>
-      <div class="price-tier price-tier--highlight">
-        <div class="price-tier__range">$50 – $150 ★ Sweet Spot</div>
-        <p>The best value tier for most buyers. You start to see real metal bases (zinc alloy, aluminium), K9 crystal accents, lined fabric shades, and proper cord management. Brands at this level typically have UL certification and longer warranties. This is where 80% of our featured picks live.</p>
-      </div>
-      <div class="price-tier">
-        <div class="price-tier__range">$150 – $500</div>
-        <p>Solid construction, genuine materials (real brass, hand-blown glass, premium crystal), and noticeably better finishing. Lamps at this level become room focal points — they're designed to be looked at, not just functional. Expect 5+ year lifespans with proper care.</p>
-      </div>
-      <div class="price-tier">
-        <div class="price-tier__range">$500+</div>
-        <p>Investment-grade decorative lighting. Heirloom materials (solid brass, Swarovski or Asfour crystal, hand-sewn silk shades), designer names, and bespoke finishes. Buy once, keep forever. These are the pieces that become part of a home's identity.</p>
-      </div>
-    </div>
-
-    {{/* PRODUCT BLOCK 3 — price filtered, featured items */}}
-    <div
-      class="product-grid inline-products"
-      data-category="{{ $cat }}"
-      data-featured="1"
-      data-limit="6"
-    >
-      {{ range first 3 (where $products "featured" 1) }}
-      <article class="product-card product-card--static">
-        <a href="{{ .affiliate_url }}" target="_blank" rel="noopener nofollow sponsored">
-          <img src="{{ $R2 }}{{ .image_key }}" alt="{{ .name }}" loading="lazy" width="400" height="400">
-          <div class="product-card__body">
-            <h3 class="product-card__name">{{ .name }}</h3>
-            <span class="product-card__price">{{ .price_label }}</span>
-            <span class="product-card__cta">Check Current Price →</span>
-          </div>
-        </a>
-      </article>
-      {{ end }}
-    </div>
-  </section>
-
-  {{/* ══════════════════════════════════════
-       ⑭ FAQ — FAQPage schema ready
-       ══════════════════════════════════════ */}}
-  {{ if .Params.faqs }}
-  <section class="hub-faq content-section" id="faq">
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-list" itemscope itemtype="https://schema.org/FAQPage">
-      {{ range .Params.faqs }}
-      <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <h3 class="faq-item__question" itemprop="name">{{ .question }}</h3>
-        <div class="faq-item__answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-          <p itemprop="text">{{ .answer }}</p>
+        {{ if .image }}
+        <div class="room-card__image">
+          <img src="{{ $R2 }}{{ .image }}" alt="{{ .name }}" loading="lazy">
+        </div>
+        {{ end }}
+        <div class="room-card__body">
+          <h3>{{ .name }}</h3>
+          <p class="room-card__rec"><strong>Best choice:</strong> {{ .recommendation }}</p>
+          <dl class="room-card__meta">
+            {{ with .spec_label }}<dt>{{ . }}:</dt><dd>{{ $.Params.rooms | where "name" $.name | first | default dict | index "spec_value" }}</dd>{{ end }}
+            {{ with .spec_value }}<dd>{{ . }}</dd>{{ end }}
+            <dt>Placement:</dt><dd>{{ .placement }}</dd>
+          </dl>
+          <a href="/{{ .slug }}/{{ $.Params.category_slug | urlize }}/" class="room-card__link">
+            See all for {{ .name }} →
+          </a>
         </div>
       </div>
       {{ end }}
@@ -500,43 +538,180 @@
   </section>
   {{ end }}
 
-  {{/* ══════════════════════════════════════
-       ⑮ RELATED CATEGORIES + INTERNAL LINKS
-       ══════════════════════════════════════ */}}
-  <section class="hub-related content-section" id="related">
-    <h2>Explore More</h2>
-    <div class="related-grid">
-      {{ range site.Menus.categories }}
-      {{ if ne .URL (printf "/%s/" $.Params.category_slug) }}
-      <a href="{{ .URL }}" class="related-card">
-        <span class="related-card__name">{{ .Name }}</span>
-        <span class="related-card__arrow">→</span>
-      </a>
-      {{ end }}
+  <!-- MID-PAGE PRODUCT BLOCK 2 — first room filtered -->
+  {{ $firstRoom := index .Params.rooms 0 }}
+  {{ if $firstRoom }}
+  <section class="hub-section">
+    <h2>Top Picks: <span>{{ $firstRoom.name }}</span></h2>
+    <div class="product-grid inline-products"
+         data-category="{{ $cat }}"
+         data-room="{{ $firstRoom.slug }}"
+         data-limit="6">
+      {{ range first 3 (where $products "room" $firstRoom.slug) }}
+      <article class="product-card">
+        <a href="{{ .affiliate_url }}" target="_blank" rel="noopener nofollow sponsored">
+          <div class="product-card__image">
+            <img src="{{ $R2 }}{{ .image_key }}" alt="{{ .name }}" loading="lazy" width="400" height="400">
+          </div>
+          <div class="product-card__body">
+            <div class="product-card__name">{{ .name }}</div>
+            <div class="product-card__price">{{ .price_label }}</div>
+            <span class="product-card__cta">Check Current Price →</span>
+          </div>
+        </a>
+      </article>
       {{ end }}
     </div>
+  </section>
+  {{ end }}
 
-    {{/* RELATED BLOG POSTS */}}
-    {{ $related := where site.Pages "Section" "blog" | first 4 }}
-    {{ if $related }}
-    <h3>From the Blog</h3>
-    <div class="related-posts">
-      {{ range $related }}
-      <a href="{{ .RelPermalink }}" class="related-post">
-        <span class="related-post__title">{{ .Title }}</span>
-        <span class="related-post__arrow">→</span>
-      </a>
+  <!-- SIZING GUIDE — fully from frontmatter -->
+  {{ if .Params.sizing_rules }}
+  <section class="hub-section" id="sizing">
+    <h2>{{ with .Params.sizing_title }}{{ . }}{{ else }}Sizing + <span>Placement Guide</span>{{ end }}</h2>
+    {{ with .Params.sizing_intro }}<p>{{ . }}</p>{{ end }}
+    {{ with .Params.sizing_image }}
+    <img src="{{ $R2 }}{{ . }}" alt="{{ $.Params.sizing_image_alt }}" class="section-img" loading="lazy">
+    {{ end }}
+    <div class="sizing-rules">
+      {{ range .Params.sizing_rules }}
+      <div class="sizing-rule">
+        <div class="sizing-rule__label">{{ .label }}</div>
+        <div class="sizing-rule__value">{{ .value }}</div>
+      </div>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  <!-- MATERIALS — fully from frontmatter -->
+  {{ if .Params.materials_sections }}
+  <section class="hub-section" id="materials">
+    <h2>{{ with .Params.materials_title }}{{ . }}{{ else }}Materials + <span>Quality Guide</span>{{ end }}</h2>
+    {{ with .Params.materials_intro }}<p class="section-intro">{{ . }}</p>{{ end }}
+    {{ with .Params.materials_image }}
+    <img src="{{ $R2 }}{{ . }}" alt="{{ $.Params.materials_image_alt }}" class="section-img" loading="lazy">
+    {{ end }}
+    <div class="content-sections">
+      {{ range .Params.materials_sections }}
+      <h3>{{ .heading }}</h3>
+      <p>{{ .content }}</p>
+      {{ end }}
+    </div>
+    {{ if .Params.quality_signals }}
+    <h3>What Signals Quality</h3>
+    <ul class="quality-signals">
+      {{ range .Params.quality_signals }}<li>{{ . }}</li>{{ end }}
+    </ul>
+    {{ end }}
+  </section>
+  {{ end }}
+
+  <!-- CARE — fully from frontmatter -->
+  {{ if .Params.care_sections }}
+  <section class="hub-section" id="care">
+    <h2>{{ with .Params.care_title }}{{ . }}{{ else }}Care + <span>Maintenance</span>{{ end }}</h2>
+    {{ with .Params.care_image }}
+    <img src="{{ $R2 }}{{ . }}" alt="{{ $.Params.care_image_alt }}" class="section-img" loading="lazy">
+    {{ end }}
+    <div class="content-sections">
+      {{ range .Params.care_sections }}
+      <h3>{{ .heading }}</h3>
+      <p>{{ .content }}</p>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  <!-- BASICS / EDUCATION — fully from frontmatter -->
+  {{ if .Params.basics_sections }}
+  <section class="hub-section" id="basics">
+    <h2>{{ with .Params.basics_title }}<span>{{ . }}</span>{{ else }}<span>Good to Know</span>{{ end }}</h2>
+    {{ with .Params.basics_intro }}<p class="section-intro">{{ . }}</p>{{ end }}
+    <div class="content-sections">
+      {{ range .Params.basics_sections }}
+      <h3>{{ .heading }}</h3>
+      <p>{{ .content }}</p>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  <!-- PRICE GUIDE + PRODUCT BLOCK 3 — fully from frontmatter -->
+  <section class="hub-section" id="price-guide">
+    <h2>Price Guide — <span>Every Budget</span></h2>
+    {{ with .Params.price_intro }}<p class="section-intro">{{ . }}</p>{{ end }}
+    {{ if .Params.price_tiers }}
+    <div class="price-tiers">
+      {{ range .Params.price_tiers }}
+      <div class="price-tier {{ if .highlight }}price-tier--highlight{{ end }}">
+        <div class="price-tier__range">{{ .range }}</div>
+        <p>{{ .content }}</p>
+      </div>
       {{ end }}
     </div>
     {{ end }}
+    <div class="product-grid inline-products" data-category="{{ $cat }}" data-featured="1" data-limit="6">
+      {{ range first 3 (where $products "featured" 1) }}
+      <article class="product-card">
+        <a href="{{ .affiliate_url }}" target="_blank" rel="noopener nofollow sponsored">
+          <div class="product-card__image">
+            <img src="{{ $R2 }}{{ .image_key }}" alt="{{ .name }}" loading="lazy" width="400" height="400">
+          </div>
+          <div class="product-card__body">
+            <div class="product-card__name">{{ .name }}</div>
+            <div class="product-card__price">{{ .price_label }}</div>
+            <span class="product-card__cta">Check Current Price →</span>
+          </div>
+        </a>
+      </article>
+      {{ end }}
+    </div>
   </section>
 
-  {{/* ══════════════════════════════════════
-       ⑯ pSEO ROOM SUB-PAGES
-       ══════════════════════════════════════ */}}
-  <section class="hub-pseo content-section" id="by-room-pages">
-    <h2>Shop by Room</h2>
-    <p>Looking for {{ lower .Params.category_name }} for a specific room? We have dedicated guides for every space:</p>
+  <!-- FAQ — accordion -->
+  {{ if .Params.faqs }}
+  <section class="hub-section" id="faq">
+    <h2>Frequently Asked <span>Questions</span></h2>
+    <div class="faq-list">
+      {{ range .Params.faqs }}
+      <div class="faq-item">
+        <details>
+          <summary class="faq-item__question">{{ .question }}</summary>
+          <div class="faq-item__answer">{{ .answer }}</div>
+        </details>
+      </div>
+      {{ end }}
+    </div>
+  </section>
+  {{ end }}
+
+  <!-- RELATED CATEGORIES — from frontmatter or fallback -->
+  <section class="hub-section" id="related">
+    <h2>Explore <span>More</span></h2>
+    <div class="related-grid">
+      {{ if .Params.related_hubs }}
+        {{ range .Params.related_hubs }}
+        <a href="{{ .url }}" class="related-card">{{ .name }} <span>→</span></a>
+        {{ end }}
+      {{ else }}
+        <a href="/lamps/" class="related-card">Lamps <span>→</span></a>
+        <a href="/mirrors/" class="related-card">Mirrors <span>→</span></a>
+        <a href="/wall-decor/" class="related-card">Wall Décor <span>→</span></a>
+        <a href="/rugs/" class="related-card">Rugs <span>→</span></a>
+        <a href="/curtains/" class="related-card">Curtains <span>→</span></a>
+        <a href="/bedding/" class="related-card">Bedding <span>→</span></a>
+        <a href="/vases/" class="related-card">Vases <span>→</span></a>
+        <a href="/candles/" class="related-card">Candles <span>→</span></a>
+      {{ end }}
+    </div>
+  </section>
+
+  <!-- pSEO ROOM LINKS -->
+  {{ if .Params.rooms }}
+  <section class="hub-section" id="by-room-pages">
+    <h2>Shop by <span>Room</span></h2>
+    <p>Looking for {{ lower .Params.category_name }} for a specific room? Browse our dedicated room guides:</p>
     <div class="pseo-links">
       {{ range .Params.rooms }}
       <a href="/{{ .slug }}/{{ $.Params.category_slug | urlize }}/" class="pseo-link">
@@ -546,17 +721,49 @@
       {{ end }}
     </div>
   </section>
+  {{ end }}
 
-</article>
+  <!-- NEWSLETTER -->
+  <div class="newsletter">
+    <div class="newsletter-inner">
+      <h2>Get Decor Ideas Straight to Your Inbox 📬</h2>
+      <p>Join thousands of home lovers getting weekly inspiration, exclusive deals, and expert styling tips.</p>
+      <button class="nl-btn" onclick="ml('show', 'ygWEME', true)">Subscribe for Free — Weekly Decor Ideas ✉</button>
+    </div>
+  </div>
 
-{{/* JS — loaded async at end of page */}}
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="/content/images/logo.jpg" alt="Wow Glam Decor" class="footer-logo">
+      <p>Your trusted source for home decor inspiration, honest product reviews, and curated recommendations for every style and budget.</p>
+      <div class="social-row"><a href="#" class="social-btn">📘</a><a href="#" class="social-btn">📷</a><a href="#" class="social-btn">🐦</a><a href="#" class="social-btn">📌</a></div>
+    </div>
+    <div class="footer-col"><h4>Shop By Room</h4><ul class="footer-links"><li><a href="/categories/living-room.html">Living Room</a></li><li><a href="/categories/bedroom.html">Bedroom</a></li><li><a href="/categories/kitchen.html">Kitchen</a></li><li><a href="/categories/bathroom.html">Bathroom</a></li><li><a href="/categories/home-office.html">Home Office</a></li></ul></div>
+    <div class="footer-col"><h4>Buying Guides</h4><ul class="footer-links"><li><a href="/categories/best-of-lists.html">Best Of Lists</a></li><li><a href="/categories/product-reviews.html">Product Reviews</a></li><li><a href="/categories/budget-furniture.html">Budget Picks</a></li><li><a href="/categories/luxury-furniture.html">Luxury Finds</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul class="footer-links"><li><a href="/about.html">About Us</a></li><li><a href="/contact.html">Contact</a></li><li><a href="/affiliate-disclosure.html">Affiliate Disclosure</a></li><li><a href="/privacy-policy.html">Privacy Policy</a></li><li><a href="/sitemap.xml">Sitemap</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; {{ now.Format "2006" }} Wow Glam Decor. All rights reserved.</p>
+    <div class="footer-legal"><a href="/privacy-policy.html">Privacy</a><a href="/affiliate-disclosure.html">Affiliate Disclosure</a><a href="/sitemap.xml">Sitemap</a></div>
+  </div>
+</footer>
+
 <script>
-  window.HUB_CONFIG = {
-    category: "{{ $cat }}",
-    room: "{{ .Params.room }}",
-    R2Base: "{{ $R2 }}"
-  };
+window.HUB_CONFIG = { category: "{{ $cat }}", R2Base: "{{ $R2 }}" };
 </script>
-<script src="{{ "js/product-filter.js" | relURL }}" defer></script>
-
-{{ end }}
+<script src="/js/product-filter.js" defer></script>
+<script src="/js/mega-menu.js" defer></script>
+<script src="/quiz/widget.js" defer></script>
+<script>
+(function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);};l=d.createElement(e);l.async=1;l.src=u;n=d.getElementsByTagName(e)[0];n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+ml('account', '2154421');
+</script>
+<script>
+(function(){const inp=document.getElementById('searchInput'),box=document.getElementById('searchSuggestions');if(!inp||!box)return;let timeout,idx=-1,cache=null;async function load(){if(cache)return cache;try{const r=await fetch('/posts.json');if(r.ok){cache=await r.json();return cache;}}catch(e){}return[];}function hl(t,q){if(!q||!t)return t;return t.replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<span class="highlight">$1</span>');}async function search(q){const posts=await load();if(!posts.length)return[];const terms=q.toLowerCase().split(/\s+/).filter(Boolean);return posts.map(p=>({...p,score:terms.reduce((s,t)=>s+(((p.title+' '+(p.description||'')+' '+((p.tags||[]).join(' '))+' '+((p.categories||[]).join(' '))).toLowerCase().split(t).length-1)),0)})).filter(p=>p.score>0).sort((a,b)=>b.score-a.score).slice(0,5);}function render(r,q){if(!r.length){box.innerHTML='<div class="no-results-search"><p>No results for "'+q+'"</p></div>';box.classList.add('active');return;}box.innerHTML=r.map((p,i)=>'<a href="'+(p.url||'/posts/'+p.slug+'.html')+'" class="suggestion-item" data-index="'+i+'"><img src="'+(p.featured_image||'/content/images/bedroom-decor-ideas.png')+'" alt="'+p.title+'" class="suggestion-thumb" loading="lazy"><div class="suggestion-content"><div class="suggestion-title">'+hl(p.title,q)+'</div><div class="suggestion-meta"><span class="suggestion-category">'+((p.categories&&p.categories[0])||'Decor')+'</span></div></div></a>').join('')+'<div class="search-footer"><a href="/search.html?q='+encodeURIComponent(q)+'">View all results →</a></div>';box.classList.add('active');idx=-1;}inp.addEventListener('input',e=>{const q=e.target.value.trim();clearTimeout(timeout);if(!q){box.classList.remove('active');return;}if(q.length<2)return;box.innerHTML='<div class="search-loading">Searching<div class="loading-dots"><span></span><span></span><span></span></div></div>';box.classList.add('active');timeout=setTimeout(async()=>render(await search(q),q),300);});document.addEventListener('click',e=>{if(!inp.contains(e.target)&&!box.contains(e.target))box.classList.remove('active');});window.performSearch=()=>{const q=inp.value.trim();if(q)window.location.href='/search.html?q='+encodeURIComponent(q);};})();
+</script>
+</body>
+</html>

@@ -7,8 +7,8 @@ hero_image: "hubs/lighting-lamps/hero.jpg"
 hero_image_alt: "Luxury glam lighting in a styled bedroom with gold arc floor lamp"
 product_category: "lighting-lamps"
 room: ""
-layout: lamps
-type: lamps
+layout: hub
+type: hub
 types_intro: "The lamp type you choose changes the entire light plan of a room — not just how bright it is, but how the space feels after dark."
 shop_intro: "Filter by room to find lamps sized and styled for your specific space."
 styles_intro: "Gold looks completely different in a Luxury Glam context versus an Art Deco one — here's how each aesthetic plays out in lighting."

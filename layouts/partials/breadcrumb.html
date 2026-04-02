@@ -1,0 +1,60 @@
+{{/*
+  layouts/partials/breadcrumb.html
+  ─────────────────────────────────
+  Renders:
+    1. BreadcrumbList JSON-LD (in <head> via partial call)
+    2. Visible breadcrumb HTML (inline where called in <body>)
+
+  Usage — hub pages (2 levels):
+    {{ partial "breadcrumb.html" (dict
+        "site"  site
+        "page"  .
+        "crumbs" (slice
+          (dict "name" "Home"        "url" "/")
+          (dict "name" .Params.category_name "url" .Permalink)
+        )
+    ) }}
+
+  Usage — pSEO pages (3 levels):
+    {{ partial "breadcrumb.html" (dict
+        "site"  site
+        "page"  .
+        "crumbs" (slice
+          (dict "name" "Home"                  "url" "/")
+          (dict "name" .Params.filter_label    "url" .Params.parent_url)
+          (dict "name" .Params.category_name   "url" .Permalink)
+        )
+    ) }}
+*/}}
+
+{{ $crumbs := .crumbs }}
+{{ $siteURL := .site.BaseURL | strings.TrimSuffix "/" }}
+
+{{/* ── JSON-LD ── output in <head> via hub-jsonld or directly */}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {{ range $i, $crumb := $crumbs -}}
+    {
+      "@type": "ListItem",
+      "position": {{ add $i 1 }},
+      "name": {{ $crumb.name | jsonify }},
+      "item": "{{ $siteURL }}{{ $crumb.url }}"
+    }{{ if lt (add $i 1) (len $crumbs) }},{{ end }}
+    {{ end }}
+  ]
+}
+</script>
+
+{{/* ── Visible breadcrumb HTML ── */}}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  {{ range $i, $crumb := $crumbs -}}
+    {{ if lt (add $i 1) (len $crumbs) -}}
+      <a href="{{ $crumb.url }}">{{ $crumb.name }}</a><span aria-hidden="true"> › </span>
+    {{- else -}}
+      <span aria-current="page">{{ $crumb.name }}</span>
+    {{- end }}
+  {{- end }}
+</nav>

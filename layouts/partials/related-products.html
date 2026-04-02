@@ -1,0 +1,144 @@
+{{/*
+  layouts/partials/related-products.html
+  ────────────────────────────────────────────────────────────────────────────
+  Shows product cards related to the current blog post.
+  Place at the bottom of single.html, inside the article body.
+
+  Usage: {{ partial "related-products.html" . }}
+
+  Reads from:
+    - data/products.json          (static product list)
+    - .Params.product_category    (category_slug to match)
+    - .Params.room                (room slug to filter)
+    - .Params.style               (style slug to filter)
+    - .Params.pinned_products     (optional: list of slugs to pin first)
+
+  Priority order:
+    1. pinned_products (from frontmatter)
+    2. products matching category + room
+    3. products matching category only
+    4. featured products from that category
+  ────────────────────────────────────────────────────────────────────────────
+*/}}
+
+{{ $R2       := "https://images.wowglamdecor.com/" }}
+{{ $all      := site.Data.products }}
+{{ $cat      := .Params.product_category }}
+{{ $room     := .Params.room }}
+{{ $style    := .Params.style }}
+{{ $pinned   := .Params.pinned_products }}
+{{ $limit    := 4 }}
+
+{{ if $cat }}
+
+{{/* Step 1 — pinned products (author-specified slugs) */}}
+{{ $pinnedProducts := slice }}
+{{ range $pinned }}
+  {{ $slug := . }}
+  {{ range $all }}
+    {{ if eq .slug $slug }}
+      {{ $pinnedProducts = $pinnedProducts | append . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* Step 2 — category + room match */}}
+{{ $byRoomCat := slice }}
+{{ if $room }}
+  {{ range $all }}
+    {{ if and (eq .category_slug $cat) (or (eq .room $room) (eq .room "any")) }}
+      {{ $byRoomCat = $byRoomCat | append . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* Step 3 — category + style match */}}
+{{ $byStyleCat := slice }}
+{{ if $style }}
+  {{ range $all }}
+    {{ if and (eq .category_slug $cat) (or (eq .style $style) (eq .style "any")) }}
+      {{ $byStyleCat = $byStyleCat | append . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* Step 4 — category featured */}}
+{{ $byFeatured := slice }}
+{{ range $all }}
+  {{ if and (eq .category_slug $cat) (eq .featured 1) }}
+    {{ $byFeatured = $byFeatured | append . }}
+  {{ end }}
+{{ end }}
+
+{{/* Merge: pinned first, then fill from pools, dedupe by slug */}}
+{{ $seen    := slice }}
+{{ $display := slice }}
+
+{{ range $pinnedProducts }}
+  {{ if not (in $seen .slug) }}
+    {{ $display = $display | append . }}
+    {{ $seen = $seen | append .slug }}
+  {{ end }}
+{{ end }}
+
+{{ range $byRoomCat }}
+  {{ if and (not (in $seen .slug)) (lt (len $display) $limit) }}
+    {{ $display = $display | append . }}
+    {{ $seen = $seen | append .slug }}
+  {{ end }}
+{{ end }}
+
+{{ range $byStyleCat }}
+  {{ if and (not (in $seen .slug)) (lt (len $display) $limit) }}
+    {{ $display = $display | append . }}
+    {{ $seen = $seen | append .slug }}
+  {{ end }}
+{{ end }}
+
+{{ range $byFeatured }}
+  {{ if and (not (in $seen .slug)) (lt (len $display) $limit) }}
+    {{ $display = $display | append . }}
+    {{ $seen = $seen | append .slug }}
+  {{ end }}
+{{ end }}
+
+{{ if $display }}
+{{/* Resolve hub URL for the "See all" link */}}
+{{ $hubURL := "" }}
+{{ $cats := slice
+  (dict "slug" "lighting-lamps"  "hub" "/lamps/")
+  (dict "slug" "mirrors"         "hub" "/mirrors/")
+  (dict "slug" "rugs-carpets"    "hub" "/rugs/")
+  (dict "slug" "wall-decor"      "hub" "/wall-decor/")
+  (dict "slug" "throw-pillows"   "hub" "/throw-pillows/")
+  (dict "slug" "vases-florals"   "hub" "/vases/")
+  (dict "slug" "bedding-linens"  "hub" "/bedding/")
+  (dict "slug" "candles-scent"   "hub" "/candles/")
+}}
+{{ range $cats }}{{ if eq .slug $cat }}{{ $hubURL = .hub }}{{ end }}{{ end }}
+
+<aside class="rp-block" aria-label="Related products">
+  <div class="rp-block__header">
+    <h3 class="rp-block__title">✨ Shop This Style</h3>
+    {{ if $hubURL }}
+    <a href="{{ $hubURL }}" class="rp-block__see-all">See all →</a>
+    {{ end }}
+  </div>
+  <div class="rp-block__grid">
+    {{ range $display }}
+    <a href="{{ .affiliate_url }}" class="rp-card" target="_blank" rel="nofollow noopener sponsored">
+      <div class="rp-card__img">
+        <img src="{{ $R2 }}{{ .image_key }}" alt="{{ .name }}" loading="lazy">
+      </div>
+      <div class="rp-card__body">
+        <div class="rp-card__name">{{ .name }}</div>
+        <div class="rp-card__price">{{ .price_label }}</div>
+        <span class="rp-card__cta">Shop This Look</span>
+      </div>
+    </a>
+    {{ end }}
+  </div>
+</aside>
+
+{{ end }}{{/* end if $display */}}
+{{ end }}{{/* end if $cat */}}
