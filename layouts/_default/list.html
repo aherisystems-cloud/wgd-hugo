@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/mega-menu-patch.css">
+<link rel="stylesheet" href="/css/navbar.css"><link rel="stylesheet" href="/css/linkify.css">
 <style>
 :root{--brand:#7e0882;--brand-dark:#5a0660;--brand-light:#a020a8;--brand-pale:rgba(126,8,130,0.07);--off-white:#fafafa;--gray-100:#f5f5f5;--gray-200:#eee;--gray-600:#757575;--gray-800:#424242;--gray-900:#212121;--shadow-sm:0 2px 12px rgba(126,8,130,0.08);--shadow-md:0 8px 32px rgba(126,8,130,0.13);--shadow-lg:0 20px 60px rgba(126,8,130,0.18);--radius:16px;--ease:cubic-bezier(0.4,0,0.2,1)}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -167,51 +167,7 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
 </style>
 </head>
 <body>
-
-<nav class="navbar">
-  <div class="nav-container">
-    <a href="/"><img src="/content/images/logo.jpg" alt="Wow Glam Decor" class="logo"></a>
-    <div class="search-box">
-      <input type="text" id="searchInput" class="search-input" placeholder="Search articles, rooms, styles..." autocomplete="off">
-      <button class="search-btn" onclick="performSearch()" aria-label="Search">🔍</button>
-      <div class="search-suggestions" id="searchSuggestions"></div>
-    </div>
-    <div class="nav-menu" id="navMenu">
-      <a href="/" class="nav-link">Home</a>
-      <a href="/posts/" class="nav-link active">Blog</a>
-      <div class="mega-menu-wrapper">
-        <span class="nav-link mega-menu-trigger">Rooms</span>
-        <div class="mega-menu"><div class="mega-menu-grid">
-          <div class="mega-menu-section"><h4>Living Spaces</h4><ul class="mega-menu-links"><li><a href="/categories/living-room.html"><span class="icon">🛋️</span>Living Room</a></li><li><a href="/categories/bedroom.html"><span class="icon">🛏️</span>Bedroom</a></li><li><a href="/categories/dining-room.html"><span class="icon">🍽️</span>Dining Room</a></li><li><a href="/categories/home-office.html"><span class="icon">💻</span>Home Office</a></li></ul></div>
-          <div class="mega-menu-section"><h4>Functional Rooms</h4><ul class="mega-menu-links"><li><a href="/categories/kitchen.html"><span class="icon">🍳</span>Kitchen</a></li><li><a href="/categories/bathroom.html"><span class="icon">🚿</span>Bathroom</a></li><li><a href="/categories/laundry-room.html"><span class="icon">🧺</span>Laundry Room</a></li><li><a href="/categories/entryway-hallway.html"><span class="icon">🚪</span>Entryway &amp; Hallway</a></li></ul></div>
-          <div class="mega-menu-section"><h4>Special Spaces</h4><ul class="mega-menu-links"><li><a href="/categories/kids-room-nursery.html"><span class="icon">🧸</span>Kids Room &amp; Nursery</a></li><li><a href="/categories/outdoor-patio.html"><span class="icon">🌿</span>Outdoor &amp; Patio</a></li><li><a href="/categories/balcony-small-spaces.html"><span class="icon">🪴</span>Balcony &amp; Small Spaces</a></li></ul></div>
-          <div class="mega-menu-section"><h4>Popular Guides</h4><ul class="mega-menu-links"><li><a href="/categories/small-space-storage.html"><span class="icon">📦</span>Small Space Storage</a></li><li><a href="/categories/rental-friendly-decor.html"><span class="icon">🔑</span>Rental-Friendly</a></li><li><a href="/categories/home-makeovers.html"><span class="icon">✨</span>Home Makeovers</a></li></ul></div>
-        </div></div>
-      </div>
-      <div class="mega-menu-wrapper">
-        <span class="nav-link mega-menu-trigger">Styles</span>
-        <div class="mega-menu"><div class="mega-menu-grid">
-          <div class="mega-menu-section"><h4>Modern Styles</h4><ul class="mega-menu-links"><li><a href="/categories/modern-style.html"><span class="icon">🏙️</span>Modern</a></li><li><a href="/categories/minimalist-style.html"><span class="icon">◻️</span>Minimalist</a></li><li><a href="/categories/scandinavian-style.html"><span class="icon">🌿</span>Scandinavian</a></li><li><a href="/categories/industrial-style.html"><span class="icon">🏭</span>Industrial</a></li></ul></div>
-          <div class="mega-menu-section"><h4>Classic Styles</h4><ul class="mega-menu-links"><li><a href="/categories/traditional-classic.html"><span class="icon">🏛️</span>Traditional &amp; Classic</a></li><li><a href="/categories/luxury-glam-decor.html"><span class="icon">👑</span>Luxury &amp; Glam</a></li><li><a href="/categories/boho-rustic-decor.html"><span class="icon">🌻</span>Boho &amp; Rustic</a></li></ul></div>
-          <div class="mega-menu-section"><h4>Decor Elements</h4><ul class="mega-menu-links"><li><a href="/categories/wall-decor.html"><span class="icon">🖼️</span>Wall Decor</a></li><li><a href="/categories/lighting-lamps.html"><span class="icon">💡</span>Lighting &amp; Lamps</a></li><li><a href="/categories/rugs-carpets.html"><span class="icon">🟫</span>Rugs &amp; Carpets</a></li><li><a href="/categories/plants-planters.html"><span class="icon">🪴</span>Plants &amp; Planters</a></li></ul></div>
-          <div class="mega-menu-section"><h4>Seasonal</h4><ul class="mega-menu-links"><li><a href="/categories/seasonal-decor.html"><span class="icon">🍂</span>Seasonal Decor</a></li><li><a href="/categories/holiday-decor.html"><span class="icon">🎄</span>Holiday Decor</a></li></ul></div>
-        </div></div>
-      </div>
-      <div class="mega-menu-wrapper">
-        <span class="nav-link mega-menu-trigger">Buying Guides</span>
-        <div class="mega-menu"><div class="mega-menu-grid">
-          <div class="mega-menu-section"><h4>By Budget</h4><ul class="mega-menu-links"><li><a href="/categories/budget-furniture.html"><span class="icon">💰</span>Budget Furniture</a></li><li><a href="/categories/luxury-furniture.html"><span class="icon">💎</span>Luxury Furniture</a></li><li><a href="/categories/budget-gift-ideas.html"><span class="icon">🎁</span>Budget Gifts</a></li><li><a href="/categories/luxury-home-gifts.html"><span class="icon">✨</span>Luxury Gifts</a></li></ul></div>
-          <div class="mega-menu-section"><h4>By Type</h4><ul class="mega-menu-links"><li><a href="/categories/space-saving-furniture.html"><span class="icon">📐</span>Space-Saving</a></li><li><a href="/categories/multifunctional-furniture.html"><span class="icon">🔄</span>Multifunctional</a></li><li><a href="/categories/furniture-buying-guides.html"><span class="icon">📖</span>Buying Guides</a></li></ul></div>
-          <div class="mega-menu-section"><h4>Reviews &amp; Lists</h4><ul class="mega-menu-links"><li><a href="/categories/best-of-lists.html"><span class="icon">🏆</span>Best Of Lists</a></li><li><a href="/categories/product-reviews.html"><span class="icon">⭐</span>Product Reviews</a></li><li><a href="/categories/comparisons.html"><span class="icon">⚖️</span>Comparisons</a></li></ul></div>
-          <div class="mega-menu-section"><h4>Gift Ideas</h4><ul class="mega-menu-links"><li><a href="/categories/home-gift-ideas.html"><span class="icon">🎁</span>Home Gift Ideas</a></li><li><a href="/categories/housewarming-gifts.html"><span class="icon">🏡</span>Housewarming</a></li></ul></div>
-        </div></div>
-      </div>
-      <a href="/about.html" class="nav-link">About</a>
-    </div>
-    <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Toggle menu">☰</button>
-  </div>
-</nav>
-
+{{ partial "navbar.html" . }}
 <div class="disclosure-bar">💡 <strong>Disclosure:</strong> This site contains affiliate links. We may earn a small commission at no extra cost to you. <a href="/affiliate-disclosure.html">Learn more</a></div>
 
 <header class="blog-hero">
