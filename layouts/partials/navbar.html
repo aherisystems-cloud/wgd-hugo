@@ -1,46 +1,38 @@
 {{/*
   layouts/partials/navbar.html
-  ─────────────────────────────────────────────────────────────────────────────
-  Two-trigger mega menu: Inspiration | Shop
-  Drop in every layout with: {{ partial "navbar.html" . }}
-  Replaces all hardcoded navbar blocks.
-
-  CSS lives in /static/css/navbar.css — loaded via <link> in every layout.
-  JS lives in /static/js/mega-menu.js — loaded at bottom of every layout.
-  ─────────────────────────────────────────────────────────────────────────────
+  Two-trigger mega menu: Ideas & Style Guides | Shop Glam Decor
+  Usage: {{ partial "navbar.html" . }}
+  CSS: /css/navbar.css  |  JS: /js/mega-menu.js
 */}}
 
 <nav class="navbar" role="navigation" aria-label="Main navigation">
   <div class="nav-container">
 
-    <!-- LOGO -->
     <a href="/" class="nav-logo-link" aria-label="Wow Glam Decor — Home">
       <img src="/content/images/logo.jpg" alt="Wow Glam Decor" class="logo">
     </a>
 
-    <!-- SEARCH -->
     <div class="search-box">
       <input type="text" id="searchInput" class="search-input"
              placeholder="Search rooms, styles, products..."
-             autocomplete="off" aria-label="Search site" aria-expanded="false"
-             aria-controls="searchSuggestions">
+             autocomplete="off" aria-label="Search site"
+             aria-expanded="false" aria-controls="searchSuggestions">
       <button class="search-btn" onclick="performSearch()" aria-label="Search">🔍</button>
-      <div class="search-suggestions" id="searchSuggestions" role="listbox" aria-label="Search suggestions"></div>
+      <div class="search-suggestions" id="searchSuggestions" role="listbox"></div>
     </div>
 
-    <!-- DESKTOP NAV -->
     <div class="nav-menu" id="navMenu" role="menubar">
 
-      <!-- ── INSPIRATION ── -->
+      {{/* ── TRIGGER 1: IDEAS & STYLE GUIDES ── */}}
       <div class="mega-menu-wrapper" id="inspirationWrapper" role="none">
         <button class="nav-link mega-menu-trigger"
                 id="inspirationTrigger"
                 aria-haspopup="true"
                 aria-expanded="false"
                 aria-controls="inspirationMega">
-          Inspiration
+          Ideas &amp; Style Guides ✨
         </button>
-        <div class="mega-menu" id="inspirationMega" role="menu" aria-label="Inspiration menu">
+        <div class="mega-menu" id="inspirationMega" role="menu" aria-label="Ideas and Style Guides">
           <div class="mega-menu-grid">
 
             <div class="mega-menu-section">
@@ -95,19 +87,19 @@
             </div>
 
           </div>
-        </div><!-- /inspirationMega -->
-      </div><!-- /inspirationWrapper -->
+        </div>
+      </div>
 
-      <!-- ── SHOP ── -->
+      {{/* ── TRIGGER 2: SHOP GLAM DECOR ── */}}
       <div class="mega-menu-wrapper" id="shopWrapper" role="none">
         <button class="nav-link mega-menu-trigger nav-link--shop"
                 id="shopTrigger"
                 aria-haspopup="true"
                 aria-expanded="false"
                 aria-controls="shopMega">
-          Shop
+          Shop Glam Decor 🛍️
         </button>
-        <div class="mega-menu" id="shopMega" role="menu" aria-label="Shop menu">
+        <div class="mega-menu" id="shopMega" role="menu" aria-label="Shop Glam Decor">
           <div class="mega-menu-grid">
 
             <div class="mega-menu-section">
@@ -158,30 +150,27 @@
                 <li><a href="/mirrors/?featured=1" role="menuitem"><span class="icon">⭐</span>Staff Picks</a></li>
                 <li><a href="/luxury-glam/" role="menuitem"><span class="icon">✨</span>Statement Pieces</a></li>
               </ul>
-              <a href="/lamps/" class="mega-shop-cta" role="menuitem">
-                <span>Browse All Products →</span>
-              </a>
+              <a href="/lamps/" class="mega-shop-cta" role="menuitem">Browse All Products →</a>
             </div>
 
           </div>
-        </div><!-- /shopMega -->
-      </div><!-- /shopWrapper -->
+        </div>
+      </div>
 
       <a href="/posts/" class="nav-link" role="menuitem">Blog</a>
       <a href="/about.html" class="nav-link" role="menuitem">About</a>
 
-    </div><!-- /nav-menu -->
+    </div>
 
-    <!-- MOBILE TOGGLE -->
     <button class="mobile-menu-btn" id="mobileMenuBtn"
             aria-label="Open navigation menu"
             aria-expanded="false"
             aria-controls="navMenu">☰</button>
 
-  </div><!-- /nav-container -->
+  </div>
 </nav>
 
-<!-- MOBILE DRAWER -->
+{{/* ── MOBILE DRAWER ── */}}
 <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
   <div class="mobile-drawer__header">
     <img src="/content/images/logo.jpg" alt="Wow Glam Decor" class="mobile-drawer__logo">
@@ -191,7 +180,7 @@
 
     <div class="mobile-section">
       <button class="mobile-section__trigger" aria-expanded="false">
-        Inspiration <span class="mobile-chevron">›</span>
+        Ideas &amp; Style Guides ✨ <span class="mobile-chevron">›</span>
       </button>
       <div class="mobile-section__content">
         <div class="mobile-col-label">By Room</div>
@@ -215,7 +204,7 @@
 
     <div class="mobile-section">
       <button class="mobile-section__trigger" aria-expanded="false">
-        Shop <span class="mobile-chevron">›</span>
+        Shop Glam Decor 🛍️ <span class="mobile-chevron">›</span>
       </button>
       <div class="mobile-section__content">
         <div class="mobile-col-label">By Category</div>

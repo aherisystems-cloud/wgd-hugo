@@ -1,0 +1,18 @@
+{
+  "name": "wowglamdecor",
+  "version": "1.0.0",
+  "description": "WowGlamDecor — Hugo site build scripts",
+  "type": "module",
+  "scripts": {
+    "sync": "node scripts/sync-products.js && node scripts/generate-link-map.js",
+    "sync:products": "node scripts/sync-products.js",
+    "sync:links": "node scripts/generate-link-map.js",
+    "pseo": "node scripts/generate-pseo.js",
+    "pseo:preview": "node scripts/generate-pseo.js --dry-run",
+    "pseo:force": "node scripts/generate-pseo.js --force",
+    "deploy": "node scripts/sync-products.js && node scripts/generate-link-map.js && git add data/products.json static/data/link-map.json && git commit -m 'sync products + link map' && git push"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

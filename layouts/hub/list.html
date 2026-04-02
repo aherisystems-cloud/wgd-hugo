@@ -26,7 +26,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/mega-menu-patch.css">
+<link rel="stylesheet" href="/css/navbar.css">
+<link rel="stylesheet" href="/css/linkify.css">
 
 {{ partial "hub-jsonld.html" . }}
 
@@ -38,52 +39,134 @@ body{font-family:'Nunito',sans-serif;background:var(--off-white);color:var(--gra
 a{text-decoration:none;color:inherit}
 img{max-width:100%;height:auto;display:block}
 ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--gray-100)}::-webkit-scrollbar-thumb{background:var(--brand);border-radius:4px}::-webkit-scrollbar-thumb:hover{background:var(--brand-dark)}
-.navbar{background:rgba(255,255,255,0.96);backdrop-filter:blur(16px);box-shadow:var(--shadow-sm);position:sticky;top:0;z-index:100}
-.nav-container{max-width:1400px;margin:0 auto;padding:13px 24px;display:flex;align-items:center;gap:16px}
-.logo{height:48px;flex-shrink:0}
-.search-box{position:relative;display:flex;align-items:center;margin-left:8px;flex-shrink:1;min-width:0}
-.search-input{width:240px;max-width:100%;padding:10px 40px 10px 16px;border:2px solid var(--gray-200);border-radius:24px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;transition:all .3s;background:var(--gray-100);box-sizing:border-box}
-.search-input:focus{outline:none;border-color:var(--brand);background:#fff;box-shadow:0 4px 16px rgba(126,8,130,.15);border-radius:24px 24px 0 0}
-.search-input::placeholder{color:var(--gray-600);font-weight:500}
-.search-btn{position:absolute;right:12px;background:none;border:none;cursor:pointer;font-size:18px;color:var(--gray-600);padding:6px;transition:all .2s;display:flex;align-items:center;z-index:10}
-.search-btn:hover{color:var(--brand);transform:scale(1.1)}
-.search-suggestions{position:absolute;top:100%;left:0;width:100%;min-width:280px;background:#fff;border:2px solid var(--brand);border-top:none;border-radius:0 0 16px 16px;box-shadow:0 12px 32px rgba(126,8,130,.18);max-height:420px;overflow-y:auto;z-index:999;display:none}
-.search-suggestions.active{display:block}
-.suggestion-item{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;transition:all .2s;border-bottom:1px solid var(--gray-100);text-decoration:none;color:inherit}
-.suggestion-item:last-child{border-bottom:none}
-.suggestion-item:hover,.suggestion-item.selected{background:var(--brand-pale)}
-.suggestion-thumb{width:48px;height:48px;border-radius:8px;object-fit:cover;flex-shrink:0;background:var(--gray-100)}
-.suggestion-content{flex:1;min-width:0}
-.suggestion-title{font-size:14px;font-weight:700;color:var(--gray-900);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.suggestion-meta{font-size:12px;color:var(--gray-600);display:flex;align-items:center;gap:8px}
-.suggestion-category{background:var(--brand-pale);color:var(--brand);padding:2px 8px;border-radius:10px;font-weight:700;font-size:11px}
-.search-footer{padding:12px 16px;background:var(--gray-100);text-align:center;border-radius:0 0 14px 14px}
-.search-footer a{color:var(--brand);font-weight:700;font-size:13px;display:inline-flex;align-items:center;gap:6px}
-.no-results-search{padding:32px 16px;text-align:center;color:var(--gray-600)}
-.highlight{background:rgba(126,8,130,.15);font-weight:800;color:var(--brand);padding:0 2px;border-radius:2px}
-.search-loading{padding:24px;text-align:center;color:var(--gray-600);font-size:14px}
-.loading-dots{display:inline-flex;gap:4px;margin-left:8px}
-.loading-dots span{width:6px;height:6px;background:var(--brand);border-radius:50%;animation:bounce 1.2s infinite}
-.loading-dots span:nth-child(2){animation-delay:.2s}.loading-dots span:nth-child(3){animation-delay:.4s}
-@keyframes bounce{0%,80%,100%{transform:scale(.6);opacity:.4}40%{transform:scale(1);opacity:1}}
-.nav-menu{display:flex;gap:2px;align-items:center;margin-left:auto;flex-shrink:0}
-.nav-link{color:var(--gray-800);font-weight:700;font-size:14px;padding:8px 14px;border-radius:8px;transition:all .2s;white-space:nowrap}
-.nav-link:hover,.nav-link.active{background:var(--brand-pale);color:var(--brand)}
-.mobile-menu-btn{display:none;background:none;border:none;font-size:24px;cursor:pointer;color:var(--gray-800);padding:8px;margin-left:auto;flex-shrink:0}
-.mega-menu-wrapper{position:relative}
-.mega-menu-trigger{cursor:pointer;display:flex;align-items:center;gap:4px;user-select:none}
-.mega-menu-trigger::after{content:'▾';font-size:10px;transition:transform .25s}
-.mega-menu-wrapper.mega-open .mega-menu-trigger::after{transform:rotate(180deg)}
-.mega-menu{position:fixed;top:auto;left:0;right:0;max-width:1400px;margin:0 auto;width:calc(100vw - 48px);background:#fff;box-shadow:0 12px 48px rgba(126,8,130,.18);border-top:3px solid var(--brand);border-radius:0 0 16px 16px;padding:32px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .25s var(--ease),visibility 0s .25s,transform .25s var(--ease);transform:translateY(-8px);z-index:998}
-.mega-menu.mega-open{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0);transition:opacity .18s var(--ease),visibility 0s 0s,transform .18s var(--ease)}
-.mega-menu-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
-.mega-menu-section h4{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--brand);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--brand-pale)}
-.mega-menu-links{list-style:none;display:flex;flex-direction:column;gap:8px}
-.mega-menu-links li a{color:var(--gray-800);font-size:14px;font-weight:600;padding:6px 0;display:flex;align-items:center;gap:8px;transition:all .2s}
-.mega-menu-links li a:hover{color:var(--brand);padding-left:8px}
-.mega-menu-links .icon{font-size:16px;width:20px;text-align:center}
 .disclosure-bar{background:var(--gray-900);color:rgba(255,255,255,.85);padding:10px 24px;text-align:center;font-size:13px;font-weight:600}
 .disclosure-bar a{color:rgba(255,255,255,.6);text-decoration:underline}
+/* ── HUB HERO ── */
+.hub-hero{background:linear-gradient(140deg,var(--brand-dark) 0%,var(--brand) 55%,var(--brand-light) 100%);color:#fff;padding:0;position:relative;overflow:hidden;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end}
+.hub-hero__img{position:absolute;inset:0;z-index:0}
+.hub-hero__img img{width:100%;height:100%;object-fit:cover;opacity:0.35}
+.hub-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(90,6,96,0.92) 0%,rgba(90,6,96,0.5) 60%,transparent 100%);z-index:1}
+.hub-hero-inner{max-width:960px;margin:0 auto;padding:48px 24px 40px;position:relative;z-index:2;width:100%}
+.breadcrumb{font-size:13px;margin-bottom:14px;opacity:.8;display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.breadcrumb a{color:#fff;text-decoration:underline}
+.breadcrumb span{margin:0 4px;opacity:.6}
+.hub-hero h1{font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:900;line-height:1.15;margin-bottom:14px}
+.hub-hero p.hero-desc{font-size:1.05rem;opacity:.92;max-width:620px;line-height:1.7}
+/* ── TOC BAR ── */
+.hub-toc{background:#fff;border-bottom:1px solid var(--gray-200);padding:12px 24px;position:sticky;top:74px;z-index:89;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+.hub-toc::-webkit-scrollbar{display:none}
+.hub-toc-inner{max-width:960px;margin:0 auto;display:flex;gap:6px}
+.hub-toc a{font-size:13px;font-weight:700;color:var(--gray-600);padding:6px 14px;border-radius:20px;background:var(--gray-100);transition:all .2s;flex-shrink:0}
+.hub-toc a:hover{background:var(--brand-pale);color:var(--brand)}
+/* ── HUB BODY ── */
+.hub-body{max-width:960px;margin:0 auto;padding:48px 24px 80px}
+.hub-intro{font-size:1.05rem;line-height:1.8;color:var(--gray-800);margin-bottom:48px}
+.hub-intro p{margin-bottom:16px}
+.hub-section{margin-bottom:64px}
+.hub-section h2{font-size:clamp(1.4rem,3vw,1.9rem);font-weight:900;color:var(--gray-900);margin-bottom:8px}
+.hub-section h2 span{color:var(--brand)}
+.hub-section h3{font-size:1.15rem;font-weight:800;color:var(--gray-900);margin:24px 0 8px}
+.section-intro{font-size:1rem;color:var(--gray-600);margin-bottom:20px;line-height:1.7}
+.section-img{width:100%;border-radius:12px;margin:20px 0;max-height:400px;object-fit:cover}
+/* ── TYPES ── */
+.types-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;margin-top:20px}
+.type-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden}
+.type-card--has-image .type-card__image{aspect-ratio:3/4;overflow:hidden;background:var(--gray-100)}
+.type-card--has-image .type-card__image img{width:100%;height:100%;object-fit:cover}
+.type-card__body{padding:16px 18px 20px}
+.type-card__body h3{font-size:.95rem;font-weight:900;margin-bottom:6px;margin-top:0}
+.type-card__body p{font-size:.85rem;color:var(--gray-600);line-height:1.6;margin-bottom:8px}
+.type-card__meta{font-size:.8rem;font-weight:700;color:var(--brand)}
+.meta-label{font-weight:800;margin-right:4px}
+/* ── PRODUCT GRID + FILTER ── */
+.product-filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.product-filter-bar input,.product-filter-bar select{padding:9px 14px;border:2px solid var(--gray-200);border-radius:10px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;background:#fff;color:var(--gray-800);transition:border-color .2s}
+.product-filter-bar input:focus,.product-filter-bar select:focus{outline:none;border-color:var(--brand)}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;margin-top:20px}
+.product-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden;transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column}
+.product-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.product-card__image{aspect-ratio:1;overflow:hidden;background:var(--gray-100)}
+.product-card__image img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.product-card:hover .product-card__image img{transform:scale(1.05)}
+.product-card__body{padding:14px 16px 18px;display:flex;flex-direction:column;flex:1}
+.product-card__room{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.4px;color:var(--brand);margin-bottom:4px}
+.product-card__name{font-size:.9rem;font-weight:800;color:var(--gray-900);margin-bottom:6px;line-height:1.3}
+.product-card__price{font-size:.9rem;font-weight:700;color:var(--brand);margin-bottom:10px}
+.product-card__cta{display:block;background:var(--brand);color:#fff;text-align:center;padding:9px 14px;border-radius:8px;font-size:.82rem;font-weight:800;transition:background .2s;margin-top:auto}
+.product-card__cta:hover{background:var(--brand-dark)}
+.hub-pagination{display:flex;justify-content:center;gap:8px;margin-top:28px}
+.hub-pagination button{padding:8px 18px;border-radius:8px;border:2px solid var(--gray-200);background:#fff;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s}
+.hub-pagination button:hover,.hub-pagination button.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+/* ── HOW TO CHOOSE ── */
+.choose-sections h3{margin-top:20px}
+.red-flags{padding-left:20px;margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.red-flags li{font-size:.95rem;line-height:1.6;color:var(--gray-800)}
+/* ── STYLES GRID ── */
+.styles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;margin-top:20px}
+.style-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden}
+.style-card__image{aspect-ratio:4/3;overflow:hidden;background:var(--gray-100)}
+.style-card__image img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.style-card:hover .style-card__image img{transform:scale(1.04)}
+.style-card__body{padding:16px 18px 20px}
+.style-card__header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.style-card__header h3{font-size:1rem;font-weight:900;margin:0}
+.style-card__price{font-size:.82rem;font-weight:700;color:var(--brand)}
+.style-card__body p{font-size:.85rem;color:var(--gray-600);line-height:1.6;margin-bottom:10px}
+.style-card__meta{font-size:.8rem;color:var(--gray-600);display:grid;grid-template-columns:auto 1fr;gap:2px 8px}
+.style-card__meta dt{font-weight:800;color:var(--gray-800)}
+.style-card__link{display:inline-block;margin-top:10px;font-size:.82rem;font-weight:800;color:var(--brand)}
+/* ── ROOMS GRID ── */
+.rooms-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;margin-top:20px}
+.room-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden}
+.room-card__image{aspect-ratio:4/3;overflow:hidden;background:var(--gray-100)}
+.room-card__image img{width:100%;height:100%;object-fit:cover}
+.room-card__body{padding:16px 18px 20px}
+.room-card__body h3{font-size:1rem;font-weight:900;margin-bottom:6px}
+.room-card__rec{font-size:.85rem;color:var(--gray-700,#555);margin-bottom:8px;line-height:1.6}
+.room-card__meta{font-size:.8rem;color:var(--gray-600);display:grid;grid-template-columns:auto 1fr;gap:2px 8px;margin-bottom:8px}
+.room-card__meta dt{font-weight:800;color:var(--gray-800)}
+.room-card__link{font-size:.82rem;font-weight:800;color:var(--brand)}
+/* ── SIZING / MATERIALS / CARE ── */
+.sizing-rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:16px}
+.sizing-rule{background:#fff;border-radius:10px;padding:16px;box-shadow:var(--shadow-sm)}
+.sizing-rule__label{font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.4px;color:var(--brand);margin-bottom:6px}
+.sizing-rule__value{font-size:.95rem;font-weight:700;color:var(--gray-900)}
+.content-sections h3{margin-top:20px;margin-bottom:8px}
+.content-sections p{font-size:.95rem;color:var(--gray-700,#555);line-height:1.75;margin-bottom:0}
+.quality-signals{padding-left:20px;margin-top:12px;display:flex;flex-direction:column;gap:6px}
+.quality-signals li{font-size:.9rem;color:var(--gray-800)}
+/* ── PRICE TIERS ── */
+.price-tiers{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:20px 0 28px}
+.price-tier{background:#fff;border-radius:12px;padding:20px;box-shadow:var(--shadow-sm);border:2px solid transparent}
+.price-tier--highlight{border-color:var(--brand);background:var(--brand-pale)}
+.price-tier__range{font-size:.85rem;font-weight:900;color:var(--brand);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.price-tier p{font-size:.875rem;color:var(--gray-700,#555);line-height:1.65}
+/* ── FAQ ── */
+.faq-list{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.faq-item details{background:#fff;border-radius:12px;box-shadow:var(--shadow-sm);overflow:hidden}
+.faq-item summary{padding:16px 20px;font-weight:800;font-size:.95rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:'＋';font-size:1.1rem;color:var(--brand);transition:transform .25s;flex-shrink:0}
+.faq-item details[open] summary::after{transform:rotate(45deg)}
+.faq-item__question{flex:1}
+.faq-item__answer{padding:0 20px 18px;color:var(--gray-800);font-size:.9rem;line-height:1.75}
+/* ── RELATED / pSEO ── */
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:14px}
+.related-card{background:#fff;border:2px solid var(--gray-200);border-radius:10px;padding:12px 16px;font-weight:800;font-size:.875rem;color:var(--gray-800);transition:all .2s;display:flex;justify-content:space-between;align-items:center}
+.related-card:hover{border-color:var(--brand);color:var(--brand)}
+.pseo-links{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:14px}
+.pseo-link{background:#fff;border:2px solid var(--gray-200);border-radius:10px;padding:14px 16px;transition:all .2s;display:flex;flex-direction:column;gap:2px}
+.pseo-link:hover{border-color:var(--brand)}
+.pseo-link__room{font-weight:800;font-size:.875rem;color:var(--gray-900)}
+.pseo-link__label{font-size:.78rem;font-weight:700;color:var(--brand)}
+/* ── NEWSLETTER ── */
+.newsletter{background:var(--gray-900);padding:48px 24px;text-align:center;color:#fff;margin-top:48px}
+.newsletter-inner{max-width:640px;margin:0 auto}
+.newsletter h2{font-size:1.6rem;font-weight:900;margin-bottom:10px}
+.newsletter p{opacity:.78;margin-bottom:20px;font-size:.95rem}
+.nl-btn{background:var(--brand);color:#fff;border:none;padding:14px 36px;border-radius:10px;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:800;cursor:pointer;transition:background .2s}
+.nl-btn:hover{background:var(--brand-light)}
+/* ── FOOTER ── */
 footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
 .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:40px}
 .footer-logo{height:42px;margin-bottom:14px}
@@ -97,183 +180,20 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
 .footer-links a{color:rgba(255,255,255,.6);font-size:14px;transition:color .2s}
 .footer-links a:hover{color:#fff}
 .footer-bottom{max-width:1200px;margin:0 auto;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;font-size:13px;opacity:.55;flex-wrap:wrap;gap:12px}
-.footer-bottom a{color:rgba(255,255,255,.55)}
-.footer-bottom a:hover{color:#fff;opacity:1}
 .footer-legal{display:flex;gap:20px}
-
-/* ── HUB PAGE STYLES ── */
-.hub-hero{background:linear-gradient(140deg,var(--brand-dark) 0%,var(--brand) 55%,var(--brand-light) 100%);color:#fff;padding:0;position:relative;overflow:hidden;min-height:340px;display:flex;flex-direction:column;justify-content:flex-end}
-.hub-hero__img{position:absolute;inset:0;z-index:0}
-.hub-hero__img img{width:100%;height:100%;object-fit:cover;opacity:0.35}
-.hub-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(90,6,96,0.92) 0%,rgba(90,6,96,0.5) 60%,transparent 100%);z-index:1}
-.hub-hero-inner{max-width:960px;margin:0 auto;padding:48px 24px 40px;position:relative;z-index:2;width:100%}
-.breadcrumb{font-size:13px;margin-bottom:14px;opacity:.8}
-.breadcrumb a{color:#fff;text-decoration:underline}
-.breadcrumb span{margin:0 8px;opacity:.6}
-.hub-hero h1{font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:900;line-height:1.15;margin-bottom:14px}
-.hub-hero p.hero-desc{font-size:1.05rem;opacity:.92;max-width:620px;line-height:1.7}
-.hub-toc{background:#fff;border-bottom:1px solid var(--gray-200);padding:12px 24px;position:sticky;top:74px;z-index:89;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
-.hub-toc::-webkit-scrollbar{display:none}
-.hub-toc-inner{max-width:960px;margin:0 auto;display:flex;gap:6px}
-.hub-toc a{font-size:13px;font-weight:700;color:var(--gray-600);padding:6px 14px;border-radius:20px;background:var(--gray-100);transition:all .2s;flex-shrink:0}
-.hub-toc a:hover{background:var(--brand-pale);color:var(--brand)}
-.hub-body{max-width:960px;margin:0 auto;padding:48px 24px 80px}
-.hub-section{margin-bottom:56px}
-.hub-section h2{font-size:1.75rem;font-weight:900;color:var(--gray-900);margin-bottom:8px;padding-bottom:12px;border-bottom:3px solid var(--brand-pale)}
-.hub-section h2 span{color:var(--brand)}
-.hub-section h3{font-size:1.1rem;font-weight:800;color:var(--gray-900);margin:24px 0 8px}
-.hub-section p{font-size:15px;color:var(--gray-800);line-height:1.8;margin-bottom:12px}
-.hub-section ul{margin:10px 0 14px 20px}
-.hub-section ul li{font-size:15px;color:var(--gray-800);line-height:1.75;margin-bottom:6px}
-.section-intro{font-size:15px;color:var(--gray-600);margin-bottom:24px;line-height:1.7}
-.section-img{width:100%;border-radius:var(--radius);margin:20px 0 28px;object-fit:cover;max-height:420px}
-.section-img-caption{font-size:12px;color:var(--gray-600);text-align:center;margin-top:-20px;margin-bottom:24px}
-
-/* Types grid — supports optional image per card */
-.types-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;margin-top:20px}
-.type-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);border-left:4px solid var(--brand);display:flex;flex-direction:column}
-.type-card--has-image{border-left:none}
-.type-card__image{overflow:hidden;aspect-ratio:3/2;background:var(--gray-100)}
-.type-card__image img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-.type-card:hover .type-card__image img{transform:scale(1.05)}
-.type-card__body{padding:20px;flex:1;display:flex;flex-direction:column}
-.type-card__body h3{font-size:1rem;font-weight:800;color:var(--brand);margin:0 0 8px}
-.type-card__body p{font-size:14px;color:var(--gray-600);line-height:1.65;flex:1;margin-bottom:10px}
-.type-card__meta{font-size:13px;color:var(--gray-600);border-top:1px solid var(--gray-100);padding-top:10px;margin-top:auto}
-.meta-label{font-weight:800;color:var(--gray-800);margin-right:4px}
-
-/* Product filter bar */
-.product-filter-bar{display:flex;flex-wrap:wrap;gap:10px;background:#fff;padding:16px;border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:24px}
-.product-filter-bar input,.product-filter-bar select{padding:10px 16px;border:2px solid var(--gray-200);border-radius:24px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;background:var(--gray-100);color:var(--gray-900);cursor:pointer;transition:all .2s}
-.product-filter-bar input{flex:1;min-width:180px}
-.product-filter-bar input:focus,.product-filter-bar select:focus{outline:none;border-color:var(--brand);background:#fff}
-
-/* Product grid */
-.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px;margin-bottom:32px}
-.product-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);transition:all .3s var(--ease);border:2px solid transparent}
-.product-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:rgba(126,8,130,.1)}
-.product-card a{display:flex;flex-direction:column;height:100%;color:inherit}
-.product-card__image{overflow:hidden;background:var(--gray-100);aspect-ratio:1/1}
-.product-card__image img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-.product-card:hover .product-card__image img{transform:scale(1.06)}
-.product-card__body{padding:18px;display:flex;flex-direction:column;flex:1}
-.product-card__name{font-size:15px;font-weight:800;color:var(--gray-900);margin-bottom:8px;line-height:1.35}
-.product-card__room{font-size:12px;color:var(--brand);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;display:block}
-.product-card__price{font-size:17px;font-weight:900;color:var(--gray-900);margin-bottom:12px;display:block}
-.product-card__rating{font-size:13px;color:#f59e0b;margin-bottom:8px;display:block}
-.product-card__review-count{color:var(--gray-600);font-size:12px}
-.product-card__cta{display:inline-flex;align-items:center;gap:6px;background:var(--brand);color:#fff;padding:10px 18px;border-radius:8px;font-weight:800;font-size:14px;margin-top:auto;transition:all .2s;width:fit-content}
-.product-card:hover .product-card__cta{background:var(--brand-dark);gap:10px}
-.product-card--skeleton{pointer-events:none}
-.skeleton-img{width:100%;aspect-ratio:1/1;background:linear-gradient(90deg,var(--gray-100) 25%,var(--gray-200) 50%,var(--gray-100) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
-.skeleton-line{height:14px;border-radius:4px;background:linear-gradient(90deg,var(--gray-100) 25%,var(--gray-200) 50%,var(--gray-100) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;margin:12px 16px}
-.skeleton-line--lg{height:18px;width:80%}.skeleton-line--sm{width:50%}
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-.no-results{grid-column:1/-1;text-align:center;padding:48px 24px;color:var(--gray-600)}
-.no-results button{margin-top:16px;padding:10px 24px;background:var(--brand);color:#fff;border:none;border-radius:8px;font-family:'Nunito',sans-serif;font-weight:800;cursor:pointer}
-
-/* Styles grid — supports optional image per card */
-.styles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-top:20px}
-.style-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);display:flex;flex-direction:column}
-.style-card__image{overflow:hidden;aspect-ratio:3/2;background:var(--gray-100)}
-.style-card__image img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-.style-card:hover .style-card__image img{transform:scale(1.05)}
-.style-card__body{padding:20px;flex:1;display:flex;flex-direction:column}
-.style-card__header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.style-card__header h3{font-size:1rem;font-weight:800;color:var(--gray-900);margin:0}
-.style-card__price{font-size:12px;font-weight:800;color:var(--brand);background:var(--brand-pale);padding:4px 10px;border-radius:12px;white-space:nowrap}
-.style-card__body p{font-size:14px;color:var(--gray-600);line-height:1.65;margin-bottom:12px;flex:1}
-.style-card__meta{font-size:13px;color:var(--gray-600);margin-bottom:14px}
-.style-card__meta dt{font-weight:800;color:var(--gray-800);float:left;margin-right:6px}
-.style-card__meta dd{margin-bottom:6px;overflow:hidden}
-.style-card__link{display:inline-flex;align-items:center;color:var(--brand);font-weight:800;font-size:14px;margin-top:auto;gap:6px;transition:gap .2s}
-.style-card__link:hover{gap:10px}
-
-/* Rooms grid — supports optional image per card */
-.rooms-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;margin-top:20px}
-.room-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);display:flex;flex-direction:column}
-.room-card__image{overflow:hidden;aspect-ratio:3/2;background:var(--gray-100)}
-.room-card__image img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
-.room-card:hover .room-card__image img{transform:scale(1.05)}
-.room-card__body{padding:20px;flex:1;display:flex;flex-direction:column}
-.room-card__body h3{font-size:1rem;font-weight:800;color:var(--brand);margin-bottom:10px}
-.room-card__rec{font-size:14px;color:var(--gray-800);margin-bottom:12px;line-height:1.6}
-.room-card__meta{font-size:13px;color:var(--gray-600);margin-bottom:14px}
-.room-card__meta dt{font-weight:800;color:var(--gray-800);float:left;margin-right:6px}
-.room-card__meta dd{margin-bottom:8px;overflow:hidden}
-.room-card__link{display:inline-flex;align-items:center;color:var(--brand);font-weight:800;font-size:14px;gap:4px;margin-top:auto;transition:gap .2s}
-.room-card__link:hover{gap:8px}
-
-/* How to choose */
-.choose-sections{display:flex;flex-direction:column;gap:4px}
-.red-flags{background:#fff8f8;border-left:4px solid #e53e3e;border-radius:0 10px 10px 0;padding:16px 20px;margin:12px 0;list-style:none}
-.red-flags li{color:#742a2a;font-size:14px;line-height:1.7;padding-left:20px;position:relative;margin-bottom:6px}
-.red-flags li::before{content:'✗';position:absolute;left:0;color:#e53e3e;font-weight:900}
-
-/* Sizing rules */
-.sizing-rules{display:flex;flex-direction:column;gap:10px;margin-top:16px}
-.sizing-rule{display:grid;grid-template-columns:200px 1fr;gap:16px;background:#fff;border-radius:10px;padding:14px 18px;box-shadow:var(--shadow-sm)}
-.sizing-rule__label{font-weight:800;color:var(--brand);font-size:14px}
-.sizing-rule__value{font-size:14px;color:var(--gray-800);line-height:1.6}
-
-/* Materials + care + basics — generic content sections */
-.content-sections{display:flex;flex-direction:column;gap:4px}
-.quality-signals{list-style:none;margin:12px 0;display:flex;flex-direction:column;gap:8px}
-.quality-signals li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--gray-800);line-height:1.6}
-.quality-signals li::before{content:'✓';color:var(--brand);font-weight:900;flex-shrink:0;margin-top:1px}
-
-/* Price tiers */
-.price-tiers{display:flex;flex-direction:column;gap:14px;margin:20px 0}
-.price-tier{background:#fff;border-radius:var(--radius);padding:20px 24px;box-shadow:var(--shadow-sm);border-left:4px solid var(--gray-200)}
-.price-tier--highlight{border-left-color:var(--brand);background:linear-gradient(to right,var(--brand-pale),#fff)}
-.price-tier__range{font-size:1.05rem;font-weight:900;color:var(--gray-900);margin-bottom:8px}
-.price-tier--highlight .price-tier__range{color:var(--brand)}
-.price-tier p{font-size:14px;color:var(--gray-600);line-height:1.7;margin:0}
-
-/* FAQ — accordion style */
-.faq-list{display:flex;flex-direction:column;gap:12px;margin-top:20px}
-.faq-item{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden}
-.faq-item__question{font-size:1rem;font-weight:800;color:var(--gray-900);padding:20px 24px;line-height:1.4;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
-.faq-item__question::after{content:'▾';font-size:14px;color:var(--brand);transition:transform .2s;flex-shrink:0;margin-left:12px}
-.faq-item details[open] .faq-item__question::after{transform:rotate(180deg)}
-.faq-item__answer{padding:0 24px 20px;font-size:14px;color:var(--gray-600);line-height:1.8}
-
-/* Related + pSEO */
-.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:16px}
-.related-card{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:10px;padding:12px 16px;box-shadow:var(--shadow-sm);font-weight:700;font-size:14px;transition:all .2s;border:2px solid transparent}
-.related-card:hover{border-color:var(--brand);color:var(--brand);transform:translateY(-2px)}
-.pseo-links{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:16px}
-.pseo-link{display:flex;flex-direction:column;background:var(--brand-pale);border-radius:10px;padding:14px 18px;transition:all .2s;border:2px solid transparent}
-.pseo-link:hover{border-color:var(--brand);background:#fff}
-.pseo-link__room{font-weight:900;font-size:15px;color:var(--brand);margin-bottom:3px}
-.pseo-link__label{font-size:13px;color:var(--gray-600);font-weight:700}
-
-/* Intro prose */
-.hub-intro{font-size:15px;color:var(--gray-800);line-height:1.85;padding:28px 32px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:48px}
-
-/* Newsletter */
-.newsletter{background:linear-gradient(135deg,var(--brand-dark),var(--brand-light));color:#fff;border-radius:var(--radius);padding:56px;text-align:center;margin:48px 0;position:relative;overflow:hidden}
-.newsletter-inner{position:relative;z-index:2}
-.newsletter h2{font-size:2rem;font-weight:900;margin-bottom:12px}
-.newsletter p{font-size:1.1rem;opacity:.93;margin-bottom:28px}
-.nl-btn{display:inline-block;background:#fff;color:var(--brand);font-family:'Nunito',sans-serif;font-size:16px;font-weight:800;padding:16px 36px;border-radius:10px;border:none;cursor:pointer;transition:all .25s;box-shadow:0 4px 20px rgba(0,0,0,.15)}
-.nl-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.2)}
-
-/* Pagination */
-.hub-pagination{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
-.hub-pagination button{display:inline-flex;align-items:center;justify-content:center;min-width:40px;height:40px;padding:0 14px;border-radius:8px;font-weight:700;font-size:14px;transition:all .2s;background:#fff;border:2px solid var(--gray-200);color:var(--gray-800);font-family:'Nunito',sans-serif;cursor:pointer}
-.hub-pagination button:hover,.hub-pagination button.active{border-color:var(--brand);color:var(--brand)}
-
+/* ── RESPONSIVE ── */
 @media(max-width:768px){
-  .nav-menu{display:none}.mobile-menu-btn{display:block}
-  .sizing-rule{grid-template-columns:1fr}
-  .hub-body{padding:32px 16px 64px}
-  .newsletter{padding:32px 20px}
-  .footer-grid{grid-template-columns:1fr}
-  .footer-bottom{flex-direction:column;text-align:center}
-  .hub-hero-inner{padding:32px 16px 28px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .types-grid,.styles-grid,.rooms-grid{grid-template-columns:repeat(2,1fr)}
+  .price-tiers{grid-template-columns:repeat(2,1fr)}
 }
-@media(max-width:1024px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){
+  .product-grid{grid-template-columns:1fr}
+  .types-grid,.styles-grid,.rooms-grid,.price-tiers{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .hub-body{padding:32px 16px 60px}
+}
 </style>
 </head>
 <body>
@@ -283,47 +203,7 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
   💡 <strong>Disclosure:</strong> This site contains affiliate links. We may earn a small commission at no extra cost to you. <a href="/affiliate-disclosure.html">Learn more</a>
 </div>
 
-<!-- NAVBAR -->
-<nav class="navbar">
-  <div class="nav-container">
-    <a href="/"><img src="/content/images/logo.jpg" alt="Wow Glam Decor" class="logo"></a>
-    <div class="search-box">
-      <input type="text" id="searchInput" class="search-input" placeholder="Search articles, rooms, styles..." autocomplete="off">
-      <button class="search-btn" onclick="performSearch()" aria-label="Search">🔍</button>
-      <div class="search-suggestions" id="searchSuggestions"></div>
-    </div>
-    <div class="nav-menu" id="navMenu">
-      <a href="/" class="nav-link">Home</a>
-      <a href="/posts/" class="nav-link">Blog</a>
-      <div class="mega-menu-wrapper">
-        <span class="nav-link mega-menu-trigger">Rooms</span>
-        <div class="mega-menu"><div class="mega-menu-grid">
-          <div class="mega-menu-section"><h4>Living Spaces</h4><ul class="mega-menu-links"><li><a href="/categories/living-room.html"><span class="icon">🛋️</span>Living Room</a></li><li><a href="/categories/bedroom.html"><span class="icon">🛏️</span>Bedroom</a></li><li><a href="/categories/dining-room.html"><span class="icon">🍽️</span>Dining Room</a></li><li><a href="/categories/home-office.html"><span class="icon">💻</span>Home Office</a></li></ul></div>
-          <div class="mega-menu-section"><h4>Functional Rooms</h4><ul class="mega-menu-links"><li><a href="/categories/kitchen.html"><span class="icon">🍳</span>Kitchen</a></li><li><a href="/categories/bathroom.html"><span class="icon">🚿</span>Bathroom</a></li><li><a href="/categories/entryway-hallway.html"><span class="icon">🚪</span>Entryway &amp; Hallway</a></li></ul></div>
-          <div class="mega-menu-section"><h4>Special Spaces</h4><ul class="mega-menu-links"><li><a href="/categories/kids-room-nursery.html"><span class="icon">🧸</span>Kids Room</a></li><li><a href="/categories/outdoor-patio.html"><span class="icon">🌿</span>Outdoor &amp; Patio</a></li></ul></div>
-          <div class="mega-menu-section"><h4>Popular Guides</h4><ul class="mega-menu-links"><li><a href="/categories/home-makeovers.html"><span class="icon">✨</span>Home Makeovers</a></li></ul></div>
-        </div></div>
-      </div>
-      <div class="mega-menu-wrapper">
-        <span class="nav-link mega-menu-trigger">Styles</span>
-        <div class="mega-menu"><div class="mega-menu-grid">
-          <div class="mega-menu-section"><h4>Modern Styles</h4><ul class="mega-menu-links"><li><a href="/categories/modern-style.html"><span class="icon">🏙️</span>Modern</a></li><li><a href="/categories/minimalist-style.html"><span class="icon">◻️</span>Minimalist</a></li></ul></div>
-          <div class="mega-menu-section"><h4>Classic Styles</h4><ul class="mega-menu-links"><li><a href="/categories/luxury-glam-decor.html"><span class="icon">👑</span>Luxury &amp; Glam</a></li><li><a href="/categories/boho-rustic-decor.html"><span class="icon">🌻</span>Boho &amp; Rustic</a></li></ul></div>
-          <div class="mega-menu-section"><h4>Decor Elements</h4><ul class="mega-menu-links"><li><a href="/categories/lighting-lamps.html"><span class="icon">💡</span>Lighting &amp; Lamps</a></li><li><a href="/categories/rugs-carpets.html"><span class="icon">🟫</span>Rugs &amp; Carpets</a></li></ul></div>
-        </div></div>
-      </div>
-      <div class="mega-menu-wrapper">
-        <span class="nav-link mega-menu-trigger">Buying Guides</span>
-        <div class="mega-menu"><div class="mega-menu-grid">
-          <div class="mega-menu-section"><h4>Product Guides</h4><ul class="mega-menu-links"><li><a href="/categories/best-of-lists.html"><span class="icon">🏆</span>Best Of Lists</a></li><li><a href="/categories/product-reviews.html"><span class="icon">⭐</span>Reviews</a></li><li><a href="/categories/comparisons.html"><span class="icon">⚖️</span>Comparisons</a></li></ul></div>
-          <div class="mega-menu-section"><h4>By Budget</h4><ul class="mega-menu-links"><li><a href="/categories/budget-furniture.html"><span class="icon">💰</span>Budget Picks</a></li><li><a href="/categories/luxury-furniture.html"><span class="icon">💎</span>Luxury Finds</a></li></ul></div>
-        </div></div>
-      </div>
-      <a href="/about.html" class="nav-link">About</a>
-    </div>
-    <button class="mobile-menu-btn" onclick="document.getElementById('navMenu').classList.toggle('mobile-open')" aria-label="Menu">☰</button>
-  </div>
-</nav>
+{{ partial "navbar.html" . }}
 
 <!-- HERO -->
 <section class="hub-hero">
@@ -334,7 +214,7 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
   {{ end }}
   <div class="hub-hero-inner">
     <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="/">Home</a><span>›</span>{{ .Params.category_name }}
+      <a href="/">Home</a><span>›</span><span>{{ .Params.category_name }}</span>
     </nav>
     <h1>{{ .Title }}</h1>
     <p class="hero-desc">{{ .Description }}</p>
@@ -440,7 +320,7 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
             <span class="product-card__room">{{ .room }}</span>
             <div class="product-card__name">{{ .name }}</div>
             <div class="product-card__price">{{ .price_label }}</div>
-            <span class="product-card__cta">Check Current Price →</span>
+            <span class="product-card__cta">Shop This Look →</span>
           </div>
         </a>
       </article>
@@ -449,7 +329,7 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
     <div id="pf-pagination" class="hub-pagination"></div>
   </section>
 
-  <!-- HOW TO CHOOSE — fully from frontmatter -->
+  <!-- HOW TO CHOOSE -->
   {{ if .Params.choose_sections }}
   <section class="hub-section" id="how-to-choose">
     <h2>How to <span>Choose</span></h2>
@@ -474,7 +354,7 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
   </section>
   {{ end }}
 
-  <!-- STYLE GUIDE — with optional images per card -->
+  <!-- STYLE GUIDE -->
   {{ if .Params.styles }}
   <section class="hub-section" id="styles">
     <h2>{{ .Params.category_name }} by <span>Style</span></h2>
@@ -507,7 +387,7 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
   </section>
   {{ end }}
 
-  <!-- ROOM GUIDE — with optional images per card -->
+  <!-- ROOM GUIDE -->
   {{ if .Params.rooms }}
   <section class="hub-section" id="by-room">
     <h2>{{ .Params.category_name }} by <span>Room</span></h2>
@@ -524,7 +404,7 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
           <h3>{{ .name }}</h3>
           <p class="room-card__rec"><strong>Best choice:</strong> {{ .recommendation }}</p>
           <dl class="room-card__meta">
-            {{ with .spec_label }}<dt>{{ . }}:</dt><dd>{{ $.Params.rooms | where "name" $.name | first | default dict | index "spec_value" }}</dd>{{ end }}
+            {{ with .spec_label }}<dt>{{ . }}:</dt>{{ end }}
             {{ with .spec_value }}<dd>{{ . }}</dd>{{ end }}
             <dt>Placement:</dt><dd>{{ .placement }}</dd>
           </dl>
@@ -538,15 +418,12 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
   </section>
   {{ end }}
 
-  <!-- MID-PAGE PRODUCT BLOCK 2 — first room filtered -->
+  <!-- MID-PAGE PRODUCT BLOCK 2 -->
   {{ $firstRoom := index .Params.rooms 0 }}
   {{ if $firstRoom }}
   <section class="hub-section">
     <h2>Top Picks: <span>{{ $firstRoom.name }}</span></h2>
-    <div class="product-grid inline-products"
-         data-category="{{ $cat }}"
-         data-room="{{ $firstRoom.slug }}"
-         data-limit="6">
+    <div class="product-grid inline-products" data-category="{{ $cat }}" data-room="{{ $firstRoom.slug }}" data-limit="6">
       {{ range first 3 (where $products "room" $firstRoom.slug) }}
       <article class="product-card">
         <a href="{{ .affiliate_url }}" target="_blank" rel="noopener nofollow sponsored">
@@ -556,7 +433,7 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
           <div class="product-card__body">
             <div class="product-card__name">{{ .name }}</div>
             <div class="product-card__price">{{ .price_label }}</div>
-            <span class="product-card__cta">Check Current Price →</span>
+            <span class="product-card__cta">Shop This Look →</span>
           </div>
         </a>
       </article>
@@ -565,7 +442,7 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
   </section>
   {{ end }}
 
-  <!-- SIZING GUIDE — fully from frontmatter -->
+  <!-- SIZING GUIDE -->
   {{ if .Params.sizing_rules }}
   <section class="hub-section" id="sizing">
     <h2>{{ with .Params.sizing_title }}{{ . }}{{ else }}Sizing + <span>Placement Guide</span>{{ end }}</h2>
@@ -584,7 +461,7 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
   </section>
   {{ end }}
 
-  <!-- MATERIALS — fully from frontmatter -->
+  <!-- MATERIALS -->
   {{ if .Params.materials_sections }}
   <section class="hub-section" id="materials">
     <h2>{{ with .Params.materials_title }}{{ . }}{{ else }}Materials + <span>Quality Guide</span>{{ end }}</h2>
@@ -607,7 +484,7 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
   </section>
   {{ end }}
 
-  <!-- CARE — fully from frontmatter -->
+  <!-- CARE -->
   {{ if .Params.care_sections }}
   <section class="hub-section" id="care">
     <h2>{{ with .Params.care_title }}{{ . }}{{ else }}Care + <span>Maintenance</span>{{ end }}</h2>
@@ -623,7 +500,7 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
   </section>
   {{ end }}
 
-  <!-- BASICS / EDUCATION — fully from frontmatter -->
+  <!-- BASICS / EDUCATION -->
   {{ if .Params.basics_sections }}
   <section class="hub-section" id="basics">
     <h2>{{ with .Params.basics_title }}<span>{{ . }}</span>{{ else }}<span>Good to Know</span>{{ end }}</h2>
@@ -637,7 +514,7 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
   </section>
   {{ end }}
 
-  <!-- PRICE GUIDE + PRODUCT BLOCK 3 — fully from frontmatter -->
+  <!-- PRICE GUIDE + PRODUCT BLOCK 3 -->
   <section class="hub-section" id="price-guide">
     <h2>Price Guide — <span>Every Budget</span></h2>
     {{ with .Params.price_intro }}<p class="section-intro">{{ . }}</p>{{ end }}
@@ -661,7 +538,7 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
           <div class="product-card__body">
             <div class="product-card__name">{{ .name }}</div>
             <div class="product-card__price">{{ .price_label }}</div>
-            <span class="product-card__cta">Check Current Price →</span>
+            <span class="product-card__cta">Shop This Look →</span>
           </div>
         </a>
       </article>
@@ -669,7 +546,7 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
     </div>
   </section>
 
-  <!-- FAQ — accordion -->
+  <!-- FAQ -->
   {{ if .Params.faqs }}
   <section class="hub-section" id="faq">
     <h2>Frequently Asked <span>Questions</span></h2>
@@ -686,7 +563,7 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
   </section>
   {{ end }}
 
-  <!-- RELATED CATEGORIES — from frontmatter or fallback -->
+  <!-- RELATED CATEGORIES -->
   <section class="hub-section" id="related">
     <h2>Explore <span>More</span></h2>
     <div class="related-grid">
@@ -699,10 +576,10 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
         <a href="/mirrors/" class="related-card">Mirrors <span>→</span></a>
         <a href="/wall-decor/" class="related-card">Wall Décor <span>→</span></a>
         <a href="/rugs/" class="related-card">Rugs <span>→</span></a>
-        <a href="/curtains/" class="related-card">Curtains <span>→</span></a>
         <a href="/bedding/" class="related-card">Bedding <span>→</span></a>
         <a href="/vases/" class="related-card">Vases <span>→</span></a>
         <a href="/candles/" class="related-card">Candles <span>→</span></a>
+        <a href="/throw-pillows/" class="related-card">Throw Pillows <span>→</span></a>
       {{ end }}
     </div>
   </section>
@@ -723,6 +600,9 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
   </section>
   {{ end }}
 
+  <!-- RELATED GUIDES (auto from blog posts) -->
+  {{ partial "related-guides.html" (dict "page" . "cat" .Params.category_slug "limit" 3) }}
+
   <!-- NEWSLETTER -->
   <div class="newsletter">
     <div class="newsletter-inner">
@@ -742,8 +622,8 @@ footer{background:var(--gray-900);color:#fff;padding:56px 24px 24px}
       <p>Your trusted source for home decor inspiration, honest product reviews, and curated recommendations for every style and budget.</p>
       <div class="social-row"><a href="#" class="social-btn">📘</a><a href="#" class="social-btn">📷</a><a href="#" class="social-btn">🐦</a><a href="#" class="social-btn">📌</a></div>
     </div>
-    <div class="footer-col"><h4>Shop By Room</h4><ul class="footer-links"><li><a href="/categories/living-room.html">Living Room</a></li><li><a href="/categories/bedroom.html">Bedroom</a></li><li><a href="/categories/kitchen.html">Kitchen</a></li><li><a href="/categories/bathroom.html">Bathroom</a></li><li><a href="/categories/home-office.html">Home Office</a></li></ul></div>
-    <div class="footer-col"><h4>Buying Guides</h4><ul class="footer-links"><li><a href="/categories/best-of-lists.html">Best Of Lists</a></li><li><a href="/categories/product-reviews.html">Product Reviews</a></li><li><a href="/categories/budget-furniture.html">Budget Picks</a></li><li><a href="/categories/luxury-furniture.html">Luxury Finds</a></li></ul></div>
+    <div class="footer-col"><h4>Shop By Room</h4><ul class="footer-links"><li><a href="/bedroom/">Bedroom</a></li><li><a href="/living-room/">Living Room</a></li><li><a href="/dining-room/">Dining Room</a></li><li><a href="/bathroom/">Bathroom</a></li><li><a href="/home-office/">Home Office</a></li></ul></div>
+    <div class="footer-col"><h4>Buying Guides</h4><ul class="footer-links"><li><a href="/categories/best-of-lists.html">Best Of Lists</a></li><li><a href="/categories/product-reviews.html">Reviews</a></li><li><a href="/categories/budget-furniture.html">Budget Picks</a></li><li><a href="/categories/luxury-furniture.html">Luxury Finds</a></li></ul></div>
     <div class="footer-col"><h4>Company</h4><ul class="footer-links"><li><a href="/about.html">About Us</a></li><li><a href="/contact.html">Contact</a></li><li><a href="/affiliate-disclosure.html">Affiliate Disclosure</a></li><li><a href="/privacy-policy.html">Privacy Policy</a></li><li><a href="/sitemap.xml">Sitemap</a></li></ul></div>
   </div>
   <div class="footer-bottom">
@@ -761,9 +641,6 @@ window.HUB_CONFIG = { category: "{{ $cat }}", R2Base: "{{ $R2 }}" };
 <script>
 (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);};l=d.createElement(e);l.async=1;l.src=u;n=d.getElementsByTagName(e)[0];n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
 ml('account', '2154421');
-</script>
-<script>
-(function(){const inp=document.getElementById('searchInput'),box=document.getElementById('searchSuggestions');if(!inp||!box)return;let timeout,idx=-1,cache=null;async function load(){if(cache)return cache;try{const r=await fetch('/posts.json');if(r.ok){cache=await r.json();return cache;}}catch(e){}return[];}function hl(t,q){if(!q||!t)return t;return t.replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<span class="highlight">$1</span>');}async function search(q){const posts=await load();if(!posts.length)return[];const terms=q.toLowerCase().split(/\s+/).filter(Boolean);return posts.map(p=>({...p,score:terms.reduce((s,t)=>s+(((p.title+' '+(p.description||'')+' '+((p.tags||[]).join(' '))+' '+((p.categories||[]).join(' '))).toLowerCase().split(t).length-1)),0)})).filter(p=>p.score>0).sort((a,b)=>b.score-a.score).slice(0,5);}function render(r,q){if(!r.length){box.innerHTML='<div class="no-results-search"><p>No results for "'+q+'"</p></div>';box.classList.add('active');return;}box.innerHTML=r.map((p,i)=>'<a href="'+(p.url||'/posts/'+p.slug+'.html')+'" class="suggestion-item" data-index="'+i+'"><img src="'+(p.featured_image||'/content/images/bedroom-decor-ideas.png')+'" alt="'+p.title+'" class="suggestion-thumb" loading="lazy"><div class="suggestion-content"><div class="suggestion-title">'+hl(p.title,q)+'</div><div class="suggestion-meta"><span class="suggestion-category">'+((p.categories&&p.categories[0])||'Decor')+'</span></div></div></a>').join('')+'<div class="search-footer"><a href="/search.html?q='+encodeURIComponent(q)+'">View all results →</a></div>';box.classList.add('active');idx=-1;}inp.addEventListener('input',e=>{const q=e.target.value.trim();clearTimeout(timeout);if(!q){box.classList.remove('active');return;}if(q.length<2)return;box.innerHTML='<div class="search-loading">Searching<div class="loading-dots"><span></span><span></span><span></span></div></div>';box.classList.add('active');timeout=setTimeout(async()=>render(await search(q),q),300);});document.addEventListener('click',e=>{if(!inp.contains(e.target)&&!box.contains(e.target))box.classList.remove('active');});window.performSearch=()=>{const q=inp.value.trim();if(q)window.location.href='/search.html?q='+encodeURIComponent(q);};})();
 </script>
 </body>
 </html>

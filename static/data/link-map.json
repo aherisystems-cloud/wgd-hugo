@@ -1,0 +1,497 @@
+{
+  "floor lamp": {
+    "url": "/lamps/",
+    "type": "hub",
+    "label": "floor lamp"
+  },
+  "floor lamps": {
+    "url": "/lamps/",
+    "type": "hub",
+    "label": "floor lamps"
+  },
+  "arc lamp": {
+    "url": "/lamps/",
+    "type": "hub",
+    "label": "arc lamp"
+  },
+  "arc floor lamp": {
+    "url": "/lamps/",
+    "type": "hub",
+    "label": "arc floor lamp"
+  },
+  "table lamp": {
+    "url": "/lamps/",
+    "type": "hub",
+    "label": "table lamp"
+  },
+  "table lamps": {
+    "url": "/lamps/",
+    "type": "hub",
+    "label": "table lamps"
+  },
+  "bedside lamp": {
+    "url": "/lamps/",
+    "type": "hub",
+    "label": "bedside lamp"
+  },
+  "bedside lamps": {
+    "url": "/lamps/",
+    "type": "hub",
+    "label": "bedside lamps"
+  },
+  "glam lamp": {
+    "url": "/lamps/",
+    "type": "hub",
+    "label": "glam lamp"
+  },
+  "glam lamps": {
+    "url": "/lamps/",
+    "type": "hub",
+    "label": "glam lamps"
+  },
+  "luxury lamp": {
+    "url": "/lamps/",
+    "type": "hub",
+    "label": "luxury lamp"
+  },
+  "luxury lamps": {
+    "url": "/lamps/",
+    "type": "hub",
+    "label": "luxury lamps"
+  },
+  "crystal lamp": {
+    "url": "/lamps/",
+    "type": "hub",
+    "label": "crystal lamp"
+  },
+  "crystal lamps": {
+    "url": "/lamps/",
+    "type": "hub",
+    "label": "crystal lamps"
+  },
+  "gold lamp": {
+    "url": "/lamps/",
+    "type": "hub",
+    "label": "gold lamp"
+  },
+  "gold lamps": {
+    "url": "/lamps/",
+    "type": "hub",
+    "label": "gold lamps"
+  },
+  "wall mirror": {
+    "url": "/mirrors/",
+    "type": "hub",
+    "label": "wall mirror"
+  },
+  "wall mirrors": {
+    "url": "/mirrors/",
+    "type": "hub",
+    "label": "wall mirrors"
+  },
+  "sunburst mirror": {
+    "url": "/mirrors/",
+    "type": "hub",
+    "label": "sunburst mirror"
+  },
+  "sunburst mirrors": {
+    "url": "/mirrors/",
+    "type": "hub",
+    "label": "sunburst mirrors"
+  },
+  "floor mirror": {
+    "url": "/mirrors/",
+    "type": "hub",
+    "label": "floor mirror"
+  },
+  "floor mirrors": {
+    "url": "/mirrors/",
+    "type": "hub",
+    "label": "floor mirrors"
+  },
+  "arch mirror": {
+    "url": "/mirrors/",
+    "type": "hub",
+    "label": "arch mirror"
+  },
+  "arch mirrors": {
+    "url": "/mirrors/",
+    "type": "hub",
+    "label": "arch mirrors"
+  },
+  "decorative mirror": {
+    "url": "/mirrors/",
+    "type": "hub",
+    "label": "decorative mirror"
+  },
+  "decorative mirrors": {
+    "url": "/mirrors/",
+    "type": "hub",
+    "label": "decorative mirrors"
+  },
+  "gold mirror": {
+    "url": "/mirrors/",
+    "type": "hub",
+    "label": "gold mirror"
+  },
+  "gold mirrors": {
+    "url": "/mirrors/",
+    "type": "hub",
+    "label": "gold mirrors"
+  },
+  "area rug": {
+    "url": "/rugs/",
+    "type": "hub",
+    "label": "area rug"
+  },
+  "area rugs": {
+    "url": "/rugs/",
+    "type": "hub",
+    "label": "area rugs"
+  },
+  "glam rug": {
+    "url": "/rugs/",
+    "type": "hub",
+    "label": "glam rug"
+  },
+  "glam rugs": {
+    "url": "/rugs/",
+    "type": "hub",
+    "label": "glam rugs"
+  },
+  "luxury rug": {
+    "url": "/rugs/",
+    "type": "hub",
+    "label": "luxury rug"
+  },
+  "luxury rugs": {
+    "url": "/rugs/",
+    "type": "hub",
+    "label": "luxury rugs"
+  },
+  "plush rug": {
+    "url": "/rugs/",
+    "type": "hub",
+    "label": "plush rug"
+  },
+  "plush rugs": {
+    "url": "/rugs/",
+    "type": "hub",
+    "label": "plush rugs"
+  },
+  "bedroom rug": {
+    "url": "/rugs/",
+    "type": "hub",
+    "label": "bedroom rug"
+  },
+  "bedroom rugs": {
+    "url": "/rugs/",
+    "type": "hub",
+    "label": "bedroom rugs"
+  },
+  "living room rug": {
+    "url": "/rugs/",
+    "type": "hub",
+    "label": "living room rug"
+  },
+  "living room rugs": {
+    "url": "/rugs/",
+    "type": "hub",
+    "label": "living room rugs"
+  },
+  "wall art": {
+    "url": "/wall-decor/",
+    "type": "hub",
+    "label": "wall art"
+  },
+  "wall decor": {
+    "url": "/wall-decor/",
+    "type": "hub",
+    "label": "wall decor"
+  },
+  "wall decoration": {
+    "url": "/wall-decor/",
+    "type": "hub",
+    "label": "wall decoration"
+  },
+  "canvas art": {
+    "url": "/wall-decor/",
+    "type": "hub",
+    "label": "canvas art"
+  },
+  "framed art": {
+    "url": "/wall-decor/",
+    "type": "hub",
+    "label": "framed art"
+  },
+  "wall prints": {
+    "url": "/wall-decor/",
+    "type": "hub",
+    "label": "wall prints"
+  },
+  "throw pillow": {
+    "url": "/throw-pillows/",
+    "type": "hub",
+    "label": "throw pillow"
+  },
+  "throw pillows": {
+    "url": "/throw-pillows/",
+    "type": "hub",
+    "label": "throw pillows"
+  },
+  "accent pillow": {
+    "url": "/throw-pillows/",
+    "type": "hub",
+    "label": "accent pillow"
+  },
+  "accent pillows": {
+    "url": "/throw-pillows/",
+    "type": "hub",
+    "label": "accent pillows"
+  },
+  "velvet pillow": {
+    "url": "/throw-pillows/",
+    "type": "hub",
+    "label": "velvet pillow"
+  },
+  "velvet pillows": {
+    "url": "/throw-pillows/",
+    "type": "hub",
+    "label": "velvet pillows"
+  },
+  "vase": {
+    "url": "/vases/",
+    "type": "hub",
+    "label": "vase"
+  },
+  "vases": {
+    "url": "/vases/",
+    "type": "hub",
+    "label": "vases"
+  },
+  "decorative vase": {
+    "url": "/vases/",
+    "type": "hub",
+    "label": "decorative vase"
+  },
+  "decorative vases": {
+    "url": "/vases/",
+    "type": "hub",
+    "label": "decorative vases"
+  },
+  "floral arrangement": {
+    "url": "/vases/",
+    "type": "hub",
+    "label": "floral arrangement"
+  },
+  "floral arrangements": {
+    "url": "/vases/",
+    "type": "hub",
+    "label": "floral arrangements"
+  },
+  "faux florals": {
+    "url": "/vases/",
+    "type": "hub",
+    "label": "faux florals"
+  },
+  "duvet": {
+    "url": "/bedding/",
+    "type": "hub",
+    "label": "duvet"
+  },
+  "duvet cover": {
+    "url": "/bedding/",
+    "type": "hub",
+    "label": "duvet cover"
+  },
+  "duvet covers": {
+    "url": "/bedding/",
+    "type": "hub",
+    "label": "duvet covers"
+  },
+  "bedding set": {
+    "url": "/bedding/",
+    "type": "hub",
+    "label": "bedding set"
+  },
+  "bedding sets": {
+    "url": "/bedding/",
+    "type": "hub",
+    "label": "bedding sets"
+  },
+  "luxury bedding": {
+    "url": "/bedding/",
+    "type": "hub",
+    "label": "luxury bedding"
+  },
+  "glam bedding": {
+    "url": "/bedding/",
+    "type": "hub",
+    "label": "glam bedding"
+  },
+  "velvet bedding": {
+    "url": "/bedding/",
+    "type": "hub",
+    "label": "velvet bedding"
+  },
+  "candle": {
+    "url": "/candles/",
+    "type": "hub",
+    "label": "candle"
+  },
+  "candles": {
+    "url": "/candles/",
+    "type": "hub",
+    "label": "candles"
+  },
+  "scented candle": {
+    "url": "/candles/",
+    "type": "hub",
+    "label": "scented candle"
+  },
+  "scented candles": {
+    "url": "/candles/",
+    "type": "hub",
+    "label": "scented candles"
+  },
+  "luxury candle": {
+    "url": "/candles/",
+    "type": "hub",
+    "label": "luxury candle"
+  },
+  "luxury candles": {
+    "url": "/candles/",
+    "type": "hub",
+    "label": "luxury candles"
+  },
+  "pillar candle": {
+    "url": "/candles/",
+    "type": "hub",
+    "label": "pillar candle"
+  },
+  "bedroom decor": {
+    "url": "/bedroom/",
+    "type": "hub",
+    "label": "bedroom decor"
+  },
+  "bedroom decoration": {
+    "url": "/bedroom/",
+    "type": "hub",
+    "label": "bedroom decoration"
+  },
+  "living room decor": {
+    "url": "/living-room/",
+    "type": "hub",
+    "label": "living room decor"
+  },
+  "living room decoration": {
+    "url": "/living-room/",
+    "type": "hub",
+    "label": "living room decoration"
+  },
+  "entryway decor": {
+    "url": "/entryway/",
+    "type": "hub",
+    "label": "entryway decor"
+  },
+  "entryway decoration": {
+    "url": "/entryway/",
+    "type": "hub",
+    "label": "entryway decoration"
+  },
+  "dining room decor": {
+    "url": "/dining-room/",
+    "type": "hub",
+    "label": "dining room decor"
+  },
+  "dining room decoration": {
+    "url": "/dining-room/",
+    "type": "hub",
+    "label": "dining room decoration"
+  },
+  "luxury glam": {
+    "url": "/luxury-glam/",
+    "type": "hub",
+    "label": "luxury glam"
+  },
+  "glam decor": {
+    "url": "/luxury-glam/",
+    "type": "hub",
+    "label": "glam decor"
+  },
+  "glam interior": {
+    "url": "/luxury-glam/",
+    "type": "hub",
+    "label": "glam interior"
+  },
+  "coastal decor": {
+    "url": "/coastal/",
+    "type": "hub",
+    "label": "coastal decor"
+  },
+  "coastal style": {
+    "url": "/coastal/",
+    "type": "hub",
+    "label": "coastal style"
+  },
+  "boho decor": {
+    "url": "/boho-eclectic/",
+    "type": "hub",
+    "label": "boho decor"
+  },
+  "bohemian decor": {
+    "url": "/boho-eclectic/",
+    "type": "hub",
+    "label": "bohemian decor"
+  },
+  "art deco decor": {
+    "url": "/art-deco/",
+    "type": "hub",
+    "label": "art deco decor"
+  },
+  "art deco style": {
+    "url": "/art-deco/",
+    "type": "hub",
+    "label": "art deco style"
+  },
+  "minimalist decor": {
+    "url": "/modern-minimalist/",
+    "type": "hub",
+    "label": "minimalist decor"
+  },
+  "modern minimalist": {
+    "url": "/modern-minimalist/",
+    "type": "hub",
+    "label": "modern minimalist"
+  },
+  "gold arc floor lamp with marble base": {
+    "url": "https://amzn.to/YOURLINK",
+    "type": "product",
+    "label": "Gold Arc Floor Lamp with Marble Base",
+    "slug": "gold-arc-floor-lamp"
+  },
+  "crystal table lamp with gold base": {
+    "url": "https://amzn.to/YOURLINK",
+    "type": "product",
+    "label": "Crystal Table Lamp with Gold Base",
+    "slug": "crystal-table-lamp"
+  },
+  "gold sunburst wall mirror": {
+    "url": "https://amzn.to/YOURLINK",
+    "type": "product",
+    "label": "Gold Sunburst Wall Mirror",
+    "slug": "gold-sunburst-mirror"
+  },
+  "ivory & gold glam area rug": {
+    "url": "https://amzn.to/YOURLINK",
+    "type": "product",
+    "label": "Ivory & Gold Glam Area Rug",
+    "slug": "glam-area-rug-ivory"
+  },
+  "blush velvet throw pillow set": {
+    "url": "https://amzn.to/YOURLINK",
+    "type": "product",
+    "label": "Blush Velvet Throw Pillow Set",
+    "slug": "velvet-throw-pillow-blush"
+  }
+}
